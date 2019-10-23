@@ -1,0 +1,23 @@
+.text-NIM {
+    font-size: 12px;
+}
+
+.table-white {
+    background: #FFF;
+}
+
+.lecturer-final-project-title {
+    display: none;
+}
+
+.login-card-body {
+    border-radius: 15px;
+}
+
+label.check-login {
+    font-weight: 100 !important;
+    font-size: 15px;
+}
+
+
+/* Button Gradient */
