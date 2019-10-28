@@ -15,7 +15,17 @@ class CreateFinalStudentsTable extends Migration
     {
         Schema::create('final_students', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('transkrip');
+            $table->string('student_id');
+            $table->string('status');
+            $table->integer('agreement')->default(0);
             $table->timestamps();
+
+            $table->unsignedInteger('user_id');
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

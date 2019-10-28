@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRecomendationTitlesTable extends Migration
+class CreateNewsReportImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class CreateRecomendationTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('recomendation_titles', function (Blueprint $table) {
+        Schema::create('news_report_images', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+
+            $table->unsignedInteger('news_report_id');
+
+            $table->foreign('news_report_id')
+                ->references('id')->on('news_reports')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,6 +32,6 @@ class CreateRecomendationTitlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recomendation_title');
+        Schema::dropIfExists('news_report_images');
     }
 }

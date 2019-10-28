@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFinalProjectTopicTable extends Migration
+class CreateRecomendationTopicTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateFinalProjectTopicTable extends Migration
      */
     public function up()
     {
-        Schema::create('final_project_topic', function (Blueprint $table) {
+        Schema::create('recomendation_topic', function (Blueprint $table) {
+
+            $table->unsignedInteger('recomendation_title_id');
             $table->unsignedInteger('topic_id');
 
-            $table->unsignedInteger('lecturer_id');
+            $table->foreign('recomendation_title_id')
+                ->references('id')->on('recomendation_titles')
+                ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('topic_id')
                 ->references('id')->on('topics')
-                ->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('lecturer_id')
-                ->references('id')->on('lecturers')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }
@@ -35,6 +35,6 @@ class CreateFinalProjectTopicTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('final_project_topic');
+        Schema::dropIfExists('recomendation_topic');
     }
 }

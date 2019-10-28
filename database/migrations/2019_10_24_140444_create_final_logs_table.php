@@ -16,6 +16,18 @@ class CreateFinalLogsTable extends Migration
         Schema::create('final_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+
+            $table->unsignedInteger('final_project_id');
+
+            $table->unsignedInteger('final_status_id');
+
+            $table->foreign('final_project_id')
+                ->references('id')->on('final_projects')
+                ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('final_status_id')
+                ->references('id')->on('final_statuses')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
