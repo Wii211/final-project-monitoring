@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFinalStudentsTable extends Migration
+class CreateSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateFinalStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('final_students', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('transkrip');
-            $table->string('student_id');
-            $table->string('status');
-            $table->integer('agreement')->default(0);
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->timestamps();
 
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('final_status_id');
 
-            $table->foreign('user_id')
-                ->references('id')->on('users')
+            $table->foreign('final_status_id')
+                ->references('id')->on('final_statuses')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }
@@ -36,6 +34,6 @@ class CreateFinalStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('final_students');
+        Schema::dropIfExists('schedules');
     }
 }

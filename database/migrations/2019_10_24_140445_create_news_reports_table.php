@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchedulesTable extends Migration
+class CreateNewsReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,16 @@ class CreateSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('news_reports', function (Blueprint $table) {
             $table->increments('id');
+
             $table->timestamps();
+
+            $table->unsignedInteger('final_log_id');
+
+            $table->foreign('final_log_id')
+                ->references('id')->on('final_logs')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,6 +33,6 @@ class CreateSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('news_reports');
     }
 }

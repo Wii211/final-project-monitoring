@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Information;
+use App\LecturerTopic;
 use Illuminate\Http\Request;
 
-class InformationController extends Controller
+class LecturerTopicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class InformationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Information  $information
+     * @param  \App\LecturerTopic  $lecturerTopic
      * @return \Illuminate\Http\Response
      */
-    public function show(Information $information)
+    public function show(LecturerTopic $lecturerTopic)
     {
         //
     }
@@ -52,10 +52,10 @@ class InformationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Information  $information
+     * @param  \App\LecturerTopic  $lecturerTopic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Information $information)
+    public function edit(LecturerTopic $lecturerTopic)
     {
         //
     }
@@ -64,10 +64,10 @@ class InformationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Information  $information
+     * @param  \App\LecturerTopic  $lecturerTopic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Information $information)
+    public function update(Request $request, LecturerTopic $lecturerTopic)
     {
         //
     }
@@ -75,10 +75,10 @@ class InformationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Information  $information
+     * @param  \App\LecturerTopic  $lecturerTopic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Information $information)
+    public function destroy(LecturerTopic $lecturerTopic)
     {
         //
     }

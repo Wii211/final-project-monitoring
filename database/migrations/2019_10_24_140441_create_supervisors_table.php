@@ -15,7 +15,19 @@ class CreateSupervisorsTable extends Migration
     {
         Schema::create('supervisors', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('role');
             $table->timestamps();
+
+            $table->unsignedInteger('final_project_id');
+            $table->unsignedInteger('lecturer_id');
+
+            $table->foreign('final_project_id')
+                ->references('id')->on('final_projects')
+                ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('lecturer_id')
+                ->references('id')->on('lecturers')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

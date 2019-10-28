@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Information::class, function (Faker $faker) {
+$factory->define(App\NewsReportImage::class, function (Faker $faker) {
     return [
         //
     ];
