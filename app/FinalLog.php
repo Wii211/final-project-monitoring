@@ -2,9 +2,25 @@
 
 namespace App;
 
+use App\NewsReport;
+use App\FinalProject;
+use App\FinalSchedule;
 use Illuminate\Database\Eloquent\Model;
 
 class FinalLog extends Model
 {
-    //
+    public function newsReport()
+    {
+        return $this->hasOne(NewsReport::class);
+    }
+
+    public function finalSchedules()
+    {
+        return $this->hasMany(FinalSchedule::class);
+    }
+
+    public function finalProject()
+    {
+        return $this->belongsTo(FinalProject::class);
+    }
 }
