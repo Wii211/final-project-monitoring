@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class FinalStudentController extends Controller
 {
+
+    private $student;
+    public function __construct(FinalStudent $student)
+    {
+        $this->student = $student;
+    }
+
     /**
      * Display a listing of the resource.
      *

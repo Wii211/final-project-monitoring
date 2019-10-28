@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Role;
+use App\Admin;
+use App\FinalStudent;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,4 +39,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    public function finalStudent()
+    {
+        return $this->hasOne(FinalStudent::class);
+    }
 }
