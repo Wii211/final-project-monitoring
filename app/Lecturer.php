@@ -29,4 +29,18 @@ class Lecturer extends Model
     {
         return $this->belongsTo(Position::class);
     }
+
+    /**
+     * Check if lecturer can become 
+     * primary supervisor by his postion
+     *
+     * @param  $lecturerId
+     * @return \Illuminate\Http\Response
+     */
+    public function canPrimary($lecturerId): bool
+    {
+        $position = Lecturer::with('position')->findOrFail($lecturerId);
+
+        return $position->position->is_prime === 1 ? true : false;
+    }
 }

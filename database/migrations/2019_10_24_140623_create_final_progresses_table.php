@@ -22,8 +22,14 @@ class CreateFinalProgressesTable extends Migration
 
             $table->unsignedInteger('supervisor_id');
 
+            $table->unsignedInteger('user_id');
+
             $table->foreign('supervisor_id')
                 ->references('id')->on('supervisors')
+                ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

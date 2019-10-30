@@ -16,6 +16,7 @@ class CreateNewsReportImagesTable extends Migration
         Schema::create('news_report_images', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('image');
 
             $table->unsignedInteger('news_report_id');
 

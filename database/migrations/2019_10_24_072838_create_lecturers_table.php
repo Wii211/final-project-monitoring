@@ -15,9 +15,14 @@ class CreateLecturersTable extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('personnel_id');
+            $table->string('personnel_id'); //NIP
+            $table->string('lecturer_id'); //NIDN
             $table->string('name');
-            $table->string('rank');
+            $table->string('last_education');
+            $table->integer('status')->default(1);
+            $table->string('phone_number')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('image_profile');
             $table->timestamps();
         });
     }

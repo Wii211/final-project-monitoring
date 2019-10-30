@@ -2,9 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class RoleUser extends Model
+class RoleUser extends Pivot
 {
     protected $table = 'role_user';
+
+    public $timestamps = false;
 }
