@@ -41,9 +41,9 @@ Route::prefix('data')->group(function () {
 
 Route::prefix('user')->group(function () {
     // Route::view('/login', 'users.login')->name('login');
-    Route::get('/login', 'LoginController@index')->name('login.index');
+    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login.index');
 
-    Route::post('/login', 'LoginController@login')->name('login.store');
+    Route::post('/login', 'Auth\LoginController@login')->name('login.store');
 });
 
 Route::view('/final_project', 'final_projects.datas')->name('final.datas');
