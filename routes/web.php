@@ -18,7 +18,6 @@ Route::prefix('student')->group(function () {
     Route::view('/', 'homes.student')->name('home.student');
     Route::view('/final_project', 'final_projects.final_projects')->name('final.final_project');
     Route::view('/pra_proposal', 'final_projects.pra_proposal')->name('final.pra_proposal');
-
 });
 
 Route::prefix('coordinator')->group(function () {
@@ -32,7 +31,6 @@ Route::prefix('lecturer')->group(function () {
     Route::view('/', 'homes.lecturer')->name('home.lecturer');
     Route::view('/supervised', 'students.supervised')->name('student.supervised');
     Route::view('/examined', 'students.examined')->name('student.examined');
-
 });
 
 Route::prefix('data')->group(function () {
@@ -42,7 +40,8 @@ Route::prefix('data')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-    Route::view('/login', 'users.login')->name('login');
+    // Route::view('/login', 'users.login')->name('login');
+    Route::get('/login', 'LoginController@index')->name('login');
 });
 
 Route::view('/final_project', 'final_projects.datas')->name('final.datas');
