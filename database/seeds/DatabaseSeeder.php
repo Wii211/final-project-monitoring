@@ -1,6 +1,6 @@
 <?php
 
-use RolesTableSeeder;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesTableSeeder::class);
         factory(App\User::class, 35)->create();
-        factory(App\User::class, 70)->create();
+        factory(App\RoleUser::class, 70)->create();
     }
 }
