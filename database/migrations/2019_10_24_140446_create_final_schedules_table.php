@@ -15,6 +15,8 @@ class CreateFinalSchedulesTable extends Migration
     {
         Schema::create('final_schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('place');
+            $table->dateTime('scheduled')->nullable();
             $table->timestamps();
         });
     }

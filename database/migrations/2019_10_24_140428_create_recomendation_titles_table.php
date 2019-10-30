@@ -19,14 +19,14 @@ class CreateRecomendationTitlesTable extends Migration
             $table->integer('agree')->default(0);
             $table->timestamps();
 
-            $table->unsignedInteger('admin_id');
+            $table->unsignedInteger('user_id');
 
             $table->unsignedInteger('lecturer_id');
 
             $table->unsignedInteger('final_student_id');
 
-            $table->foreign('admin_id')
-                ->references('id')->on('admins')
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('lecturer_id')

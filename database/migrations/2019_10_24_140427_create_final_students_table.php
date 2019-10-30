@@ -15,7 +15,7 @@ class CreateFinalStudentsTable extends Migration
     {
         Schema::create('final_students', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('transkrip');
+            $table->string('transcript');
             $table->string('student_id');
             $table->string('status');
             $table->integer('agreement')->default(0);
