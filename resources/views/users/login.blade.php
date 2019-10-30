@@ -12,9 +12,10 @@
                     <a href="../../index2.html"><b>Sistem Monitoring </b>LTE</a>
                 </div>
 
-                <form action="../../index3.html" method="post">
+                <form action="{{ route('login.store') }}" method="post">
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" placeholder="Username">
+                        <input type="text" name="user_name" class="form-control form-control-sm" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -22,7 +23,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control form-control-sm" placeholder="Password">
+                        <input type="password" name="password" class="form-control form-control-sm" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -30,7 +31,7 @@
                         </div>
                     </div>
                     <div class="icheck-primary">
-                        <input type="checkbox" id="remember">
+                        <input type="checkbox" id="remember" name="remember">
                         <label class="check-login" for="remember">
                             Remember Me
                         </label>
