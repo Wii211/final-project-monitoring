@@ -44,7 +44,7 @@ Route::prefix('user')->group(function () {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login.index');
 
     Route::post('/login', 'Auth\LoginController@login')->name('login.store');
-    Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
 Route::view('/final_project', 'final_projects.datas')->name('final.datas');
