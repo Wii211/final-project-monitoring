@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="icheck-primary">
-                        <input type="checkbox" id="remember">
+                        <input type="checkbox" id="remember" name="remember">
                         <label class="check-login" for="remember">
                             Remember Me
                         </label>
