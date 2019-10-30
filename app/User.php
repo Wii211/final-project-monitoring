@@ -45,13 +45,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function admin()
-    {
-        return $this->hasOne(Admin::class);
-    }
-
     public function finalStudent()
     {
         return $this->hasOne(FinalStudent::class);
+    }
+
+    public function recomendationTitles()
+    {
+        return $this->hasMany(RecomendationTitle::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Admin;
 use App\Topic;
 use App\Lecturer;
@@ -25,9 +26,9 @@ class RecomendationTitle extends Model
         return $this->belongsTo(Lecturer::class);
     }
 
-    public function admin()
+    public function user()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(User::class);
     }
 
     public function finalStudent()
