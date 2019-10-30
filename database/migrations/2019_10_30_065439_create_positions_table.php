@@ -16,7 +16,6 @@ class CreatePositionsTable extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('rank');
             $table->integer('is_primary')->default(0);
             $table->timestamps();
         });
