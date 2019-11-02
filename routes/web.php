@@ -15,18 +15,17 @@ Route::view('/home', 'welcome');
 Route::prefix('student')->group(function () {
 
     Route::view('/', 'students.home')->name('student.home');
-    
+
     //Pra Proposal
     Route::view('/pre_proposal', 'students.pre_proposal')->name('pre_proposal.index');
 
     //Tugas Akhir Mahasiswa
     Route::view('/final_project', 'students.final_project')->name('final_project.index');
-
 });
 
 Route::prefix('coordinator')->group(function () {
     Route::view('/', 'coordinators.home')->name('coordinator.home');
-    
+
     //Tugas Akhir Yang Masih Aktif
     Route::view('/final_projects', 'final_projects.index')->name('final_actives.index');
 
@@ -37,15 +36,19 @@ Route::prefix('coordinator')->group(function () {
     Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
 });
 
+Route::resource('topic', 'TopicController');
+
+Route::resource('position', 'PositionController');
 
 Route::prefix('data')->group(function () {
 
     //Data Dosen
-    Route::view('/lecturers', 'datas.lecturer')->name('lecturers.index');
+    // Route::view('/lecturers', 'datas.lecturer')->name('lecturers.index');
+    Route::resource('lecturers', 'LecturerController');
 
     //Data Mahasiswa
     Route::view('/students', 'datas.student')->name('students.index');
-    
+
     //Data Arsip Tugas Akhir (Yang sudah selesai)
     Route::view('/final_projects', 'datas.final_project')->name('final_inactives.index');
 });

@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TopicCollection;
 use App\Topic;
 use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
+    private $topic;
+
+    public function __construct(Topic $topic)
+    {
+        $this->topic = $topic;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        return  new TopicCollection($this->topic->get());
     }
 
     /**

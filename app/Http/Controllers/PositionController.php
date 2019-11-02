@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PositionCollection;
 use App\Position;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
 {
+
+    private $position;
+
+    public function __construct(Position $position)
+    {
+        $this->position = $position;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        return  new PositionCollection($this->position->get());
     }
 
     /**
