@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/', 'welcome');
+Route::view('/home', 'welcome');
+Route::view('/homie', 'welcome');
 
 // :(((())))
 Route::prefix('student')->group(function () {
@@ -34,16 +35,22 @@ Route::prefix('lecturer')->group(function () {
 });
 
 Route::prefix('data')->group(function () {
-    Route::view('/lecturers', 'datas.lecturer')->name('lecturer');
+    // Route::view('/lecturers', 'datas.lecturer')->name('lecturer');
+    Route::get('/lecturers', 'LecturerController@index')->name('lecturer');
     Route::view('/students', 'datas.student')->name('student');
     Route::view('/informations', 'datas.information')->name('information');
 });
 
 Route::prefix('user')->group(function () {
-    // Route::view('/login', 'users.login')->name('login');
+
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login.index');
 
     Route::post('/login', 'Auth\LoginController@login')->name('login.store');
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+});
+
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:admin']], function () {
+    Route::view('/test', 'welcome');
 });
 
 Route::view('/final_project', 'final_projects.datas')->name('final.datas');
