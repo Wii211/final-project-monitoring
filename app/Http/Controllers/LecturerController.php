@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LecturerCollection;
 use App\Lecturer;
 use Illuminate\Http\Request;
 
 class LecturerController extends Controller
 {
+
+    private $lecturer;
+
+    public function __construct(Lecturer $lecturer)
+    {
+        $this->lecturer = $lecturer;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return $request->ajax() ? new LecturerCollection($this->lecturer->get())
+            : view('datas.lecturer');
     }
 
     /**

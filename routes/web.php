@@ -35,7 +35,8 @@ Route::prefix('lecturer')->group(function () {
 });
 
 Route::prefix('data')->group(function () {
-    Route::view('/lecturers', 'datas.lecturer')->name('lecturer');
+    // Route::view('/lecturers', 'datas.lecturer')->name('lecturer');
+    Route::get('/lecturers', 'LecturerController@index')->name('lecturer');
     Route::view('/students', 'datas.student')->name('student');
     Route::view('/informations', 'datas.information')->name('information');
 });
