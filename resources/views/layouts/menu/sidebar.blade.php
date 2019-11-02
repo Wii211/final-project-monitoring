@@ -28,7 +28,7 @@
                with font-awesome or any other icon font library -->
                   <li class="nav-header">Mahasiswa</li>
                   <li class="nav-item">
-                      <a id="studentHome" href="{{ route('home.student') }}" class="nav-link active">
+                      <a id="studentHome" href="{{ route('student.home') }}" class="nav-link active">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p>
                             Home
@@ -36,7 +36,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="studentProposal" href="{{ route('final.pra_proposal') }}" class="nav-link">
+                      <a id="studentProposal" href="{{ route('pre_proposal.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-sticky-note"></i>
                           <p>
                             Pra-Proposal
@@ -45,7 +45,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="studentFinalProject" href="{{ route('final.final_project') }}" class="nav-link">
+                      <a id="studentFinalProject" href="{{ route('final_project.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                             Tugas Akhir
@@ -54,7 +54,7 @@
                   </li>
                   <li class="nav-header">Koordinator TA</li>
                   <li class="nav-item">
-                      <a id="coorHome" href="{{ route('home.coordinator') }}" class="nav-link">
+                      <a id="coorHome" href="{{ route('coordinator.home') }}" class="nav-link">
                           <i class="nav-icon fas fa-home"></i>
                           <p>
                             Home
@@ -62,7 +62,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="coorFinalProjectStudent" href="{{ route('final.student') }}" class="nav-link">
+                      <a id="coorFinalProjectStudent" href="{{ route('final_students.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-user-graduate"></i>
                           <p>
                             Mahasiswa TA
@@ -71,7 +71,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="coorFinalProject" href="{{ route('final.for_coordinator') }}" class="nav-link">
+                      <a id="coorFinalProject" href="{{ route('final_actives.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-book"></i>
                           <p>
                             Tugas Akhir
@@ -80,7 +80,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="coorFinalProjectSchedule" href="{{ route('final.schedule') }}" class="nav-link">
+                      <a id="coorFinalProjectSchedule" href="{{ route('final_schedules.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-calendar-alt"></i>
                           <p>
                             Seminar Proposal/Sidang TA
@@ -89,15 +89,7 @@
                   </li>
                   <li class="nav-header">Datas</li>
                   <li class="nav-item">
-                      <a id="information" href="{{ route('information') }}" class="nav-link">
-                          <i class="nav-icon fas fa-info"></i>
-                          <p>
-                              Informasi
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a id="finalProject" href="{{ route('final.datas') }}" class="nav-link">
+                      <a id="finalProject" href="{{ route('final_inactives.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                             Data Tugas Akhir
@@ -105,7 +97,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="lecturer" href="{{ route('lecturer') }}" class="nav-link">
+                      <a id="lecturer" href="{{ route('lecturers.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                             Data Dosen
@@ -113,35 +105,10 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="student" href="{{ route('student') }}" class="nav-link">
+                      <a id="student" href="{{ route('students.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-users"></i>
                           <p>
                               Data Mahasiswa
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-header">Dosen</li>
-                  <li class="nav-item">
-                      <a id="lecturerHome" href="{{ route('home.lecturer') }}" class="nav-link ">
-                          <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>
-                            Home
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a id="lecturerSupervised" href="{{ route('student.supervised') }}" class="nav-link">
-                          <i class="nav-icon fas fa-users"></i>
-                          <p>
-                            Daftar Bimbingan
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a id="lecturerExamined" href="{{ route('student.examined') }}" class="nav-link">
-                          <i class="nav-icon fas fa-users"></i>
-                          <p>
-                            Daftar Yang Diuji
                           </p>
                       </a>
                   </li>

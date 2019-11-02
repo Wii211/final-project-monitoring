@@ -6,29 +6,6 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-info-circle"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Verifikasi Mahasiswa</span>
-                        <span class="info-box-number">
-                            10
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Mahasiswa TA</span>
-                        <span class="info-box-number">5</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="d-flex justify-content-end">
             {{-- <button type="button" class="btn bg-gradient-success mb-2" id="convert">
                 <i class="fas fa-images"></i>
