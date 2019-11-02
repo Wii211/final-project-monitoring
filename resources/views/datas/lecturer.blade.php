@@ -8,10 +8,10 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between">
-            <button type="button" class="btn bg-gradient-success mb-2" id="convert">
+        <div class="d-flex justify-content-end">
+            {{-- <button type="button" class="btn bg-gradient-success mb-2" id="convert">
                 <i class="fas fa-images"></i>
-                Import Data</button>
+                Import Data</button> --}}
             <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
                 data-target="#scheduleFinalProject">Tambah Data Dosen</button>
 
