@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/home', 'welcome');
+Route::view('/student', 'welcome');
 
 // :(((())))
 Route::prefix('student')->group(function () {
@@ -24,7 +24,6 @@ Route::prefix('coordinator')->group(function () {
     Route::view('/', 'homes.coordinator')->name('home.coordinator');
     Route::view('/final_project', 'final_projects.for_coordinator')->name('final.for_coordinator');
     Route::view('/final_project/students', 'final_projects.students')->name('final.student');
-    Route::view('/final_project/schedules', 'final_projects.schedules')->name('final.schedule');
 });
 
 Route::prefix('lecturer')->group(function () {
@@ -34,15 +33,14 @@ Route::prefix('lecturer')->group(function () {
 });
 
 Route::prefix('data')->group(function () {
-    Route::view('/lecturers', 'datas.lecturer')->name('lecturer');
-    Route::view('/students', 'datas.student')->name('student');
-    Route::view('/informations', 'datas.information')->name('information');
+    Route::view('/lecturers', 'LecturerController@index')->name('lecturer.index');
+    Route::view('/students', 'FinalStudentController@index')->name('student.index');
+    // Route::view('/informations', '')->name('information.index');
 });
 
 Route::prefix('user')->group(function () {
     // Route::view('/login', 'users.login')->name('login');
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login.index');
-
     Route::post('/login', 'Auth\LoginController@login')->name('login.store');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 });
