@@ -16,27 +16,30 @@
             {{-- <button type="button" class="btn bg-gradient-success mb-2" id="convert">
                 <i class="fas fa-images"></i>
                 Import Data</button> --}}
-            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
-                data-target="#scheduleFinalProject">Tambah Data Dosen</button>
+            <button type="submit" class="btn btn-primary mb-2" id="lecturerStore" data-toggle="modal"
+                data-target="#lecturerModal">Tambah Data Dosen</button>
 
         </div>
         <div class="card">
             <div class="card-body">
-                <table class="table" id="lecturerTable">
-                    <thead>
-                        <tr>
-                            <th>NIP</th>
-                            <th>NIDN</th>
-                            <th>Nama</th>
-                            <th>Status</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                        <table class="table" id="lecturerTable">
+                            <thead>
+                                <tr>
+                                    <th>NIP</th>
+                                    <th>NIDN</th>
+                                    <th>Nama</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -45,6 +48,7 @@
 
 {{-- Modal --}}
 @section('modal')
+    @include('modals.lecturer.store')
     @include('modals.lecturer.detail')
 @endsection
 
