@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\TopicItem;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class LecturerItem extends JsonResource
@@ -22,7 +23,11 @@ class LecturerItem extends JsonResource
             'status' => $this->status,
             'phone_number' => $this->phone_number,
             'email' => $this->email,
-            'image_profil' => $this->image_profile
+            'image_profile' => $this->image_profile,
+            'position' => new PositionItem($this->whenLoaded('position')),
+            'topics' => TopicItem::collection($this->whenLoaded('topics')),
+            // 'topics' => $this->topics
+
         ];
     }
 }
