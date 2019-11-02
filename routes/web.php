@@ -34,6 +34,10 @@ Route::prefix('lecturer')->group(function () {
     Route::view('/examined', 'students.examined')->name('student.examined');
 });
 
+Route::resource('topic', 'TopicController');
+
+Route::resource('position', 'PositionController');
+
 Route::prefix('data')->group(function () {
     // Route::view('/lecturers', 'datas.lecturer')->name('lecturer');
     Route::get('/lecturers', 'LecturerController@index')->name('lecturer');
