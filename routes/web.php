@@ -43,7 +43,8 @@ Route::resource('position', 'PositionController');
 Route::prefix('data')->group(function () {
 
     //Data Dosen
-    Route::view('/lecturers', 'datas.lecturer')->name('lecturers.index');
+    // Route::view('/lecturers', 'datas.lecturer')->name('lecturers.index');
+    Route::resource('lecturers', 'LecturerController');
 
     //Data Mahasiswa
     Route::view('/students', 'datas.student')->name('students.index');
