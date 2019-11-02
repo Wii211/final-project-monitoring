@@ -27,7 +27,7 @@ class PositionsTableSeeder extends Seeder
                 ],
                 [
                     'name' => 'Staff Pengajar',
-                    'is_primary' => '1',
+                    'is_primary' => '0',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ]
