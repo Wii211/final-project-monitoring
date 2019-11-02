@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Topic;
 use App\Examiner;
 use App\Position;
 use App\Supervisor;
@@ -28,6 +29,16 @@ class Lecturer extends Model
     public function position()
     {
         return $this->belongsTo(Position::class);
+    }
+
+    public function topics()
+    {
+        return $this->belongsToMany(
+            Topic::class,
+            'lecturer_topic',
+            'lecturer_id',
+            'topic_id'
+        );
     }
 
     /**
