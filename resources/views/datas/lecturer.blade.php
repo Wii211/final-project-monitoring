@@ -4,6 +4,10 @@
 <!-- If() -->
 @section('title', 'Data Dosen')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+@endsection
+
 <!-- Content -->
 @section('content')
 <section class="content">
@@ -17,36 +21,20 @@
 
         </div>
         <div class="card">
-            <div class="card-body p-0">
-                <table class="table">
+            <div class="card-body">
+                <table class="table" id="lecturerTable">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>NIP</th>
+                            <th>NIDN</th>
                             <th>Nama</th>
-                            <th>Tanggal</th>
+                            <th>Status</th>
                             <th></th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>14Y950645423-492</td>
-                            <td>Winardi Chandra</td>
-                            <td>29-02-2022</td>
-                            <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#lecturerDetail">Detail</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Update</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Delete</button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -55,7 +43,16 @@
 </section>
 @endsection
 
-<!-- Modal -->
+{{-- Modal --}}
 @section('modal')
-@include('modals.lecturer.detail')
+    @include('modals.lecturer.detail')
+@endsection
+
+{{-- Javascript --}}
+
+@section('javascript')
+    <!-- DataTables -->
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/lecturer/lecturer.js') }}"></script>
 @endsection
