@@ -55,7 +55,6 @@ let dataTable = $('#lecturerTable').DataTable({
     }]
 });
 
-// Tambah Data
 $('#lecturerStore').click(function () {
     $('#lecturerDataForm')[0].reset();
     $('#lecturerModalTitle').text("Tambah Data Dosen Teknologi Informasi");
@@ -64,7 +63,7 @@ $('#lecturerStore').click(function () {
 
 
 
-// Posisi
+// Position
 function getPositions(id, value) {
     let data = '<option value="' + id + '">' + value + '</option>';
     $('#positions').append(data);
@@ -84,7 +83,7 @@ $(document).ready(function () {
     });
 });
 
-// Topik
+// Topic
 function getTopics(id, value) {
     let data = '<option value="' + id + '">' + value + '</option>';
     $('#topics').append(data);
@@ -104,77 +103,57 @@ $(document).ready(function () {
     });
 });
 
-//Ambil Data
-$('#fieldTable tbody').on('click', '.update', function () {
-    let data = dataTable.row($(this).parents('tr')).data();
+//Fetch
+$('#lecturerTable tbody').on('click', '.update', function () {
+    let id = $(this).attr("id");
     $.ajax({
-        url: "https://quequic.space/api/superadmin/field/" + data.id,
+        url: "" + id,
         dataType: "json",
-        success: function (data) {
-            $('#fieldForm')[0].reset();
-            $('#fieldModal').modal('show');
-            $('#fieldTitle').text("Update Data");
-            $('#fieldAction').val("Update");
-
-            //Fetch Data
-            $('#fieldName').val(data.field_name)
-            $('#fieldId').val(data.id)
-        }
+        success: function (data) {}
     })
 });
 
-// $(document).on('click', '#fieldAction', function (event) {
-//     event.preventDefault();
-//     let buttonAction = $('#fieldAction').val();
-//     let type, url;
-//     let name = $('#fieldName').val();
-//     let id = $('#fieldId').val();
-//     let accessId = $('#fieldLastAccessId').val();
+//Add
+$('#lecturerTable tbody').on('click', '#lecturerStore', function (e) {
+    e.preventDefault();
+    let action = $('#lecturerModalButton').text();
+    let id = "",
+        type, url;
 
-//     if (buttonAction == "Add") {
-//         type = "POST";
-//         url = "https://quequic.space/api/superadmin/field";
-//     } else if (buttonAction == "Update") {
-//         type = "PUT";
-//         url = "https://quequic.space/api/superadmin/field/" + id + "/edit";
-//     }
+    if (action == "Tambah") {
+        type = "POST";
+        url = "";
+    } else if (action == "Update") {
+        type = "PUT";
+        url = "";
+    }
 
 
-//     if (name !== '') {
-//         $.ajax({
-//             url: url,
-//             type: type,
-//             data: {
-//                 field_name: name,
-//                 last_user_access_id: accessId
-//             },
-//             success: function (data) {
-//                 $('#fieldForm')[0].reset();
-//                 $('#fieldModal').modal('hide');
-//                 if (data.error == undefined) {
-//                     swal(
-//                             'Berhasil!',
-//                             data.message,
-//                             'success'
-//                         )
-//                         .then(function () {
-//                             dataTable.ajax.reload();
-//                         });
-//                 } else {
+    if (id !== '') {
+        $.ajax({
+            url: url,
+            type: type,
+            success: function (data) {
+                $('#lecturerDataForm')[0].reset();
+                $('#lecturerModal').modal('hide');
+                if (data.error == undefined) {
+                    swal(
+                            'Berhasil!',
+                            data.message,
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                } else {
 
-//                     swal(
-//                         data.message,
-//                         '',
-//                         'error'
-//                     )
-//                 }
-//             }
-//         });
-//     } else {
-//         swal(
-//             '',
-//             'Masukkan data secara lengkap!',
-//             'error'
-//         );
-//     }
-// });
+                    swal(
+                        data.message,
+                        '',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+});
