@@ -4,58 +4,59 @@
 <!-- If() -->
 @section('title', 'Data Dosen')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+@endsection
+
 <!-- Content -->
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between">
-            <button type="button" class="btn bg-gradient-success mb-2" id="convert">
+        <div class="d-flex justify-content-end">
+            {{-- <button type="button" class="btn bg-gradient-success mb-2" id="convert">
                 <i class="fas fa-images"></i>
-                Import Data</button>
-            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
-                data-target="#scheduleFinalProject">Tambah Data Dosen</button>
+                Import Data</button> --}}
+            <button type="submit" class="btn btn-primary mb-2" id="lecturerStore" data-toggle="modal"
+                data-target="#lecturerModal">Tambah Data Dosen</button>
 
         </div>
         <div class="card">
-            <div class="card-body p-0">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nama</th>
-                            <th>Tanggal</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>14Y950645423-492</td>
-                            <td>Winardi Chandra</td>
-                            <td>29-02-2022</td>
-                            <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#lecturerDetail">Detail</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Update</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card-body">
+                <div class="table-responsive">
+                        <table class="table" id="lecturerTable">
+                            <thead>
+                                <tr>
+                                    <th>NIP</th>
+                                    <th>NIDN</th>
+                                    <th>Nama</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    
+                </div>
             </div>
         </div>
     </div>
 </section>
 @endsection
 
-<!-- Modal -->
+{{-- Modal --}}
 @section('modal')
-@include('modals.lecturer.detail')
+    @include('modals.lecturer.store')
+    @include('modals.lecturer.detail')
+@endsection
+
+{{-- Javascript --}}
+
+@section('javascript')
+    <!-- DataTables -->
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/lecturer/lecturer.js') }}"></script>
 @endsection

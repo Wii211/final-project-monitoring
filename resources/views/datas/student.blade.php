@@ -57,5 +57,5 @@
 
 <!-- Modal -->
 @section('modal')
-@include('modals.lecturer.detail')
+    @include('modals.lecturer.detail')
 @endsection
