@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LecturerRequest;
 use Illuminate\Http\Request;
 use App\Http\Services\LecturerService;
 
@@ -32,7 +33,7 @@ class LecturerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LecturerRequest $request)
     {
         $this->lecturerService->storeData($request);
     }
@@ -55,7 +56,7 @@ class LecturerController extends Controller
      * @param  \App\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LecturerRequest $request, $id)
     {
         $this->lecturerService->updateData($request, $id);
     }
