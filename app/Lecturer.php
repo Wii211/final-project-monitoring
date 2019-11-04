@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lecturer extends Model
 {
+    protected $guarded = ['id'];
+
     public function recomendationTitles()
     {
         return $this->HasMany(RecomendationTitle::class);
@@ -54,4 +56,7 @@ class Lecturer extends Model
 
         return $position->position->is_prime === 1 ? true : false;
     }
+
+    public function uploadImage($requestImage)
+    { }
 }
