@@ -44,29 +44,72 @@ class LecturerService
 
     public function storeData(Request $request)
     {
-        //TODO TRY CATCH IF FAIL
-        $fileName = " ";
-        if ($request->hasFile('image_profile')) {
-            $fileName = $this->uploadHelper->uploadImage(
-                $request->file('image_profile'),
-                $request->name,
-                'lecturers'
-            );
+        try {
+            $fileName = " ";
+            if ($request->hasFile('image_profile')) {
+                $fileName = $this->uploadHelper->uploadImage(
+                    $request->file('image_profile'),
+                    $request->name,
+                    'lecturers'
+                );
+            }
+            $this->lecturer->create(
+                array_merge(
+                    $request->except([
+                        'image_profile',
+                        'topics'
+                    ]),
+                    ['image_profile' => $fileName]
+                )
+            )->topics()->attach($request->topics);
+            return response()->json("Success");
+        } catch (\Throwable $th) {
+            return response()->json("Failed" . $th);
         }
-        // try {
-        $this->lecturer->create(
-            array_merge(
-                $request->except([
-                    'image_profile',
-                    'topics'
-                ]),
-                ['image_profile' => $fileName]
-            )
-        )->topics()->attach($request->topics);
+    }
 
-        return response()->json("Success");
-        // } catch (\Throwable $th) {
-        //     return response()->json("Failed" . $th);
-        // }
+    public function updateData(Request $request, $id)
+    {
+        try {
+            $lecturer = $this->lecturer->findOrFail($id);
+            $fileName = " ";
+            if ($request->hasFile('image_profile')) {
+                if ($lecturer->image_profile) {
+                    $this->uploadHelper->deleteImage($lecturer->image_profile);
+                }
+                $fileName = $this->uploadHelper->uploadImage(
+                    $request->file('image_profile'),
+                    $request->name,
+                    'lecturers'
+                );
+            }
+            $lecturer->update(
+                array_merge(
+                    $request->except([
+                        'image_profile',
+                        'topics'
+                    ]),
+                    ['image_profile' => $fileName]
+                )
+            )->topics()->sync($request->topics);
+            return response()->json("Success");
+        } catch (\Throwable $th) {
+            return response()->json("Failed" . $th);
+        }
+    }
+
+    public function doNonActive($id)
+    {
+        try {
+            $lecturer = $this->lecturer->findOrFail($id);
+
+            $lecturer->status = 0;
+
+            if ($lecturer->save()) {
+                return response()->json("Success");
+            }
+        } catch (\Throwable $th) {
+            return response()->json("Failed" . $th);
+        }
     }
 }

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Lecturer;
 use Illuminate\Http\Request;
 use App\Http\Services\LecturerService;
 
 class LecturerController extends Controller
 {
 
-    private $lecturerService, $topic;
+    private $lecturerService;
 
     public function __construct(LecturerService $lecturerService)
     {
@@ -25,16 +24,6 @@ class LecturerController extends Controller
     {
         return $request->ajax() ? $this->lecturerService
             ->getListData() : view('datas.lecturer');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -60,26 +49,15 @@ class LecturerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lecturer $lecturer)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lecturer $lecturer)
+    public function update(Request $request, $id)
     {
-        //
+        $this->lecturerService->updateData($request, $id);
     }
 
     /**
@@ -88,8 +66,8 @@ class LecturerController extends Controller
      * @param  \App\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lecturer $lecturer)
+    public function destroy($id)
     {
-        //
+        $this->lecturerService->doNonActive($id);
     }
 }
