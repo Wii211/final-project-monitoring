@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\LecturerCollection;
 use App\Lecturer;
 use Illuminate\Http\Request;
+use App\Http\Services\LecturerService;
 
 class LecturerController extends Controller
 {
 
-    private $lecturer;
+    private $lecturerService, $topic;
 
-    public function __construct(Lecturer $lecturer)
+    public function __construct(LecturerService $lecturerService)
     {
-        $this->lecturer = $lecturer;
+        $this->lecturerService = $lecturerService;
     }
 
     /**
@@ -23,8 +23,8 @@ class LecturerController extends Controller
      */
     public function index(Request $request)
     {
-        return $request->ajax() ? new LecturerCollection($this->lecturer->get())
-            : view('datas.lecturer');
+        return $request->ajax() ? $this->lecturerService
+            ->getListData() : view('datas.lecturer');
     }
 
     /**
@@ -45,7 +45,7 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->lecturerService->storeData($request);
     }
 
     /**
@@ -54,9 +54,9 @@ class LecturerController extends Controller
      * @param  \App\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function show(Lecturer $lecturer)
+    public function show($id)
     {
-        //
+        return $this->lecturerService->getData(['topics', 'position'], $id);
     }
 
     /**
