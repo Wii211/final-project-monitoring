@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <img id="detailPhoto" class="img-fluid w-100"
-                    src="{{ asset('storage/app/lecturers/IPKs_1572838451_5dbf9c334122b.jpg') }}" alt="Photo"></th>
+                    src="{{ asset('storage/images/lecturers/Zaza_1572852195_5dbfd1e38906d') }}" alt="Photo"></th>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>

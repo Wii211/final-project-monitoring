@@ -106,7 +106,8 @@ function topicLecturer(name) {
     $('#detailTopic').append(data);
 }
 
-function detailLecturer(personnel, id, name, phone, email, status, lastEducation, position, positionPrimary) {
+function detailLecturer(personnel, id, name, phone, email, status, lastEducation, position,
+    positionPrimary, image) {
     $('#detailPersonalId').text(personnel);
     $('#detailLecturerId').text(id);
     $('#detailName').text(name);
@@ -124,19 +125,8 @@ function detailLecturer(personnel, id, name, phone, email, status, lastEducation
     } else {
         $('#supervisor').html('<i class="fa fa-times" aria-hidden="true"></i>')
     }
+    $('#detailPhoto').attr('src', '../storage/images/' + image);
     $('#detailTopic').html("");
-}
-
-function fetchLecturer(personnel, id, name, phone, email, status, position, topics, lastEducation) {
-    $('#lecturerPersonalId').val(personnel);
-    $('#lecturerLecturerId').val(id);
-    $('#lecturerName').val(name);
-    $('#lecturerNumber').val(phone);
-    $('#lecturerEmail').val(email);
-    $('#lecturerLastEduction').val(lastEducation);
-    $('#lecturerPosition').val(position);
-    $('#lecturerStatus').val(status);
-    $('#lecturerTopic').val(topics);
 }
 
 //Detail
@@ -146,13 +136,13 @@ $('#lecturerTable tbody').on('click', '.detail', function () {
         url: "lecturers/" + id,
         dataType: "json",
         success: function (result) {
-            console.log(result)
             $('#lecturerDetail').modal('show');
 
             // Detail
             detailLecturer(result.data.personnel_id, result.data.lecturer_id,
                 result.data.name, result.data.phone_number, result.data.email,
-                result.data.status, result.data.last_education, result.data.position.name, result.data.position.is_primary)
+                result.data.status, result.data.last_education, result.data.position.name,
+                result.data.position.is_primary, result.data.image_profile)
 
             // Topic
             result.data.topics.forEach(function (topic) {
@@ -162,19 +152,40 @@ $('#lecturerTable tbody').on('click', '.detail', function () {
     })
 });
 
+function fetchLecturer(id, personnel, lecturerId, name, phone, email, status, position, lastEducation) {
+    $('#lecturerPersonalId').val(personnel);
+    $('#lecturerLecturerId').val(lecturerId);
+    $('#lecturerName').val(name);
+    $('#lecturerNumber').val(phone);
+    $('#lecturerEmail').val(email);
+    $('#lecturerLastEduction').val(lastEducation);
+    $('#positions').val(position);
+    $('#lecturerModalButton').text("Update");
+    $('#lecturerStatus').val(status);
+    $('#lecturerId').val(id)
+    // $('#lecturerTopic').val(topics);
+}
+
 //Fetch
 $('#lecturerTable tbody').on('click', '.update', function () {
     let id = $(this).attr("id");
+    let topicData = []
     $.ajax({
         url: "lecturers/" + id,
         dataType: "json",
         success: function (result) {
+            console.log(result)
             $('#lecturerModal').modal('show')
-
-            fetchLecturer(result.data.personnel_id, result.data.lecturer_id,
+            fetchLecturer(result.data.id, result.data.personnel_id, result.data.lecturer_id,
                 result.data.name, result.data.phone_number, result.data.email,
-                result.data.status, result.data.position.id, result.data.topics.id)
+                result.data.status, result.data.position.id,
+                result.data.last_education)
 
+            // Topic
+            result.data.topics.forEach(function (topic) {
+                topicData.push(topic.id);
+            })
+            $('#topics').val(topicData);
 
         }
     })
@@ -184,14 +195,15 @@ $('#lecturerTable tbody').on('click', '.update', function () {
 $(document).on('submit', '#lecturerDataForm', function (e) {
     e.preventDefault();
     let action = $('#lecturerModalButton').text();
-    let id = '',
-        type, url;
+    let id = $('#lecturerId').val();
+    let type, url;
 
     if (action == "Tambah") {
         type = "POST";
         url = "lecturers"
     } else if (action == "Update") {
         type = "PUT";
+        url = "lecturers/" + id
     }
 
 
@@ -251,14 +263,20 @@ $('#lecturerTable tbody').on('click', '.delete', function () {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
-            Swal.fire(
-                    'Deleted! Id' + id,
-                    'Your file has been deleted.',
-                    'success'
-                )
-                .then(function () {
-                    dataTable.ajax.reload();
-                });
+            $.ajax({
+                url: "lecturers/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted Id ' + id + '!',
+                            'Status dosen telah diubah menjadi tidak aktif',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                }
+            });
         }
     })
 });

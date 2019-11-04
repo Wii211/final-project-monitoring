@@ -43,9 +43,6 @@
             </div>
         </div>
     </div>
-    
-    <img src="{{asset('storage/images/lecturers/kadkakdk_1572849593_5dbfc7b992915')}}"
-     alt="" srcset="">
      
 </section>
 @endsection

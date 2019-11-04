@@ -13,11 +13,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">NIP</label>
-                        <input type="text" id="personalId" class="form-control" name="personnel_id" required>
+                        <input type="text" id="lecturerPersonalId" class="form-control" name="personnel_id" required>
                     </div>
                     <div class="form-group">
                         <label for="">NIDN</label>
-                        <input type="text" id="lecturerId" class="form-control" name="lecturer_id" required>
+                        <input type="text" id="lecturerLecturerId" class="form-control" name="lecturer_id" required>
                     </div>
                     <div class="form-group">
                         <label for="">Nama Lengkap (Dengan Gelar)</label>
@@ -44,20 +44,21 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Foto</label>
-                        <input type="file" class="form-control-file" name="image_profile" id="lecturerImage">
+                        <input type="file" class="form-control-file" name="image_profile" id="lecturerImage" value="12121">
                     </div>
                     <div class="form-group">
                         <label for="positions">Posisi</label>
-                        <select class="form-control" id="positions" name="position_id" id="lecturerPosition">
+                        <select class="form-control" id="positions" name="position_id">
                         </select>
                     </div>
                     <div class="form-group mt-3">
                         <label for="topics">Bidang Minat Dosen</label>
-                        <select multiple class="form-control" id="topics" name="topics[]" id="lecturerTopic">
+                        <select multiple class="form-control" id="topics" name="topics[]">
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="lecturerId" value="">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="input" class="btn btn-primary" id="lecturerModalButton">Ajukan</button>
                 </div>
