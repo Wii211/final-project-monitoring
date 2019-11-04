@@ -25,12 +25,13 @@ class UploadHelper
 
         // $uploadedFile =  $uploadedFile->resize(320, 240);
 
-        $file = $uploadedFile->storeAs($folder, $fileName .
-            '.' . $uploadedFile->getClientOriginalExtension());
+        // $file = $uploadedFile->storeAs('public/images/' . $folder, $fileName .
+        //     '.' . $uploadedFile->getClientOriginalExtension());
 
-        if ($file) {
+        $image = Image::make($uploadedFile)->save($path . '/' . $folder . '/' . $fileName);
 
-            return $file;
+        if ($image) {
+            return $folder . '/' . $fileName;
         } else {
             return false;
         }
