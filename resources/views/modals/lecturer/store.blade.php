@@ -7,7 +7,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="lecturerDataForm">
+        <form id="lecturerDataForm" action="{{route('lecturers.store')}}" method="POST" 
+        enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">NIP</label>
@@ -51,13 +53,13 @@
                     </div>
                     <div class="form-group mt-3">
                         <label for="topics">Bidang Minat Dosen</label>
-                        <select multiple class="form-control" id="topics" name="topic[]">
+                        <select multiple class="form-control" id="topics" name="topics[]">
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="lecturerModalButton">Ajukan</button>
+                    <button type="input" class="btn btn-primary" id="lecturerModalButton">Ajukan</button>
                 </div>
             </form>
         </div>
