@@ -20,6 +20,7 @@ class LecturerItem extends JsonResource
             'personnel_id' => $this->personnel_id,
             'lecturer_id' => $this->lecturer_id,
             'name' => $this->name,
+            'last_education' => $this->last_education,
             'status' => $this->status,
             'phone_number' => $this->phone_number,
             'email' => $this->email,
