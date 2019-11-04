@@ -41,6 +41,10 @@
                             <td id="detailPosition"></td>
                         </tr>
                         <tr>
+                            <th>Pendidikan Terakhir</th>
+                            <td id="detailEducation"></td>
+                        </tr>
+                        <tr>
                             <th>Bidang Minat</th>
                             <td id="">
                                 <ul id="detailTopic">

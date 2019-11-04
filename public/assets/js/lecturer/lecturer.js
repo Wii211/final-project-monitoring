@@ -127,7 +127,7 @@ function detailLecturer(personnel, id, name, phone, email, status, lastEducation
     $('#detailTopic').html("");
 }
 
-function fetchLecturer(personnel, id, name, phone, email, status, position, topics) {
+function fetchLecturer(personnel, id, name, phone, email, status, position, topics, lastEducation) {
     $('#lecturerPersonalId').val(personnel);
     $('#lecturerLecturerId').val(id);
     $('#lecturerName').val(name);
@@ -152,7 +152,7 @@ $('#lecturerTable tbody').on('click', '.detail', function () {
             // Detail
             detailLecturer(result.data.personnel_id, result.data.lecturer_id,
                 result.data.name, result.data.phone_number, result.data.email,
-                result.data.status, result.data.position.name, result.data.position.is_primary)
+                result.data.status, result.data.last_education, result.data.position.name, result.data.position.is_primary)
 
             // Topic
             result.data.topics.forEach(function (topic) {
@@ -170,9 +170,10 @@ $('#lecturerTable tbody').on('click', '.update', function () {
         dataType: "json",
         success: function (result) {
             $('#lecturerModal').modal('show')
-            detailLecturer(result.data.personnel_id, result.data.lecturer_id,
+
+            fetchLecturer(result.data.personnel_id, result.data.lecturer_id,
                 result.data.name, result.data.phone_number, result.data.email,
-                result.data.status, result.data.position.name, result.data.position.is_primary)
+                result.data.status, result.data.position.id, result.data.topics.id)
 
 
         }
