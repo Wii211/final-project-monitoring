@@ -25,21 +25,21 @@ let dataTable = $('#lecturerTable').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info detail'" + buttonId + "'>Detail</button>";
+                return "<button class='btn btn-info detail' id='" + buttonId + "'>Detail</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-warning update'" + buttonId + "'>Update</button>";
+                return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-danger delete'" + buttonId + "'>Delete</button>";
+                return "<button class='btn btn-danger delete' id='" + buttonId + "'>Delete</button>";
             }
         }
     ],
@@ -75,7 +75,6 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (position) {
-            console.log(position)
             position.data.forEach(function (result) {
                 getPositions(result.id, result.name);
             });
@@ -95,7 +94,6 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (topic) {
-            console.log(topic)
             topic.data.forEach(function (result) {
                 getTopics(result.id, result.name);
             });
@@ -103,57 +101,182 @@ $(document).ready(function () {
     });
 });
 
+function topicLecturer(name) {
+    let data = '<li>' + name + '</li>';
+    $('#detailTopic').append(data);
+}
+
+function detailLecturer(personnel, id, name, phone, email, status, lastEducation, position,
+    positionPrimary, image) {
+    $('#detailPersonalId').text(personnel);
+    $('#detailLecturerId').text(id);
+    $('#detailName').text(name);
+    $('#detailPhoneNumber').text(phone);
+    $('#detailEmail').text(email);
+    $('#detailEducation').text(lastEducation);
+    if (status === 1) {
+        $('#detailStatus').text("Dosen Aktif");
+    } else {
+        $('#detailStatus').text("Tidak Aktif");
+    }
+    $('#detailPosition').text(position);
+    if (positionPrimary === 1) {
+        $('#supervisor').html('<i class="fa fa-check" aria-hidden="true"></i>')
+    } else {
+        $('#supervisor').html('<i class="fa fa-times" aria-hidden="true"></i>')
+    }
+    $('#detailPhoto').attr('src', '../storage/images/' + image);
+    $('#detailTopic').html("");
+}
+
+//Detail
+$('#lecturerTable tbody').on('click', '.detail', function () {
+    let id = $(this).attr("id");
+    $.ajax({
+        url: "lecturers/" + id,
+        dataType: "json",
+        success: function (result) {
+            $('#lecturerDetail').modal('show');
+
+            // Detail
+            detailLecturer(result.data.personnel_id, result.data.lecturer_id,
+                result.data.name, result.data.phone_number, result.data.email,
+                result.data.status, result.data.last_education, result.data.position.name,
+                result.data.position.is_primary, result.data.image_profile)
+
+            // Topic
+            result.data.topics.forEach(function (topic) {
+                topicLecturer(topic.name)
+            })
+        }
+    })
+});
+
+function fetchLecturer(id, personnel, lecturerId, name, phone, email, status, position, lastEducation) {
+    $('#lecturerPersonalId').val(personnel);
+    $('#lecturerLecturerId').val(lecturerId);
+    $('#lecturerName').val(name);
+    $('#lecturerNumber').val(phone);
+    $('#lecturerEmail').val(email);
+    $('#lecturerLastEduction').val(lastEducation);
+    $('#positions').val(position);
+    $('#lecturerModalButton').text("Update");
+    $('#lecturerStatus').val(status);
+    $('#lecturerId').val(id)
+    // $('#lecturerTopic').val(topics);
+}
+
 //Fetch
 $('#lecturerTable tbody').on('click', '.update', function () {
     let id = $(this).attr("id");
+    let topicData = []
     $.ajax({
-        url: "" + id,
+        url: "lecturers/" + id,
         dataType: "json",
-        success: function (data) {}
+        success: function (result) {
+            console.log(result)
+            $('#lecturerModal').modal('show')
+            fetchLecturer(result.data.id, result.data.personnel_id, result.data.lecturer_id,
+                result.data.name, result.data.phone_number, result.data.email,
+                result.data.status, result.data.position.id,
+                result.data.last_education)
+
+            // Topic
+            result.data.topics.forEach(function (topic) {
+                topicData.push(topic.id);
+            })
+            $('#topics').val(topicData);
+
+        }
     })
 });
 
 //Add
-$('#lecturerTable tbody').on('click', '#lecturerStore', function (e) {
+$(document).on('submit', '#lecturerDataForm', function (e) {
     e.preventDefault();
     let action = $('#lecturerModalButton').text();
-    let id = "",
-        type, url;
+    let id = $('#lecturerId').val();
+    let type, url;
 
     if (action == "Tambah") {
         type = "POST";
-        url = "";
+        url = "lecturers"
     } else if (action == "Update") {
         type = "PUT";
-        url = "";
+        url = "lecturers/" + id
     }
 
 
-    if (id !== '') {
+    if (type !== '') {
+        Swal.fire({
+            title: 'Loading',
+            timer: 2000,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
         $.ajax({
             url: url,
             type: type,
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
             success: function (data) {
                 $('#lecturerDataForm')[0].reset();
-                $('#lecturerModal').modal('hide');
                 if (data.error == undefined) {
-                    swal(
-                            'Berhasil!',
-                            data.message,
+                    Swal.fire({
+                            type: 'success',
+                            title: 'Data telah ditambahkan',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(function () {
+                            dataTable.ajax.reload();
+                            $('#lecturerModal').modal('hide');
+                        });
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Gagal menambahkan data',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+    }
+});
+
+
+//Delete
+$('#lecturerTable tbody').on('click', '.delete', function () {
+    let id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "lecturers/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted Id ' + id + '!',
+                            'Status dosen telah diubah menjadi tidak aktif',
                             'success'
                         )
                         .then(function () {
                             dataTable.ajax.reload();
                         });
-                } else {
-
-                    swal(
-                        data.message,
-                        '',
-                        'error'
-                    )
                 }
-            }
-        });
-    }
+            });
+        }
+    })
 });
