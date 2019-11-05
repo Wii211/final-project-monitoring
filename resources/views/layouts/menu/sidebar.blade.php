@@ -28,7 +28,7 @@
                with font-awesome or any other icon font library -->
                   <li class="nav-header">Mahasiswa</li>
                   <li class="nav-item">
-                      <a id="studentHome" href="{{ route('student.home') }}" class="nav-link active">
+                      <a id="studentHome" href="{{ route('final_registration.index') }}" class="nav-link active">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p>
                             Home
