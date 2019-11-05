@@ -20,14 +20,19 @@
                         </div>
                         <span class="progress-description">
                             <b>
+                                
 
-                                Pendaftaran akan ditutup 10 hari lagi, pada tanggal 29 Oktober 2019
+                                
+
+                                Pendaftaran akan ditutup {{$endDateAndDiffDate['differenceBetweenDate']}} 
+                                hari lagi, pada tanggal {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
                             </b>
                         </span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
 
+                {{-- TODO ERROR MESSAGE AND SUCCESS MESSAGE --}}
                 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

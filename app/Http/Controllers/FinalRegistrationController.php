@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Services\DeadLineScheduleService;
 use App\Http\Requests\FinalRegistrasionRequest;
 use App\Http\Services\FinalRegistrationService;
 
 class FinalRegistrationController extends Controller
 {
 
-    private $finalRegistrationService;
+    private $finalRegistrationService, $deadLineScheduleService;
 
-    public function __construct(FinalRegistrationService $finalRegistrationService)
-    {
+    public function __construct(
+        FinalRegistrationService $finalRegistrationService,
+        DeadLineScheduleService $deadLineScheduleService
+    ) {
         $this->finalRegistrationService = $finalRegistrationService;
+        $this->deadLineScheduleService = $deadLineScheduleService;
     }
 
     /**
@@ -23,7 +27,9 @@ class FinalRegistrationController extends Controller
      */
     public function index()
     {
-        return view('students.home');
+        $endDateAndDiffDate = $this->deadLineScheduleService->showProposalRegisterDeadLine();
+
+        return view('students.home', compact('endDateAndDiffDate'));
     }
 
     /**

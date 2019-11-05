@@ -22,8 +22,6 @@ Route::group(
         Route::post('/final_registration', 'FinalRegistrationController@store')
             ->name('final_registration.store');
 
-        Route::view('/', 'students.home')->name('student.home');
-
         //Pra Proposal
         Route::view('/pre_proposal', 'students.pre_proposal')->name('pre_proposal.index');
 
