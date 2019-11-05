@@ -26,7 +26,18 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->isCoordinator()) {
+            return redirect()->route('coordinator_dashboard.index');
+        } elseif ($user->isAdmin()) {
+            return redirect()->route('final_project.index');
+        } elseif ($user->isStudent()) {
+            return redirect()->route('final_registration.index');
+        }
+    }
 
     /**
      * Create a new controller instance.
