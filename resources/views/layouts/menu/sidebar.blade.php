@@ -54,7 +54,7 @@
                   </li>
                   <li class="nav-header">Koordinator TA</li>
                   <li class="nav-item">
-                      <a id="coorHome" href="{{ route('coordinator.home') }}" class="nav-link">
+                      <a id="coorHome" href="{{ route('coordinator_dashboard.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-home"></i>
                           <p>
                             Home
@@ -89,7 +89,7 @@
                   </li>
                   <li class="nav-header">Datas</li>
                   <li class="nav-item">
-                      <a id="finalProject" href="{{ route('final_inactives.index') }}" class="nav-link">
+                      <a id="finalProject" href="{{ route('final_project.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                             Data Tugas Akhir
