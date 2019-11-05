@@ -33,7 +33,7 @@ class UploadHelper
         }
     }
 
-    public function deleteImage($fileName)
+    public function deleteFile($fileName)
     {
         if (Storage::delete($fileName)) {
             return true;
