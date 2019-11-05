@@ -196,18 +196,19 @@ $(document).on('submit', '#lecturerDataForm', function (e) {
     e.preventDefault();
     let action = $('#lecturerModalButton').text();
     let id = $('#lecturerId').val();
-    let type, url;
+    let url;
+    let formData = new FormData(this);
 
     if (action == "Tambah") {
-        type = "POST";
         url = "lecturers"
     } else if (action == "Update") {
-        type = "PUT";
         url = "lecturers/" + id
+        formData.append("_method", "PUT");
     }
 
 
-    if (type !== '') {
+
+    if (url !== '') {
         Swal.fire({
             title: 'Loading',
             timer: 2000,
@@ -218,8 +219,8 @@ $(document).on('submit', '#lecturerDataForm', function (e) {
 
         $.ajax({
             url: url,
-            type: type,
-            data: new FormData(this),
+            type: "POST",
+            data: formData,
             contentType: false,
             processData: false,
             success: function (data) {
