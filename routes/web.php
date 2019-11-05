@@ -31,7 +31,7 @@ Route::group(
 );
 
 Route::prefix('coordinator')->group(function () {
-    Route::view('/', 'coordinators.home')->name('coordinator.home');
+    Route::view('/', 'coordinators.home')->name('coordinator_dashboard.index');
 
     //Tugas Akhir Yang Masih Aktif
     Route::view('/final_projects', 'final_projects.index')->name('final_actives.index');
@@ -57,7 +57,7 @@ Route::prefix('data')->group(function () {
     Route::view('/students', 'datas.student')->name('students.index');
 
     //Data Arsip Tugas Akhir (Yang sudah selesai)
-    Route::view('/final_projects', 'datas.final_project')->name('final_inactives.index');
+    Route::view('/final_projects', 'datas.final_project')->name('final_project.index');
 });
 
 Route::prefix('user')->group(function () {
