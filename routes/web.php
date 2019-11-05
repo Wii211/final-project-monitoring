@@ -12,16 +12,25 @@
 */
 Route::view('/home', 'welcome');
 
-Route::prefix('student')->group(function () {
+Route::group(
+    ['prefix' => 'student', 'middleware' => ['auth', 'role:mahasiswa']],
+    function () {
 
-    Route::view('/', 'students.home')->name('student.home');
+        Route::get('/', 'FinalRegistrationController@index')
+            ->name('final_registration.index');
 
-    //Pra Proposal
-    Route::view('/pre_proposal', 'students.pre_proposal')->name('pre_proposal.index');
+        Route::post('/final_registration', 'FinalRegistrationController@store')
+            ->name('final_registration.store');
 
-    //Tugas Akhir Mahasiswa
-    Route::view('/final_project', 'students.final_project')->name('final_project.index');
-});
+        Route::view('/', 'students.home')->name('student.home');
+
+        //Pra Proposal
+        Route::view('/pre_proposal', 'students.pre_proposal')->name('pre_proposal.index');
+
+        //Tugas Akhir Mahasiswa
+        Route::view('/final_project', 'students.final_project')->name('final_project.index');
+    }
+);
 
 Route::prefix('coordinator')->group(function () {
     Route::view('/', 'coordinators.home')->name('coordinator.home');
