@@ -62,17 +62,20 @@ class LecturerService
                     ['image_profile' => $fileName]
                 )
             )->topics()->attach($request->topics);
-            return response()->json("Success");
+            return true;
         } catch (\Throwable $th) {
-            return response()->json("Failed" . $th);
+            return false;
         }
     }
 
     public function updateData(Request $request, $id)
     {
         try {
+
             $lecturer = $this->lecturer->findOrFail($id);
-            $fileName = " ";
+
+            $fileName = $lecturer->image_profile;
+
             if ($request->hasFile('image_profile')) {
                 if ($lecturer->image_profile) {
                     $this->uploadHelper->deleteImage($lecturer->image_profile);
@@ -91,10 +94,12 @@ class LecturerService
                     ]),
                     ['image_profile' => $fileName]
                 )
-            )->topics()->sync($request->topics);
-            return response()->json("Success");
+            );
+            $lecturer->topics()->sync($request->topics);
+
+            return true;
         } catch (\Throwable $th) {
-            return response()->json("Failed" . $th);
+            return false;
         }
     }
 
@@ -106,10 +111,10 @@ class LecturerService
             $lecturer->status = 0;
 
             if ($lecturer->save()) {
-                return response()->json("Success");
+                return true;
             }
         } catch (\Throwable $th) {
-            return response()->json("Failed" . $th);
+            return false;
         }
     }
 }

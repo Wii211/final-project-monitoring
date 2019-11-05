@@ -35,7 +35,12 @@ class LecturerController extends Controller
      */
     public function store(LecturerRequest $request)
     {
-        $this->lecturerService->storeData($request);
+        try {
+            $this->lecturerService->storeData($request);
+            return response()->json("Success");
+        } catch (\Throwable $th) {
+            return response()->json("Error " . $th);
+        }
     }
 
     /**
@@ -58,7 +63,12 @@ class LecturerController extends Controller
      */
     public function update(LecturerRequest $request, $id)
     {
-        $this->lecturerService->updateData($request, $id);
+        try {
+            $this->lecturerService->updateData($request, $id);
+            return response()->json("Success");
+        } catch (\Throwable $th) {
+            return response()->json("Error " . $th);
+        }
     }
 
     /**
@@ -69,6 +79,11 @@ class LecturerController extends Controller
      */
     public function destroy($id)
     {
-        $this->lecturerService->doNonActive($id);
+        try {
+            $this->lecturerService->doNonActive($id);
+            return response()->json("Success");
+        } catch (\Throwable $th) {
+            return response()->json("Error " . $th);
+        }
     }
 }
