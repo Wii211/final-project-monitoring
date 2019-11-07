@@ -21,8 +21,6 @@ class FinalRegistrationService
     {
         $finalStudentId = Auth::user()->finalStudent->id;
 
-
-
         if ($request->hasFile('transcript') && $request->hasFile('latest_study_plan')) {
             $transcriptName = $this->uploadHelper->uploadFile(
                 $request->file('transcript'),
@@ -46,6 +44,19 @@ class FinalRegistrationService
             } else {
                 return false;
             }
+        }
+    }
+
+    public function verifyFinalStudent($finalStudentId)
+    {
+        $finalStudent =  $this->finalStudent->findOrFail($finalStudentId);
+
+        $finalStudent->agreement = 1;
+
+        if ($finalStudent->save()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
