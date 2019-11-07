@@ -174,7 +174,6 @@ $('#lecturerTable tbody').on('click', '.update', function () {
         url: "lecturers/" + id,
         dataType: "json",
         success: function (result) {
-            console.log(result)
             $('#lecturerModal').modal('show')
             fetchLecturer(result.data.id, result.data.personnel_id, result.data.lecturer_id,
                 result.data.name, result.data.phone_number, result.data.email,
@@ -225,10 +224,10 @@ $(document).on('submit', '#lecturerDataForm', function (e) {
             processData: false,
             success: function (data) {
                 $('#lecturerDataForm')[0].reset();
-                if (data.error == undefined) {
+                if (data === "Success") {
                     Swal.fire({
                             type: 'success',
-                            title: 'Data telah ditambahkan',
+                            title: 'Data berhasil dieksekusi',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -239,7 +238,7 @@ $(document).on('submit', '#lecturerDataForm', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: 'Gagal menambahkan data',
+                        title: 'Gagal data dieksekusi',
                         showConfirmButton: false,
                         timer: 1500
                     })
