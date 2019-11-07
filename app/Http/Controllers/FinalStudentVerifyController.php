@@ -81,9 +81,9 @@ class FinalStudentVerifyController extends Controller
     public function update($id)
     {
         if ($this->finalRegistrationService->verifyFinalStudent($id)) {
-            return response()->jsonp("Success");
+            return response()->json("Success");
         } else {
-            return response()->jsonp("Error");
+            return response()->json("Error");
         }
     }
 
@@ -96,9 +96,9 @@ class FinalStudentVerifyController extends Controller
     public function destroy($id)
     {
         if ($this->finalRegistrationService->unverifyFinalStudent($id)) {
-            return response()->jsonp("Success");
+            return response()->json("Success");
         } else {
-            return response()->jsonp("Error");
+            return response()->json("Error");
         }
     }
 }
