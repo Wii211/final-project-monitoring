@@ -27,8 +27,6 @@ class LecturerItem extends JsonResource
             'image_profile' => $this->image_profile,
             'position' => new PositionItem($this->whenLoaded('position')),
             'topics' => TopicItem::collection($this->whenLoaded('topics')),
-            // 'topics' => $this->topics
-
         ];
     }
 }
