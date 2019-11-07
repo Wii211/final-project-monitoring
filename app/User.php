@@ -62,4 +62,28 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isStudent()
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name === "mahasiswa") return true;
+        }
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name === 'admin') return true;
+        }
+        return false;
+    }
+
+    public function isCoordinator()
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name === 'koordinator') return true;
+        }
+        return false;
+    }
 }

@@ -78,7 +78,7 @@ class LecturerService
 
             if ($request->hasFile('image_profile')) {
                 if ($lecturer->image_profile) {
-                    $this->uploadHelper->deleteImage($lecturer->image_profile);
+                    $this->uploadHelper->deleteFile($lecturer->image_profile);
                 }
                 $fileName = $this->uploadHelper->uploadImage(
                     $request->file('image_profile'),
