@@ -16,31 +16,62 @@ let dataTable = $('#finalStudentTable').DataTable({
             data: 'name'
         },
         {
-            data: 'status'
-        },
-        {
-            data: 'is_verified'
-        },
-        {
             sortable: false,
             "render": function (data, type, full, meta) {
+                let status = full.is_verified;
                 let buttonId = full.id;
-                return "<button class='btn btn-info verification' id='" + buttonId + "'>Verifikasi</button>";
-            }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.id;
-                return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
-            }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.id;
-                return "<button class='btn btn-danger delete' id='" + buttonId + "'>Delete</button>";
+                if (status == 0) {
+                    return "<button class='btn btn-success verification' id='" + buttonId + "' value='" + status + "'>Verification</button>";
+                } else {
+                    return "<button class='btn btn-danger verification' id='" + buttonId + "' value='" + status + "'>Unverification</button>";
+                }
             }
         }
-    ],
+    ]
+});
+
+
+//Update
+$('#finalStudentTable tbody').on('click', '.verification', function () {
+    let id = $(this).attr("id");
+    let status = $(this).val();
+    let method, type;
+
+    if (status == 1) {
+        type = "DELETE";
+        method = "DELETE";
+    } else if (status == 0) {
+        type = "POST";
+        method = "PUT";
+    }
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, do it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "students/" + id,
+                type: type,
+                data: {
+                    "_method": method
+                },
+                success: function () {
+                    Swal.fire(
+                            'Berhasil',
+                            '',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                }
+            })
+        }
+    });
 });
