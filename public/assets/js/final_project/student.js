@@ -43,14 +43,4 @@ let dataTable = $('#finalStudentTable').DataTable({
             }
         }
     ],
-    "columnDefs": [{
-        // targets: [3],
-        // render: function (data, type, row) {
-        //     if (data == 1) {
-        //         return '<span class="badge badge-success p-2">Aktif</span>';
-        //     } else {
-        //         return '<span class="badge badge-danger p-2">Tidak Aktif</span>';
-        //     }
-        // }
-    }]
 });

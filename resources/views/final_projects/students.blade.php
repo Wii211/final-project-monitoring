@@ -12,36 +12,20 @@
 <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-body p-0">
+            <div class="card-body">
                 <table class="table" id="finalStudentTable">
                     <thead>
                         <tr>
                             <th>NIM</th>
                             <th>Nama</th>
                             <th>Status</th>
+                            <th>Verifikasi</th>
                             <th width="10%"></th>
                             <th width="10%"></th>
                             <th width="10%"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1610817110001</td>
-                            <td>Achmad Mujaddid Islami</td>
-                            <th>Status</th>
-                            <td>
-                                <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
-                                    data-target="#progressFinalProject">Verifikasi</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#detailFinalProject">Update</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
-                                    data-target="#detailFinalProject"><i class="fa fa-times-circle"></i></button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -60,5 +44,5 @@
     <!-- DataTables -->
     <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/lecturer/lecturer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/final_project/student.js') }}"></script>
 @endsection
