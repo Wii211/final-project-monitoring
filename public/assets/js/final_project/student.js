@@ -35,11 +35,13 @@ let dataTable = $('#finalStudentTable').DataTable({
 $('#finalStudentTable tbody').on('click', '.verification', function () {
     let id = $(this).attr("id");
     let status = $(this).val();
-    let method;
+    let method, type;
 
     if (status == 1) {
+        type = "DELETE";
         method = "DELETE";
     } else if (status == 0) {
+        type = "POST";
         method = "PUT";
     }
 
@@ -55,7 +57,7 @@ $('#finalStudentTable tbody').on('click', '.verification', function () {
         if (result.value) {
             $.ajax({
                 url: "students/" + id,
-                type: "POST",
+                type: type,
                 data: {
                     "_method": method
                 },
