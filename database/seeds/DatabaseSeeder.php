@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         factory(App\User::class, 35)->create();
         factory(App\RoleUser::class, 70)->create();
-        factory(App\Lecturer::class, 15)->create();
         $this->call(PositionsTableSeeder::class);
+        factory(App\Lecturer::class, 15)->create();
         $this->call(TopicsTableSeeder::class);
         factory(App\LecturerTopic::class, 15)->create();
     }
