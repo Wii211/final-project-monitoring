@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\FinalRegistrationService;
 use App\Http\Services\FinalStudentService;
 use Illuminate\Http\Request;
 
 class FinalStudentVerifyController extends Controller
 {
-    private $finalStudentService;
+    private $finalStudentService, $finalRegistrationService;
 
-    public function __construct(FinalStudentService $finalStudentService)
-    {
+    public function __construct(
+        FinalStudentService $finalStudentService,
+        FinalRegistrationService $finalRegistrationService
+    ) {
         $this->finalStudentService = $finalStudentService;
+        $this->finalRegistrationService = $finalRegistrationService;
     }
 
     /**
@@ -21,6 +25,7 @@ class FinalStudentVerifyController extends Controller
      */
     public function index(Request $request)
     {
+
         return $request->ajax() ? $this->finalStudentService
             ->getListData() : view('final_projects.students');
     }
@@ -64,9 +69,7 @@ class FinalStudentVerifyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
+    { }
 
     /**
      * Update the specified resource in storage.
@@ -75,9 +78,13 @@ class FinalStudentVerifyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        if ($this->finalRegistrationService->verifyFinalStudent($id)) {
+            return response()->jsonp("Success");
+        } else {
+            return response()->jsonp("Error");
+        }
     }
 
     /**
@@ -88,6 +95,10 @@ class FinalStudentVerifyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->finalRegistrationService->unverifyFinalStudent($id)) {
+            return response()->jsonp("Success");
+        } else {
+            return response()->jsonp("Error");
+        }
     }
 }
