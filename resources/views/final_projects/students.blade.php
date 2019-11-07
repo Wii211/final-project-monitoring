@@ -18,11 +18,7 @@
                         <tr>
                             <th>NIM</th>
                             <th>Nama</th>
-                            <th>Status</th>
-                            <th>Verifikasi</th>
-                            <th width="10%"></th>
-                            <th width="10%"></th>
-                            <th width="10%"></th>
+                            <th>Status Verifikasi</th>
                         </tr>
                     </thead>
                     <tbody>
