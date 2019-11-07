@@ -51,7 +51,7 @@ class FinalRegistrationService
     {
         $finalStudent =  $this->finalStudent->findOrFail($finalStudentId);
 
-        $finalStudent->agreement = 1;
+        $finalStudent->is_verified = 1;
 
         if ($finalStudent->save()) {
             return true;
@@ -64,7 +64,7 @@ class FinalRegistrationService
     {
         $finalStudent =  $this->finalStudent->findOrFail($finalStudentId);
 
-        $finalStudent->agreement = 0;
+        $finalStudent->is_verified = 0;
 
         if ($finalStudent->save()) {
             return true;
