@@ -37,7 +37,9 @@ Route::prefix('coordinator')->group(function () {
     Route::view('/final_projects', 'final_projects.index')->name('final_actives.index');
 
     //Mahasiswa Yang Mengambil Tugas Akhir
-    Route::view('/final_projects/students', 'final_projects.students')->name('final_students.index');
+    // Route::view('/final_projects/students', 'final_projects.students')->name('final_students_verify.index');
+    Route::get('/final_projects/students', 'FinalStudentVerifyController@index')
+        ->name('final_students_verify.index');
 
     //Jadwal Seminar/Sidang
     Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
