@@ -41,6 +41,14 @@ Route::prefix('coordinator')->group(function () {
     Route::get('/final_projects/students', 'FinalStudentVerifyController@index')
         ->name('final_students_verify.index');
 
+    Route::put('/final_projects/students/{student}', 'FinalStudentVerifyController@update')
+        ->name('final_students_verify.update');
+
+    Route::delete('/final_projects/students/{student}', 'FinalStudentVerifyController@update')
+        ->name('final_students_verify.destroy');
+
+
+
     //Jadwal Seminar/Sidang
     Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
 });
