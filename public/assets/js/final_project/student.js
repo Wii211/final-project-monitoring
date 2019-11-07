@@ -21,9 +21,9 @@ let dataTable = $('#finalStudentTable').DataTable({
                 let status = full.is_verified;
                 let buttonId = full.id;
                 if (status == 0) {
-                    return "<button class='btn btn-success verification' id='" + buttonId + "'>Verification</button>";
+                    return "<button class='btn btn-success verification' id='" + buttonId + "' value='" + status + "'>Verification</button>";
                 } else {
-                    return "<button class='btn btn-danger verification' id='" + buttonId + "'>Unverification</button>";
+                    return "<button class='btn btn-danger verification' id='" + buttonId + "' value='" + status + "'>Unverification</button>";
                 }
             }
         }
@@ -34,6 +34,14 @@ let dataTable = $('#finalStudentTable').DataTable({
 //Update
 $('#finalStudentTable tbody').on('click', '.verification', function () {
     let id = $(this).attr("id");
+    let status = $(this).val();
+    let method;
+
+    if (status == 1) {
+        method = "DELETE";
+    } else if (status == 0) {
+        method = "PUT";
+    }
 
     Swal.fire({
         title: 'Are you sure?',
@@ -49,7 +57,7 @@ $('#finalStudentTable tbody').on('click', '.verification', function () {
                 url: "students/" + id,
                 type: "POST",
                 data: {
-                    "_method": "PUT"
+                    "_method": method
                 },
                 success: function () {
                     Swal.fire(
