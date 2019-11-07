@@ -59,4 +59,17 @@ class FinalRegistrationService
             return false;
         }
     }
+
+    public function unverifyFinalStudent($finalStudentId)
+    {
+        $finalStudent =  $this->finalStudent->findOrFail($finalStudentId);
+
+        $finalStudent->agreement = 0;
+
+        if ($finalStudent->save()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
