@@ -19,5 +19,10 @@ label.check-login {
     font-size: 15px;
 }
 
+.img-circle {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover;
+}
 
 /* Button Gradient */
