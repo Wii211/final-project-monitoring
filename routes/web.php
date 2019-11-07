@@ -59,7 +59,7 @@ Route::prefix('data')->group(function () {
     Route::view('/students', 'datas.student')->name('students.index');
 
     //Data Arsip Tugas Akhir (Yang sudah selesai)
-    Route::view('/final_projects', 'datas.final_project')->name('final_project.index');
+    Route::view('/final_projects', 'datas.final_project')->name('final_projects.index');
 });
 
 Route::prefix('user')->group(function () {
@@ -72,5 +72,5 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:admin']], funct
     Route::view('/test', 'welcome');
 });
 
-Route::view('/profile/change_profile', 'profiles.change_profile')->name('change_profile');
-Route::view('/profile/change_password', 'profiles.change_password')->name('change_password');
+Route::view('/profile/change_profile', 'profiles.change_profile')->name('change_profile.index');
+Route::view('/profile/change_password', 'profiles.change_password')->name('change_password.index');
