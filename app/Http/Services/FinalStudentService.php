@@ -3,19 +3,22 @@
 
 namespace App\Http\Services;
 
+use App\Lecturer;
+
 use App\FinalStudent;
-use App\Helpers\UploadHelper;
-use App\Http\Resources\FinalStudentCollection;
 use Illuminate\Http\Request;
+use App\Helpers\UploadHelper;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\FinalStudentCollection;
 
 class FinalStudentService
 {
-    private $finalStudent;
+    private $finalStudent, $lecturer;
 
-    public function __construct(FinalStudent $finalStudent)
+    public function __construct(Lecturer $lecturer, FinalStudent $finalStudent)
     {
-        $this->$finalStudent = $finalStudent;
+        $this->lecturer = $lecturer;
+        $this->finalStudent = $finalStudent;
     }
 
     public function getListData($relation = null)
@@ -23,6 +26,9 @@ class FinalStudentService
         $query = $relation == null ? $this->finalStudent
             : $this->finalStudent->with($relation);
 
-        return new FinalStudentCollection($query->get(['id', 'name', 'status', 'is_verified']));
+
+
+        return new FinalStudentCollection($query
+            ->get(['id', 'name', 'status', 'is_verified', 'student_id']));
     }
 }
