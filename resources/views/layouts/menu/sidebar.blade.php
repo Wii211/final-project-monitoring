@@ -61,6 +61,15 @@
                       </a>
                   </li>
                   <li class="nav-item">
+                      <a id="coorFinalProjectStudent" href="{{ route('recomendation-title.index') }}" 
+                      class="nav-link {{ Request::is('recomendation-title') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-user-graduate"></i>
+                          <p>
+                            Rekomendasi Topik/Judul
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
                       <a id="coorFinalProjectStudent" href="{{ route('final_students_verify.index') }}" 
                       class="nav-link {{ Request::is('coordinator/final_projects/students*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-user-graduate"></i>

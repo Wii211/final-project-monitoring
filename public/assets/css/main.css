@@ -25,4 +25,8 @@ label.check-login {
     object-fit: cover;
 }
 
+.bg-gradient-warning {
+    color: #FFF !important;
+}
+
 /* Button Gradient */
