@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\RecomendationTitleService;
 use App\RecomendationTitle;
 use Illuminate\Http\Request;
 
 class RecomendationTitleController extends Controller
 {
+    private $recomendationTitleService;
+
+    public function __construct(RecomendationTitleService $recomendationTitleService)
+    {
+        $this->recomendationTitleService = $recomendationTitleService;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('recommendations.titles');
+        $q = null;
+
+        if ($request->has('q')) $q = $request->query('q');
+
+        return view(
+            'recommendations.titles',
+            ['recomendationTitles' => $this->recomendationTitleService->getListData($q)]
+        );
     }
 
     /**
@@ -35,7 +49,11 @@ class RecomendationTitleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($this->recomendationTitleService->storeData($request)) {
+            return redirect()->back()->with('success', ['Success']);
+        } else {
+            return redirect()->back()->with('failed', ['Failed']);
+        }
     }
 
     /**
@@ -44,9 +62,9 @@ class RecomendationTitleController extends Controller
      * @param  \App\RecomendationTitle  $recomendationTitle
      * @return \Illuminate\Http\Response
      */
-    public function show(RecomendationTitle $recomendationTitle)
+    public function show(RecomendationTitle $recomendationTitle, $id)
     {
-        //
+        $this->recomendationTitleService->getData($id);
     }
 
     /**
@@ -67,9 +85,13 @@ class RecomendationTitleController extends Controller
      * @param  \App\RecomendationTitle  $recomendationTitle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecomendationTitle $recomendationTitle)
+    public function update(Request $request, $id)
     {
-        //
+        if ($this->recomendationTitleService->updateData($request, $id)) {
+            return redirect()->back()->with('success', ['Success']);
+        } else {
+            return redirect()->back()->with('failed', ['Failed']);
+        }
     }
 
     /**
@@ -78,8 +100,12 @@ class RecomendationTitleController extends Controller
      * @param  \App\RecomendationTitle  $recomendationTitle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecomendationTitle $recomendationTitle)
+    public function destroy($id)
     {
-        //
+        if ($this->recomendationTitleService->deleteData($id)) {
+            return redirect()->back()->with('success', ['Success']);
+        } else {
+            return redirect()->back()->with('failed', ['Failed']);
+        }
     }
 }
