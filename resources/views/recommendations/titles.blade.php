@@ -14,7 +14,17 @@
                 data-target="#recomendationTitle">Tambah Rekomendasi Judul</button>
         </div>
         <div class="card">
-            <div class="card-body p-0">
+            <div class="card-body pb-0">
+                <form class="row" action="" method="post">
+                    <div class="form-group col-md-9">
+                        <input type="text" class="form-control form-control-sm" placeholder="Cari judul..." id="" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="submit" class="btn bg-gradient-primary w-100">Cari</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body pt-0">
                 <table class="table">
                     <thead>
                         <tr>
@@ -33,7 +43,8 @@
                             <td>Microcontroller</td>
                             <td>Sayap-sayap kelam kupu-kupu</td>
                             <td>Prof. Winardi</td>
-                            <td>Peler peler peler peler peler peler peler peler peler peler peler peler peler peler peler</td>
+                            <td>Peler peler peler peler peler peler peler peler peler peler peler peler peler peler
+                                peler</td>
                             <td>
                                 <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
                                     data-target="#updateProposal">Update</button>
@@ -57,5 +68,5 @@
 @endsection
 
 @section('modal')
-    @include('modals.final_project.recommendation')
+@include('modals.final_project.recommendation')
 @endsection
