@@ -68,8 +68,10 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pagination"> {{ $recomendationTitles->links() }}   </div>
         </div>
         <hr>
+        
     </div>
 </section>
 @endsection
