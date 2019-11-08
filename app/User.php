@@ -5,6 +5,7 @@ namespace App;
 use App\Role;
 use App\Admin;
 use App\FinalStudent;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -96,5 +97,10 @@ class User extends Authenticatable
         } elseif ($this->isStudent()) {
             return 'final_registration.index';
         }
+    }
+
+    public static function getAuthId()
+    {
+        return Auth::user()->id;
     }
 }
