@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class RecomendationTitle extends Model
 {
+    protected $guarded = ['id'];
+
     public function topics()
     {
         return $this->belongsToMany(
