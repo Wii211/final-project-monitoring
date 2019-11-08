@@ -44,7 +44,7 @@ Route::prefix('coordinator')->group(function () {
     Route::put('/final_projects/students/{student}', 'FinalStudentVerifyController@update')
         ->name('final_students_verify.update');
 
-    Route::delete('/final_projects/students/{student}', 'FinalStudentVerifyController@update')
+    Route::delete('/final_projects/students/{student}', 'FinalStudentVerifyController@destroy')
         ->name('final_students_verify.destroy');
 
 
