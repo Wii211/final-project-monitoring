@@ -76,6 +76,8 @@ Route::prefix('user')->group(function () {
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
+Route::resource('recomendation-title', 'RecomendationTitleController');
+
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:admin']], function () {
     Route::view('/test', 'welcome');
 });
