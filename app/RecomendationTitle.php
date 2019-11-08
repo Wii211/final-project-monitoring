@@ -52,12 +52,12 @@ class RecomendationTitle extends Model
     {
         if ($q === null) return $query;
         return $query
-            ->whereTitle('LIKE', "%{$q}")
+            ->where("title", "LIKE", "%{$q}%")
             ->orWhereHas('lecturer', function ($query) use ($q) {
-                $query->whereName('LIKE', "%{$q}");
+                $query->where('name', 'LIKE', "%{$q}%");
             })
             ->orWhereHas('topics', function ($query) use ($q) {
-                $query->whereName('LIKE', "%{$q}");
+                $query->where('name', 'LIKE', "%{$q}%");
             });
     }
 }
