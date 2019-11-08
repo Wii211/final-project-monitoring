@@ -23,7 +23,7 @@ class FinalStudentService
 
     public function getListData($relation = null)
     {
-        $query = $relation == null ? $this->finalStudent->active(1)
+        $query = $relation == null ? $this->finalStudent->active(true)
             : $this->finalStudent->active(true)->with($relation);
 
         return new FinalStudentCollection($query
