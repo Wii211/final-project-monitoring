@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
         factory(App\Lecturer::class, 15)->create();
         $this->call(TopicsTableSeeder::class);
         factory(App\LecturerTopic::class, 15)->create();
+        factory(App\FinalStudent::class, 15)->create();
+        factory(App\RecomendationTitle::class, 25)->create();
+        factory(App\RecomendationTopic::class, 30)->create();
     }
 }
