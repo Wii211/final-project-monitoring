@@ -30,13 +30,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->isCoordinator()) {
-            return redirect()->route('coordinator_dashboard.index');
-        } elseif ($user->isAdmin()) {
-            return redirect()->route('final_project.index');
-        } elseif ($user->isStudent()) {
-            return redirect()->route('final_registration.index');
-        }
+        return redirect()->route($user->redirectTo());
     }
 
     /**

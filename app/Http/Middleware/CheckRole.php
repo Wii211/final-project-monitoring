@@ -17,7 +17,7 @@ class CheckRole
     {
         if (!$request->user()->hasRoles($roleNames)) {
             return redirect()
-                ->to(route('login.index'));
+                ->to(route($request->user()->redirectTo()));
         }
         return $next($request);
     }
