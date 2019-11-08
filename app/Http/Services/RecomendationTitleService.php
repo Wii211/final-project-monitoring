@@ -2,16 +2,18 @@
 
 namespace App\Http\Services;
 
+use App\User;
 use App\RecomendationTitle;
 use Illuminate\Http\Request;
 
 class RecomendationTitleService
 {
-    private $recomendationTitle;
+    private $recomendationTitle, $user;
 
-    public function __construct(RecomendationTitle $recomendationTitle)
+    public function __construct(RecomendationTitle $recomendationTitle, User $user)
     {
         $this->recomendationTitle = $recomendationTitle;
+        $this->user = $user;
     }
 
     public function getListData($search)
@@ -32,7 +34,8 @@ class RecomendationTitleService
                 array_merge(
                     $request->except([
                         'topics'
-                    ])
+                    ]),
+                    ['user_id' => $this->user->getAuthId()]
                 )
             )->topics()->attach($request->topics);
             return true;
@@ -50,7 +53,8 @@ class RecomendationTitleService
                 array_merge(
                     $request->except([
                         'topics'
-                    ])
+                    ]),
+                    ['user_id' => $this->user->getAuthId()]
                 )
             );
             $recomendationTitle->topics()->sync($request->topics);
