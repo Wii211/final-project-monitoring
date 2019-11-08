@@ -25,7 +25,8 @@ label.check-login {
     object-fit: cover;
 }
 
-.bg-gradient-warning {
+.bg-gradient-warning,
+.badge-warning {
     color: #FFF !important;
 }
 
