@@ -23,4 +23,9 @@ class FinalStudent extends Model
     {
         return $this->hasOne(FinalProject::class);
     }
+
+    public function scopeActive($query, $value)
+    {
+        return $query->whereStatus($value);
+    }
 }
