@@ -86,4 +86,15 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function redirectTo()
+    {
+        if ($this->isCoordinator()) {
+            return 'coordinator_dashboard.index';
+        } elseif ($this->isAdmin()) {
+            return 'final_project.index';
+        } elseif ($this->isStudent()) {
+            return 'final_registration.index';
+        }
+    }
 }
