@@ -47,4 +47,17 @@ class RecomendationTitle extends Model
     {
         //TODO use this function for set userId
     }
+
+    public function scopeSearch($query, $q)
+    {
+        if ($q === null) return $query;
+        return $query
+            ->whereTitle('LIKE', "%{$q}")
+            ->orWhereHas('lecturer', function ($query) use ($q) {
+                $query->whereName('LIKE', "%{$q}");
+            })
+            ->orWhereHas('topics', function ($query) use ($q) {
+                $query->whereName('LIKE', "%{$q}");
+            });
+    }
 }
