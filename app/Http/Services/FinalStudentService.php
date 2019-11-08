@@ -24,7 +24,11 @@ class FinalStudentService
     public function getListData($relation = null)
     {
         $query = $relation == null ? $this->finalStudent->active(1)
+<<<<<<< HEAD
             : $this->finalStudent->active(true)->with($relation);
+=======
+            : $this->finalStudent->active(1)->with($relation);
+>>>>>>> 9ec55b22e44e796e045b49dbd9a2ee55cef5e8a9
 
         return new FinalStudentCollection($query
             ->get(['id', 'name', 'status', 'is_verified', 'student_id']));
