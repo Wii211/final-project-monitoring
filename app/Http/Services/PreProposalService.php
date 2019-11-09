@@ -2,10 +2,52 @@
 
 namespace App\Http\Services;
 
+use App\FinalLog;
+use App\FinalProject;
+use App\FinalStudent;
+use App\Supervisor;
 use Illuminate\Http\Request;
 
 class PreProposalService
 {
+    private $finalProject, $finalStudent, $finalLog;
+
+    public function __construct(
+        FinalProject $finalProject,
+        FinalStudent $finalStudent,
+        FinalLog $finalLog
+    ) {
+        $this->finalProject = $finalProject;
+        $this->finalStudent = $finalStudent;
+        $this->finalLog = $finalLog;
+    }
+
     public function submit(Request $request)
-    { }
+    {
+        $finalStudentId = $this->finalStudent->getStudentId();
+
+        try {
+            DB::transaction(function () use ($request, $finalStudentId) {
+
+                $finalProject = $this->finalProject;
+
+                $finalProject->title = $request->title;
+                $finalProject->final_student_id = $finalStudentId;
+
+                $finalProject->save();
+
+                $finalLog = $this->finalLog;
+
+                $finalLog->final_project_id = $finalProject->id;
+                $finalLog->final_status_id = 1;
+
+                $finalLog->save();
+
+                $finalProject->supervisors()->createMany($request->supervisors);
+            });
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
+    }
 }

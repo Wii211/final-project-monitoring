@@ -23,7 +23,9 @@ Route::group(
             ->name('final_registration.store');
 
         //Pra Proposal
-        Route::view('/pre_proposal', 'students.pre_proposal')->name('pre_proposal.index');
+
+
+        Route::resource('/pre_proposal', 'PreProposalController');
 
         //Tugas Akhir Mahasiswa
         Route::view('/final_project', 'students.final_project')->name('final_project.index');
