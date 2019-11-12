@@ -19,12 +19,24 @@
             <div class="card-body pb-0">
                 <form class="row" action="{{route('recomendation-title.index')}}" method="GET">
                     <div class="form-group col-md-9">
-                        <input type="text" name="q" class="form-control form-control-sm" placeholder="Cari judul..."  id="" required>
+                        <input type="text" name="q" class="form-control form-control-sm" placeholder="Cari judul..."
+                            id="" required>
                     </div>
                     <div class="form-group col-md-3">
                         <button type="submit" value="q" class="btn bg-gradient-primary w-100">Cari</button>
                     </div>
                 </form>
+                <div class="mt-3">
+                    @if(Session::has('success'))
+                    <div class="alert alert-success" role="alert">
+                        Berhasil. Judul milik ini anda!
+                    </div>
+                    @elseif(Session::has('failed'))
+                    <div class="alert alert-danger" role="alert">
+                        Error
+                    </div>
+                    @endif
+                </div>
             </div>
             <div class="card-body pt-0">
                 <table class="table">
@@ -43,14 +55,14 @@
                     </thead>
                     <tbody>
                         @foreach ($recomendationTitles as $title)
-                            
-                        
+
+
                         <tr>
                             <td>@foreach ($title->topics as $topic)
-                                {{$topic->name}}        
-                            @endforeach
-                        </td>
-                        <td> {{$title->title}} </td>
+                                {{$topic->name}}
+                                @endforeach
+                            </td>
+                            <td> {{$title->title}} </td>
                             <td>{{$title->lecturer->name}}</td>
                             <td>{{$title->description}}</td>
                             @if(Auth::user()->isAdmin())
@@ -64,18 +76,21 @@
                             </td>
                             @endif
                             <td>
-                                <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Ambil</button>
+                                <form action="{{ route('pre_proposal.store') }}" method="POST">
+                                    @csrf
+                                    <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
+                                        data-target="#updateProposal">Ambil</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="pagination"> {{ $recomendationTitles->links() }}   </div>
+            <div class="pagination"> {{ $recomendationTitles->links() }} </div>
         </div>
         <hr>
-        
+
     </div>
 </section>
 @endsection
