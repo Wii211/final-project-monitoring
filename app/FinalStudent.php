@@ -34,10 +34,7 @@ class FinalStudent extends Model
 
     public function getStudentId()
     {
-        if (!is_null($this->finalStudent)) {
-            return Auth::user()->finalStudent->id;
-        } else {
-            return false;
-        }
+
+        return Auth::user()->finalStudent->id;
     }
 }
