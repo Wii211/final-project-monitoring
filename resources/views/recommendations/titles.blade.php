@@ -11,8 +11,8 @@
             {{-- <button type="button" class="btn bg-gradient-success mb-2" id="convert">
                 <i class="fas fa-images"></i>
                 Import Data</button> --}}
-            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
-                data-target="#recomendationTitle">Tambah Rekomendasi Judul</button>
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" id="addRecommendationTitle"
+                data-target="#recomendationTitleModal">Tambah Rekomendasi Judul</button>
         </div>
         @endif
         <div class="card">
@@ -34,78 +34,84 @@
                     @elseif(Session::has('failed'))
                     <div class="alert alert-danger" role="alert">
                         Error
+                        @elseif(Session::has('duplicate'))
+                        <div class="alert alert-warning" role="alert">
+                            Anda mengambil judul yang lain. Jangan maruk!
+                        </div>
+                        @endif
                     </div>
-                    @endif
+                </div>
+                <div class="card-body pt-0">
+                    <div class="table-responsive">
+                        <table class="table" id="recommendationTitleTable">
+                            <thead>
+                                <tr>
+                                    <th>Topik</th>
+                                    <th>Judul</th>
+                                    <th>Dosen</th>
+                                    <th width="30%">Keterangan</th>
+                                    @if(Auth::user()->isAdmin())
+                                    <th width="5%"></th>
+                                    <th width="5%"></th>
+                                    @endif
+                                    <th width="5%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($recomendationTitles as $title)
+
+
+                                <tr>
+                                    <td>@foreach ($title->topics as $topic)
+                                        {{$topic->name}}
+                                        @endforeach
+                                    </td>
+                                    <td> {{$title->title}} </td>
+                                    <td>{{$title->lecturer->name}}</td>
+                                    <td>{{$title->description}}</td>
+                                    @if(Auth::user()->isAdmin())
+                                    <td>
+                                        <button class="btn bg-gradient-warning btn-sm w-100 update"
+                                            id="{{ $title->id }}">Update</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn bg-gradient-danger btn-sm w-100 delete"
+                                            id="{{ $title->id }}">Delete</button>
+                                    </td>
+                                    @endif
+                                    {{$title->final_student_id}}
+                                    <td>
+                                        @if(!$title->final_student_id)
+                                        <form action="{{ route('pre_proposal.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="title" value="{{ $title->title }}">
+                                            <input type="hidden" name="title_id" value="{{ $title->id }}">
+                                            <input type="hidden" name="supervisors[]"
+                                                value="{{ $title->lecturer->id }}">
+                                            <input type="hidden" name="supervisors[]" value="1">
+                                            <input type="hidden" name="type" value="recommendation-title">
+                                            <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
+                                                data-target="#updateProposal">Ambil</button>
+                                        </form>
+                                        @elseif($title->final_student_id === Auth::user()->finalStudent->id)
+                                        <span class="badge badge-warning">Judul telah anda ambil</span>
+                                        @else
+                                        <span class="badge badge-danger">Judul telah diambil</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="pagination"> {{ $recomendationTitles->links() }} </div>
                 </div>
             </div>
-            <div class="card-body pt-0">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Topik</th>
-                            <th>Judul</th>
-                            <th>Dosen</th>
-                            <th width="30%">Keterangan</th>
-                            @if(Auth::user()->isAdmin())
-                            <th width="5%"></th>
-                            <th width="5%"></th>
-                            @endif
-                            <th width="5%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($recomendationTitles as $title)
+            <hr>
 
-
-                        <tr>
-                            <td>@foreach ($title->topics as $topic)
-                                {{$topic->name}}
-                                @endforeach
-                            </td>
-                            <td> {{$title->title}} </td>
-                            <td>{{$title->lecturer->name}}</td>
-                            <td>{{$title->description}}</td>
-                            @if(Auth::user()->isAdmin())
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Update</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Delete</button>
-                            </td>
-                            @endif
-                            {{$title->final_student_id}}
-                            <td>
-                            @if(!$title->final_student_id)
-                                <form action="{{ route('pre_proposal.store') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="title" value="{{ $title->title }}">
-                                    <input type="hidden" name="title_id" value="{{ $title->id }}">
-                                    <input type="hidden" name="supervisors[]" value="{{ $title->lecturer->id }}">
-                                    <input type="hidden" name="supervisors[]" value="1">
-                                    <input type="hidden" name="type" value="recommendation-title">
-                                    <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
-                                        data-target="#updateProposal">Ambil</button>
-                                </form>
-                            @elseif($title->final_student_id === Auth::user()->finalStudent->id)
-                                <span class="badge badge-warning">Judul telah anda ambil</span>
-                            @else 
-                                <span class="badge badge-danger">Judul telah diambil</span>
-                            @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-end">
-                <div class="pagination"> {{ $recomendationTitles->links() }} </div>
-            </div>
         </div>
-        <hr>
-
-    </div>
 </section>
 @endsection
 
@@ -114,5 +120,5 @@
 @endsection
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('assets/js/title/title.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/title/title.js') }}"></script>
 @endsection
