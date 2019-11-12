@@ -77,7 +77,7 @@
                             @endif
                             {{$title->final_student_id}}
                             <td>
-                            @if($title->final_student_id)
+                            @if(!$title->final_student_id)
                                 <form action="{{ route('pre_proposal.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="title" value="{{ $title->title }}">
