@@ -33,9 +33,16 @@ class PreProposalService
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
+        $supervisors = [];
+        if ($request->type === "recommendation-title") {
+            $supervisors = [
+                'lecturer_id' => $request->supervisors[0],
+                'role' => $request->supervisors[1]
+            ];
+        }
 
         try {
-            DB::transaction(function () use ($request, $finalStudentId) {
+            DB::transaction(function () use ($request, $finalStudentId, $supervisors) {
 
                 $finalProject = $this->finalProject;
 
@@ -51,7 +58,7 @@ class PreProposalService
 
                 $finalLog->save();
 
-                $finalProject->supervisors()->create($request->supervisors);
+                $finalProject->supervisors()->create($supervisors);
             });
         } catch (\Throwable $th) {
             return false;
