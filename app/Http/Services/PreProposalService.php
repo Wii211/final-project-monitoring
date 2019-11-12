@@ -22,6 +22,11 @@ class PreProposalService
         $this->finalLog = $finalLog;
     }
 
+    public function getData($id, $relation)
+    {
+        return $this->finalProject->with($relation)->findOrFail($id);
+    }
+
     public function submit(Request $request)
     {
         $finalStudentId = $this->finalStudent->getStudentId();
