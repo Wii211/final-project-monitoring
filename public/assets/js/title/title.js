@@ -76,6 +76,7 @@ $('#recommendationTitleTable tbody').on('click', '.update', function () {
         success: function (result) {
             console.log(result);
             $('#recomendationTitleModal').modal('show');
+            $('#recomendationTitleModalButton').text('Update');
 
             // Topic
             // result.data.topics.forEach(function (topic) {
@@ -90,15 +91,16 @@ $('#recommendationTitleTable tbody').on('click', '.update', function () {
 //Add
 $(document).on('submit', '#recomendationTitleForm', function (e) {
     e.preventDefault();
-    let action = $('#lecturerModalButton').text();
-    let id = $('#lecturerId').val();
+    let action = $('#recomendationTitleModalButton').text();
+    let id = $('#recommendationTitleId').val();
+
     let url;
     let formData = new FormData(this);
 
     if (action == "Tambah") {
-        url = "lecturers"
+        url = "recomendation-title"
     } else if (action == "Update") {
-        url = "lecturers/" + id
+        url = "recomendation-title/" + id
         formData.append("_method", "PUT");
     }
 
@@ -118,7 +120,7 @@ $(document).on('submit', '#recomendationTitleForm', function (e) {
             contentType: false,
             processData: false,
             success: function (data) {
-                $('#lecturerDataForm')[0].reset();
+                $('#recomendationTitleForm')[0].reset();
                 if (data === "Success") {
                     Swal.fire({
                             type: 'success',
@@ -128,7 +130,7 @@ $(document).on('submit', '#recomendationTitleForm', function (e) {
                         })
                         .then(function () {
                             dataTable.ajax.reload();
-                            $('#lecturerModal').modal('hide');
+                            $('#recomendationTitleModal').modal('hide');
                         });
                 } else {
                     Swal.fire({
@@ -164,7 +166,7 @@ $('#recommendationTitleTable tbody').on('click', '.delete', function () {
                 success: function () {
                     Swal.fire(
                             'Deleted Id ' + id + '!',
-                            'Status dosen telah diubah menjadi tidak aktif',
+                            'Rekomendasi judul telah dihapus!',
                             'success'
                         )
                         .then(function () {
