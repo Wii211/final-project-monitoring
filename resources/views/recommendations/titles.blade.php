@@ -79,7 +79,9 @@
                                 <form action="{{ route('pre_proposal.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="title" value="{{ $title->title }}">
-                                    <input type="hidden" name="supervisors" value="{{ $title->lecturer->id }}">
+                                    <input type="hidden" name="supervisors[]" value="{{ $title->lecturer->id }}">
+                                    <input type="hidden" name="supervisors[]" value="1">
+                                    <input type="hidden" name="type" value="recommendation-title">
                                     <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
                                         data-target="#updateProposal">Ambil</button>
                                 </form>
@@ -89,7 +91,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="pagination"> {{ $recomendationTitles->links() }} </div>
+            <div class="d-flex justify-content-end">
+                <div class="pagination"> {{ $recomendationTitles->links() }} </div>
+            </div>
         </div>
         <hr>
 
@@ -99,4 +103,8 @@
 
 @section('modal')
 @include('modals.final_project.recommendation')
+@endsection
+
+@section('javascript')
+    <script type="text/javascript" src="{{ asset('assets/js/title/title.js') }}"></script>
 @endsection
