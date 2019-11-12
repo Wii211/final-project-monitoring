@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Supervisor extends Model
 {
+    protected $guarded = ['id'];
+
     public function lecturer()
     {
         return $this->belongsTo(Lecturer::class);
