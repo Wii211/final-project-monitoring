@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TopicCollection;
+use App\Http\Services\TopicService;
 use App\Topic;
 use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
-    private $topic;
+    private $topicService;
 
-    public function __construct(Topic $topic)
+    public function __construct(TopicService $topicService)
     {
-        $this->topic = $topic;
+        $this->topicService = $topicService;
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return  new TopicCollection($this->topic->get());
+        return $request->ajax() ? $this->topicService->getListData()
+            : view('datas.lecturer');
     }
 
     /**
