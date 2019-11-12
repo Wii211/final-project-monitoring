@@ -6,22 +6,25 @@ use App\FinalLog;
 use App\Supervisor;
 use App\FinalProject;
 use App\FinalStudent;
+use App\RecomendationTitle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
 class PreProposalService
 {
-    private $finalProject, $finalStudent, $finalLog;
+    private $finalProject, $finalStudent, $finalLog, $recomendationTitle;
 
     public function __construct(
         FinalProject $finalProject,
         FinalStudent $finalStudent,
-        FinalLog $finalLog
+        FinalLog $finalLog,
+        RecomendationTitle $recomendationTitle
     ) {
         $this->finalProject = $finalProject;
         $this->finalStudent = $finalStudent;
         $this->finalLog = $finalLog;
+        $this->recomendationTitle = $recomendationTitle;
     }
 
     public function getData($id, $relation)
@@ -32,6 +35,10 @@ class PreProposalService
     public function submit(Request $request)
     {
         $finalStudentId = $this->finalStudent->getStudentId();
+
+        if ($this->recomendationTitle->checkIfSubmited($finalStudentId)) {
+            return "duplicate";
+        }
 
         $supervisors = [];
         if ($request->type === "recommendation-title") {
@@ -51,6 +58,11 @@ class PreProposalService
 
                 $finalProject->save();
 
+                $recomendationTitle = $this->recomendationTitle->findOrFail($request->title_id);
+                $recomendationTitle->final_student_id = $finalStudentId;
+
+                $recomendationTitle->save();
+
                 $finalLog = $this->finalLog;
 
                 $finalLog->final_project_id = $finalProject->id;
@@ -61,6 +73,7 @@ class PreProposalService
                 $finalProject->supervisors()->create($supervisors);
             });
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
         return true;
