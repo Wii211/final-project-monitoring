@@ -89,7 +89,9 @@
                                         data-target="#updateProposal">Ambil</button>
                                 </form>
                             @elseif($title->final_student_id === Auth::user()->finalStudent->id)
-                                <span class="badge badge-warning">Anda sudah mengambil</span>
+                                <span class="badge badge-warning">Judul telah anda ambil</span>
+                            @else 
+                                <span class="badge badge-danger">Judul telah diambil</span>
                             @endif
                             </td>
                         </tr>
