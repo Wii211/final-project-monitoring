@@ -19,3 +19,159 @@
 //     })
 
 // })
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$('#addRecommendationTitle').click(function () {
+    $('#recomendationTitleForm')[0].reset();
+    $('#recomendationTitleModalTitle').text("Tambah Data Rekomendasi Judul");
+    $('#recomendationTitleModalButton').text("Tambah");
+});
+
+function getTopics(id, value) {
+    let data = '<option value="' + id + '">' + value + '</option>';
+    $('#topics').append(data);
+}
+
+function getLecturers(id, value) {
+    let data = '<option value="' + id + '">' + value + '</option>';
+    $('#lecturers').append(data);
+}
+
+$(document).ready(function () {
+    $.ajax({
+        url: "topic",
+        type: "GET",
+        dataType: "json",
+        success: function (topic) {
+            topic.forEach(function (result) {
+                getTopics(result.id, result.name);
+            });
+        }
+    });
+
+    $.ajax({
+        url: "data/lecturers",
+        type: "GET",
+        dataType: "json",
+        success: function (lecturer) {
+            lecturer.data.forEach(function (result) {
+                getLecturers(result.id, result.name);
+            });
+        }
+    })
+});
+
+//Fetch
+$('#recommendationTitleTable tbody').on('click', '.update', function () {
+    let id = $(this).attr("id");
+    let topicData = [];
+
+    $.ajax({
+        url: "recomendation-title/" + id,
+        dataType: "json",
+        success: function (result) {
+            console.log(result);
+            $('#recomendationTitleModal').modal('show');
+
+            // Topic
+            // result.data.topics.forEach(function (topic) {
+            //     topicData.push(topic.id);
+            // })
+            // $('#topics').val(topicData);
+
+        }
+    })
+});
+
+//Add
+$(document).on('submit', '#recomendationTitleForm', function (e) {
+    e.preventDefault();
+    let action = $('#lecturerModalButton').text();
+    let id = $('#lecturerId').val();
+    let url;
+    let formData = new FormData(this);
+
+    if (action == "Tambah") {
+        url = "lecturers"
+    } else if (action == "Update") {
+        url = "lecturers/" + id
+        formData.append("_method", "PUT");
+    }
+
+    if (url !== '') {
+        Swal.fire({
+            title: 'Loading',
+            timer: 2000,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('#lecturerDataForm')[0].reset();
+                if (data === "Success") {
+                    Swal.fire({
+                            type: 'success',
+                            title: 'Data berhasil dieksekusi',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(function () {
+                            dataTable.ajax.reload();
+                            $('#lecturerModal').modal('hide');
+                        });
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Gagal data dieksekusi',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+    }
+});
+
+
+//Delete
+$('#recommendationTitleTable tbody').on('click', '.delete', function () {
+    let id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "recomendation-title/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted Id ' + id + '!',
+                            'Status dosen telah diubah menjadi tidak aktif',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                }
+            });
+        }
+    })
+});
