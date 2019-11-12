@@ -78,6 +78,8 @@
                             <td>
                                 <form action="{{ route('pre_proposal.store') }}" method="POST">
                                     @csrf
+                                    <input type="hidden" name="title" value="{{ $title->title }}">
+                                    <input type="hidden" name="supervisors" value="{{ $title->lecturer->id }}">
                                     <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
                                         data-target="#updateProposal">Ambil</button>
                                 </form>
