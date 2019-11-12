@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\PreProposalService;
 use Illuminate\Http\Request;
 
 class PreProposalController extends Controller
 {
+    private $preProposalService;
+
+    public function __construct(PreProposalService $preProposalService)
+    {
+        $this->preProposalService = $preProposalService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,7 @@ class PreProposalController extends Controller
      */
     public function index()
     {
-        //
+        return view('students.pre_proposal');
     }
 
     /**
@@ -34,7 +42,11 @@ class PreProposalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($this->preProposalService->submit($request)) {
+            return redirect()->back()->with('success', ['Success']);
+        } else {
+            return redirect()->back()->with('failed', ['Failed']);
+        }
     }
 
     /**

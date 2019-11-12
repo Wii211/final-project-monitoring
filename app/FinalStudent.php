@@ -5,10 +5,13 @@ namespace App;
 use App\User;
 use App\FinalProject;
 use App\RecomendationTitle;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class FinalStudent extends Model
 {
+    protected $guarded = ['id'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -27,5 +30,14 @@ class FinalStudent extends Model
     public function scopeActive($query, $value)
     {
         return $query->whereStatus($value);
+    }
+
+    public function getStudentId()
+    {
+        if (!is_null($this->finalStudent)) {
+            return Auth::user()->finalStudent->id;
+        } else {
+            return false;
+        }
     }
 }
