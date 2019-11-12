@@ -9,6 +9,7 @@ use App\FinalStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class PreProposalService
 {
     private $finalProject, $finalStudent, $finalLog;
@@ -32,6 +33,7 @@ class PreProposalService
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
+
         try {
             DB::transaction(function () use ($request, $finalStudentId) {
 
@@ -49,7 +51,7 @@ class PreProposalService
 
                 $finalLog->save();
 
-                $finalProject->supervisors()->createMany($request->supervisors);
+                $finalProject->supervisors()->create($request->supervisors);
             });
         } catch (\Throwable $th) {
             return false;
