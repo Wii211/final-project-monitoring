@@ -75,16 +75,22 @@
                                     data-target="#updateProposal">Delete</button>
                             </td>
                             @endif
+                            {{$title->final_student_id}}
                             <td>
+                            @if($title->final_student_id)
                                 <form action="{{ route('pre_proposal.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="title" value="{{ $title->title }}">
+                                    <input type="hidden" name="title_id" value="{{ $title->id }}">
                                     <input type="hidden" name="supervisors[]" value="{{ $title->lecturer->id }}">
                                     <input type="hidden" name="supervisors[]" value="1">
                                     <input type="hidden" name="type" value="recommendation-title">
                                     <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
                                         data-target="#updateProposal">Ambil</button>
                                 </form>
+                            @elseif($title->final_student_id === Auth::user()->finalStudent->id)
+                                <span class="badge badge-warning">Anda sudah mengambil</span>
+                            @endif
                             </td>
                         </tr>
                         @endforeach
