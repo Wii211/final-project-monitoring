@@ -94,7 +94,7 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (topic) {
-            topic.data.forEach(function (result) {
+            topic.forEach(function (result) {
                 getTopics(result.id, result.name);
             });
         }
