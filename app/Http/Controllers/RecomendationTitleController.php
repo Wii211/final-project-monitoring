@@ -104,9 +104,9 @@ class RecomendationTitleController extends Controller
     public function destroy($id)
     {
         if ($this->recomendationTitleService->deleteData($id)) {
-            return redirect()->back()->with('success', ['Success']);
+            return response()->json("success");
         } else {
-            return redirect()->back()->with('failed', ['Failed']);
+            return response()->json("failed");
         }
     }
 }
