@@ -79,7 +79,6 @@
                                             id="{{ $title->id }}">Delete</button>
                                     </td>
                                     @endif
-                                    {{$title->final_student_id}}
                                     <td>
                                         @if(!$title->final_student_id)
                                         <form action="{{ route('pre_proposal.store') }}" method="POST">
