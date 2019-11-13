@@ -65,7 +65,7 @@ class RecomendationTitleController extends Controller
     public function show($id)
     {
 
-        $this->recomendationTitleService->getData($id);
+        return response()->json($this->recomendationTitleService->getData($id));
     }
 
     /**
