@@ -62,9 +62,12 @@
 
 
                                 <tr>
-                                    <td>@foreach ($title->topics as $topic)
-                                        {{$topic->name}}
-                                        @endforeach
+                                    <td>
+                                        <ul>
+                                            @foreach ($title->topics as $topic)
+                                            <li>{{$topic->name}}</li>
+                                            @endforeach
+                                        </ul>
                                     </td>
                                     <td> {{$title->title}} </td>
                                     <td>{{$title->lecturer->name}}</td>
@@ -78,7 +81,7 @@
                                         <button class="btn bg-gradient-danger btn-sm w-100 delete"
                                             id="{{ $title->id }}">Delete</button>
                                     </td>
-                                    @endif
+                                    @elseif(Auth::user()->isStudent())
                                     <td>
                                         @if(!$title->final_student_id)
                                         <form action="{{ route('pre_proposal.store') }}" method="POST">
@@ -98,6 +101,7 @@
                                         <span class="badge badge-danger">Judul telah diambil</span>
                                         @endif
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
