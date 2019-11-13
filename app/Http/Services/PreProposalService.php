@@ -36,10 +36,6 @@ class PreProposalService
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
-        if ($this->recomendationTitle->checkIfSubmited($finalStudentId)) {
-            return "duplicate";
-        }
-
         $supervisors = [];
         if ($request->type === "recommendation-title") {
             $supervisors = [
@@ -77,5 +73,16 @@ class PreProposalService
             return false;
         }
         return true;
+    }
+
+    public function checkDuplicate()
+    {
+        $finalStudentId = $this->finalStudent->getStudentId();
+
+        if ($this->recomendationTitle->checkIfSubmited($finalStudentId)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
