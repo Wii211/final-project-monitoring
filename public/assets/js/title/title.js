@@ -110,7 +110,7 @@ $(document).on('submit', '#recomendationTitleForm', function (e) {
     if (url !== '') {
         Swal.fire({
             title: 'Loading',
-            timer: 2000,
+            timer: 60000,
             onBeforeOpen: () => {
                 Swal.showLoading()
             }
