@@ -68,7 +68,6 @@ $(document).ready(function () {
 //Fetch
 $('#recommendationTitleTable tbody').on('click', '.update', function () {
     let id = $(this).attr("id");
-    let topicData = [];
 
     $.ajax({
         url: "recomendation-title/" + id,
