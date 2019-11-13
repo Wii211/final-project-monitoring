@@ -44,7 +44,7 @@ class FinalStatusesTableSeeder extends Seeder
                     'updated_at' => date('Y-m-d H:i:s'),
                 ],
                 [
-                    'name' => 'tugas_akhur_selesai',
+                    'name' => 'tugas_akhir_selesai',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ]
