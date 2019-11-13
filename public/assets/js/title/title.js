@@ -124,7 +124,7 @@ $(document).on('submit', '#recomendationTitleForm', function (e) {
             processData: false,
             success: function (data) {
                 $('#recomendationTitleForm')[0].reset();
-                if (data === "Success") {
+                if (data === "success") {
                     Swal.fire({
                             type: 'success',
                             title: 'Data berhasil dieksekusi',
@@ -132,7 +132,7 @@ $(document).on('submit', '#recomendationTitleForm', function (e) {
                             timer: 1500
                         })
                         .then(function () {
-                            dataTable.ajax.reload();
+                            window.location.reload();
                             $('#recomendationTitleModal').modal('hide');
                         });
                 } else {
@@ -173,7 +173,7 @@ $('#recommendationTitleTable tbody').on('click', '.delete', function () {
                             'success'
                         )
                         .then(function () {
-                            dataTable.ajax.reload();
+                            window.location.reload();
                         });
                 }
             });
