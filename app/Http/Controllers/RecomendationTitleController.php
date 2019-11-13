@@ -50,9 +50,9 @@ class RecomendationTitleController extends Controller
     public function store(Request $request)
     {
         if ($this->recomendationTitleService->storeData($request)) {
-            return redirect()->back()->with('success', ['Success']);
+            return response()->json("success");
         } else {
-            return redirect()->back()->with('failed', ['Failed']);
+            return response()->json("failed");
         }
     }
 
@@ -89,9 +89,9 @@ class RecomendationTitleController extends Controller
     public function update(Request $request, $id)
     {
         if ($this->recomendationTitleService->updateData($request, $id)) {
-            return redirect()->back()->with('success', ['Success']);
+            return response()->json("success");
         } else {
-            return redirect()->back()->with('failed', ['Failed']);
+            return response()->json("failed");
         }
     }
 
