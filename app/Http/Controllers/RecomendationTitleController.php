@@ -62,8 +62,9 @@ class RecomendationTitleController extends Controller
      * @param  \App\RecomendationTitle  $recomendationTitle
      * @return \Illuminate\Http\Response
      */
-    public function show(RecomendationTitle $recomendationTitle, $id)
+    public function show($id)
     {
+
         $this->recomendationTitleService->getData($id);
     }
 

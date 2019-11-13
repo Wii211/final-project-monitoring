@@ -32,45 +32,51 @@ Route::group(
     }
 );
 
-Route::prefix('coordinator')->group(function () {
-    Route::view('/', 'coordinators.home')->name('coordinator_dashboard.index');
+Route::group(
+    ['prefix' => 'coordinator', 'middleware' => ['auth', 'role:koordinator']],
+    function () {
+        Route::view('/', 'coordinators.home')->name('coordinator_dashboard.index');
 
-    //Tugas Akhir Yang Masih Aktif
-    Route::view('/final_projects', 'final_projects.index')->name('final_actives.index');
+        //Tugas Akhir Yang Masih Aktif
+        Route::view('/final_projects', 'final_projects.index')->name('final_actives.index');
 
-    //Mahasiswa Yang Mengambil Tugas Akhir
-    // Route::view('/final_projects/students', 'final_projects.students')->name('final_students_verify.index');
-    Route::get('/final_projects/students', 'FinalStudentVerifyController@index')
-        ->name('final_students_verify.index');
+        //Mahasiswa Yang Mengambil Tugas Akhir
+        // Route::view('/final_projects/students', 'final_projects.students')->name('final_students_verify.index');
+        Route::get('/final_projects/students', 'FinalStudentVerifyController@index')
+            ->name('final_students_verify.index');
 
-    Route::put('/final_projects/students/{student}', 'FinalStudentVerifyController@update')
-        ->name('final_students_verify.update');
+        Route::put('/final_projects/students/{student}', 'FinalStudentVerifyController@update')
+            ->name('final_students_verify.update');
 
-    Route::delete('/final_projects/students/{student}', 'FinalStudentVerifyController@destroy')
-        ->name('final_students_verify.destroy');
+        Route::delete('/final_projects/students/{student}', 'FinalStudentVerifyController@destroy')
+            ->name('final_students_verify.destroy');
 
 
 
-    //Jadwal Seminar/Sidang
-    Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
-});
+        //Jadwal Seminar/Sidang
+        Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
+    }
+);
 
 Route::resource('topic', 'TopicController');
 
 Route::resource('position', 'PositionController');
 
-Route::prefix('data')->group(function () {
+Route::group(
+    ['prefix' => 'data', 'middleware' => ['auth', 'role:admin']],
+    function () {
 
-    //Data Dosen
-    // Route::view('/lecturers', 'datas.lecturer')->name('lecturers.index');
-    Route::resource('lecturers', 'LecturerController');
+        //Data Dosen
+        // Route::view('/lecturers', 'datas.lecturer')->name('lecturers.index');
+        Route::resource('lecturers', 'LecturerController');
 
-    //Data Mahasiswa
-    Route::view('/students', 'datas.student')->name('students.index');
+        //Data Mahasiswa
+        Route::view('/students', 'datas.student')->name('students.index');
 
-    //Data Arsip Tugas Akhir (Yang sudah selesai)
-    Route::view('/final_projects', 'datas.final_project')->name('final_projects.index');
-});
+        //Data Arsip Tugas Akhir (Yang sudah selesai)
+        Route::view('/final_projects', 'datas.final_project')->name('final_projects.index');
+    }
+);
 
 Route::prefix('user')->group(function () {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login.index');
