@@ -38,10 +38,10 @@ class RecomendationTitleService
                     ['user_id' => $this->user->getAuthId()]
                 )
             )->topics()->attach($request->topics);
-            return true;
         } catch (\Throwable $th) {
             return false;
         }
+        return true;
     }
 
     public function updateData(Request $request, $id)
@@ -58,11 +58,10 @@ class RecomendationTitleService
                 )
             );
             $recomendationTitle->topics()->sync($request->topics);
-
-            return true;
         } catch (\Throwable $th) {
             return false;
         }
+        return true;
     }
 
     public function deleteData($id)
