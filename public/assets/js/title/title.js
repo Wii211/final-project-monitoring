@@ -168,7 +168,7 @@ $('#recommendationTitleTable tbody').on('click', '.delete', function () {
                 type: 'DELETE',
                 success: function () {
                     Swal.fire(
-                            'Deleted Id ' + id + '!',
+                            'Deleted!',
                             'Rekomendasi judul telah dihapus!',
                             'success'
                         )
