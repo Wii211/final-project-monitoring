@@ -68,20 +68,24 @@ $(document).ready(function () {
 //Fetch
 $('#recommendationTitleTable tbody').on('click', '.update', function () {
     let id = $(this).attr("id");
+    let topicData = [];
 
     $.ajax({
         url: "recomendation-title/" + id,
         dataType: "json",
         success: function (result) {
-            console.log(result);
+            console.log(result)
             $('#recomendationTitleModal').modal('show');
             $('#recomendationTitleModalButton').text('Update');
 
-            // Topic
-            // result.data.topics.forEach(function (topic) {
-            //     topicData.push(topic.id);
-            // })
-            // $('#topics').val(topicData);
+            result.topics.forEach(function (topic) {
+                topicData.push(topic.id);
+            })
+            $('#topics').val(topicData);
+            $('#title').val(result.title);
+            $('#description').val(result.description);
+            $('#lecturers').val(result.lecturer_id);
+            $('#recommendationTitleId').val(result.id);
 
         }
     })
