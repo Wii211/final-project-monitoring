@@ -23,8 +23,13 @@ class LecturerController extends Controller
      */
     public function index(Request $request)
     {
+
+        $q = null;
+
+        if ($request->has('primary')) $q = $request->query('primary');
+
         return $request->ajax() ? $this->lecturerService
-            ->getListData() : view('datas.lecturer');
+            ->getListData($q) : view('datas.lecturer');
     }
 
     /**
