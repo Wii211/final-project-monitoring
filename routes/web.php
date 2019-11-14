@@ -51,6 +51,7 @@ Route::group(
         Route::delete('/final_projects/students/{student}', 'FinalStudentVerifyController@destroy')
             ->name('final_students_verify.destroy');
 
+        Route::resource('dead-line', 'DeadlineScheduleController');
 
 
         //Jadwal Seminar/Sidang

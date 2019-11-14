@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(FinalStatusesTableSeeder::class);
+        $this->call(DeadLineScheduleTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         factory(App\User::class, 35)->create();
         factory(App\RoleUser::class, 70)->create();
