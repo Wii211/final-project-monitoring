@@ -27,7 +27,7 @@
                     Error
                 </div>
                 @endif
-                    <form action="{{route('change_profile.update', ['id' => Auth::user()->id]) }}" method="POST">
+                    <form action="{{route('change_profile.update', ['id' => Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -48,7 +48,7 @@
                                         Ukuran maks. 1 MB <br>
                                         Format .PNG, .JPEG, .JPG
                                     </small>
-                                    <input type="file" class="form-control-file mt-2" name="image-profile"
+                                    <input type="file" class="form-control-file mt-2" name="image_profile"
                                         id="image-profile">
                                 </div>
                             </div>

@@ -29,6 +29,8 @@ class ProfileService
     {
         $user = $this->user->findOrFail($id);
 
+
+
         if ($request->hasFile('image_profile')) {
             $imageProfile = $this->uploadHelper->uploadFile(
                 $request->file('image_profile'),
@@ -38,11 +40,14 @@ class ProfileService
 
             $user->phone_number = $request->phone_number;
             $user->image_profile = $imageProfile;
-
-            if ($user->save()) {
-                return true;
-            } else {
-                return false;
+            try {
+                if ($user->save()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                dd($th);
             }
         }
     }
