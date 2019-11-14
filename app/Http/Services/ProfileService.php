@@ -37,18 +37,18 @@ class ProfileService
                 $user->user_name,
                 'image_profile'
             );
-
-            $user->phone_number = $request->phone_number;
-            $user->image_profile = $imageProfile;
-            try {
-                if ($user->save()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } catch (\Throwable $th) {
-                dd($th);
+            if ($user->image_profile) {
+                $this->uploadHelper->deleteFile($user->image_profile);
             }
+            $user->image_profile = $imageProfile;
+        }
+        $user->phone_number = $request->phone_number;
+
+
+        if ($user->save()) {
+            return true;
+        } else {
+            return false;
         }
     }
 
