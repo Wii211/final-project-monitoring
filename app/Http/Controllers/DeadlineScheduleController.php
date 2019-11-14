@@ -23,7 +23,7 @@ class DeadlineScheduleController extends Controller
     public function index()
     {
         $deadlineSchedule = $this->deadLineScheduleService->getListData();
-        return view('coordinators.home', $deadlineSchedule);
+        return view('coordinators.home', compact('deadlineSchedule'));
     }
 
     /**
