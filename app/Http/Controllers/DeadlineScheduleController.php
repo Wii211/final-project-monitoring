@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Schedule;
 use Illuminate\Http\Request;
+use App\Http\Services\DeadLineScheduleService;
 
 class DeadlineScheduleController extends Controller
 {
+    private $deadLineScheduleService;
+
+    public function __construct(DeadLineScheduleService $deadLineScheduleService)
+    {
+        $this->deadLineScheduleService = $deadLineScheduleService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -67,9 +75,14 @@ class DeadlineScheduleController extends Controller
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Schedule $schedule)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->deadLineScheduleService->updateData($request, $id);
+            return response()->json("Success");
+        } catch (\Throwable $th) {
+            return response()->json("Error " . $th);
+        }
     }
 
     /**

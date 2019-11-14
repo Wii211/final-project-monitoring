@@ -24,4 +24,7 @@ class DeadLineScheduleService
 
         return compact('endDate', 'differenceBetweenDate');
     }
+
+    public function updateData(Request $request, $id)
+    { }
 }
