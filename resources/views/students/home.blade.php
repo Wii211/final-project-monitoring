@@ -15,10 +15,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Deadline Pendaftaran Proposal Tugas Akhir</span>
 
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 70%"></div>
-                        </div>
-                        <span class="progress-description">
+                        <span class="progress-description mt-2">
                             <b>
                                 
 
