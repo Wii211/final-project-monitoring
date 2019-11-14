@@ -92,5 +92,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:admin']], funct
     Route::view('/test', 'welcome');
 });
 
-Route::view('/profile/change_profile', 'profiles.change_profile')->name('change_profile.index');
-Route::view('/profile/change_password', 'profiles.change_password')->name('change_password.index');
+
+Route::group(['prefix' => '/profile'], function () {
+
+    Route::resource('/change_profile', 'ProfileController');
+    Route::resource('/change_password', 'PasswordController');
+});
