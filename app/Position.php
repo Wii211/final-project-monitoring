@@ -11,4 +11,14 @@ class Position extends Model
     {
         return $this->hasMany(Lecturer::class);
     }
+
+    public function lecturersPrimary()
+    {
+        return $this->hasMany(Lecturer::class)->primary();
+    }
+
+    public function scopePrimary($query)
+    {
+        return $query->whereIsPrimary(1);
+    }
 }
