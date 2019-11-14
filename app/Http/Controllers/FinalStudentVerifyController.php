@@ -27,7 +27,7 @@ class FinalStudentVerifyController extends Controller
     {
 
         return $request->ajax() ? $this->finalStudentService
-            ->getListData() : view('final_projects.students');
+            ->getListData(null, true) : view('final_projects.students');
     }
 
     /**
