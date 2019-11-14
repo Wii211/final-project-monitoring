@@ -35,8 +35,7 @@ Route::group(
 Route::group(
     ['prefix' => 'coordinator', 'middleware' => ['auth', 'role:koordinator']],
     function () {
-        Route::get('/', 'DeadlineScheduleController@index')
-            ->name('coordinator_dashboard.index');
+        Route::view('/', 'coordinators.home')->name('coordinator_dashboard.index');
 
         //Tugas Akhir Yang Masih Aktif
         Route::view('/final_projects', 'final_projects.index')->name('final_actives.index');
