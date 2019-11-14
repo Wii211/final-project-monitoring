@@ -9,12 +9,22 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <form action="">
+                @if(Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                    Berhasil
+                </div>
+                @elseif(Session::has('failed'))
+                <div class="alert alert-danger" role="alert">
+                    Error
+                </div>
+                @endif
+                <form action="{{route('change_password.update', ['id' => Auth::user()->id]) }}" method="POST">
+                    @csrf
                     <div class="form-group row">
                         <label class="col-3" for="oldPassword">Password Lama</label>
                         <div class="col-9">
                             <input type="password" class="form-control form-control-sm" id="oldPassword"
-                                name="old_password" required minLength="8" maxlength="16" required>
+                                name="old_password" required>
                         </div>
                     </div>
                     <hr>
@@ -35,13 +45,14 @@
                             <div id="confirmStatus"></div>
                         </div>
                     </div>
-
+                    <input type="hidden" name="_method" value="PUT">
+                    <button type="submit" class="btn btn-primary mb-2 w-100" data-toggle="modal"
+                        data-target="#pengajuanProposal">
+                        <i class="fas fa-key mr-2"></i>
+                        Ganti Password</button>
                 </form>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mb-2 w-100" data-toggle="modal" data-target="#pengajuanProposal">
-            <i class="fas fa-key mr-2"></i>
-            Ganti Password</button>
     </div>
 </section>
 @endsection
