@@ -57,6 +57,12 @@ class Lecturer extends Model
         return $position->position->is_prime === 1 ? true : false;
     }
 
-    public function uploadImage($requestImage)
-    { }
+    public function scopePrimary($query, $q)
+    {
+        if ($q === null) return $query;
+
+        return $query->whereHas('position', function ($query) use ($q) {
+            $query->whereIsPrimary($q);
+        });
+    }
 }
