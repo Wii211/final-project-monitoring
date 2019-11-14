@@ -29,4 +29,12 @@ class FinalStudentService
         return new FinalStudentCollection($query
             ->get(['id', 'name', 'status', 'is_verified', 'student_id']));
     }
+
+    public function getData($relation = null, $id)
+    {
+        $query = $relation == null ? $this->finalStudent->active(true)
+            : $this->finalStudent->active(true)->with($relation);
+
+        return $query->findOrFail($id);
+    }
 }

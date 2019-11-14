@@ -18,8 +18,8 @@ class DeadLineScheduleService
     }
     public function showProposalRegisterDeadLine()
     {
-        //Where finalStatusId = 1 is proposalRegister in database
-        $deadlineSchedule = $this->deadlineSchedule->whereFinalStatusId(1)->first();
+        $deadlineSchedule = $this->deadlineSchedule
+            ->whereFinalStatusId($this->finalStatus->name('pendaftaran'))->first();
 
         $endDate = Carbon::parse($deadlineSchedule->end_date);
 
