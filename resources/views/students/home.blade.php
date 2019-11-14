@@ -37,9 +37,18 @@
                 @endif
 
             </div>
-        </div> 
+        </div>
         @if(Auth::user()->isVerified() == 0)
         <div class="card">
+            @if(Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                Berhasil.
+            </div>
+            @elseif(Session::has('failed'))
+            <div class="alert alert-danger" role="alert">
+                Error.
+            </div>
+            @endif
             <div class="card-body">
                 <form method="POST" action="{{route('final_registration.store')}}" enctype="multipart/form-data">
                     @csrf
