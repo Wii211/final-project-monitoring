@@ -8,6 +8,9 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
+            <pre>
+                {{ dd($deadlineSchedule) }}
+            </pre>
             <form action="{{route('dead-line.store')}}" method="POST">
                     <div class="form-group row">
                         <label class="col-md-2" for="exampleFormControlInput1">Pendaftaran dimulai</label>
