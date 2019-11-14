@@ -29,7 +29,7 @@ class LecturerController extends Controller
         if ($request->has('primary')) $q = $request->query('primary');
 
         return $request->ajax() ? $this->lecturerService
-            ->getListData($q) : view('datas.lecturer');
+            ->getListData(null, $q) : view('datas.lecturer');
     }
 
     /**
