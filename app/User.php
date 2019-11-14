@@ -103,4 +103,9 @@ class User extends Authenticatable
     {
         return Auth::user()->id;
     }
+
+    public function isVerified()
+    {
+        return Auth::user()->finalStudent->is_verified;
+    }
 }
