@@ -29,6 +29,8 @@ class FinalStudent extends Model
 
     public function scopeActive($query, $value)
     {
+        if ($value === null) return $query;
+
         return $query->whereStatus($value);
     }
 
