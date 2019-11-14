@@ -108,4 +108,9 @@ class User extends Authenticatable
     {
         return Auth::user()->finalStudent->is_verified;
     }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
