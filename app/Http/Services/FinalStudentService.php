@@ -21,20 +21,23 @@ class FinalStudentService
         $this->finalStudent = $finalStudent;
     }
 
-    public function getListData($relation = null)
+    public function getListData($relation = null, $active)
     {
-        $query = $relation == null ? $this->finalStudent->active(true)
-            : $this->finalStudent->active(true)->with($relation);
+        $query = $relation == null ? $this->finalStudent
+            : $this->finalStudent->with($relation);
 
-        return new FinalStudentCollection($query
-            ->get(['id', 'name', 'status', 'is_verified', 'student_id']));
+        return new FinalStudentCollection($query->active($active)
+            ->get());
     }
 
     public function getData($relation = null, $id)
     {
-        $query = $relation == null ? $this->finalStudent->active(true)
-            : $this->finalStudent->active(true)->with($relation);
+        $query = $relation == null ? $this->finalStudent
+            : $this->finalStudent->with($relation);
 
         return $query->findOrFail($id);
     }
+
+    public function store(Request $request)
+    { }
 }
