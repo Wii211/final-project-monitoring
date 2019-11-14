@@ -73,7 +73,7 @@ Route::group(
         Route::resource('lecturers', 'LecturerController');
 
         //Data Mahasiswa
-        Route::view('/students', 'datas.student')->name('students.index');
+        Route::resource('students', 'FinalStudentController');
 
         //Data Arsip Tugas Akhir (Yang sudah selesai)
         Route::view('/final_projects', 'datas.final_project')->name('final_projects.index');
