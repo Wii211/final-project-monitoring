@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\FinalStudent;
+use App\Http\Services\FinalStudentService;
 use Illuminate\Http\Request;
 
 class FinalStudentController extends Controller
 {
+    private $studentService;
 
-    private $student;
-    public function __construct(FinalStudent $student)
+    public function __construct(FinalStudentService $studentService)
     {
-        $this->student = $student;
+        $this->studentService = $studentService;
     }
 
     /**
@@ -19,9 +20,10 @@ class FinalStudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return $request->ajax() ? response()->json($this->studentService)
+            ->getListData(null, null) : view('datas.student');
     }
 
     /**
@@ -41,9 +43,7 @@ class FinalStudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+    { }
 
     /**
      * Display the specified resource.
@@ -51,9 +51,9 @@ class FinalStudentController extends Controller
      * @param  \App\FinalStudent  $finalStudent
      * @return \Illuminate\Http\Response
      */
-    public function show(FinalStudent $finalStudent)
+    public function show($id)
     {
-        //
+        return response()->json($this->studentService->getData(null, $id));
     }
 
     /**
