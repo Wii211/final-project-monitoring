@@ -22,7 +22,8 @@ class DeadlineScheduleController extends Controller
      */
     public function index()
     {
-        //
+        $deadlineSchedule = $this->deadLineScheduleService->getListData();
+        return view('coordinators.home', $deadlineSchedule);
     }
 
     /**
@@ -32,7 +33,7 @@ class DeadlineScheduleController extends Controller
      */
     public function create()
     {
-        //
+        //a
     }
 
     /**
@@ -43,7 +44,11 @@ class DeadlineScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($this->deadLineScheduleService->updateSchedules($request)) {
+            return redirect()->back()->with('success', ['Success']);
+        } else {
+            return redirect()->back()->with('failed', ['Failed']);
+        }
     }
 
     /**

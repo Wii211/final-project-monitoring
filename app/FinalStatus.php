@@ -11,4 +11,9 @@ class FinalStatus extends Model
     {
         return $this->hasMany(DeadlineSchedule::class);
     }
+
+    public function scopeName($query, $name)
+    {
+        return $query->whereName($name)->first()->id;
+    }
 }

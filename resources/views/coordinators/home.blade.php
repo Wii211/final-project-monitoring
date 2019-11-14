@@ -12,6 +12,7 @@
                 {{ dd($deadlineSchedule) }}
             </pre>
             <form action="{{route('dead-line.store')}}" method="POST">
+                @csrf
                     <div class="form-group row">
                         <label class="col-md-2" for="exampleFormControlInput1">Pendaftaran dimulai</label>
                         <div class="col-md-4">
@@ -55,7 +56,6 @@
                                 name="revision_final_project_end_date"> Hari setelah tugas akhir ditutup.
                         </div>
                     </div>
-                    <input type="hidden" name="_method" value="PUT">
                     <button type="submit" class="btn btn-primary w-100">Perbarui Deadline</button>
                 </form>
             </div>
