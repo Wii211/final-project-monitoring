@@ -13,8 +13,12 @@
                     <div class="widget-user-image">
                         <img class="img-circle elevation-2" src="{{ asset('storage/'.$data->image_profile) }}" alt="User Avatar">
                     </div>
+                    @if(Auth::user()->finalStudent !== null)
                     <h3 class="widget-user-username">{{ Auth::user()->finalStudent->name }}</h3>
                     <h5 class="widget-user-desc">{{ Auth::user()->finalStudent->student_id }}</h5>
+                    @else
+                    <h3 class="widget-user-username">{{ Auth::user()->user_name }}</h3>
+                    @endif
                 </div>
             </div>
             <div class="card-body">

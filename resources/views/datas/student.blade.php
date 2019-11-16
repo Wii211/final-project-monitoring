@@ -4,49 +4,35 @@
 <!-- If() -->
 @section('title', 'Data Mahasiswa')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+@endsection
+
 <!-- Content -->
 @section('content')
 <section class="content">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <button type="button" class="btn bg-gradient-success mb-2" id="convert">
-                <i class="fas fa-images"></i>
-                Import Data</button>
+            <button type="button" class="btn bg-gradient-success mb-2" data-toggle="modal" 
+                data-target="#import-modal"><i class="fas fa-images"></i>Import Data</button>
             <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
-                data-target="#scheduleFinalProject">Tambah Data Mahasiswa</button>
+                data-target="#student-modal">Tambah Data Mahasiswa</button>
 
         </div>
         <div class="card">
-            <div class="card-body p-0">
-                <table class="table">
+            <div class="card-body">
+                <table class="table" id="student-table">
                     <thead>
                         <tr>
                             <th>NIM</th>
                             <th>Nama</th>
-                            <th>Tanggal</th>
+                            <th>Status</th>
                             <th></th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>14Y950645423-492</td>
-                            <td>Winardi Chandra</td>
-                            <td>29-02-2022</td>
-                            <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#lecturerDetail">Detail</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Update</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Delete</button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -57,5 +43,14 @@
 
 <!-- Modal -->
 @section('modal')
-    @include('modals.lecturer.detail')
+    @include('modals.student.add')
+    @include('modals.student.import')
+    {{-- @include('modals.lecturer.detail') --}}
+@endsection
+
+@section('javascript')
+<!-- DataTables -->
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/student/student.js') }}"></script>
 @endsection
