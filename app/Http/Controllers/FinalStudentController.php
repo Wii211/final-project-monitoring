@@ -22,8 +22,8 @@ class FinalStudentController extends Controller
      */
     public function index(Request $request)
     {
-        return $request->ajax() ? response()->json($this->studentService)
-            ->getListData(null, null) : view('datas.student');
+        return $request->ajax() ? response()->json($this->studentService->getListData(null, null))
+            : view('datas.student');
     }
 
     /**
