@@ -75,5 +75,5 @@
 
 
 @section('javascript')
-<script type="text/javascript" src="{{ asset('assets/js/chooseTitleFinalProject.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/student/preproposal.js') }}"></script>
 @endsection
