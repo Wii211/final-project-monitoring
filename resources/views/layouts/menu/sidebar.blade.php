@@ -22,7 +22,7 @@
           <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                   data-accordion="false">
-                  <li class="nav-header">Mahasiswa</li>
+                  @if(Auth::user()->isStudent())
                   <li class="nav-item">
                       <a href="{{ route('final_registration.index') }}" 
                         class="nav-link {{ Request::is('student') ? 'active' : '' }}">
@@ -50,7 +50,8 @@
                           </p>
                       </a>
                   </li>
-                  <li class="nav-header">Koordinator TA</li>
+                  @endif
+                  @if(Auth::user()->isCoordinator())
                   <li class="nav-item">
                       <a id="coorHome" href="{{ route('coordinator_dashboard.index') }}"
                       class="nav-link {{ Request::is('coordinator') ? 'active' : '' }}">
@@ -60,6 +61,7 @@
                           </p>
                       </a>
                   </li>
+                  @endif
                   <li class="nav-item">
                       <a id="coorFinalProjectStudent" href="{{ route('recomendation-title.index') }}" 
                       class="nav-link {{ Request::is('recomendation-title') ? 'active' : '' }}">
@@ -69,6 +71,7 @@
                           </p>
                       </a>
                   </li>
+                  @if(Auth::user()->isCoordinator())
                   <li class="nav-item">
                       <a id="coorFinalProjectStudent" href="{{ route('final_students_verify.index') }}" 
                       class="nav-link {{ Request::is('coordinator/final_projects/students*') ? 'active' : '' }}">
@@ -98,7 +101,9 @@
                           </p>
                       </a>
                   </li>
-                  <li class="nav-header">Datas</li>
+                  @endif
+                  @if(Auth::user()->isAdmin())
+                  <li class="nav-header">DATA</li>
                   <li class="nav-item">
                       <a id="finalProject" href="{{ route('final_projects.index') }}"
                       class="nav-link {{ Request::is('data/final_projects') ? 'active' : '' }}">
@@ -126,6 +131,7 @@
                           </p>
                       </a>
                   </li>
+                  @endif
                   <li class="nav-header">PROFILE</li>
                   <li class="nav-item">
                       <a id="changeProfile" href="{{ route('change_profile.index') }}"
