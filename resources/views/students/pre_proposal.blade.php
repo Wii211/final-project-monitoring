@@ -11,7 +11,7 @@
         <div class="d-flex flex-row-reverse bd-highlight">
             <div class="p-2 bd-highlight">
                 <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
-                    data-target="#pengajuanProposal">Ajukan Judul Proposal</button>
+                    data-target="#preproposal-modal">Ajukan Judul Proposal</button>
             </div>
         </div>
         <div class="card">
