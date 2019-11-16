@@ -12,33 +12,46 @@ let dataTable = $('#student-table').DataTable({
         url: "students"
     },
     "columns": [{
-            data: 'fullname'
+            data: 'student_id'
         },
         {
-            data: 'gender'
+            data: 'name'
+        },
+        {
+            data: 'status'
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return '<button id="' + buttonId + '" class="d-block btn btn-sm btn-gradient-primary show-images">Images</button>';
+                return '<button id="' + buttonId + '" class="btn btn-info detail">Detail</button>';
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return '<button id="' + buttonId + '" class="btn btn-sm btn-gradient-warning update">Update</button>';
+                return '<button id="' + buttonId + '" class="btn btn-warning update">Update</button>';
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return '<button id="' + buttonId + '" class="btn btn-sm btn-gradient-danger delete">Delete</button>';
+                return '<button id="' + buttonId + '" class="btn btn-danger delete">Delete</button>';
             }
         }
-    ]
+    ],
+    "columnDefs": [{
+        targets: [2],
+        render: function (data, type, row) {
+            if (data == 1) {
+                return '<span class="badge badge-success p-2">Aktif</span>';
+            } else {
+                return '<span class="badge badge-danger p-2">Tidak Aktif</span>';
+            }
+        }
+    }]
 });
 
 function indexImages(id) {
