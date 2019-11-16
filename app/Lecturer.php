@@ -61,6 +61,11 @@ class Lecturer extends Model
     {
         if ($q === null) return $query;
 
+        if ($q == 'true') {
+            $q = 1;
+        } else {
+            $q = 0;
+        }
         return $query->whereHas('position', function ($query) use ($q) {
             $query->whereIsPrimary($q);
         });
