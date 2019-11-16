@@ -2,19 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\LecturerService;
 use App\Supervisor;
 use Illuminate\Http\Request;
 
 class SupervisorController extends Controller
 {
+    private $lecturerService;
+
+    public function __construct(LecturerService $lecturerService)
+    {
+        $this->lecturerService = $lecturerService;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $q = null;
+
+        if ($request->has('primary')) $q = $request->query('primary');
+
+        return response()->json($this->lecturerService->getListData(null, $q, ['id', 'name']));
     }
 
     /**
