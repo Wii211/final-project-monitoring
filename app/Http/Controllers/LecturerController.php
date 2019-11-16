@@ -28,7 +28,8 @@ class LecturerController extends Controller
         if ($request->has('primary')) $q = $request->query('primary');
 
         return $request->ajax() ? response()->json(
-            $this->lecturerService->getListData(null, $q, null)
+            ['data' =>
+            $this->lecturerService->getListData(null, $q, null)]
         ) : view('datas.lecturer');
     }
 

@@ -25,7 +25,10 @@ class SupervisorController extends Controller
 
         if ($request->has('primary')) $q = $request->query('primary');
 
-        return response()->json($this->lecturerService->getListData(null, $q, ['id', 'name']));
+        return response()->json(
+            ['data' =>
+            $this->lecturerService->getListData(null, $q, ['id', 'name'])]
+        );
     }
 
     /**
