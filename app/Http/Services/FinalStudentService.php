@@ -9,7 +9,6 @@ use App\FinalStudent;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\FinalStudentCollection;
 
 class FinalStudentService
 {
@@ -26,8 +25,7 @@ class FinalStudentService
         $query = $relation == null ? $this->finalStudent
             : $this->finalStudent->with($relation);
 
-        return new FinalStudentCollection($query->active($active)
-            ->get());
+        return $query->active($active)->get();
     }
 
     public function getData($relation = null, $id)
