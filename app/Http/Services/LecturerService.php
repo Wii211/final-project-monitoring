@@ -27,13 +27,13 @@ class LecturerService
      * @param  $relation
      * @return App\Http\Resources\LecturerCollection 
      */
-    public function getListData($relation = null, $q): LecturerCollection
+    public function getListData($relation = null, $q, $data)
     {
         //TODO Find More Elegant Solution
         $query = $relation == null ? $this->lecturer
             : $this->lecturer->with($relation);
 
-        return new LecturerCollection($query->primary($q)->get());
+        return $query->primary($q)->get($data);
     }
 
     public function getListDataPrimary($relation = null)
