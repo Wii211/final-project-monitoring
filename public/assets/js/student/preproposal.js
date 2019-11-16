@@ -1,14 +1,27 @@
 $(document).ready(function () {
     $.ajax({
-        url: "../lecturers?primary=true",
+        url: "../supervisor?primary=true",
         type: "GET",
         dataType: "json",
-        success: function (data) {
-            console.log(data);
-            // position.data.forEach(function (result) {
-            //     let data = '<option value="' + id + '">' + value + '</option>';
-            //     $('#positions').append(data);
-            // });
+        success: function (lecturer) {
+            lecturer.data.forEach(function (result) {
+
+                let data = '<option value="' + result.id + '">' + result.name + '</option>';
+                $('#lecturers-primary').append(data);
+            });
+        }
+    });
+
+    $.ajax({
+        url: "../supervisor?primary=false",
+        type: "GET",
+        dataType: "json",
+        success: function (lecturer) {
+            lecturer.data.forEach(function (result) {
+
+                let data = '<option value="' + result.id + '">' + result.name + '</option>';
+                $('#lecturers').append(data);
+            });
         }
     });
 });
