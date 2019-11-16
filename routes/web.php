@@ -22,8 +22,9 @@ Route::group(
         Route::post('/final_registration', 'FinalRegistrationController@store')
             ->name('final_registration.store');
 
-        //Pra Proposal
 
+
+        //Pra Proposal
 
         Route::resource('/pre_proposal', 'PreProposalController');
 
@@ -63,6 +64,8 @@ Route::group(
 Route::resource('topic', 'TopicController');
 
 Route::resource('position', 'PositionController');
+
+Route::resource('supervisor', 'SupervisorController');
 
 Route::group(
     ['prefix' => 'data', 'middleware' => ['auth', 'role:admin']],
