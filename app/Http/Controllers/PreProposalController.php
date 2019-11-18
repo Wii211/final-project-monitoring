@@ -31,7 +31,7 @@ class PreProposalController extends Controller
     {
         $data = $this->preProposalService
             ->getData($this->finalStudent->getStudentId(), [
-                'finalLogsPraProposal',
+                'finalLogsPraProposal.finalStatus',
                 'supervisors'
             ]);
 
