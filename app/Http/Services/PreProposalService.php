@@ -51,7 +51,7 @@ class PreProposalService
         $supervisors = [];
         if ($request->type === "recommendation-title") {
             $supervisors = [
-                'lecturer_id' => $request->supervisors['lecturer_id'],
+                'lecturer_id' => $request->supervisors,
                 'role' => $role
             ];
         }
