@@ -52,9 +52,9 @@ class Lecturer extends Model
      */
     public function canPrimary($lecturerId): bool
     {
-        $position = Lecturer::with('position')->findOrFail($lecturerId);
+        $position = $this->with('position')->findOrFail($lecturerId);
 
-        return $position->position->is_prime === 1 ? true : false;
+        return $position->position->is_primary === 1 ? true : false;
     }
 
     public function scopePrimary($query, $q)
