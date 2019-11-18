@@ -35,8 +35,6 @@ class PreProposalController extends Controller
                 'supervisors'
             ]);
 
-        dd($data);
-
         return view('students.pre_proposal', compact('data'));
     }
 
