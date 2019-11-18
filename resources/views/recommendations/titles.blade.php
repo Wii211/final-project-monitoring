@@ -89,7 +89,7 @@
                                         @csrf
                                         <input type="hidden" name="title" value="{{ $title->title }}">
                                         <input type="hidden" name="title_id" value="{{ $title->id }}">
-                                        <input type="hidden" name="supervisors" value="{{ $title->lecturer->id }}">
+                                        <input type="hidden" name="supervisors[lecturer_id]" value="{{ $title->lecturer->id }}">
                                         <input type="hidden" name="type" value="recommendation-title">
                                         <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
                                             data-target="#updateProposal">Ambil</button>
