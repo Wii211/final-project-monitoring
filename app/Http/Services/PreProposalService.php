@@ -3,9 +3,10 @@
 namespace App\Http\Services;
 
 use App\FinalLog;
+use App\Lecturer;
 use App\Supervisor;
-use App\FinalProject;
 use App\FinalStatus;
+use App\FinalProject;
 use App\FinalStudent;
 use App\RecomendationTitle;
 use Illuminate\Http\Request;
