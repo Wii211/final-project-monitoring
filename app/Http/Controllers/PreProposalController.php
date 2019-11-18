@@ -31,13 +31,9 @@ class PreProposalController extends Controller
     {
         $data = $this->preProposalService
             ->getData($this->finalStudent->getStudentId(), [
-                'finalLogs' => function ($query) {
-                    $query->whereFinalStatusId($this->finalStatus->name('pra-proposal'));
-                },
+                'finalLogsPraProposal',
                 'supervisors'
             ]);
-
-        dd($data);
 
         return view('students.pre_proposal', compact('data'));
     }
