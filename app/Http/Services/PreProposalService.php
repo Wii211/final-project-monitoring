@@ -77,7 +77,7 @@ class PreProposalService
                 $finalLog = $this->finalLog;
 
                 $finalLog->final_project_id = $finalProject->id;
-                $finalLog->final_status_id = $this->finalStatus->name('pendaftaran');
+                $finalLog->final_status_id = $this->finalStatus->name('pra-proposal');
 
                 $finalLog->save();
 
