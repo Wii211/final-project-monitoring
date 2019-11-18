@@ -45,14 +45,14 @@ class PreProposalService
 
         $role = 1;
 
-        if (!$this->lecturer->canPrimary($request->supervisors)) {
+        if (!$this->lecturer->canPrimary($request->supervisors['lecturer_id'])) {
             $role = 2;
         }
 
         $supervisors = [];
         if ($request->type === "recommendation-title") {
             $supervisors = [
-                'lecturer_id' => $request->supervisors,
+                'lecturer_id' => $request->supervisors['lecturer_id'],
                 'role' => $role
             ];
         }
