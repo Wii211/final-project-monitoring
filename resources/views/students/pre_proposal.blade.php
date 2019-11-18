@@ -21,7 +21,7 @@
         @if(!is_null($data))
         <div class="card">
             <div class="card-body">
-                <table class="table">
+                <table class="table" id="preproposal-table">
                     <thead>
                         <tr>
                             <th>Judul</th>
