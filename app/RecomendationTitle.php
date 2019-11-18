@@ -40,9 +40,10 @@ class RecomendationTitle extends Model
 
     public function checkIfSubmited($finalStudentId)
     {
-        if (is_null($this->find($finalStudentId))) {
+        if ($this->find($finalStudentId)) {
             return true;
         } else {
+
             return false;
         }
     }
