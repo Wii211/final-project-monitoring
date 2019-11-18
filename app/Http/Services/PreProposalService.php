@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 class PreProposalService
 {
-    private $finalProject, $finalStudent, $finalLog, $recomendationTitle, $finalStatus;
+    private $finalProject, $finalStudent, $finalLog, $recomendationTitle,
+        $finalStatus;
 
     public function __construct(
         FinalProject $finalProject,
@@ -22,6 +23,7 @@ class PreProposalService
         FinalLog $finalLog,
         RecomendationTitle $recomendationTitle,
         FinalStatus $finalStatus
+
     ) {
         $this->finalProject = $finalProject;
         $this->finalStudent = $finalStudent;
@@ -39,11 +41,17 @@ class PreProposalService
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
+        $role = 1;
+
+        if (!$this->recomendationTitle->canPrimary($request->supervisors)) {
+            $role = 2;
+        }
+
         $supervisors = [];
         if ($request->type === "recommendation-title") {
             $supervisors = [
-                'lecturer_id' => $request->supervisors[0],
-                'role' => $request->supervisors[1]
+                'lecturer_id' => $request->supervisors,
+                'role' => $role
             ];
         }
 
@@ -73,7 +81,6 @@ class PreProposalService
                 $finalProject->supervisors()->create($supervisors);
             });
         } catch (\Throwable $th) {
-            dd($th);
             return false;
         }
         return true;
