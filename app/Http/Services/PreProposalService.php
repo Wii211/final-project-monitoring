@@ -44,7 +44,7 @@ class PreProposalService
 
         $role = 1;
 
-        if (!$this->lecurer->canPrimary($request->supervisors)) {
+        if (!$this->lecturer->canPrimary($request->supervisors)) {
             $role = 2;
         }
 
