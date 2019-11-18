@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\User;
 use App\FinalLog;
 use App\Lecturer;
 use App\Supervisor;
@@ -36,7 +37,7 @@ class PreProposalService
 
     public function getData($id, $relation)
     {
-        return $this->finalProject->with($relation)->findOrFail($id);
+        return $this->finalProject->with($relation)->whereFinalStudentId($id)->first();
     }
 
     public function submit(Request $request)

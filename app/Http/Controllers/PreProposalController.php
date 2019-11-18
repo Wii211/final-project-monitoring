@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\PreProposalService;
+use App\FinalStudent;
+
 use Illuminate\Http\Request;
+use App\Http\Services\PreProposalService;
 
 class PreProposalController extends Controller
 {
-    private $preProposalService;
+    private $preProposalService, $finalStudent;
 
-    public function __construct(PreProposalService $preProposalService)
+    public function __construct(PreProposalService $preProposalService, FinalStudent $finalStudent)
     {
         $this->preProposalService = $preProposalService;
+        $this->finalStudent = $finalStudent;
     }
 
     /**
@@ -21,7 +24,10 @@ class PreProposalController extends Controller
      */
     public function index()
     {
-        return view('students.pre_proposal');
+        $data = $this->preProposalService
+            ->getData($this->finalStudent->getStudentId(), ['finalLogs', 'supervisors']);
+
+        return view('students.pre_proposal', compact('data'));
     }
 
     /**
@@ -61,7 +67,9 @@ class PreProposalController extends Controller
      */
     public function show($id)
     {
-        //
+        // $data = $this->preProposalService(User::getAuthId());
+
+        // return view('view.name', compact('data'));
     }
 
     /**
