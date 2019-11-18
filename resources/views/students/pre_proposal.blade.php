@@ -22,7 +22,8 @@
                             <th>Judul</th>
                             <th>Tipe</th>
                             <th>Status Verifikasi</th>
-                            <th>Status Dosen Pembimbing</th>
+                            <th>Status Pembimbing 1</th>
+                            <th>Status Pembimbing 2</th>
                             <th width="10%"></th>
                             <th width="10%"></th>
                         </tr>
@@ -32,6 +33,7 @@
                             <td>Hey aspiring content creators, submit demo musik kamu dan dapatkan kesempatan menangin
                                 HP Pavilion x360, serta mentoring dari Eka.e</td>
                             <td><span class="badge badge-primary p-2">Pra-Proposal</span></td>
+                            <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
                             <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
                             <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
                             <td>
