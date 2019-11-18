@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\FinalStudent;
+use App\FinalStatus;
 
+use App\FinalStudent;
 use Illuminate\Http\Request;
 use App\Http\Services\PreProposalService;
 
 class PreProposalController extends Controller
 {
-    private $preProposalService, $finalStudent;
+    private $preProposalService, $finalStudent, $finalStatus;
 
-    public function __construct(PreProposalService $preProposalService, FinalStudent $finalStudent)
-    {
+    public function __construct(
+        PreProposalService $preProposalService,
+        FinalStudent $finalStudent,
+        FinalStatus $finalStatus
+    ) {
         $this->preProposalService = $preProposalService;
         $this->finalStudent = $finalStudent;
+        $this->finalStatus = $finalStatus;
     }
 
     /**
@@ -25,7 +30,14 @@ class PreProposalController extends Controller
     public function index()
     {
         $data = $this->preProposalService
-            ->getData($this->finalStudent->getStudentId(), ['finalLogs', 'supervisors']);
+            ->getData($this->finalStudent->getStudentId(), [
+                'finalLogs' => function ($query) {
+                    $query->whereFinalStatusId($this->finalStatus->name('pra-proposal'));
+                },
+                'supervisors'
+            ]);
+
+        dd($data);
 
         return view('students.pre_proposal', compact('data'));
     }
