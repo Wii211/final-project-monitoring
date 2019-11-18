@@ -8,43 +8,70 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
+        {{-- {{dd($data)}} --}}
+        @if(is_null($data))
         <div class="d-flex flex-row-reverse bd-highlight">
             <div class="p-2 bd-highlight">
                 <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
                     data-target="#preproposal-modal">Ajukan Judul Proposal</button>
             </div>
         </div>
+        <hr>
+        @endif
+        @if(!is_null($data))
         <div class="card">
-            <div class="card-body p-0">
+            <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Judul</th>
-                            <th>Tipe</th>
+                            <th>Tanggal</th>
+                            <th>Status Skripsi</th>
                             <th>Status Verifikasi</th>
-                            <th>Status Pembimbing 1</th>
-                            <th>Status Pembimbing 2</th>
-                            <th width="10%"></th>
                             <th width="10%"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Hey aspiring content creators, submit demo musik kamu dan dapatkan kesempatan menangin
-                                HP Pavilion x360, serta mentoring dari Eka.e</td>
-                            <td><span class="badge badge-primary p-2">Pra-Proposal</span></td>
-                            <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
-                            <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
-                            <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
+                            <td>{{ $data->title }}</td>
+                            <td>{{ $data->created_at->toDateString() }}</td>
+                            <td><span class="badge badge-primary p-2">{{ ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span></td>
+                            @if($data->finalLogsPraProposal[0]->is_verification == 0)
+                            <td><span class="badge badge-warning p-2">Menunggu verifikasi</span></td>
+                            @else
+                            <td><span class="badge badge-success p-2">Telah diverifikasi</span></td>
+                            @endif
                             <td>
-                                <button class="btn bg-gradient-info btn-sm w-100" data-toggle="modal"
-                                    data-target="#detailFinalProject">Detail</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Update</button>
+                                <button class="btn bg-gradient-warning btn-sm w-100" id="{{ $data->id }}">Update</button>
                             </td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span class="d-block text-center"><b>Dosen Pembimbing</b></span>
+            </div>
+            <div class="card-body pt-0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Status Pembimbing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($data->supervisors as $supervisor)
+                        <tr>
+                            <td>{{ $supervisor->lecturer->name }}</td>
+                            @if($supervisor->is_agree == 0)
+                            <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
+                            @else
+                            <td><span class="badge badge-success p-2">Disetujui</span></td>
+                            @endif
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -65,6 +92,7 @@
         </div>
         <button type="button" class="btn btn-primary w-100">Fix / Commit</button>
     </div>
+    @endif
 </section>
 @endsection
 
