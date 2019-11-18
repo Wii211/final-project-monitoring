@@ -40,7 +40,7 @@ class RecomendationTitle extends Model
 
     public function checkIfSubmited($finalStudentId)
     {
-        if ($this->find($finalStudentId)) {
+        if ($this->whereFinalStudentId($finalStudentId)->first()) {
             return true;
         } else {
 
