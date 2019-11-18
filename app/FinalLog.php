@@ -3,6 +3,7 @@
 namespace App;
 
 use App\NewsReport;
+use App\FinalStatus;
 use App\FinalProject;
 use App\FinalSchedule;
 use Illuminate\Database\Eloquent\Model;
@@ -22,5 +23,10 @@ class FinalLog extends Model
     public function finalProject()
     {
         return $this->belongsTo(FinalProject::class);
+    }
+
+    public function finalStatus()
+    {
+        return $this->belongsTo(FinalStatus::class);
     }
 }

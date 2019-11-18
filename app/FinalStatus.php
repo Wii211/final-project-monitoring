@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\FinalLog;
 use App\DeadlineSchedule;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,11 @@ class FinalStatus extends Model
     public function deadlineSchedules()
     {
         return $this->hasMany(DeadlineSchedule::class);
+    }
+
+    public function finalLogs()
+    {
+        return $this->hasMany(FinalLog::class);
     }
 
     public function scopeName($query, $name)
