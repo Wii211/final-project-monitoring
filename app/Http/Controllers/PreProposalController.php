@@ -32,7 +32,7 @@ class PreProposalController extends Controller
         $data = $this->preProposalService
             ->getData($this->finalStudent->getStudentId(), [
                 'finalLogsPraProposal.finalStatus',
-                'supervisors'
+                'supervisors.lecturer'
             ]);
 
         return view('students.pre_proposal', compact('data'));
