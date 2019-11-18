@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\FinalLog;
 use App\Supervisor;
 use App\FinalProject;
+use App\FinalStatus;
 use App\FinalStudent;
 use App\RecomendationTitle;
 use Illuminate\Http\Request;
@@ -13,18 +14,20 @@ use Illuminate\Support\Facades\DB;
 
 class PreProposalService
 {
-    private $finalProject, $finalStudent, $finalLog, $recomendationTitle;
+    private $finalProject, $finalStudent, $finalLog, $recomendationTitle, $finalStatus;
 
     public function __construct(
         FinalProject $finalProject,
         FinalStudent $finalStudent,
         FinalLog $finalLog,
-        RecomendationTitle $recomendationTitle
+        RecomendationTitle $recomendationTitle,
+        FinalStatus $finalStatus
     ) {
         $this->finalProject = $finalProject;
         $this->finalStudent = $finalStudent;
         $this->finalLog = $finalLog;
         $this->recomendationTitle = $recomendationTitle;
+        $this->finalStatus = $finalStatus;
     }
 
     public function getData($id, $relation)
@@ -54,7 +57,8 @@ class PreProposalService
 
                 $finalProject->save();
 
-                $recomendationTitle = $this->recomendationTitle->findOrFail($request->title_id);
+                $recomendationTitle = $this->recomendationTitle
+                    ->findOrFail($request->title_id);
                 $recomendationTitle->final_student_id = $finalStudentId;
 
                 $recomendationTitle->save();
@@ -62,7 +66,7 @@ class PreProposalService
                 $finalLog = $this->finalLog;
 
                 $finalLog->final_project_id = $finalProject->id;
-                $finalLog->final_status_id = 1;
+                $finalLog->final_status_id = $this->finalStatus->name('pendaftaran');
 
                 $finalLog->save();
 
