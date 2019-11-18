@@ -31,6 +31,11 @@ class FinalProject extends Model
         return $this->hasMany(FinalLog::class);
     }
 
+    public function finalLogsPraProposal()
+    {
+        return $this->hasMany(FinalLog::class)->whereFinalStatusId(FinalStatus::name('pra-proposal'));
+    }
+
     public function topics()
     {
         return $this->belongsToMany(
