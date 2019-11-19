@@ -19,16 +19,16 @@
                         <textarea class="form-control" id="description" rows="3" name="description" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="lecturers-primary">Dosen Pembimbing Pertama</label>
-                        <select class="form-control" id="lecturers-primary" name="supervisors[lecturer_id]" required>
+                        <label for="supervisors-1">Dosen Pembimbing Pertama</label>
+                        <select class="form-control" id="supervisors-1" name="supervisors[lecturer_id]" required>
                         </select>
-                        <input type="hidden" name="supervisors[role]" value="1">
+                        <input type="hidden" id="supervisors-role-1" name="supervisors[role]" value="1">
                     </div>
                     <div class="form-group">
-                        <label for="lecturers">Dosen Pembimbing Kedua</label>
-                        <select class="form-control" id="lecturers" name="supervisors2[lecturer_id]" required>
+                        <label for="supervisors-2">Dosen Pembimbing Kedua</label>
+                        <select class="form-control" id="supervisors-2" name="supervisors2[lecturer_id]" required>
                         </select>
-                        <input type="hidden" name="supervisors2[role]" value="2">
+                        <input type="hidden" id="supervisors-role-2" name="supervisors2[role]" value="2">
                     </div>
                     <hr>
                     <a href="{{ route('recomendation-title.index') }}" class="btn bg-gradient-primary w-100">Klik di sini untuk memilih judul dari dosen, tersedia topik baru!</a>
