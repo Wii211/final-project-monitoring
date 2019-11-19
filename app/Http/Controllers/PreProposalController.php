@@ -60,10 +60,18 @@ class PreProposalController extends Controller
             return redirect()->back()->with('duplicate', ['Duplicate']);
         }
 
-        if ($this->preProposalService->submit($request)) {
-            return redirect()->back()->with('success', ['Success']);
+        if ($request->has('title_id')) {
+            if ($this->preProposalService->submitWithRecomendationTitle($request)) {
+                return redirect()->back()->with('success', ['Success']);
+            } else {
+                return redirect()->back()->with('failed', ['Failed']);
+            }
         } else {
-            return redirect()->back()->with('failed', ['Failed']);
+            if ($this->preProposalService->submit($request)) {
+                return redirect()->back()->with('success', ['Success']);
+            } else {
+                return redirect()->back()->with('failed', ['Failed']);
+            }
         }
     }
 
@@ -100,7 +108,11 @@ class PreProposalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($this->preProposalService->updateToProposal($id)) {
+            return redirect()->back()->with('success', ['Success']);
+        } else {
+            return redirect()->back()->with('failed', ['Failed']);
+        }
     }
 
     /**

@@ -40,7 +40,7 @@ class PreProposalService
         return $this->finalProject->with($relation)->whereFinalStudentId($id)->first();
     }
 
-    public function submit(Request $request)
+    public function submitWithRecomendationTitle(Request $request)
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
@@ -83,6 +83,57 @@ class PreProposalService
 
                 $finalProject->supervisors()->create($supervisors);
             });
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
+    }
+
+
+
+    public function submit(Request $request)
+    {
+        $finalStudentId = $this->finalStudent->getStudentId();
+
+        // $supervisors = [];
+        // if ($request->type === "recommendation-title") {
+        //     $supervisors = [
+        //         'lecturer_id' => $request->supervisors['lecturer_id'],
+        //         'role' => $request->supervisors['role']
+        //     ];
+        // }
+        try {
+            DB::transaction(function () use ($request, $finalStudentId) {
+
+                $finalProject = $this->finalProject;
+
+                $finalProject->title = $request->title;
+                $finalProject->final_student_id = $finalStudentId;
+
+                $finalProject->save();
+
+                $finalLog = $this->finalLog;
+
+                $finalLog->final_project_id = $finalProject->id;
+                $finalLog->final_status_id = $this->finalStatus->name('pra-proposal');
+
+                $finalLog->save();
+
+                $finalProject->supervisors()->create($request->supervisors);
+            });
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
+    }
+
+    public function updateToProposal($finalProjectId)
+    {
+        try {
+            $finalLog = $this->finalLog;
+            $finalLog->final_project_id = $finalProjectId;
+            $finalLog->final_status_id = $this->finalStatus->name('proposal');
+            $finalLog->save();
         } catch (\Throwable $th) {
             return false;
         }
