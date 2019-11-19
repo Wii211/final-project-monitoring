@@ -13,8 +13,12 @@
                   <img src="{{ asset('storage/'.Auth::user()->image_profile) }}" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <div class="text-white d-block">{{ Auth::user()->user_name }}</div>
-                  <div class="text-white d-block text-NIM">1610817110001</div>
+                    @if(Auth::user()->finalStudent !== null)
+                    <div class="text-white d-block">{{ Auth::user()->finalStudent->name }}</div>
+                    <div class="text-white d-block text-NIM">{{ Auth::user()->finalStudent->student_id }}</div>
+                    @else
+                    <div class="text-white d-block">{{ Auth::user()->user_name }}</div>
+                    @endif
               </div>
           </div>
 
@@ -46,7 +50,7 @@
                       class="nav-link {{ Request::is('student/final_project') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
-                            Tugas Akhir
+                            Proposal/Tugas Akhir
                           </p>
                       </a>
                   </li>
