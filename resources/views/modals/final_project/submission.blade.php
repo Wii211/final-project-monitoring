@@ -26,9 +26,9 @@
                     </div>
                     <div class="form-group">
                         <label for="lecturers">Dosen Pembimbing Kedua</label>
-                        <select class="form-control" id="lecturers" name="supervisors[lecturer_id]" required>
+                        <select class="form-control" id="lecturers" name="supervisors2[lecturer_id]" required>
                         </select>
-                        <input type="hidden" name="supervisors[role]" value="2">
+                        <input type="hidden" name="supervisors2[role]" value="2">
                     </div>
                     <hr>
                     <a href="{{ route('recomendation-title.index') }}" class="btn bg-gradient-primary w-100">Klik di sini untuk memilih judul dari dosen, tersedia topik baru!</a>
