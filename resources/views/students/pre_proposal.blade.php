@@ -19,7 +19,7 @@
         <hr>
         @endif
         @if(!is_null($data))
-        @if($data->finalLogsPraProposal[0]->finalStatus->name === 'pra-proposal')
+        @if($status !== 'proposal')
         <div class="card">
             <div class="card-body">
                 <table class="table" id="preproposal-table">
@@ -98,6 +98,15 @@
                 <input type="hidden" name="_method" value="PUT">
                 <button type="submit" class="btn btn-primary w-100">Fix / Commit</button>
             </form>
+        </div>
+        @else
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Anda telah mengambil proposal. Silahkan masuk ke halaman <a href="{{ route('final_project.index') }}">tugas akhir.</a></strong>
+                </div>
+            </div>
         </div>
         @endif
         @endif
