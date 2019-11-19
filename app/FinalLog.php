@@ -17,7 +17,7 @@ class FinalLog extends Model
 
     public function finalSchedules()
     {
-        return $this->hasMany(FinalSchedule::class);
+        return $this->hasMany(FinalSchedule::class, 'final_log_id');
     }
 
     public function finalProject()

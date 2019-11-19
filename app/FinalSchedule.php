@@ -9,6 +9,6 @@ class FinalSchedule extends Model
 {
     public function finalLog()
     {
-        return $this->belongsTo(FinalLog::class);
+        return $this->belongsTo(FinalLog::class, 'final_log_id');
     }
 }
