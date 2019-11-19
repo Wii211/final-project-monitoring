@@ -14,7 +14,7 @@ $(document).ready(function () {
             lecturer.data.forEach(function (result) {
 
                 let data = '<option value="' + result.id + '">' + result.name + '</option>';
-                $('#lecturers-primary').append(data);
+                $('#supervisors-1').append(data);
             });
         }
     });
@@ -27,7 +27,7 @@ $(document).ready(function () {
             lecturer.data.forEach(function (result) {
 
                 let data = '<option value="' + result.id + '">' + result.name + '</option>';
-                $('#lecturers').append(data);
+                $('#supervisors-2').append(data);
             });
         }
     });
@@ -41,17 +41,29 @@ $('#preproposal-add').click(function () {
 });
 
 //Fetch datas for update
+let i = 1;
 $('#preproposal-table tbody').on('click', '.update', function () {
     let id = $(this).attr('id');
 
     $.ajax({
-        // url: "preproposals/" + id + "/edit",
+        url: "pre_proposal/" + id,
         dataType: "json",
         success: function (result) {
+            console.log(result)
             $('#preproposal-modal').modal('show');
             $('#preproposal-title').text("Update Judul Pra-proposal");
             $('#preproposal-action').text("Update");
+            $('#preproposal-id').val(result.id);
 
+            $('#title').val(result.title);
+            $('#description').val(result.description);
+
+
+            result.supervisors.forEach(function (data) {
+                $('#supervisors-' + i).val(data.lecturer_id);
+                $('#supervisors-role-' + i).val(data.role);
+                i++
+            })
         }
     })
 });
