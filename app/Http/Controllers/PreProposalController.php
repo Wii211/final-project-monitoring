@@ -68,9 +68,10 @@ class PreProposalController extends Controller
             }
         } else {
             if ($this->preProposalService->submit($request)) {
-                return redirect()->back()->with('success', ['Success']);
+
+                return response()->json("Success");
             } else {
-                return redirect()->back()->with('failed', ['Failed']);
+                return response()->json('Failed');
             }
         }
     }
