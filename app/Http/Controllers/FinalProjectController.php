@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalLog;
 use App\FinalProject;
+use App\FinalStatus;
 use App\FinalStudent;
-use App\Http\Services\PreProposalService;
 use Illuminate\Http\Request;
+use App\Http\Services\PreProposalService;
 
 class FinalProjectController extends Controller
 {
@@ -28,8 +30,8 @@ class FinalProjectController extends Controller
     {
         $data = $this->preProposalService
             ->getData($this->finalStudent->getStudentId(), [
-                'finalLogsPraProposal.finalSchedules',
-                'finalLogsPraProposal.finalStatus',
+                'finalLogs.finalSchedules',
+                'finalLogs.finalStatus',
                 'supervisors.lecturer'
             ]);
 
