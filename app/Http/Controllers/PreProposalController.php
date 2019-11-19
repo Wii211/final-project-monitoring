@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\FinalStatus;
+use App\FinalLog;
 
+use App\FinalStatus;
 use App\FinalStudent;
 use Illuminate\Http\Request;
 use App\Http\Services\PreProposalService;
@@ -35,7 +36,13 @@ class PreProposalController extends Controller
                 'supervisors.lecturer'
             ]);
 
-        return view('students.pre_proposal', compact('data'));
+        $status = "";
+
+        if (FinalLog::statusProposal($data->id)) {
+            $status = "proposal";
+        }
+
+        return view('students.pre_proposal', compact('data', 'status'));
     }
 
     /**
