@@ -30,10 +30,10 @@ class FinalLog extends Model
         return $this->belongsTo(FinalStatus::class);
     }
 
-    public function proposalExist($finalProjectId)
+    public function scopeStatusProposal($query, $finalProjectId)
     {
-        if ($this->whereFinalProjectId($finalProjectId)
-            ->whereRole(FinalStatus::name('proposal'))->first()
+        if ($query->whereFinalProjectId($finalProjectId)
+            ->whereFinalStatusId(FinalStatus::name('proposal'))->first()
         ) {
             return true;
         } else {
