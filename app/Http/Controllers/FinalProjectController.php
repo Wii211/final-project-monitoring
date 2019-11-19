@@ -28,6 +28,7 @@ class FinalProjectController extends Controller
     {
         $data = $this->preProposalService
             ->getData($this->finalStudent->getStudentId(), [
+                'finalLogsPraProposal.finalSchedules',
                 'finalLogsPraProposal.finalStatus',
                 'supervisors.lecturer'
             ]);
