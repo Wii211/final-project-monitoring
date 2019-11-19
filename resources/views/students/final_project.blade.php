@@ -5,8 +5,10 @@
 @section('title', 'Tugas Akhir')
 
 @section('content')
+{{-- {{ dd($data) }} --}}
 <section class="content">
     <div class="container-fluid">
+
         <div class="card">
             <div class="card-body p-0">
                 <table class="table">
@@ -23,12 +25,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Update software without click</td>
-                            <td>Update software without click</td>
-                            <td><span class="badge badge-primary p-2">Tugas Akhir</span></td>
+                            <td>{{ $data->title }}</td>
+                            <td>{{ $data->created_at->toDateString() }}</td>
+                            <td><span class="badge badge-primary p-2">{{  ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span></td>
                             <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#progressFinalProject">Progress</button>
+                                <button class="btn bg-gradient-primary btn-sm w-100 btn-progress" id="{{ $data->id }}">Progress</button>
                             </td>
                         </tr>
                     </tbody>
@@ -48,14 +49,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($data->supervisors as $supervisor)
                         <tr>
-                            <td>Pa Darmansyah</td>
+                            <td>{{ $supervisor->lecturer->name }}</td>
+                            @if($supervisor->role == 1) 
                             <td>Pembimbing 1</td>
-                        </tr>
-                        <tr>
-                            <td>Pa Husnul Khatimi</td>
+                            @else
                             <td>Pembimbing 2</td>
+                            @endif
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
