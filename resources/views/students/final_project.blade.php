@@ -3,12 +3,11 @@
 <!-- Section Start -->
 <!-- If() -->
 @section('title', 'Tugas Akhir')
-
-@section('content')
 {{-- {{ dd($data) }} --}}
+@section('content')
 <section class="content">
     <div class="container-fluid">
-
+        @if(!is_null($data))
         <div class="card">
             <div class="card-body p-0">
                 <table class="table">
@@ -27,9 +26,12 @@
                         <tr>
                             <td>{{ $data->title }}</td>
                             <td>{{ $data->created_at->toDateString() }}</td>
-                            <td><span class="badge badge-primary p-2">{{  ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span></td>
+                            @foreach($data->finalLogs as $finalLog)
+                                @php $status = $finalLog->finalStatus->name @endphp
+                            @endforeach
+                            <td><span class="badge badge-primary p-2">{{ ucfirst($status) }}</span></td>
                             <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100 btn-progress" id="{{ $data->id }}">Progress</button>
+                            <button class="btn bg-gradient-primary btn-sm w-100 btn-progress" id="{{ $data->id }}" value="{{ $data->id }}">Progress</button>
                             </td>
                         </tr>
                     </tbody>
@@ -89,6 +91,8 @@
                     data-target="#pengajuanProposal">Ajukan ke Dosen Pembimbing</button>
             </div>
         </div>
+        @foreach($data->finalLogs as $finalLog)
+        @if(is_null($finalLog->finalSchedules))
         <div class="card">
             <div class="card-body p-0">
                 <table class="table table-bordered">
@@ -114,6 +118,9 @@
                 </table>
             </div>
         </div>
+        @endif
+        @endforeach
+        @endif
     </div>
 </section>
 @endsection
