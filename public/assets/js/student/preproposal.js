@@ -92,7 +92,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
             success: function (data) {
                 $('#preproposal-form')[0].reset();
 
-                if (data.error == undefined) {
+                if (data == "Failed") {
                     Swal.fire({
                             type: 'success',
                             title: data.success,
