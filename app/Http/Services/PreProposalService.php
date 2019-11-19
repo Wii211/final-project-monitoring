@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 class PreProposalService
 {
     private $finalProject, $finalStudent, $finalLog, $recomendationTitle,
-        $finalStatus, $lecturer;
+        $finalStatus, $lecturer, $supervisor;
 
     public function __construct(
         FinalProject $finalProject,
@@ -25,7 +25,8 @@ class PreProposalService
         FinalLog $finalLog,
         RecomendationTitle $recomendationTitle,
         FinalStatus $finalStatus,
-        Lecturer $lecturer
+        Lecturer $lecturer,
+        Supervisor $supervisor
     ) {
         $this->finalProject = $finalProject;
         $this->finalStudent = $finalStudent;
@@ -33,6 +34,7 @@ class PreProposalService
         $this->recomendationTitle = $recomendationTitle;
         $this->finalStatus = $finalStatus;
         $this->lecturer = $lecturer;
+        $this->supervisor = $supervisor;
     }
 
     public function getData($id, $relation)
@@ -114,9 +116,21 @@ class PreProposalService
 
                 $finalLog->save();
 
-                $finalProject->supervisors()->create($request->supervisors);
+                $finalProject->supervisors()->createMany([
+                    [
+                        'role' => $request->supervisors['role'],
+                        'lecturer_id' => $request->supervisors['lecturer_id'],
+                        'final_project_id' => $finalProject->id
+                    ],
+                    [
+                        'role' => $request->supervisors2['role'],
+                        'lecturer_id' => $request->supervisors2['lecturer_id'],
+                        'final_project_id' => $finalProject->id
+                    ]
+                ]);
             });
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
         return true;
