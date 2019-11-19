@@ -147,13 +147,19 @@ class PreProposalService
                 $finalProject->description = $request->description;
                 $finalProject->save();
 
-                $this->supervisor->whereFinalProjectId($finalProjectId)
+
+
+                $this->supervisor->whereFinalProjectId($finalProjectId)->whereRole(1)
                     ->update(
                         [
-                            'role' => $request->supervisors['role']
-                        ],
+                            'lecturer_id' => $request->supervisors['lecturer_id']
+                        ]
+                    );
+
+                $this->supervisor->whereFinalProjectId($finalProjectId)->whereRole(2)
+                    ->update(
                         [
-                            'role' => $request->supervisors2['role']
+                            'lecturer_id' => $request->supervisors2['lecturer_id']
                         ]
                     );
             });
