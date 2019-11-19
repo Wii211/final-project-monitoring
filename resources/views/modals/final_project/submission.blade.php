@@ -11,7 +11,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="title">Judul Proposal</label>
+                        <label for="title">Judul/Topik Proposal</label>
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
@@ -20,13 +20,15 @@
                     </div>
                     <div class="form-group">
                         <label for="lecturers-primary">Dosen Pembimbing Pertama</label>
-                        <select class="form-control" id="lecturers-primary" name="lecturer" required>
+                        <select class="form-control" id="lecturers-primary" name="supervisors[lecturer_id]" required>
                         </select>
+                        <input type="hidden" name="supervisors[role]" value="1">
                     </div>
                     <div class="form-group">
                         <label for="lecturers">Dosen Pembimbing Kedua</label>
-                        <select class="form-control" id="lecturers" name="second_lecturer">
+                        <select class="form-control" id="lecturers" name="supervisors[lecturer_id]" required>
                         </select>
+                        <input type="hidden" name="supervisors[role]" value="2">
                     </div>
                     <hr>
                     <a href="{{ route('recomendation-title.index') }}" class="btn bg-gradient-primary w-100">Klik di sini untuk memilih judul dari dosen, tersedia topik baru!</a>
