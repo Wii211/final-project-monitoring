@@ -80,7 +80,7 @@
             </div>
         </div>
         <div class="card">
-            {{-- <form action="{{ route('pre_proposal.update', ['id' => $data->id]) }}" method="post"> --}}
+            <form action="{{ route('pre_proposal.update', ['id' => $data->id]) }}" method="post">
                 @csrf
                 <div class="form-check">
                     <div class="card-body">
@@ -94,12 +94,12 @@
                         </label>
                     </div>
                 </div>
-                <input type="hidden" name="">
+                <input type="hidden" name="_method" value="PUT">
                 <button type="button" class="btn btn-primary w-100">Fix / Commit</button>
-            {{-- </form> --}}
+            </form>
         </div>
+        @endif
     </div>
-    @endif
 </section>
 @endsection
 
