@@ -1,3 +1,10 @@
+// CSRF 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 $(document).ready(function () {
     $.ajax({
         url: "../supervisor?primary=true",
@@ -94,6 +101,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                         })
                         .then(function () {
                             $('#preproposal-modal').modal('hide');
+                            window.location.reload();
                         });
                 } else {
                     Swal.fire({
