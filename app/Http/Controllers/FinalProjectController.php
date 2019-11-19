@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\FinalProject;
+use App\FinalStudent;
+use App\Http\Services\PreProposalService;
 use Illuminate\Http\Request;
 
 class FinalProjectController extends Controller
 {
+    private $preProposalService, $finalStudent;
+
+    public function __construct(
+        PreProposalService $preProposalService,
+        FinalStudent $finalStudent
+    ) {
+        $this->preProposalService = $preProposalService;
+        $this->finalStudent = $finalStudent;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,13 @@ class FinalProjectController extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->preProposalService
+            ->getData($this->finalStudent->getStudentId(), [
+                'finalLogsPraProposal.finalStatus',
+                'supervisors.lecturer'
+            ]);
+
+        return view('students.final_project', compact('data'));
     }
 
     /**
