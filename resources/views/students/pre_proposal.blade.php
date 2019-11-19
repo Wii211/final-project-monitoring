@@ -12,7 +12,7 @@
         @if(is_null($data))
         <div class="d-flex flex-row-reverse bd-highlight">
             <div class="p-2 bd-highlight">
-                <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
+                <button type="submit" class="btn btn-primary mb-2" id="preproposal-add" data-toggle="modal"
                     data-target="#preproposal-modal">Ajukan Judul Proposal</button>
             </div>
         </div>
@@ -99,8 +99,6 @@
 <!-- Modal -->
 @section('modal')
 @include('modals.final_project.submission')
-@include('modals.final_project.detail')
-@include('modals.final_project.update')
 @endsection
 
 
