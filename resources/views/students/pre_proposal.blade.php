@@ -84,7 +84,7 @@
                 @csrf
                 <div class="form-check">
                     <div class="card-body">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
                         <label class="form-check-label" for="defaultCheck1">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                             <b>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="_method" value="PUT">
-                <button type="button" class="btn btn-primary w-100">Fix / Commit</button>
+                <button type="submit" class="btn btn-primary w-100">Fix / Commit</button>
             </form>
         </div>
         @endif
