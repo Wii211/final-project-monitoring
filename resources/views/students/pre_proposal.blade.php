@@ -19,6 +19,7 @@
         <hr>
         @endif
         @if(!is_null($data))
+        @if($data->finalLogsPraProposal[0]->finalStatus->name === 'pra-proposal')
         <div class="card">
             <div class="card-body">
                 <table class="table" id="preproposal-table">
@@ -98,6 +99,7 @@
                 <button type="submit" class="btn btn-primary w-100">Fix / Commit</button>
             </form>
         </div>
+        @endif
         @endif
     </div>
 </section>
