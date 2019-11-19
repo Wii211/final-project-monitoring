@@ -56,11 +56,11 @@ class PreProposalController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->preProposalService->checkDuplicate()) {
-            return redirect()->back()->with('duplicate', ['Duplicate']);
-        }
 
         if ($request->has('title_id')) {
+            if ($this->preProposalService->checkDuplicate()) {
+                return redirect()->back()->with('duplicate', ['Duplicate']);
+            }
             if ($this->preProposalService->submitWithRecomendationTitle($request)) {
                 return redirect()->back()->with('success', ['Success']);
             } else {
