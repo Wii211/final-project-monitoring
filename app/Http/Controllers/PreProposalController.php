@@ -84,9 +84,12 @@ class PreProposalController extends Controller
      */
     public function show($id)
     {
-        // $data = $this->preProposalService(User::getAuthId());
-
-        // return view('view.name', compact('data'));
+        $data = $this->preProposalService
+            ->getData($this->finalStudent->getStudentId(), [
+                'finalLogsPraProposal.finalStatus',
+                'supervisors.lecturer'
+            ]);
+        return response()->json($data);
     }
 
     /**
