@@ -35,14 +35,17 @@
                         <tr>
                             <td>{{ $data->title }}</td>
                             <td>{{ $data->created_at->toDateString() }}</td>
-                            <td><span class="badge badge-primary p-2">{{ ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span></td>
+                            <td><span
+                                    class="badge badge-primary p-2">{{ ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span>
+                            </td>
                             @if($data->finalLogsPraProposal[0]->is_verification == 0)
                             <td><span class="badge badge-warning p-2">Menunggu verifikasi</span></td>
                             @else
                             <td><span class="badge badge-success p-2">Telah diverifikasi</span></td>
                             @endif
                             <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" id="{{ $data->id }}">Update</button>
+                                <button class="btn bg-gradient-warning btn-sm w-100"
+                                    id="{{ $data->id }}">Update</button>
                             </td>
                         </tr>
                     </tbody>
@@ -77,20 +80,23 @@
             </div>
         </div>
         <div class="card">
-            <div class="form-check">
-                <div class="card-body">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                        <b>
-                            Saya menyadari bahwa setelah menekan fix/commit, saya tidak akan bisa
-                            memperbarui judul lagi ke depannnya. Terkecuali atas izin dari dosen yang bersangkutan.
-                        </b>
-                    </label>
+            <form action="{{ route(pre_proposal.store, ['id' => $data->id]) }}" method="post">
+                @csrf
+                <div class="form-check">
+                    <div class="card-body">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            <b>
+                                Saya menyadari bahwa setelah menekan fix/commit, saya tidak akan bisa
+                                memperbarui judul lagi ke depannnya. Terkecuali atas izin dari dosen yang bersangkutan.
+                            </b>
+                        </label>
+                    </div>
                 </div>
-            </div>
+                <button type="button" class="btn btn-primary w-100">Fix / Commit</button>
+            </form>
         </div>
-        <button type="button" class="btn btn-primary w-100">Fix / Commit</button>
     </div>
     @endif
 </section>
