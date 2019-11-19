@@ -29,4 +29,15 @@ class FinalLog extends Model
     {
         return $this->belongsTo(FinalStatus::class);
     }
+
+    public function proposalExist($finalProjectId)
+    {
+        if ($this->whereFinalProjectId($finalProjectId)
+            ->whereRole(FinalStatus::name('proposal'))->first()
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
