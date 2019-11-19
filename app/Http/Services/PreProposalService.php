@@ -136,6 +136,34 @@ class PreProposalService
         return true;
     }
 
+    public function update($finalProjectId, Request $request)
+    {
+        try {
+            DB::transaction(function () use ($request, $finalProjectId) {
+
+                $finalProject = $this->finalProject->findOrFail($finalProjectId);
+
+                $finalProject->title = $request->title;
+                $finalProject->description = $request->description;
+                $finalProject->save();
+
+                $this->supervisor->whereFinalProjectId($finalProjectId)
+                    ->update(
+                        [
+                            'role' => $request->supervisors['role']
+                        ],
+                        [
+                            'role' => $request->supervisors2['role']
+                        ]
+                    );
+            });
+        } catch (\Throwable $th) {
+            dd($th);
+            return false;
+        }
+        return true;
+    }
+
     public function updateToProposal($finalProjectId)
     {
         try {

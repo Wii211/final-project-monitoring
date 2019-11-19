@@ -112,10 +112,19 @@ class PreProposalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($this->preProposalService->updateToProposal($id)) {
-            return redirect()->back()->with('success', ['Success']);
+        if ($request->has('title')) {
+            if ($this->preProposalService->update($id, $request)) {
+                return response()->json("Success");
+            } else {
+                return response()->json('Failed');
+            }
         } else {
-            return redirect()->back()->with('failed', ['Failed']);
+
+            if ($this->preProposalService->updateToProposal($id)) {
+                return redirect()->back()->with('success', ['Success']);
+            } else {
+                return redirect()->back()->with('failed', ['Failed']);
+            }
         }
     }
 
