@@ -29,7 +29,9 @@ Route::group(
         Route::resource('/pre_proposal', 'PreProposalController');
 
         //Tugas Akhir Mahasiswa
-        Route::view('/final_project', 'students.final_project')->name('final_project.index');
+        // Route::view('/final_project', 'students.final_project')->name('final_project.index');
+
+        Route::resource('/final_project', 'FinalProjectController');
     }
 );
 
