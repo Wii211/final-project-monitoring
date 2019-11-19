@@ -44,7 +44,7 @@
                             <td><span class="badge badge-success p-2">Telah diverifikasi</span></td>
                             @endif
                             <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100"
+                                <button class="btn bg-gradient-warning btn-sm w-100 update"
                                     id="{{ $data->id }}">Update</button>
                             </td>
                         </tr>
