@@ -28,6 +28,9 @@ Route::group(
 
         Route::resource('/pre_proposal', 'PreProposalController');
 
+        Route::post('/final-student-import', 'FinalStudentImport@store')
+            ->name('final_import.store');
+
         //Tugas Akhir Mahasiswa
         // Route::view('/final_project', 'students.final_project')->name('final_project.index');
 
