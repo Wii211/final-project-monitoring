@@ -45,7 +45,13 @@ class FinalStudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { }
+    {
+        if ($this->studentService->store($request)) {
+            return response()->json("success");
+        } else {
+            return response()->json('Failed');
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -76,9 +82,13 @@ class FinalStudentController extends Controller
      * @param  \App\FinalStudent  $finalStudent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FinalStudent $finalStudent)
+    public function update(Request $request, $id)
     {
-        //
+        if ($this->studentService->update($request, $id)) {
+            return response()->json("sucess");
+        } else {
+            return response()->json('false');
+        }
     }
 
     /**
