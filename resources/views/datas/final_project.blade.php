@@ -4,8 +4,8 @@
 <!-- If() -->
 @section('title', 'Data Tugas Akhir')
 
-@section('galery')
-<link rel="stylesheet" href="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.css') }}">
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
 @endsection
 
 <!-- Content -->
@@ -13,14 +13,14 @@
 <section class="content">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <button type="submit" class="btn bg-gradient-success mb-2" data-toggle="modal"
-                data-target="#pengajuanProposal">Export Data</button>
-            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
-                data-target="#pengajuanProposal">Tambah Data TA</button>
+            <button type="button" id="final-project-import" class="btn bg-gradient-success mb-2" data-toggle="modal"
+                data-target="#import-modal">Import Data</button>
+            <button type="button" id="final-project-add" class="btn btn-primary mb-2" data-toggle="modal"
+                data-target="#final-project-modal">Tambah Data TA</button>
         </div>
         <div class="card">
-            <div class="card-body p-0">
-                <table class="table">
+            <div class="card-body">
+                <table class="table" id="final-project-table">
                     <thead>
                         <tr>
                             <th width="40%">Judul</th>
@@ -65,41 +65,17 @@
 
 <!-- Modal -->
 @section('modal')
-@include('modals.final_project.submission')
+@include('modals.final_project.add')
 @include('modals.final_project.detail')
 @include('modals.final_project.news_report')
-@include('modals.final_project.update')
+@include('modals.student.import')
 @endsection
 
 @section('javascript')
-<script src="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
-{{-- <script src="{{ asset('assets/js/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/js/fileSaver.js') }}"></script> --}}
-<script>
-    $(function () {
-        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-            event.preventDefault();
-            $(this).ekkoLightbox({
-                alwaysShowClose: true
-            });
-        });
+<!-- DataTables -->
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 
-//         $('#convertImageToPDF').click(function () {
-//             var imgData = screen.toDataURL();
-//             imgData = imgData.substr(22);
-//             imgData = atob(imgData);
-
-//             let zip = new JSZip();
-//             zip.file(imgData, imgData);
-//             zip.generateAsync({
-//                     type: "blob"
-//                 })
-//                 .then(function (content) {
-//                     saveAs(content, "example.zip");
-//                 });
-//         })
-//     })
-// </script>
-
-
+<!-- -->
+<script type="text/javascript" src="{{ asset('assets/js/final_project/final_project.js') }}"></script>
 @endsection
