@@ -61,7 +61,7 @@ class FinalStudentController extends Controller
      */
     public function show($id)
     {
-        return response()->json($this->studentService->getData(null, $id));
+        return response()->json($this->studentService->getData(['user'], $id));
     }
 
     /**
