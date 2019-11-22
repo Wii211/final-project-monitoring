@@ -65,7 +65,7 @@ class FinalStudentService
 
                 $finalStudent = $this->finalStudent([
                     'student_id' => $request->student_id,
-                    'status' => 0,
+                    'status' => $request->status,
                     'is_verified' => 0,
                     'user_id' => $user->id,
                     'name' => $request->name
