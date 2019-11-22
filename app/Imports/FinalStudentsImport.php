@@ -2,12 +2,13 @@
 
 namespace App\Imports;
 
-use App\FinalStudent;
+use App\Role;
 use App\User;
+use App\FinalStudent;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
-class FinalStudentsImport implements ToCollection
+class FinalStudentsImport implements ToCollection, WithHeadingRow
 {
     /**
      * @param Collection $collection
@@ -21,14 +22,14 @@ class FinalStudentsImport implements ToCollection
                 'phone_number' => $row['nomor_telepon'],
                 'gender' => $row['jenis_kelamin'],
                 'image_profile' => 'https://lorempixel.com/640/480/?40069',
-                'password' => $row['nim'] . $row['nama'],
+                'password' => $row['nim'],
             ]);
 
-            $user->roles()->sync($this->role->name('mahasiswa')->id);
+            $user->roles()->sync(Role::whereName('mahasiswa')->first()->id);
 
             FinalStudent::create([
                 'student_id' => $row['nim'],
-                'status' => 0,
+                'status' => $row['status'],
                 'is_verified' => 0,
                 'user_id' => $user->id,
                 'name' => $row['nama']
