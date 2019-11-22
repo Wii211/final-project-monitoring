@@ -108,7 +108,7 @@ $(document).on('submit', '#student-form', function (e) {
             success: function (data) {
                 $('#student-form')[0].reset();
 
-                if (data.error == undefined) {
+                if (data !== "false") {
                     Swal.fire({
                             type: 'success',
                             title: data.success,
