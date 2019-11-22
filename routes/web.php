@@ -28,9 +28,6 @@ Route::group(
 
         Route::resource('/pre_proposal', 'PreProposalController');
 
-        Route::post('/final-student-import', 'FinalStudentImport@store')
-            ->name('final_import.store');
-
         //Tugas Akhir Mahasiswa
         // Route::view('/final_project', 'students.final_project')->name('final_project.index');
 
@@ -85,6 +82,9 @@ Route::group(
 
         //Data Arsip Tugas Akhir (Yang sudah selesai)
         Route::view('/final_projects', 'datas.final_project')->name('final_projects.index');
+
+        Route::post('/final-student-import', 'FinalStudentImportController@store')
+            ->name('final_import.store');
     }
 );
 
