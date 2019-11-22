@@ -33,13 +33,6 @@ let dataTable = $('#student-table').DataTable({
                 let buttonId = full.id;
                 return '<button id="' + buttonId + '" class="btn btn-warning update">Update</button>';
             }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.id;
-                return '<button id="' + buttonId + '" class="btn btn-danger delete">Delete</button>';
-            }
         }
     ],
     "columnDefs": [{
@@ -93,17 +86,19 @@ $('#student-table tbody').on('click', '.update', function () {
     let id = $(this).attr('id');
 
     $.ajax({
-        url: "students/" + id + "/edit",
+        url: "students/" + id,
         dataType: "json",
         success: function (result) {
             $('#student-modal').modal('show');
             $('#student-title').text("Update student");
             $('#student-action').text("Update");
 
-            $('#fullname').val(result.fullname);
-            $('#nickname').val(result.nickname);
-            $('#sex').val(result.gender);
-            $('#description').val(result.description);
+            $('#final-student-id').val(result.student_id);
+            $('#name').val(result.name);
+            $('#email').val(result.user.email);
+            $('#phone-number').val(result.user.phone_number);
+            $('#status').val(result.status);
+            $('#gender').val(result.user.gender);
             $('#student-id').val(result.id);
         }
     })
