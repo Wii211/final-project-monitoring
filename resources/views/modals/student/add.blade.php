@@ -18,6 +18,14 @@
                         <label for="name">Nama Lengkap</label>
                         <input type="text" id="name" class="form-control form-control-sm" name="name" required>
                     </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" class="form-control form-control-sm" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-number">Telepon</label>
+                        <input type="text" id="phone-number" class="form-control form-control-sm" name="phone_number" required>
+                    </div>
                     <div class="form-group mt-3">
                         <label for="status">Status</label>
                         <select class="form-control form-control-sm" id="status" name="status" required>
@@ -25,11 +33,17 @@
                             <option value="Tidak Aktif">Tidak Aktif</option>
                         </select>
                     </div>
-                    {{-- <div class="form-group mt-3">
-                        <label for="user-id">Session</label>
-                        <select class="form-control form-control-sm" id="user-id" name="user_id" required>
+                    <div class="form-group mt-3">
+                        <label for="status">Jenis Kelamin</label>
+                        <select class="form-control form-control-sm" id="gender" name="gender" required>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
                         </select>
-                    </div> --}}
+                    </div>
+                    <div class="form-group">
+                        <label for="image-profile">Foto</label>
+                        <input type="file" id="image-profile" class="form-control form-control-sm" name="image_profile" accept="images/*" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="student-id">
