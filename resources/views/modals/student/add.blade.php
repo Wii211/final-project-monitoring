@@ -40,10 +40,6 @@
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="image-profile">Foto</label>
-                        <input type="file" id="image-profile" class="form-control form-control-sm" name="image_profile" accept="images/*" required>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="student-id">
