@@ -50,20 +50,20 @@ class FinalStudentService
         try {
             DB::transaction(function () use ($request) {
 
-                $user = $this->user([
+                $user = new User([
                     'user_name' => $request->student_id,
                     'email' => $request->email,
                     'phone_number' => $request->phone_number,
                     'gender' => $request->gender,
                     'image_profile' => 'https://lorempixel.com/640/480/?40069',
-                    'password' => $request->student_id . $request->name,
+                    'password' => $request->student_id,
                 ]);
 
                 $user->save();
 
-                $user->roles()->sync($this->role->name('mahasiswa')->id);
+                $user->roles()->sync($this->role->whereName('mahasiswa')->first()->id);
 
-                $finalStudent = $this->finalStudent([
+                $finalStudent = new FinalStudent([
                     'student_id' => $request->student_id,
                     'status' => $request->status,
                     'is_verified' => 0,
@@ -74,6 +74,7 @@ class FinalStudentService
                 $finalStudent->save();
             });
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
         return true;
