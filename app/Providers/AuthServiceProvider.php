@@ -25,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::define('isVerify', function ($user) {
+            return $user->finalStudent->is_verified === 1;
+        });
+
         //
     }
 }
