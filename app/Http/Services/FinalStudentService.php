@@ -85,25 +85,25 @@ class FinalStudentService
 
         try {
             DB::transaction(function () use ($request, $id) {
-                $user = $this->user->findOrFail($id);
-
-                $user->user_name = $request->student_id;
-                $user->email = $request->email;
-                $user->phone_number = $request->phone_number;
-                $user->gender = $request->gender;
-                $user->password = $request->password;
-
-                $user->save();
-
-                $finalStudent = $this->finalStudent->whereUserId($id)->first();
+                $finalStudent = $this->finalStudent->whereId($id)->first();
                 $finalStudent->name = $request->name;
                 $finalStudent->student_id = $request->student_id;
                 $finalStudent->status = $request->status;
-                $finalStudent->is_verified = $request->is_verified;
+                // $finalStudent->is_verified = $request->is_verified;
 
                 $finalStudent->save();
+
+                $user = $this->user->findOrFail($finalStudent->user_id);
+
+                $user->user_name = $request->student_id;
+                // $user->email = $request->email;
+                $user->phone_number = $request->phone_number;
+                $user->gender = $request->gender;
+
+                $user->save();
             });
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
         return true;
