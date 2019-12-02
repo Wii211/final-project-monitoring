@@ -82,6 +82,7 @@ Route::group(
 
         //Data Arsip Tugas Akhir (Yang sudah selesai)
         Route::view('/final_projects', 'datas.final_project')->name('final_projects.index');
+        Route::resource('/final_project', 'FinalProjectDataController');
 
         Route::post('/final-student-import', 'FinalStudentImportController@store')
             ->name('final_import.store');
