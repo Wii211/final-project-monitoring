@@ -245,6 +245,7 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
             console.log(data);
 
             $('#news-report-modal').modal('show');
+            $('#news-report-image').html('');
 
             data.forEach(function (result) {
 
@@ -265,7 +266,29 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
 // Final-Project
 $('#final-project-table tbody').on('click', '.news-report-final-project', function () {
     let id = $(this).attr('id');
-
     
-    $('#news-report-modal').modal('show');
+    $.ajax({
+        url: "news-report/" + id + "?finalStatusName=tugas_akhirs",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+
+            $('#news-report-modal').modal('show');
+            $('#news-report-image').html('');
+
+            data.forEach(function (result) {
+
+                let data = '<div class="filtr-item col-sm-3">' +
+                '<a href="' + result.image + '" data-toggle="lightbox"' + 
+                'data-title="' + result.image + '" data-gallery="gallery">' +
+                '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
+
+
+                $('#news-report-image').append(data);
+            
+            });
+
+        }
+    });
 });
