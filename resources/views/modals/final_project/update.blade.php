@@ -15,6 +15,11 @@
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
+                        <label for="final-student-id">Mahasiswa</label>
+                        <select class="form-control" id="final-student-id" name="final-student-id" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="description">Deskripsi Umum Proposal Tugas Akhir</label>
                         <textarea class="form-control" id="description" rows="3" name="description" required></textarea>
                     </div>
