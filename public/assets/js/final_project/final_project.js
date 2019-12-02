@@ -238,7 +238,7 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
     let id = $(this).attr('id');
 
     $.ajax({
-        url: "news-report/" + id + "?finalStatusName=proposal",
+        url: "news-report-image/" + id + "?finalStatusName=proposal",
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -250,14 +250,13 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
             data.forEach(function (result) {
 
                 let data = '<div class="filtr-item col-sm-3">' +
-                '<a class="gallery-image" href="' + result.image + '" data-toggle="lightbox"' + 
-                'data-title="' + result.image + '" data-gallery="gallery">' +
-                '<button class="btn btn-danger"><i class="fa fa-times"></i></button>' +
-                '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
-
+                    '<a class="gallery-image" href="' + result.image + '" data-toggle="lightbox"' +
+                    'data-title="' + result.image + '" data-gallery="gallery">' +
+                    '<button class="btn btn-danger" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
+                    '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
 
                 $('#news-report-image').append(data);
-            
+
             });
 
         }
@@ -267,29 +266,59 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
 // Final-Project
 $('#final-project-table tbody').on('click', '.news-report-final-project', function () {
     let id = $(this).attr('id');
-    
+
     $.ajax({
-        url: "news-report/" + id + "?finalStatusName=tugas_akhirs",
+        url: "news-report-image/" + id + "?finalStatusName=tugas_akhir",
         type: "GET",
         dataType: "json",
         success: function (data) {
-            console.log(data);
-
             $('#news-report-modal').modal('show');
             $('#news-report-image').html('');
 
             data.forEach(function (result) {
 
                 let data = '<div class="filtr-item col-sm-3">' +
-                '<a href="' + result.image + '" data-toggle="lightbox"' + 
-                'data-title="' + result.image + '" data-gallery="gallery">' +
-                '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
-
+                    '<a class="gallery-image" href="' + result.image + '" data-toggle="lightbox"' +
+                    'data-title="' + result.image + '" data-gallery="gallery">' +
+                    '<button class="btn btn-danger delete-image" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
+                    '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
 
                 $('#news-report-image').append(data);
-            
+
             });
 
         }
     });
+});
+
+//Delete
+$('#news-report-image').on('click', '.delete-image', function () {
+    let id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "news-report-image/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted!',
+                            'Telah dihapus!',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                }
+            });
+        }
+    })
 });
