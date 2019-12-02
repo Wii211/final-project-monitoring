@@ -14,6 +14,7 @@ class Role extends Model
 
     public function scopeName($query, $name)
     {
-        $query->whereName($name);
+
+        return $query->whereName($name);
     }
 }
