@@ -14,7 +14,7 @@ let dataTable = $('#final-project-table').DataTable({
             data: 'title'
         },
         {
-            data: 'final_student_id'
+            data: 'final_student.name'
         },
         {
             data: 'created_at'
@@ -23,41 +23,31 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info info' id='" + buttonId + "'>Berita Acara</button>";
+                return "<button class='btn btn-primary btn-sm news-report' id='" + buttonId + "'>Berita Acara</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info detail' id='" + buttonId + "'>Detail</button>";
+                return "<button class='btn btn-info btn-sm detail' id='" + buttonId + "'>Detail</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
+                return "<button class='btn btn-warning btn-sm update' id='" + buttonId + "'>Update</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-danger delete' id='" + buttonId + "'>Delete</button>";
+                return "<button class='btn btn-danger btn-sm delete' id='" + buttonId + "'>Delete</button>";
             }
         }
-    ],
-    "columnDefs": [{
-        targets: [3],
-        render: function (data, type, row) {
-            if (data == 1) {
-                return '<span class="badge badge-success p-2">Aktif</span>';
-            } else {
-                return '<span class="badge badge-danger p-2">Tidak Aktif</span>';
-            }
-        }
-    }]
+    ]
 });
 
 // Click Button Add
@@ -153,4 +143,32 @@ $(document).on('submit', '#final-project-form', function (e) {
             }
         });
     }
+});
+
+$(document).ready(function () {
+    $.ajax({
+        url: "../supervisor?primary=true",
+        type: "GET",
+        dataType: "json",
+        success: function (lecturer) {
+            lecturer.data.forEach(function (result) {
+
+                let data = '<option value="' + result.id + '">' + result.name + '</option>';
+                $('#supervisors-1').append(data);
+            });
+        }
+    });
+
+    $.ajax({
+        url: "../supervisor?primary=false",
+        type: "GET",
+        dataType: "json",
+        success: function (lecturer) {
+            lecturer.data.forEach(function (result) {
+
+                let data = '<option value="' + result.id + '">' + result.name + '</option>';
+                $('#supervisors-2').append(data);
+            });
+        }
+    });
 });
