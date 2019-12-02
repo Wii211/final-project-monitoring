@@ -1,8 +1,8 @@
-<div class="modal fade" id="newsReport" tabindex="-1" role="dialog">
+<div class="modal fade" id="news-report-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Arsip Berita Acara</h5>
+                <h5 class="modal-title" id="news-report-title">Arsip Berita Acara</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -102,11 +102,11 @@
                 </div>
 
                 <hr>
-                <form enctype="multipart/form-data">
+                <form enctype="multipart/form-data" id="news-report-table">
                     <div class="row">
                         <div class="form-group col-12">
-                            <label for="exampleFormControlInput1">Tambah Foto Berita Acara</label>
-                            <input type="file" class="form-control-file" id="" name="news_reports[]" multiple>
+                            <label for="news-reports">Tambah Foto Berita Acara</label>
+                            <input type="file" class="form-control-file" id="news-reports" name="news_reports[]" multiple>
                         </div>
                     </div>
                     <button type="button" class="btn bg-gradient-primary w-100" data-dismiss="modal">Submit Berita Acara
