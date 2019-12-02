@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalProject;
 use App\FinalStudent;
 use Illuminate\Http\Request;
 use App\Http\Services\PreProposalService;
@@ -26,12 +27,7 @@ class FinalProjectDataController extends Controller
      */
     public function index()
     {
-        $data = $this->preProposalService
-            ->getData($this->finalStudent->getStudentId(), [
-                'finalLogs.finalSchedules',
-                'finalLogs.finalStatus',
-                'supervisors.lecturer'
-            ]);
+        $data = FinalProject::with('finalStudent')->get();
 
         return response()->json(['data' => $data]);
     }
