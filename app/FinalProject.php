@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FinalProject extends Model
 {
+    protected $guarded = ['id'];
+
     public function finalStudent()
     {
         return $this->belongsTo(FinalStudent::class);
