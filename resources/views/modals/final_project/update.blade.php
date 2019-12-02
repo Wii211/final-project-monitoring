@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         <label for="final-student-id">Mahasiswa</label>
-                        <select class="form-control" id="final-student-id" name="final-student-id" required>
+                        <select class="form-control" id="final-student-id" name="final_student_id" required>
                         </select>
                     </div>
                     <div class="form-group">
