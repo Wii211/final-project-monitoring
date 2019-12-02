@@ -91,7 +91,9 @@ class FinalProjectDataController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = FinalProject::with('finalStudent', 'supervisors')->findOrFail($id);
+
+        return response()->json(['data' => $data]);
     }
 
     /**
