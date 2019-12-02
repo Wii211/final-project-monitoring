@@ -33,7 +33,7 @@ class FinalProjectDataController extends Controller
                 'supervisors.lecturer'
             ]);
 
-        return view('final_projects.index', compact('data'));
+        return response()->json(['data' => $data]);
     }
 
     /**
