@@ -39,4 +39,9 @@ class FinalStudent extends Model
 
         return Auth::user()->finalStudent->id;
     }
+
+    public static function convertActive($active)
+    {
+        return strtolower($active) == "aktif" ? 1 : 0;
+    }
 }

@@ -31,7 +31,7 @@ class FinalStudentsImport implements ToCollection, WithHeadingRow
 
             FinalStudent::create([
                 'student_id' => $row['nim'],
-                'status' => $row['status'],
+                'status' => FinalStudent::convertActive($row['status']),
                 'is_verified' => 0,
                 'user_id' => $user->id,
                 'name' => $row['nama']
