@@ -25,6 +25,7 @@
                             <th>Mahasiswa</th>
                             <th>Tanggal</th>
                             <th></th>
+                            <th></th>
                             <th width="5%"></th>
                             <th width="5%"></th>
                         </tr>
