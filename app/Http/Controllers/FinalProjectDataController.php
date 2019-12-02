@@ -63,24 +63,25 @@ class FinalProjectDataController extends Controller
                 $finalProject->save();
 
                 $supervisor1 = new Supervisor([
-                    'role' => $request->supervisor['role'],
+                    'role' => $request->supervisors['role'],
                     'final_project_id' => $finalProject->id,
-                    'lecturer_id' => $request->supervisor['lecturer_id']
+                    'lecturer_id' => $request->supervisors['lecturer_id']
                 ]);
 
                 $supervisor1->save();
 
                 $supervisor2 = new Supervisor([
-                    'role' => $request->superviso2['role'],
+                    'role' => $request->supervisors2['role'],
                     'final_project_id' => $finalProject->id,
-                    'lecturer_id' => $request->superviso2['lecturer_id']
+                    'lecturer_id' => $request->supervisors2['lecturer_id']
                 ]);
                 $supervisor2->save();
             });
         } catch (\Throwable $th) {
-            return response()->json("Success");
+            return response()->json("Failed");
         }
-        return response()->json("Failed");
+
+        return response()->json("Success");
     }
 
     /**
@@ -126,25 +127,21 @@ class FinalProjectDataController extends Controller
 
                 $finalProject->save();
 
-                $supervisor1 = new Supervisor([
-                    'role' => $request->supervisor['role'],
-                    'final_project_id' => $finalProject->id,
-                    'lecturer_id' => $request->supervisor['lecturer_id']
-                ]);
+                $supervisor1 = Supervisor::whereRole(1)->whereFinalProjectId($id)->first();
+                $supervisor1->lecturer_id = $request->supervisors['lecturer_id'];
 
                 $supervisor1->save();
 
-                $supervisor2 = new Supervisor([
-                    'role' => $request->superviso2['role'],
-                    'final_project_id' => $finalProject->id,
-                    'lecturer_id' => $request->superviso2['lecturer_id']
-                ]);
+                $supervisor2 = Supervisor::whereRole(2)->whereFinalProjectId($id)->first();
+                $supervisor2->lecturer_id = $request->supervisors2['lecturer_id'];
+
                 $supervisor2->save();
             });
         } catch (\Throwable $th) {
-            return response()->json("Success");
+            dd($th);
+            return response()->json("Failed");
         }
-        return response()->json("Failed");
+        return response()->json("Success");
     }
 
     /**
