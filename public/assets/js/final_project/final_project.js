@@ -171,4 +171,17 @@ $(document).ready(function () {
             });
         }
     });
+
+    $.ajax({
+        url: "students",
+        type: "GET",
+        dataType: "json",
+        success: function (students) {
+            students.data.forEach(function (result) {
+
+                let data = '<option value="' + result.id + '">' + result.name + '</option>';
+                $('#final-student-id').append(data);
+            });
+        }
+    });
 });
