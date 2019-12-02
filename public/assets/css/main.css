@@ -56,3 +56,14 @@ label.check-login {
     border-color: #007bff;
     box-shadow: none;
 }
+
+.gallery-image {
+    position: relative;
+    display: inline-block;
+}
+
+.gallery-image button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
