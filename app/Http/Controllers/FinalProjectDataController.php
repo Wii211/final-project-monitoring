@@ -114,7 +114,35 @@ class FinalProjectDataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            DB::transaction(function () use ($request, $id) {
+                $finalProject = FinalProject::findOrFail($id);
+
+                $finalProject->title = $request->title;
+                $finalProject->final_student_id = $request->final_student_id;
+                $finalProject->description = $request->description;
+
+                $finalProject->save();
+
+                $supervisor1 = new Supervisor([
+                    'role' => $request->supervisor['role'],
+                    'final_project_id' => $finalProject->id,
+                    'lecturer_id' => $request->supervisor['lecturer_id']
+                ]);
+
+                $supervisor1->save();
+
+                $supervisor2 = new Supervisor([
+                    'role' => $request->superviso2['role'],
+                    'final_project_id' => $finalProject->id,
+                    'lecturer_id' => $request->superviso2['lecturer_id']
+                ]);
+                $supervisor2->save();
+            });
+        } catch (\Throwable $th) {
+            return response()->json("Success");
+        }
+        return response()->json("Failed");
     }
 
     /**
