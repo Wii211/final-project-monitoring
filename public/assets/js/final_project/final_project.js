@@ -23,7 +23,14 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-primary btn-sm news-report' id='" + buttonId + "'>Berita Acara</button>";
+                return "<button class='btn btn-primary btn-sm news-report-proposal' id='" + buttonId + "'>Berita Acara Proposal</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return "<button class='btn btn-primary btn-sm news-report-final-project' id='" + buttonId + "'>Berita Acara Tugas Akhir</button>";
             }
         },
         {
@@ -212,7 +219,12 @@ $('#final-project-table tbody').on('click', '.delete', function () {
 });
 
 
-// Click Button Add
-$('#final-project-table tbody').on('click', '.news-report', function () {
+// Proposal
+$('#final-project-table tbody').on('click', '.news-report-proposal', function () {
+    $('#news-report-modal').modal('show');
+});
+
+// Final-Project
+$('#final-project-table tbody').on('click', '.news-report-final-project', function () {
     $('#news-report-modal').modal('show');
 });
