@@ -7,6 +7,7 @@ use App\User;
 use App\FinalStudent;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class FinalStudentsImport implements ToCollection, WithHeadingRow
 {
