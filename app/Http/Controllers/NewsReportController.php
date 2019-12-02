@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\NewsReport;
+use App\FinalStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsReportController extends Controller
 {
@@ -12,10 +14,8 @@ class NewsReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+    public function index(Request $request)
+    { }
 
     /**
      * Show the form for creating a new resource.
@@ -44,9 +44,18 @@ class NewsReportController extends Controller
      * @param  \App\NewsReport  $newsReport
      * @return \Illuminate\Http\Response
      */
-    public function show(NewsReport $newsReport)
+    public function show(Request $request, $finalProjectId)
     {
-        //
+        $finalStatusId = FinalStatus::name($request->query('finalStatusName'))->first()->id;
+
+        return DB::table('final_logs')
+            ->join('news_reports', 'final_logs.id', '=', 'news_reports.final_log_id')
+            ->join('news_report_images', 'news_reports.id', '=', 'news_report_images.news_report_id')
+            ->where([
+                ['final_logs.final_status_id', '=', $finalStatusId],
+                ['final_logs.final_project_id', '=', $finalProjectId],
+            ])
+            ->get();
     }
 
     /**

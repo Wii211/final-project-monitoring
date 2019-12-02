@@ -86,6 +86,8 @@ Route::group(
 
         Route::post('/final-student-import', 'FinalStudentImportController@store')
             ->name('final_import.store');
+
+        Route::resource('news-report', 'NewsReportController');
     }
 );
 
