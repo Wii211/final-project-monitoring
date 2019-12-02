@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\NewsReport;
 use App\FinalStatus;
+use App\NewsReportImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -87,8 +88,14 @@ class NewsReportController extends Controller
      * @param  \App\NewsReport  $newsReport
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NewsReport $newsReport)
+    public function destroy($newsReportImageId)
     {
-        //
+        $newsReportImage = NewsReportImage::findOrFail($newsReportImageId);
+
+        if ($newsReportImage->delete()) {
+            return response()->json('Success');
+        } else {
+            return response()->json("Failed");
+        }
     }
 }
