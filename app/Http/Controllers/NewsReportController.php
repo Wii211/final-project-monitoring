@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\NewsReport;
 use App\FinalStatus;
-use App\NewsReportImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,18 +45,7 @@ class NewsReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $finalProjectId)
-    {
-        $finalStatusId = FinalStatus::name($request->query('finalStatusName'));
-
-        return DB::table('final_logs')
-            ->join('news_reports', 'final_logs.id', '=', 'news_reports.final_log_id')
-            ->join('news_report_images', 'news_reports.id', '=', 'news_report_images.news_report_id')
-            ->where([
-                ['final_logs.final_status_id', '=', $finalStatusId],
-                ['final_logs.final_project_id', '=', $finalProjectId],
-            ])
-            ->get();
-    }
+    { }
 
     /**
      * Show the form for editing the specified resource.
@@ -88,14 +76,6 @@ class NewsReportController extends Controller
      * @param  \App\NewsReport  $newsReport
      * @return \Illuminate\Http\Response
      */
-    public function destroy($newsReportImageId)
-    {
-        $newsReportImage = NewsReportImage::findOrFail($newsReportImageId);
-
-        if ($newsReportImage->delete()) {
-            return response()->json('Success');
-        } else {
-            return response()->json("Failed");
-        }
-    }
+    public function destroy(NewsReport $newsReport)
+    { }
 }
