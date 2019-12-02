@@ -66,17 +66,16 @@ $('#final-project-table tbody').on('click', '.update', function () {
         url: "final_project/" + id,
         dataType: "json",
         success: function (result) {
-            console.log(result)
             $('#final-project-modal').modal('show');
             $('#final-project-title').text("Update Tugas Akhir");
             $('#final-project-action').text("Update");
-            $('#final-project-id').val(result.id);
+            $('#final-project-id').val(result.data.id);
 
-            $('#title').val(result.title);
-            $('#description').val(result.description);
+            $('#title').val(result.data.title);
+            $('#description').val(result.data.description);
 
 
-            result.supervisors.forEach(function (data) {
+            result.data.supervisors.forEach(function (data) {
                 $('#supervisors-' + i).val(data.lecturer_id);
                 $('#supervisors-role-' + i).val(data.role);
                 i++
@@ -130,7 +129,7 @@ $(document).on('submit', '#final-project-form', function (e) {
                         })
                         .then(function () {
                             $('#final-project-modal').modal('hide');
-                            window.location.reload();
+                            dataTable.ajax.reload();
                         });
                 } else {
                     Swal.fire({
