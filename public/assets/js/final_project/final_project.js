@@ -3,6 +3,61 @@ $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
+}); 
+
+let dataTable = $('#final-project-table').DataTable({
+    "processing": true,
+    "ajax": {
+        url: "final_project"
+    },
+    "columns": [{
+            data: 'title'
+        },
+        {
+            data: 'final_student_id'
+        },
+        {
+            data: 'created_at'
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return "<button class='btn btn-info info' id='" + buttonId + "'>Berita Acara</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return "<button class='btn btn-info detail' id='" + buttonId + "'>Detail</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return "<button class='btn btn-danger delete' id='" + buttonId + "'>Delete</button>";
+            }
+        }
+    ],
+    "columnDefs": [{
+        targets: [3],
+        render: function (data, type, row) {
+            if (data == 1) {
+                return '<span class="badge badge-success p-2">Aktif</span>';
+            } else {
+                return '<span class="badge badge-danger p-2">Tidak Aktif</span>';
+            }
+        }
+    }]
 });
 
 // Click Button Add
