@@ -12,9 +12,7 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between">
-            <button type="button" id="final-project-import" class="btn bg-gradient-success mb-2" data-toggle="modal"
-                data-target="#import-modal">Import Data</button>
+        <div class="d-flex justify-content-end">
             <button type="button" id="final-project-add" class="btn btn-primary mb-2" data-toggle="modal"
                 data-target="#final-project-modal">Tambah Data TA</button>
         </div>
@@ -33,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {{-- <tr>
                             <td>Hey aspiring content creators, submit demo musik kamu dan dapatkan kesempatan menangin
                                 HP Pavilion x360, serta mentoring dari Eka.e</td>
                             <td>Winardi Chandra</td>
@@ -54,7 +52,7 @@
                                 <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
                                     data-target="#updateProposal">Delete</button>
                             </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
@@ -65,8 +63,8 @@
 
 <!-- Modal -->
 @section('modal')
-@include('modals.final_project.add')
-@include('modals.final_project.detail')
+{{-- @include('modals.final_project.add') --}}
+@include('modals.final_project.update')
 @include('modals.final_project.news_report')
 @include('modals.student.import')
 @endsection
