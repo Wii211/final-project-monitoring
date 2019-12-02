@@ -250,8 +250,9 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
             data.forEach(function (result) {
 
                 let data = '<div class="filtr-item col-sm-3">' +
-                '<a href="' + result.image + '" data-toggle="lightbox"' + 
+                '<a class="gallery-image" href="' + result.image + '" data-toggle="lightbox"' + 
                 'data-title="' + result.image + '" data-gallery="gallery">' +
+                '<button class="btn btn-danger"><i class="fa fa-times"></i></button>' +
                 '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
 
 
