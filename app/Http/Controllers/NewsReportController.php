@@ -46,7 +46,7 @@ class NewsReportController extends Controller
      */
     public function show(Request $request, $finalProjectId)
     {
-        $finalStatusId = FinalStatus::name($request->query('finalStatusName'))->first()->id;
+        $finalStatusId = FinalStatus::name($request->query('finalStatusName'));
 
         return DB::table('final_logs')
             ->join('news_reports', 'final_logs.id', '=', 'news_reports.final_log_id')
