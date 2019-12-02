@@ -152,6 +152,12 @@ class FinalProjectDataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $finalProject = FinalProject::findOrFail($id);
+
+        if ($finalProject->delete()) {
+            return response()->json("Success");
+        } else {
+            return response()->json("Failed");
+        }
     }
 }
