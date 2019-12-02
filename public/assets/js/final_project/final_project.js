@@ -30,13 +30,6 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info btn-sm detail' id='" + buttonId + "'>Detail</button>";
-            }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.id;
                 return "<button class='btn btn-warning btn-sm update' id='" + buttonId + "'>Update</button>";
             }
         },
@@ -123,7 +116,7 @@ $(document).on('submit', '#final-project-form', function (e) {
                 if (data !== "Failed") {
                     Swal.fire({
                             type: 'success',
-                            title: data.success,
+                            title: 'Berhasil!',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -134,7 +127,7 @@ $(document).on('submit', '#final-project-form', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: data.error,
+                        title: 'Error',
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -183,4 +176,43 @@ $(document).ready(function () {
             });
         }
     });
+});
+
+
+//Delete
+$('#final-project-table tbody').on('click', '.delete', function () {
+    let id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "final_project/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted!',
+                            'Telah dihapus!',
+                            'success'
+                        )
+                        .then(function () {
+                            dataTable.ajax.reload();
+                        });
+                }
+            });
+        }
+    })
+});
+
+
+// Click Button Add
+$('#final-project-table tbody').on('click', '.news-report', function () {
+    $('#news-report-modal').modal('show');
 });
