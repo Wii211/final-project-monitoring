@@ -29,8 +29,8 @@
                     <div class="form-group mt-3">
                         <label for="status">Status</label>
                         <select class="form-control form-control-sm" id="status" name="status" required>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Tidak Aktif">Tidak Aktif</option>
+                            <option value="1">Aktif</option>
+                            <option value="0">Tidak Aktif</option>
                         </select>
                     </div>
                     <div class="form-group mt-3">

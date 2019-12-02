@@ -28,8 +28,6 @@
                             <th>Nama</th>
                             <th>Status</th>
                             <th></th>
-                            <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,4 +51,5 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/student/student.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/import.js') }}"></script>
 @endsection

@@ -26,6 +26,7 @@ class FinalStudentsImport implements ToCollection, WithHeadingRow
                 'password' => $row['nim'],
             ]);
 
+            $user->save();
             $user->roles()->sync(Role::whereName('mahasiswa')->first()->id);
 
             FinalStudent::create([
