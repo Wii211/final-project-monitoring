@@ -21,11 +21,10 @@
                 <table class="table" id="final-project-table">
                     <thead>
                         <tr>
-                            <th width="40%">Judul</th>
-                            <th width="20%">Mahasiswa</th>
-                            <th width="10%">Tanggal</th>
-                            <th width="15%"></th>
-                            <th width="5%"></th>
+                            <th width="30%">Judul</th>
+                            <th>Mahasiswa</th>
+                            <th>Tanggal</th>
+                            <th></th>
                             <th width="5%"></th>
                             <th width="5%"></th>
                         </tr>
