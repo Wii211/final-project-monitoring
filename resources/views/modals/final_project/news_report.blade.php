@@ -14,10 +14,9 @@
                         Download Images
                     </button>
                 </div> --}}
-                <div class="filter-container row"  id="news-report-image">
+                <div class="filter-container p-0 row"  id="news-report-image">
                     
                 </div>
-
                 <hr>
                 <form enctype="multipart/form-data" id="news-report-table">
                     <div class="row">
