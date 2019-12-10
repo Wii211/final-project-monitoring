@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 class NewsReportImageController extends Controller
 {
-    private $newsReportImage, $uploadHelper;
+    private $newsReportImage, $uploadHelper, $finalLog;
 
-    public function __construct(NewsReportImage $newsReportImage, UploadHelper $uploadHelper)
+    public function __construct(NewsReportImage $newsReportImage, UploadHelper $uploadHelper, FinalLog $finalLog)
     {
         $this->newsReportImage = $newsReportImage;
         $this->uploadHelper = $uploadHelper;
+        $this->finalLog = $finalLog;
     }
 
     /**
@@ -48,6 +49,16 @@ class NewsReportImageController extends Controller
      */
     public function store(Request $request)
     {
+
+        $finalLogId = $this->finalLog->whereFinalProjectId($request->final_project_id)
+            ->whereFinalStatusId(FinalStatus::name($request->final_status_name))
+            ->first()->id;
+
+        $newsReport = new NewsReport;
+        $newsReport->final_log_id = $finalLogId;
+
+        $newsReport->save();
+
         $newsReportImage = $this->newsReportImage;
 
         $filesName = [];
@@ -65,7 +76,7 @@ class NewsReportImageController extends Controller
                 }
 
                 $newsReportImage->image = $filesName;
-                $newsReportImage->news_report_id = $request->news_report_id;
+                $newsReportImage->news_report_id = $newsReport->id;
                 $newsReportImage->save();
             }
         } catch (\Throwable $th) {
