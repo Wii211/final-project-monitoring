@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use App\FinalStatus;
 use App\NewsReportImage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Helpers\UploadHelper;
+use App\NewsReport;
 use Illuminate\Support\Facades\DB;
 
 class NewsReportImageController extends Controller
 {
+    private $newsReportImage, $uploadHelper;
+
+    public function __construct(NewsReportImage $newsReportImage, UploadHelper $uploadHelper)
+    {
+        $this->newsReportImage = $newsReportImage;
+        $this->uploadHelper = $uploadHelper;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +48,31 @@ class NewsReportImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newsReportImage = $this->newsReportImage;
+
+        $filesName = [];
+
+        try {
+            if ($request->hasFile('news_report_images')) {
+                foreach ($request->news_report_images as $key => $newsReportImage) {
+                    $filesName[] = [
+                        'name' => $this->uploadHelper->uploadFile(
+                            $request->file('image_profile'),
+                            Str::random(40),
+                            'news_report'
+                        )
+                    ];
+                }
+
+                $newsReportImage->image = $filesName;
+                $newsReportImage->news_report_id = $request->news_report_id;
+                $newsReportImage->save();
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json("Failed");
+        }
+        return response()->json("Success");
     }
 
     /**
