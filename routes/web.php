@@ -16,6 +16,8 @@ Route::group(
     ['prefix' => 'student', 'middleware' => ['auth', 'role:mahasiswa']],
     function () {
 
+
+
         Route::get('/', 'FinalRegistrationController@index')
             ->name('final_registration.index');
 
@@ -24,9 +26,16 @@ Route::group(
 
 
 
+        Route::group(
+            ['middleware' => ['auth', 'verify']],
+            function () {
+                Route::resource('/pre_proposal', 'PreProposalController');
+            }
+        );
+
         //Pra Proposal
 
-        Route::resource('/pre_proposal', 'PreProposalController');
+
 
         //Tugas Akhir Mahasiswa
         // Route::view('/final_project', 'students.final_project')->name('final_project.index');
