@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\FinalLog;
+use App\User;
 
+use App\FinalLog;
 use App\FinalStatus;
 use App\FinalStudent;
 use Illuminate\Http\Request;
@@ -38,12 +39,16 @@ class PreProposalController extends Controller
 
         $status = "";
 
-        if (is_null($data)) {
+        $finalStudent = FinalStudent::whereIsVerified(1)->whereUserId(User::getAuthId())->first();
+
+        if (is_null($finalStudent)) {
             return redirect()->route('final_registration.index');
         }
 
-        if (FinalLog::statusProposal($data->id)) {
-            $status = "proposal";
+        if (!is_null($data)) {
+            if (FinalLog::statusProposal($data->id)) {
+                $status = "proposal";
+            }
         }
 
         return view('students.pre_proposal', compact('data', 'status'));
