@@ -40,11 +40,11 @@
         </div>
         @if(Auth::user()->isVerified() == 0)
         <div class="card">
-            @if(Session::has('success'))
+            @if(Session::has('Success'))
             <div class="alert alert-success" role="alert">
-                Berhasil.
+                Berhasil. Silahkan tunggu proses verifikasi.
             </div>
-            @elseif(Session::has('failed'))
+            @elseif(Session::has('Failed'))
             <div class="alert alert-danger" role="alert">
                 Error.
             </div>
@@ -59,12 +59,12 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Upload Transkip Nilai</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="transcript">
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="transcript" accept="application/pdf">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Upload Rencana Studi Terakhir</label>
                         <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                            name="latest_study_plan">
+                            name="latest_study_plan" accept="application/pdf">
                     </div>
                     <button type="submit" class="btn btn-primary mb-2 w-100">Verifikasi</button>
                 </form>
