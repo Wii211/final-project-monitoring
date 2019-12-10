@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalLog;
+use App\NewsReport;
 use App\FinalStatus;
 use App\NewsReportImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
-use App\NewsReport;
 use Illuminate\Support\Facades\DB;
 
 class NewsReportImageController extends Controller
