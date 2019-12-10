@@ -26,8 +26,8 @@
                         </div>
                     </div>
                     <input type="hidden" id="news-report-id">
-                    <input type="hidden" id="news-report-status" name="news_report_status">
-                    <input type="hidden" id="final-project-id" name="final_project_id">
+                    <input type="hidden" id="news-report-status" name="final_status_name">
+                    <input type="hidden" id="final-news-project-id" name="final_project_id">
                     <button type="submit" class="btn bg-gradient-primary w-100">Submit Berita Acara
                     </button>
                 </form>

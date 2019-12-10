@@ -242,12 +242,12 @@ function newsReportProposal(id, name) {
         type: "GET",
         dataType: "json",
         success: function (data) {
-            console.log(data);
+            console.log(id);
+            $('#final-news-project-id').val(id);
 
             $('#news-report-modal').modal('show');
             $('#news-report-image').html('');
             $('#news-report-status').val(name);
-            $('#final-project-id').val(id);
 
             if(data.length !== 0){
                 $('#news-report-id').val(data[0].news_report_id);
@@ -285,7 +285,7 @@ $('#final-project-table tbody').on('click', '.news-report-final-project', functi
 //Delete
 $('#news-report-image').on('click', '.delete-image', function () {
     let id = $(this).attr("id");
-    let newsId = $('#news-report-id').val();
+    let finalId = $('#final-news-project-id').val();
     let status = $('#news-report-status').val();
 
     Swal.fire({
@@ -308,7 +308,7 @@ $('#news-report-image').on('click', '.delete-image', function () {
                             'success'
                         )
                         .then(function () {
-                            newsReportProposal(newsId, status)
+                            newsReportProposal(finalId, status)
                         });
                 }
             });
@@ -323,7 +323,7 @@ $(document).on('submit', '#news-report-form', function (e) {
 
     //Variablesx
     let formData = new FormData(this);
-    let id = $('#news-report-id').val();
+    let id = $('#final-news-project-id').val();
     let status = $('#news-report-status').val();
     let url = 'news-report-image';
 
