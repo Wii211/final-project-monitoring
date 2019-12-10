@@ -253,11 +253,9 @@ function newsReportProposal(id, name) {
                 $('#news-report-id').val(data[0].news_report_id);
             }
             data.forEach(function (result) {
-                let data = '<div class="gallery-image filtr-item col-sm-3" data-category="' + j + '">' +
+                let data = '<div class="gallery-image filtr-item col-sm-3">' +
                     '<button class="btn btn-danger delete-image" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
-                    '<a class="" href="../storage/' + result.image + '" data-toggle="lightbox"' +
-                    'data-title="../storage/' + result.image + '" data-gallery="gallery">' +
-                    '<img id="image123" src="../storage/' + result.image + '" class="img-fluid mb-2"></a></div>';
+                    '<img src="../storage/' + result.image + '" class="img-fluid mb-2 fullscreen"></div>';
 
                     j++;
                 $('#news-report-image').append(data);
@@ -267,9 +265,12 @@ function newsReportProposal(id, name) {
     });
 }
 
-function newsReportFinalProject(id) {
-    
-}
+$(document).on('click', '.fullscreen', function(){
+    let image = $(this).attr('src');
+    $('#news-report-detail-modal').modal('show');
+
+    $('#detail-image').html('<img src="'+ image +'" class="w-100">')
+})
 
 $('#final-project-table tbody').on('click', '.news-report-proposal', function () {
     let id = $(this).attr('id');
