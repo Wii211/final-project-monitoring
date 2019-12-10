@@ -66,6 +66,7 @@
 {{-- @include('modals.final_project.add') --}}
 @include('modals.final_project.update')
 @include('modals.final_project.news_report')
+@include('modals.final_project.news_report_detail')
 @include('modals.student.import')
 @endsection
 
