@@ -246,10 +246,11 @@ function newsReportProposal(id, name) {
 
             $('#news-report-modal').modal('show');
             $('#news-report-image').html('');
+            $('#news-report-status').val(name);
+            $('#final-project-id').val(id);
 
             if(data.length !== 0){
                 $('#news-report-id').val(data[0].news_report_id);
-                $('#news-report-status').val(name);
             }
             data.forEach(function (result) {
                 let data = '<div class="gallery-image filtr-item col-sm-3" data-category="' + j + '">' +
@@ -324,7 +325,7 @@ $(document).on('submit', '#news-report-form', function (e) {
     let formData = new FormData(this);
     let id = $('#news-report-id').val();
     let status = $('#news-report-status').val();
-    let url;
+    let url = 'news-report-image';
 
     if (url !== '') {
         Swal.fire({

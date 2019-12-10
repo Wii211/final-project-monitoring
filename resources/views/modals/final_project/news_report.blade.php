@@ -22,12 +22,13 @@
                     <div class="row">
                         <div class="form-group col-12">
                             <label for="news-reports">Tambah Foto Berita Acara</label>
-                            <input type="file" class="form-control-file" id="news-reports" name="news_reports[]" multiple>
+                            <input type="file" class="form-control-file" id="news-reports" name="news_report_images[]" multiple>
                         </div>
                     </div>
                     <input type="hidden" id="news-report-id">
-                    <input type="hidden" id="news-report-status">
-                    <button type="button" class="btn bg-gradient-primary w-100" data-dismiss="modal">Submit Berita Acara
+                    <input type="hidden" id="news-report-status" name="news_report_status">
+                    <input type="hidden" id="final-project-id" name="final_project_id">
+                    <button type="submit" class="btn bg-gradient-primary w-100">Submit Berita Acara
                     </button>
                 </form>
             </div>
