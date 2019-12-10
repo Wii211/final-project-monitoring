@@ -44,4 +44,15 @@ class FinalStudent extends Model
     {
         return strtolower($active) == "aktif" ? 1 : 0;
     }
+
+    public function checkIsVerify($id)
+    {
+        $finalStudent = $this->whereIsVerified(1)->whereUserId($id)->first();
+
+        if (is_null($finalStudent)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
