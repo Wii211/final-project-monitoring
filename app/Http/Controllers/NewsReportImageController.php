@@ -60,28 +60,23 @@ class NewsReportImageController extends Controller
 
         $newsReport->save();
 
-        $newsReportImage = $this->newsReportImage;
-
-        $filesName = [];
-
         try {
             if ($request->hasFile('news_report_images')) {
-                foreach ($request->news_report_images as $key => $newsReportImage) {
-                    $filesName[] = [
-                        'name' => $this->uploadHelper->uploadFile(
-                            $request->file('image_profile'),
-                            Str::random(40),
-                            'news_report'
-                        )
-                    ];
-                }
+                foreach ($request->news_report_images as $newsReportImageFile) {
+                    $newsReportImage = $this->newsReportImage;
+                    $filesName =  $this->uploadHelper->uploadFile(
+                        $newsReportImageFile,
+                        Str::random(40),
+                        'news_report'
+                    );
 
-                $newsReportImage->image = $filesName;
-                $newsReportImage->news_report_id = $newsReport->id;
-                $newsReportImage->save();
+                    $newsReportImage->image = $filesName;
+                    $newsReportImage->news_report_id = $newsReport->id;
+                    $newsReportImage->save();
+                }
             }
         } catch (\Throwable $th) {
-            //throw $th;
+
             return response()->json("Failed");
         }
         return response()->json("Success");
