@@ -234,6 +234,7 @@ $('#final-project-table tbody').on('click', '.delete', function () {
 
 
 // Proposal
+let j = 1;
 $('#final-project-table tbody').on('click', '.news-report-proposal', function () {
     let id = $(this).attr('id');
 
@@ -248,15 +249,14 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
             $('#news-report-image').html('');
 
             data.forEach(function (result) {
-
-                let data = '<div class="filtr-item col-sm-3">' +
-                    '<a class="gallery-image" href="' + result.image + '" data-toggle="lightbox"' +
+                let data = '<div class="gallery-image filtr-item col-sm-3" data-category="' + j + '">' +
+                    '<button class="btn btn-danger delete-image" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
+                    '<a class="" href="' + result.image + '" data-toggle="lightbox"' +
                     'data-title="' + result.image + '" data-gallery="gallery">' +
-                    '<button class="btn btn-danger" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
                     '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
 
+                    j++;
                 $('#news-report-image').append(data);
-
             });
 
         }
@@ -276,13 +276,13 @@ $('#final-project-table tbody').on('click', '.news-report-final-project', functi
             $('#news-report-image').html('');
 
             data.forEach(function (result) {
-
-                let data = '<div class="filtr-item col-sm-3">' +
-                    '<a class="gallery-image" href="' + result.image + '" data-toggle="lightbox"' +
-                    'data-title="' + result.image + '" data-gallery="gallery">' +
+                let data = '<div class="gallery-image filtr-item col-sm-3" data-category="' + j + '">' +
                     '<button class="btn btn-danger delete-image" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
+                    '<a class="" href="' + result.image + '" data-toggle="lightbox"' +
+                    'data-title="' + result.image + '" data-gallery="gallery">' +
                     '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
 
+                    j++;
                 $('#news-report-image').append(data);
 
             });
@@ -315,7 +315,7 @@ $('#news-report-image').on('click', '.delete-image', function () {
                             'success'
                         )
                         .then(function () {
-                            dataTable.ajax.reload();
+                            window.location.reload();
                         });
                 }
             });
