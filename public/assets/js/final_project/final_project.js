@@ -235,11 +235,10 @@ $('#final-project-table tbody').on('click', '.delete', function () {
 
 // Proposal
 let j = 1;
-$('#final-project-table tbody').on('click', '.news-report-proposal', function () {
-    let id = $(this).attr('id');
 
+function newsReportProposal(id, name) {
     $.ajax({
-        url: "news-report-image/" + id + "?finalStatusName=proposal",
+        url: "news-report-image/" + id + "?finalStatusName=" + name,
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -248,6 +247,10 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
             $('#news-report-modal').modal('show');
             $('#news-report-image').html('');
 
+            if(data.length !== 0){
+                $('#news-report-id').val(data[0].news_report_id);
+                $('#news-report-status').val(name);
+            }
             data.forEach(function (result) {
                 let data = '<div class="gallery-image filtr-item col-sm-3" data-category="' + j + '">' +
                     '<button class="btn btn-danger delete-image" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
@@ -261,39 +264,28 @@ $('#final-project-table tbody').on('click', '.news-report-proposal', function ()
 
         }
     });
+}
+
+function newsReportFinalProject(id) {
+    
+}
+
+$('#final-project-table tbody').on('click', '.news-report-proposal', function () {
+    let id = $(this).attr('id');
+    newsReportProposal(id, "proposal")
 });
 
 // Final-Project
 $('#final-project-table tbody').on('click', '.news-report-final-project', function () {
     let id = $(this).attr('id');
-
-    $.ajax({
-        url: "news-report-image/" + id + "?finalStatusName=tugas_akhir",
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-            $('#news-report-modal').modal('show');
-            $('#news-report-image').html('');
-
-            data.forEach(function (result) {
-                let data = '<div class="gallery-image filtr-item col-sm-3" data-category="' + j + '">' +
-                    '<button class="btn btn-danger delete-image" id="' + result.id + '"><i class="fa fa-times"></i></button>' +
-                    '<a class="" href="' + result.image + '" data-toggle="lightbox"' +
-                    'data-title="' + result.image + '" data-gallery="gallery">' +
-                    '<img id="image123" src="' + result.image + '" class="img-fluid mb-2"></a></div>';
-
-                    j++;
-                $('#news-report-image').append(data);
-
-            });
-
-        }
-    });
+    newsReportProposal(id, "tugas_akhir")
 });
 
 //Delete
 $('#news-report-image').on('click', '.delete-image', function () {
     let id = $(this).attr("id");
+    let newsId = $('#news-report-id').val();
+    let status = $('#news-report-status').val();
 
     Swal.fire({
         title: 'Are you sure?',
@@ -315,10 +307,62 @@ $('#news-report-image').on('click', '.delete-image', function () {
                             'success'
                         )
                         .then(function () {
-                            window.location.reload();
+                            newsReportProposal(newsId, status)
                         });
                 }
             });
         }
     })
+});
+
+
+// Store News Report
+$(document).on('submit', '#news-report-form', function (e) {
+    e.preventDefault();
+
+    //Variablesx
+    let formData = new FormData(this);
+    let id = $('#news-report-id').val();
+    let status = $('#news-report-status').val();
+    let url;
+
+    if (url !== '') {
+        Swal.fire({
+            title: 'Loading',
+            timer: 60000,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('#news-report-form')[0].reset();
+
+                if (data !== "Failed") {
+                    Swal.fire({
+                            type: 'success',
+                            title: 'Berhasil!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(function () {
+                            newsReportProposal(id, status)
+                        });
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+    }
 });
