@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalLog;
 use App\Supervisor;
+use App\FinalStatus;
 use App\FinalProject;
 use App\FinalStudent;
 use Illuminate\Http\Request;
@@ -61,6 +63,18 @@ class FinalProjectDataController extends Controller
                 ]);
 
                 $finalProject->save();
+
+                $finalLogProposal = new FinalLog;
+                $finalLogProposal->final_project_id = $finalProject->id;
+                $finalLogProposal->final_status_id = FinalStatus::name('proposal');
+
+                $finalLogProposal->save();
+
+                $finalLogFinal = new FinalLog;
+                $finalLogFinal->final_project_id = $finalProject->id;
+                $finalLogFinal->final_status_id = FinalStatus::name('tugas_akhir');
+
+                $finalLogFinal->save();
 
                 $supervisor1 = new Supervisor([
                     'role' => $request->supervisors['role'],
