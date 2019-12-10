@@ -63,7 +63,7 @@ class NewsReportImageController extends Controller
         try {
             if ($request->hasFile('news_report_images')) {
                 foreach ($request->news_report_images as $newsReportImageFile) {
-                    $newsReportImage = $this->newsReportImage;
+                    $newsReportImage = new NewsReportImage;
                     $filesName =  $this->uploadHelper->uploadFile(
                         $newsReportImageFile,
                         Str::random(40),
