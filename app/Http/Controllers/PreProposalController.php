@@ -39,12 +39,6 @@ class PreProposalController extends Controller
 
         $status = "";
 
-        $finalStudent = FinalStudent::whereIsVerified(1)->whereUserId(User::getAuthId())->first();
-
-        if (is_null($finalStudent)) {
-            return redirect()->route('final_registration.index');
-        }
-
         if (!is_null($data)) {
             if (FinalLog::statusProposal($data->id)) {
                 $status = "proposal";
