@@ -38,6 +38,10 @@ class PreProposalController extends Controller
 
         $status = "";
 
+        if (is_null($data)) {
+            return redirect()->route('final_registration.index');
+        }
+
         if (FinalLog::statusProposal($data->id)) {
             $status = "proposal";
         }
