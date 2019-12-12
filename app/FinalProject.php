@@ -56,7 +56,8 @@ class FinalProject extends Model
 
     public function checkIsVerify($finalProjectId, $finalStatusName)
     {
-        return is_null(FinalLog::whereFinalProjectId($finalProjectId)
-            ->whereFinalStatusId(FinalStatus::name($finalStatusName))->first()) ? false : true;
+        return FinalLog::whereFinalProjectId($finalProjectId)
+            ->whereFinalStatusId(FinalStatus::name($finalStatusName))
+            ->whereIsVerification(1)->first() ? true : false;
     }
 }
