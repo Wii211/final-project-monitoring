@@ -39,10 +39,10 @@
                             <td><span
                                     class="badge badge-primary p-2">{{ ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span>
                             </td>
-                            @if($data->finalLogsPraProposal[0]->is_verification == 0)
-                            <td><span class="badge badge-warning p-2">Menunggu verifikasi</span></td>
-                            @else
+                            @if($data->checkIsVerify($data->id, "pra-proposal"))
                             <td><span class="badge badge-success p-2">Telah diverifikasi</span></td>
+                            @else
+                            <td><span class="badge badge-warning p-2">Menunggu verifikasi</span></td>
                             @endif
                             <td>
                                 <button class="btn bg-gradient-warning btn-sm w-100 update"
@@ -69,10 +69,10 @@
                         @foreach($data->supervisors as $supervisor)
                         <tr>
                             <td>{{ $supervisor->lecturer->name }}</td>
-                            @if($supervisor->is_agree == 0)
-                            <td><span class="badge badge-warning p-2">Menunggu Persetujuan</span></td>
+                            @if($supervisor->role == 1)
+                            <td><span class="badge badge-primary p-2">Dosen Pembimbing 1</span></td>
                             @else
-                            <td><span class="badge badge-success p-2">Disetujui</span></td>
+                            <td><span class="badge badge-info p-2">Dosen Pembimbing 2</span></td>
                             @endif
                         </tr>
                         @endforeach
@@ -80,6 +80,7 @@
                 </table>
             </div>
         </div>
+        @if($data->checkIsVerify($data->id, "pra-proposal"))
         <div class="card">
             <form action="{{ route('pre_proposal.update', ['id' => $data->id]) }}" method="post">
                 @csrf
@@ -99,6 +100,7 @@
                 <button type="submit" class="btn btn-primary w-100">Fix / Commit</button>
             </form>
         </div>
+        @endif
         @else
         <div class="card">
             <div class="card-body">
