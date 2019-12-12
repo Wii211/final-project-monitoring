@@ -30,6 +30,7 @@ Route::group(
             ['middleware' => ['auth', 'verify']],
             function () {
                 Route::resource('/pre_proposal', 'PreProposalController');
+                Route::resource('/final_project', 'FinalProjectController');
             }
         );
 
@@ -40,7 +41,7 @@ Route::group(
         //Tugas Akhir Mahasiswa
         // Route::view('/final_project', 'students.final_project')->name('final_project.index');
 
-        Route::resource('/final_project', 'FinalProjectController');
+
     }
 );
 
