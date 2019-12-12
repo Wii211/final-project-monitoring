@@ -25,7 +25,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $data->title }}</td>
-                            <td>{{ $data->created_at->toDateString() }}</td>
+                            <td>{{ $data->created_at }}</td>
                             @foreach($data->finalLogs as $finalLog)
                                 @php $status = $finalLog->finalStatus->name @endphp
                             @endforeach

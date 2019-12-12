@@ -35,7 +35,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $data->title }}</td>
-                            <td>{{ $data->created_at->toDateString() }}</td>
+                            <td>{{ $data->created_at }}</td>
                             <td><span
                                     class="badge badge-primary p-2">{{ ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span>
                             </td>
