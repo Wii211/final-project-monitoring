@@ -173,6 +173,13 @@ class PreProposalService
     public function updateToProposal($finalProjectId)
     {
         try {
+            $preProposal = $this->finalLog->whereFinalProjectId($finalProjectId)
+                ->whereFinalStatusId($this->finalStatus->name('pra-proposal'))->first();
+
+            $preProposal->is_verification = 1;
+
+            $preProposal->save();
+
             $finalLog = $this->finalLog;
             $finalLog->final_project_id = $finalProjectId;
             $finalLog->final_status_id = $this->finalStatus->name('proposal');
