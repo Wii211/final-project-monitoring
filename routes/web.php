@@ -104,6 +104,11 @@ Route::group(
         Route::post('/final-student-import', 'FinalStudentImportController@store')
             ->name('final_import.store');
 
+        Route::get('/monitoring', 'FinalProjectMonitoringController@index')
+            ->name('monitoring.index');
+
+
+
         Route::resource('news-report-image', 'NewsReportImageController');
     }
 );
