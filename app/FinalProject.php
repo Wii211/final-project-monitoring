@@ -6,6 +6,7 @@ use App\Topic;
 use App\Examiner;
 use App\FinalLog;
 use App\Supervisor;
+use App\FinalStatus;
 use App\FinalStudent;
 use Illuminate\Database\Eloquent\Model;
 
@@ -51,5 +52,11 @@ class FinalProject extends Model
             'final_project_id',
             'topic_id'
         );
+    }
+
+    public function checkIsVerify($finalProjectId, $finalStatusName)
+    {
+        return is_null(FinalLog::whereFinalProjectId($finalProjectId)
+            ->whereFinalStatusId(FinalStatus::name($finalStatusName))->first()) ? false : true;
     }
 }

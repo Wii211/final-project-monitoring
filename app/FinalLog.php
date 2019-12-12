@@ -40,10 +40,4 @@ class FinalLog extends Model
             return false;
         }
     }
-
-    public function checkIsVerify($finalProjectId, $finalStatusName)
-    {
-        return is_null($this->whereFinalProjectId($finalProjectId)
-            ->whereFinalStatusId(FinalStatus::name($finalStatusName))->first()) ? false : true;
-    }
 }
