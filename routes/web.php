@@ -70,6 +70,9 @@ Route::group(
 
         //Jadwal Seminar/Sidang
         Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
+
+        Route::get('/monitoring', 'FinalProjectMonitoringController@index')
+            ->name('monitoring.index');
     }
 );
 
@@ -103,9 +106,6 @@ Route::group(
 
         Route::post('/final-student-import', 'FinalStudentImportController@store')
             ->name('final_import.store');
-
-        Route::get('/monitoring', 'FinalProjectMonitoringController@index')
-            ->name('monitoring.index');
 
 
 
