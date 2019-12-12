@@ -34,6 +34,13 @@ class FinalStudent extends Model
         return $query->whereStatus($value);
     }
 
+    public function scopeVerify($query, $value)
+    {
+        if ($value === null) return $query;
+
+        return $query->whereIsVerified($value);
+    }
+
     public function getStudentId()
     {
 
