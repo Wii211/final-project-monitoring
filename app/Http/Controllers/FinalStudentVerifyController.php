@@ -25,10 +25,13 @@ class FinalStudentVerifyController extends Controller
      */
     public function index(Request $request)
     {
+        $verify = null;
+
+        if ($request->has('verify')) $verify = $request->query('verify');
 
         return $request->ajax() ?  response()->json(
             ['data' => $this->finalStudentService
-                ->getListData(null, true)]
+                ->getListData(null, 1, $verify)]
         ) : view('final_projects.students');
     }
 
