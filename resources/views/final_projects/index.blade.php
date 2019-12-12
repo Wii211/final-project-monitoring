@@ -4,12 +4,16 @@
 <!-- If() -->
 @section('title', 'Tugas Akhir Mahasiswa')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+@endsection
+
 @section('content')
 <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-body p-0">
-                <table class="table">
+            <div class="card-body">
+                <table class="table" id="final-project-table">
                     <thead>
                         <tr>
                             <th>Nama</th>
@@ -43,7 +47,7 @@
                                     data-target="#detailFinalProject">Update</button>
                             </td>
                         </tr>
-                    </tbody>
+                    </tbody> 
                 </table>
             </div>
         </div>
@@ -54,4 +58,11 @@
 @section('modal')
 @include('modals.final_project.progress_view')
 @include('modals.final_project.detail')
+@endsection
+
+@section('javascript')
+    <!-- DataTables -->
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/final_project/active.js') }}"></script>
 @endsection
