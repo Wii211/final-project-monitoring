@@ -72,7 +72,15 @@ class FinalLogStudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $finalLog = FinalLog::FindOrFail($id);
+
+        $finalLog->is_verification = $request->is_verification;
+
+        if ($finalLog->save()) {
+            return response()->json("Success");
+        } else {
+            return response()->json("Failed");
+        }
     }
 
     /**

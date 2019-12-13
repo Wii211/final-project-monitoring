@@ -76,6 +76,9 @@ Route::group(
 
         Route::get('/student-status/{finalProjectId}', 'FinalLogStudentController@show')
             ->name('student-status.show');
+
+        Route::put('/student-status/{id}/verify', 'FinalLogStudentController@update')
+            ->name('student-status.update');
     }
 );
 
