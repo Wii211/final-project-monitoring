@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalLog;
+use App\FinalStatus;
 use App\FinalProgress;
 use Illuminate\Http\Request;
 
@@ -44,9 +46,16 @@ class FinalProgressController extends Controller
      * @param  \App\FinalProgress  $finalProgress
      * @return \Illuminate\Http\Response
      */
-    public function show(FinalProgress $finalProgress)
+    public function show(Request $request, $finalProjectId)
     {
-        //
+        $finalStatusId = FinalStatus::name($request->final_status);
+
+        $finalLogId = FinalLog::whereFinalStatusId($finalStatusId)
+            ->whereFinalProjectId($finalProjectId)->first->id;
+
+        $finalProgress = FinalProgress::whereFinalLogId($finalLogId)->get();
+
+        return response()->json(['data' => $finalProgress]);
     }
 
     /**
