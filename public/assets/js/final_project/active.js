@@ -39,14 +39,7 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-primary progress-detail' id='" + buttonId + "'>Progress</button>";
-            }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.id;
-                return "<button class='btn btn-info detail' id='" + buttonId + "'>Detail</button>";
+                return "<button class='btn btn-primary progress-agreement' id='" + buttonId + "'>Progress</button>";
             }
         },
         {
@@ -57,4 +50,44 @@ let dataTable = $('#final-project-table').DataTable({
             }
         }
     ]
-});
+})
+
+// Verification
+$('#final-project-table tbody').on('click', '.verification', function () {
+    $('#final-project-verification-modal').modal('show')
+})
+
+$('#final-status-table tbody').on('click', '.final-status-check', function () {
+    let id = $(this).attr("id");
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, verified it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                // url: "news-report-image/" + id,
+                // type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Verified!',
+                            'Telah dihapus!',
+                            'success'
+                        )
+                        .then(function () {
+                            // newsReportProposal(finalId, status)
+                        });
+                }
+            });
+        }
+    })
+})
+
+// Agreement
+$('#final-project-table tbody').on('click', '.progress-agreement', function () {
+    $('#final-progress-agreement-modal').modal('show')
+})
