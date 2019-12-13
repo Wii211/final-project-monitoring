@@ -51,6 +51,7 @@
 @endsection
 
 @section('modal')
+@include('modals.final_project.update_active')
 @include('modals.final_project.verification')
 @include('modals.final_project.progress_agreement')
 @include('modals.final_project.detail')
