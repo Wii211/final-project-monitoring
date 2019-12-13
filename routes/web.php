@@ -73,6 +73,9 @@ Route::group(
 
         Route::get('/monitoring', 'FinalProjectMonitoringController@index')
             ->name('monitoring.index');
+
+        Route::get('/student-status/{finalProjectId}', 'FinalLogStudentController@show')
+            ->name('student-status.show');
     }
 );
 
