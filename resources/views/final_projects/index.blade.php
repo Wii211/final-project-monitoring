@@ -22,7 +22,6 @@
                             <th width="10%"></th>
                             <th width="10%"></th>
                             <th width="10%"></th>
-                            <th width="10%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,10 +38,6 @@
                                     data-target="#progressFinalProject">Progress</button>
                             </td>
                             <td>
-                                <button class="btn bg-gradient-info btn-sm w-100" data-toggle="modal"
-                                    data-target="#detailFinalProject">Detail</button>
-                            </td>
-                            <td>
                                 <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
                                     data-target="#detailFinalProject">Update</button>
                             </td>
@@ -56,7 +51,8 @@
 @endsection
 
 @section('modal')
-@include('modals.final_project.progress_view')
+@include('modals.final_project.verification')
+@include('modals.final_project.progress_agreement')
 @include('modals.final_project.detail')
 @endsection
 
