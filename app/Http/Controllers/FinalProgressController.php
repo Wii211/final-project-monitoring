@@ -48,14 +48,20 @@ class FinalProgressController extends Controller
      */
     public function show(Request $request, $finalProjectId)
     {
-        $finalStatusId = FinalStatus::name($request->final_status);
+        try {
+            //code...
 
-        $finalLogId = FinalLog::whereFinalStatusId($finalStatusId)
-            ->whereFinalProjectId($finalProjectId)->first->id;
+            $finalStatusId = FinalStatus::name($request->final_status);
 
-        $finalProgress = FinalProgress::whereFinalLogId($finalLogId)->get();
+            $finalLogId = FinalLog::whereFinalStatusId($finalStatusId)
+                ->whereFinalProjectId($finalProjectId)->first->id;
 
-        return response()->json(['data' => $finalProgress]);
+            $finalProgress = FinalProgress::whereFinalLogId($finalLogId)->get();
+
+            return response()->json(['data' => $finalProgress]);
+        } catch (\Throwable $th) {
+            return response()->json("failed");
+        }
     }
 
     /**
