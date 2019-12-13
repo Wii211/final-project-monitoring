@@ -72,8 +72,8 @@ $('#final-project-add').click(function () {
 });
 
 //Fetch datas for update
-let i = 1;
 $('#final-project-table tbody').on('click', '.update', function () {
+    let bb = 1;
     let id = $(this).attr('id');
 
     $.ajax({
@@ -91,9 +91,9 @@ $('#final-project-table tbody').on('click', '.update', function () {
 
 
             result.data.supervisors.forEach(function (data) {
-                $('#supervisors-' + i).val(data.lecturer_id);
-                $('#supervisors-role-' + i).val(data.role);
-                i++
+                $('#supervisors-' + bb).val(data.lecturer_id);
+                $('#supervisors-role-' + bb).val(data.role);
+                bb++
             })
         }
     })
