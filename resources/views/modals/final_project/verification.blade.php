@@ -19,49 +19,7 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>Pre-proposal</td>
-                                <td>
-                                    <span class="badge badge-warning p-2">Belum diverifikasi</span>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-success final-status-check"><i class="fas fa-flag"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">2</td>
-                                <td>Proposal</td>
-                                <td>
-                                    <span class="badge badge-warning p-2">Belum diverifikasi</span>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td scope="row">3</td>
-                                <td>Revisi Proposal</td>
-                                <td>
-                                    <span class="badge badge-warning p-2">Belum diverifikasi</span>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td scope="row">4</td>
-                                <td>Tugas Akhir</td>
-                                <td>
-                                    <span class="badge badge-warning p-2">Belum diverifikasi</span>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td scope="row">5</td>
-                                <td>Revisi Tugas Akhir</td>
-                                <td>
-                                    <span class="badge badge-warning p-2">Belum diverifikasi</span>
-                                </td>
-                                <td></td>
-                            </tr>
+                        <tbody id="final-status-table-row">
                         </tbody>
                     </table>
                 </div>
