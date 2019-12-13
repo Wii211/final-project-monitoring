@@ -1,15 +1,15 @@
-<div class="modal fade" id="progressFinalProject" tabindex="-1" role="dialog">
+<div class="modal fade" id="final-project-progress-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Progress Pengerjaan</h5>
+                <h5 class="modal-title" id="final-project-progress-title">Progres Pengerjaan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="final-project-progress-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -50,7 +50,7 @@
                             <input type="file" class="form-control-file" id="exampleFormControlFile1">
                         </div>
                     </div>
-                    <button type="button" class="btn bg-gradient-success w-100" data-dismiss="modal">Submit
+                    <button type="submit" class="btn bg-gradient-success w-100" data-dismiss="modal">Submit
                         Progress</button>
                 </form>
             </div>
