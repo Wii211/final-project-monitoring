@@ -41,11 +41,7 @@
                 <hr>
                 <form>
                     <div class="row">
-                        <div class="form-group col-6">
-                            <label for="exampleFormControlInput1">Tanggal</label>
-                            <input type="date" class="form-control" id="exampleFormControlInput1">
-                        </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label for="exampleFormControlInput1">Keterangan</label>
                             <input type="date" class="form-control" id="exampleFormControlInput1">
                         </div>
