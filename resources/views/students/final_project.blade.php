@@ -2,19 +2,19 @@
 
 <!-- Section Start -->
 <!-- If() -->
-@section('title', 'Tugas Akhir')
+@section('title', 'Proposal/Tugas Akhir')
 {{-- {{ dd($data) }} --}}
 @section('content')
 <section class="content">
     <div class="container-fluid">
         @if(!is_null($data))
-            @if($data->checkIsVerify($data->id, "proposal"))
+            @if($data->checkIsVerify($data->id, "pra-proposal"))
                 <div class="card">
                     <div class="card-body p-0">
-                        <table class="table">
+                        <table class="table" id="final-project-table">
                             <thead>
                                 <tr>
-                                    <th colspan="4">Deskripsi Tugas Akhir</th>
+                                    <th colspan="4">Deskripsi Proposal/Tugas Akhir</th>
                                 </tr>
                                 <tr>
                                     <th>Judul</th>
@@ -32,7 +32,7 @@
                                     @endforeach
                                     <td><span class="badge badge-primary p-2">{{ ucfirst($status) }}</span></td>
                                     <td>
-                                    <button class="btn bg-gradient-primary btn-sm w-100 btn-progress" id="{{ $data->id }}" value="{{ $data->id }}">Progress</button>
+                                        <button type="button" class="btn bg-gradient-primary btn-sm w-100 btn-progress progress-input" id="{{ $data->id }}" value="{{ $data->id }}">Progress</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -56,9 +56,9 @@
                                 <tr>
                                     <td>{{ $supervisor->lecturer->name }}</td>
                                     @if($supervisor->role == 1) 
-                                    <td>Pembimbing 1</td>
+                                    <td><span class="badge badge-primary p-2">Dosen Pembimbing 1</span></td>
                                     @else
-                                    <td>Pembimbing 2</td>
+                                    <td><span class="badge badge-info p-2">Dosen Pembimbing 2</span></td>
                                     @endif
                                 </tr>
                                 @endforeach
@@ -79,7 +79,7 @@
                             <tbody>
                                 <tr>
                                     <td>1.</td>
-                                    <td>Pedoman Tugas Akhir</td>
+                                    <td>Pedoman Proposal/Tugas Akhir</td>
                                     <td><a href="#">Download Berkas Lampiran</a> </td>
                                 </tr>
                             </tbody>
@@ -88,8 +88,13 @@
                 </div>
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <div class="p-2 bd-highlight">
-                        <button type="submit" class="btn btn-success mb-2" data-toggle="modal"
-                            data-target="#pengajuanProposal">Ajukan ke Dosen Pembimbing</button>
+                        @if($data->checkIsVerify($data->id, "proposal"))
+                            <button type="submit" class="btn btn-success mb-2" data-toggle="modal"
+                                data-target="#pengajuanProposal">Ajukan Seminar Proposal</button>
+                        @elseif($data->checkIsVerify($data->id, "tugas_akhir"))
+                            <button type="submit" class="btn btn-success mb-2" data-toggle="modal"
+                                data-target="#pengajuanProposal">Ajukan Sidang Tugas Akhir</button>
+                        @endif
                     </div>
                 </div>
                 @foreach($data->finalLogs as $finalLog)
@@ -139,4 +144,8 @@
 @section('modal')
 @include('modals.final_project.progress')
 @include('modals.final_project.detail')
+@endsection
+
+@section('javascript')
+<script type="text/javascript" src="{{ asset('assets/js/student/final_project.js') }}"></script>
 @endsection
