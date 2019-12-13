@@ -37,7 +37,25 @@ class FinalProgressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $finalStatusId = FinalStatus::name($request->final_status);
+
+            $finalProjectId = $request->finalProjectId;
+
+            $finalLogId = FinalLog::whereFinalStatusId($finalStatusId)
+                ->whereFinalProjectId($finalProjectId)->first->id;
+
+            $finalProgress = new FinalProgress([
+                'description' => $request->description,
+                'agreement' => $request->agreement,
+                'final_log_id' => $finalLogId
+            ]);
+            $finalProgress->save();
+        } catch (\Throwable $th) {
+            return response()->json("Failed");
+        }
+        return response()->json("Success");
     }
 
     /**
