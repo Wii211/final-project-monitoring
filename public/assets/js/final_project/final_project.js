@@ -84,6 +84,7 @@ $('#final-project-table tbody').on('click', '.update', function () {
             $('#final-project-title').text("Update Tugas Akhir");
             $('#final-project-action').text("Update");
             $('#final-project-id').val(result.data.id);
+            $('#final-student-id').val(result.data.final_student_id);
 
             $('#title').val(result.data.title);
             $('#description').val(result.data.description);
