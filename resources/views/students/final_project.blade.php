@@ -32,7 +32,7 @@
                                     @endforeach
                                     <td><span class="badge badge-primary p-2">{{ ucfirst($status) }}</span></td>
                                     <td>
-                                        <button type="button" class="btn bg-gradient-primary btn-sm w-100 btn-progress progress-input" id="{{ $data->id }}" value="{{ $data->id }}">Progress</button>
+                                        <button type="button" class="btn bg-gradient-primary btn-sm w-100 btn-progress progress-input" id="{{ $data->id }}" value="{{ $status }}">Progress</button>
                                     </td>
                                 </tr>
                             </tbody>
