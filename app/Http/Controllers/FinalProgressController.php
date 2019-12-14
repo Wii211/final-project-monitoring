@@ -117,6 +117,6 @@ class FinalProgressController extends Controller
         } catch (\Throwable $th) {
             return response()->json('Failed');
         }
-        return response()->json("Failed");
+        return response()->json("Success");
     }
 }
