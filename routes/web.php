@@ -24,6 +24,8 @@ Route::group(
         Route::post('/final_registration', 'FinalRegistrationController@store')
             ->name('final_registration.store');
 
+        Route::post('/project-progress', 'FinalProgressController@store')
+            ->name('project-progress.store');
         Route::get('/project-progress/{finalProjectId}', 'FinalProgressController@show')
             ->name('project-progress.show');
 

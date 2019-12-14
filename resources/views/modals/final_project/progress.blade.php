@@ -15,43 +15,28 @@
                                 <th>#</th>
                                 <th>Tanggal</th>
                                 <th>Deskripsi</th>
-                                <th><i class="fas fa-file-word"></i> File</th>
                                 <th>Persetujuan<br>Pembimbing</th>
                                 <th width="5%"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>21-01-2019</td>
-                                <td>Konsultasi Pra-Proposal</td>
-                                <td>File</td>
-                                <td>
-                                    <span class="badge badge-success p-2">Disetujui</span>
-                                </td>
-                                <td>
-                                    <button class="btn bg-gradient-danger btn-sm w-100"><span
-                                            class="fas fa-times"></span></button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
 
                 </div>
                 <hr>
-                <form>
+                <form id="final-project-progress-form">
+                    @csrf
                     <div class="row">
                         <div class="form-group col-12">
-                            <label for="exampleFormControlInput1">Keterangan</label>
-                            <input type="date" class="form-control" id="exampleFormControlInput1">
-                        </div>
-                        <div class="form-group col-12">
-                            <label for="exampleFormControlInput1">Hasil</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <label for="progress-description">Deskripsi Progres</label>
+                            <textarea class="form-control" name="description" id="progress-description" rows="5"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn bg-gradient-success w-100" data-dismiss="modal">Submit
-                        Progress</button>
+                    <input type="hidden" name="final_status" id="final-project-status">
+                    <input type="hidden" name="final_project_id" id="final-project-progress-id">
+                    <button type="submit" class="btn bg-gradient-success w-100">Submit
+                        Progres</button>
                 </form>
             </div>
             <div class="modal-footer">

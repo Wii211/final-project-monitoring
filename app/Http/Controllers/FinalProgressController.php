@@ -41,14 +41,13 @@ class FinalProgressController extends Controller
 
             $finalStatusId = FinalStatus::name($request->final_status);
 
-            $finalProjectId = $request->finalProjectId;
+            $finalProjectId = $request->final_project_id;
 
             $finalLogId = FinalLog::whereFinalStatusId($finalStatusId)
-                ->whereFinalProjectId($finalProjectId)->first->id;
+                ->whereFinalProjectId($finalProjectId)->first()->id;
 
             $finalProgress = new FinalProgress([
                 'description' => $request->description,
-                'agreement' => $request->agreement,
                 'final_log_id' => $finalLogId
             ]);
             $finalProgress->save();
@@ -72,7 +71,7 @@ class FinalProgressController extends Controller
             $finalStatusId = FinalStatus::name($request->final_status);
 
             $finalLogId = FinalLog::whereFinalStatusId($finalStatusId)
-                ->whereFinalProjectId($finalProjectId)->first->id;
+                ->whereFinalProjectId($finalProjectId)->first()->id;
 
             $finalProgress = FinalProgress::whereFinalLogId($finalLogId)->get();
 
