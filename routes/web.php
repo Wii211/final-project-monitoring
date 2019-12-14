@@ -27,6 +27,10 @@ Route::group(
         Route::get('/project-progress/{finalProjectId}', 'FinalProgressController@show')
             ->name('project-progress.show');
 
+        Route::delete('/project-progress/{finalProjectId}', 'FinalProgressController@show')
+            ->name('project-progress.destroy');
+
+
         Route::group(
             ['middleware' => ['auth', 'verify']],
             function () {

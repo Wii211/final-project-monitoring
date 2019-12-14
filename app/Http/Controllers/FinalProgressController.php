@@ -111,8 +111,13 @@ class FinalProgressController extends Controller
      * @param  \App\FinalProgress  $finalProgress
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FinalProgress $finalProgress)
+    public function destroy($id)
     {
-        //
+        try {
+            FinalProgress::destroy($id);
+        } catch (\Throwable $th) {
+            return response()->json('Failed');
+        }
+        return response()->json("Failed");
     }
 }
