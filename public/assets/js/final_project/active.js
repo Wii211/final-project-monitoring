@@ -59,14 +59,14 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.final_project.id;
-                return "<button class='btn btn-primary progress-proposal fs-12' id='" + buttonId + "'>Progress Proposal</button>";
+                return "<button class='btn btn-primary progress-proposal fs-12' id='" + buttonId + "' value='proposal'>Progress Proposal</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.final_project.id;
-                return "<button class='btn btn-primary progress-final-project fs-12' id='" + buttonId + "'>Progress TA</button>";
+                return "<button class='btn btn-primary progress-final-project fs-12' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
             }
         },
         {
@@ -148,8 +148,7 @@ function verification(id){
 
 // Verificationx
 $('#final-project-table tbody').on('click', '.verification', function () {
-    let id = $(this).attr("id");
-
+    let id = $(this).attr("id")
     verification(id)
 })
 
@@ -230,7 +229,7 @@ function progressIndex(id, status) {
                         '</tr>'
 
                     no++
-                    $('#ffinal-progress-agreement-table tbody').append(data)
+                    $('#final-progress-agreement-table tbody').append(data)
                 })
             }
         }
@@ -240,7 +239,8 @@ function progressIndex(id, status) {
 // Agreement
 $('#final-project-table tbody').on('click', '.progress-proposal', function () {
     let id = $(this).attr("id")
-    progressIndex(id, "proposal")
+    let status = $(this).val()
+    progressIndex(id, status)
 })
 
 
@@ -295,4 +295,48 @@ $(document).on('submit', '#final-project-active-form', function (e) {
             }
         });
     }
+})
+
+//Progress Agreement
+$('#final-progress-agreement-table tbody').on('click', '.progress-agreement-check', function () {
+    let id = $(this).attr("id")
+    let finalId = $('#final-project-verification-id').val()
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, verified it!'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+            $.ajax({
+                url: "student-status/" + id + "/verify",
+                type: 'POST',
+                data: {
+                    '_method': 'PUT', 
+                    'is_verification': 1
+                }, 
+                success: function () {
+                    Swal.fire(
+                            'Verified!',
+                            'Telah diverifikasi!',
+                            'success'
+                        )
+                        .then(function () {
+                            verification(finalId)
+                        });
+                }
+            });
+        }
+    })
 })
