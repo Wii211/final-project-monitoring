@@ -13,7 +13,6 @@ function progressIndex(id, status) {
             'final_status': status
         },
         success: function (result) {
-            console.log(result)
             $('#final-project-status').val(status)
             $('#final-project-progress-id').val(id)
             $('#final-project-progress-modal').modal('show')
