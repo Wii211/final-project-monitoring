@@ -19,7 +19,8 @@
                             <th>Nama</th>
                             <th>Judul</th>
                             <th>Status</th>
-                            <th width="10%"></th>
+                            <th></th>
+                            <th></th>
                             <th width="10%"></th>
                             <th width="10%"></th>
                         </tr>
@@ -35,7 +36,11 @@
                             </td>
                             <td>
                                 <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#progressFinalProject">Progress</button>
+                                    data-target="#progressFinalProject">Progress Proposal</button>
+                            </td>
+                            <td>
+                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
+                                    data-target="#progressFinalProject">Progress Tugas Akhir</button>
                             </td>
                             <td>
                                 <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
