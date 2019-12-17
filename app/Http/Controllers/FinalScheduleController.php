@@ -175,8 +175,19 @@ class FinalScheduleController extends Controller
      * @param  \App\FinalSchedule  $finalSchedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FinalSchedule $finalSchedule)
+    public function destroy(Request $request, $finalScheduleId)
     {
-        //
+        try {
+            DB::transaction(function () use ($request, $finalScheduleId) {
+                FinalSchedule::destroy($finalScheduleId);
+
+                $finalProjectId = $request->final_project_id;
+
+                $examiners = Examiner::whereFinalProjectId($finalProjectId)->delete();
+            });
+        } catch (\Throwable $th) {
+            return response()->json("Failed");
+        }
+        return response()->json("Success");
     }
 }
