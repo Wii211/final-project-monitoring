@@ -84,19 +84,19 @@ let dataTable = $('#final-schedule-table').DataTable({
 
 
 // Store
-$(document).on('submit', '#preproposal-form', function (e) {
+$(document).on('submit', '#final-schedule-form', function (e) {
     e.preventDefault()
-    
-    let action = $('#preproposal-action').text();
-    let id = $('#preproposal-id').val();
+
+    let id = $('#final-schedule-id').val();
+    let action = $('#final-schedule-button').text();
     let url;
 
     let formData = new FormData(this);
 
-    if (action == "Ajukan") {
-        url = "pre_proposal";
+    if (action == "Tambah") {
+        url = "../final-schedules";
     } else if (action == "Update") {
-        url = "pre_proposal/" + id;
+        url = "../final-schedules/" + id;
         formData.append("_method", "PUT");
     }
 
@@ -107,8 +107,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
             onBeforeOpen: () => {
                 Swal.showLoading()
             }
-        });
-
+        })
         $.ajax({
             url: url,
             type: "POST",
@@ -116,7 +115,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
             contentType: false,
             processData: false,
             success: function (data) {
-                $('#preproposal-form')[0].reset();
+                $('#final-schedule-form')[0].reset();
 
                 if (data !== "Failed") {
                     Swal.fire({
@@ -126,9 +125,9 @@ $(document).on('submit', '#preproposal-form', function (e) {
                             timer: 1500
                         })
                         .then(function () {
-                            $('#preproposal-modal').modal('hide');
-                            window.location.reload();
-                        });
+                            $('#final-schedule-modal').modal('hide');
+                            dataTable.ajax.reload();
+                        })
                 } else {
                     Swal.fire({
                         type: 'error',
