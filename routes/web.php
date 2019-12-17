@@ -77,6 +77,8 @@ Route::group(
 
         Route::resource('dead-line', 'DeadlineScheduleController');
 
+        Route::resource('finished-project', 'FinishedFinalProjectController');
+
 
         //Jadwal Seminar/Sidang
         Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
