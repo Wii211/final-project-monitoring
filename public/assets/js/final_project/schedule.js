@@ -60,28 +60,47 @@ let dataTable = $('#final-schedule-table').DataTable({
         url: "../final-schedules"
     },
     "columns": [{
-            data: 'id'
-        }, 
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let status = full.final_log.final_status.name
+                let title = full.final_log.final_project.title
+
+                return title + ' <span class="badge badge-primary p-2">' + status + '</span>'
+            }
+        },
         {
-            data: 'id'
-        }, 
-        {
-            data: 'id'
-        }, 
-        {
-            data: 'id'
+            data: 'final_log.final_project.final_student.name'
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let id = full.final_project.id;
-                return "<button class='btn btn-warning update' id='" + id + "'>Update</button>" +
-                    "<button class='btn btn-danger delete mt-3' id='" + id + "'>Delete</button>";
+                return '<table class="table m-0">' +
+                '<tr><th>Ruangan</th><td>' + full.place + '</td></tr>' +
+                '<tr><th>Tanggal</th><td>' + full.scheduled + '</td></tr></table>'
+            }
+        },
+        {
+            data: 'final_log.final_project.examiners',
+            "render": function(value, type, row){
+                let val = ''
+                val += '<table class="table m-0">'
+                value.forEach(function(data){
+                    val += '<tr><th>Pembahas ' + data.role + '</th><td>' + data.lecturer.name + '</td></tr>'
+                })
+                val += '</table>'
+                return val
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let id = full.id;
+                return "<button class='btn btn-warning update w-100' id='" + id + "'>Update</button>" +
+                    "<button class='btn btn-danger delete mt-3 w-100' id='" + id + "'>Delete</button>";
             }
         }
     ]
 })
-
 
 // Store
 $(document).on('submit', '#final-schedule-form', function (e) {
