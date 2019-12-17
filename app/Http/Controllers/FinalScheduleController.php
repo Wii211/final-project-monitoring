@@ -48,7 +48,7 @@ class FinalScheduleController extends Controller
                 $finalProjectId = $request->final_project_id;
 
                 $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
-                    ->whereFinalStatus(FinalStatus::name($request->status))->first()->id;
+                    ->whereFinalStatusId(FinalStatus::name($request->status))->first()->id;
 
                 $finalSchedule = new FinalSchedule([
                     'place' => $request->place,
