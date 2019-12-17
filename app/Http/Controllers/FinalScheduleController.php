@@ -18,7 +18,10 @@ class FinalScheduleController extends Controller
      */
     public function index()
     {
-        $finalSchedule = FinalSchedule::with(['finalLog.finalProject.examiners', 'finalLog.finalStatus'])
+        $finalSchedule = FinalSchedule::with([
+            'finalLog.finalProject.examiners',
+            'finalLog.finalStatus', 'finalLog.finalProject.finalStudent'
+        ])
             ->latest()->get();
 
         return response()->json(['data' => $finalSchedule]);
@@ -117,9 +120,54 @@ class FinalScheduleController extends Controller
      * @param  \App\FinalSchedule  $finalSchedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FinalSchedule $finalSchedule)
+    public function update(Request $request, $finalScheduleId)
     {
-        //
+        try {
+            DB::transaction(function () use ($request, $finalScheduleId) {
+
+                $finalProjectId = $request->final_project_id;
+
+                $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
+                    ->whereFinalStatusId(FinalStatus::name($request->status))->first()->id;
+
+
+
+                $finalSchedule = new FinalSchedule([
+                    'place' => $request->place,
+                    'scheduled' => $request->scheduled,
+                    'final_log_id' => $finalLogId
+                ]);
+
+                $finalSchedule->save();
+
+                $examiners1 = new Examiner([
+                    'role' => $request->examiner1['role'],
+                    'lecturer_id' => $request->examiner1['lecturer_id'],
+                    'final_project_id' => $finalProjectId
+                ]);
+
+                $examiners1->save();
+
+                $examiners2 = new Examiner([
+                    'role' => $request->examiner2['role'],
+                    'lecturer_id' => $request->examiner2['lecturer_id'],
+                    'final_project_id' => $finalProjectId
+                ]);
+
+                $examiners2->save();
+
+                $examiners3 = new Examiner([
+                    'role' => $request->examiner3['role'],
+                    'lecturer_id' => $request->examiner3['lecturer_id'],
+                    'final_project_id' => $finalProjectId
+                ]);
+
+                $examiners3->save();
+            });
+        } catch (\Throwable $th) {
+            return response()->json("Failed");
+        }
+        return response()->json("Success");
     }
 
     /**
