@@ -19,7 +19,7 @@
                             <th>Nama</th>
                             <th>Judul</th>
                             <th>Status</th>
-                            <th></th>
+                            <th>Progress</th>
                             <th></th>
                             <th width="10%"></th>
                             <th width="10%"></th>
