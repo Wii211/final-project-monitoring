@@ -15,7 +15,7 @@
                                     <th>#</th>
                                     <th>Tanggal</th>
                                     <th>Deskripsi</th>
-                                    <th>Persetujuan<br>Pembimbing</th>
+                                    <th>Verifikasi<br>Koordinator</th>
                                     <th width="5%">Action</th>
                                 </tr>
                             </thead>
@@ -48,6 +48,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="final-project-agreement-id">
+                    <input type="hidden" id="final-project-agreement-status">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

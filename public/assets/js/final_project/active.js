@@ -48,7 +48,6 @@ let dataTable = $('#final-project-table').DataTable({
                 let status
 
                 full.final_project.final_logs.forEach(function (data) {
-                    console.log(data.final_status.name)
                     status = data.final_status.name
                 })
 
@@ -66,7 +65,7 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.final_project.id;
-                return "<button class='btn btn-primary progress-final-project fs-12' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
+                return "<button class='btn btn-primary progress-proposal fs-12' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
             }
         },
         {
@@ -219,12 +218,15 @@ function progressIndex(id, status) {
             $('#final-progress-agreement-table tbody').html('')
             if (result !== "failed") {
                 result.data.forEach(function (result) {
-                    let status
+                    let status, button
 
                     if (result.agreement === 1) {
                         status = '<span class="badge badge-success p-2">Telah disetujui</span>'
+                        button = ''
                     } else {
                         status = '<span class="badge badge-danger p-2">Belum disetujui</span>'
+                        button = '<button class="btn bg-gradient-success btn-sm w-100 progress-agreement-check" id="' + result.id + '" >' +
+                        '<span class="fas fa-check"></span></button>'
                     }
 
                     let data = '<tr>' +
@@ -232,8 +234,7 @@ function progressIndex(id, status) {
                         '<td>' + result.created_at + '</td>' +
                         '<td>' + result.description + '</td>' +
                         '<td>' + status + '</td>' +
-                        '<td><button class="btn bg-gradient-success btn-sm w-100 progress-agreement-check" id="' + result.id + '">' +
-                        '<span class="fas fa-check"></span></button></td>' +
+                        '<td>' + button + '</td>' +
                         '</tr>'
 
                     no++
@@ -248,7 +249,12 @@ function progressIndex(id, status) {
 $('#final-project-table tbody').on('click', '.progress-proposal', function () {
     let id = $(this).attr("id")
     let status = $(this).val()
+    
+    $('#final-project-agreement-id').val(id)
+    $('#final-project-agreement-status').val(status)
+
     progressIndex(id, status)
+
 })
 
 
@@ -308,7 +314,8 @@ $(document).on('submit', '#final-project-active-form', function (e) {
 //Progress Agreement
 $('#final-progress-agreement-table tbody').on('click', '.progress-agreement-check', function () {
     let id = $(this).attr("id")
-    let finalId = $('#final-project-verification-id').val()
+    let finalId = $('#final-project-agreement-id').val()
+    let status = $('#final-project-agreement-status').val()
 
     Swal.fire({
         title: 'Are you sure?',
@@ -317,7 +324,7 @@ $('#final-progress-agreement-table tbody').on('click', '.progress-agreement-chec
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, verified it!'
+        confirmButtonText: 'Yes, agreed it!'
     }).then((result) => {
         if (result.value) {
             Swal.fire({
@@ -328,20 +335,20 @@ $('#final-progress-agreement-table tbody').on('click', '.progress-agreement-chec
                 }
             })
             $.ajax({
-                url: "student-status/" + id + "/verify",
+                url: "project-progress/" + id + "/update",
                 type: 'POST',
                 data: {
-                    '_method': 'PUT', 
-                    'is_verification': 1
+                    '_method': 'PUT',
+                    'agreement': 1
                 }, 
                 success: function () {
                     Swal.fire(
                             'Verified!',
-                            'Telah diverifikasi!',
+                            'Telah disetujui!',
                             'success'
                         )
                         .then(function () {
-                            verification(finalId)
+                            progressIndex(finalId, status)
                         });
                 }
             });
