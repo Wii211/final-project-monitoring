@@ -16,15 +16,15 @@
             {{-- <button type="button" class="btn bg-gradient-success mb-2" id="convert">
                 <i class="fas fa-images"></i>
                 Export to Image</button> --}}
-            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal" id="final-schedule-table"
-                data-target="#scheduleFinalProject">Tentukan Seminar/Sidang</button>
+            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal" id="final-schedule-add"
+                data-target="#final-schedule-modal">Tentukan Seminar/Sidang</button>
         </div>
         <div class="mb-2">
         <div id="result"></div>
         </div>
         <div class="card">
             <div class="card-body">
-                <table class="table table-bordered" id="final-schedule-table">
+                <table class="table table-responsive w-100" id="final-schedule-table">
                     <thead>
                         <tr>
                             <th width="30%">Judul</th>
@@ -32,17 +32,31 @@
                             <th>Tempat Tanggal Seminar</th>
                             <th width="30%">Dosen Penguji</th>
                             <th width="5%"></th>
-                            <th width="5%"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {{-- <tr>
                             <td>Hey aspiring content creators, submit demo musik kamu dan dapatkan kesempatan menangin
                                 HP Pavilion x360, serta mentoring dari Eka.e</td>
                             <td>Winardi Chandra</td>
-                            <td>A16, 29-02-2022. Pukul 00:00</td>
                             <td class="p-0">
-                                <table class="table table-bordered m-0">
+                                <table class="table m-0">
+                                    <tr>
+                                        <th>Ruangan</th>
+                                        <td>A16</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <td>29-02-2022</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Waktu</th>
+                                        <td>00:00</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="p-0">
+                                <table class="table m-0">
                                     <tr>
                                         <th>Ketua</th>
                                         <td>M. Winarto Ramadhani</td>
@@ -60,12 +74,10 @@
                             <td>
                                 <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
                                     data-target="#updateProposal">Update</button>
+                                <button class="btn bg-gradient-danger btn-sm w-100 mt-3" data-toggle="modal"
+                                data-target="#updateProposal">Delete</button>
                             </td>
-                            <td>
-                                <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Delete</button>
-                            </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
