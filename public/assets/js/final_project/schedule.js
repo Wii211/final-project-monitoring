@@ -140,7 +140,7 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                 if (data !== "Failed") {
                     Swal.fire({
                             type: 'success',
-                            title: data.success,
+                            title: 'Data telah ditambahkan!',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -151,7 +151,7 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: data.error,
+                        title: 'Gagal menambahkan data!',
                         showConfirmButton: false,
                         timer: 1500
                     })
