@@ -19,7 +19,7 @@ class FinalScheduleController extends Controller
     public function index()
     {
         $finalSchedule = FinalSchedule::with([
-            'finalLog.finalProject.examiners',
+            'finalLog.finalProject.examiners.lecturer',
             'finalLog.finalStatus', 'finalLog.finalProject.finalStudent'
         ])
             ->latest()->get();
@@ -97,9 +97,14 @@ class FinalScheduleController extends Controller
      * @param  \App\FinalSchedule  $finalSchedule
      * @return \Illuminate\Http\Response
      */
-    public function show(FinalSchedule $finalSchedule)
+    public function show($finalScheduleId)
     {
-        //
+        $finalSchedule = FinalSchedule::with([
+            'finalLog.finalProject.examiners',
+            'finalLog.finalStatus', 'finalLog.finalProject.finalStudent'
+        ])->findOrFail($finalScheduleId);
+
+        return response()->json($finalSchedule);
     }
 
     /**
@@ -130,39 +135,33 @@ class FinalScheduleController extends Controller
                 $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
                     ->whereFinalStatusId(FinalStatus::name($request->status))->first()->id;
 
+                $finalSchedule =  FinalSchedule::findOrFail($finalScheduleId)
+                    ->update([
+                        'place' => $request->place,
+                        'scheduled' => $request->scheduled,
+                        'final_log_id' => $finalLogId
+                    ]);
 
+                $examiners1 = Examiner::findOrFail($request->examiner1['id'])
+                    ->update([
+                        'role' => $request->examiner1['role'],
+                        'lecturer_id' => $request->examiner1['lecturer_id'],
+                        'final_project_id' => $finalProjectId
+                    ]);
 
-                $finalSchedule = new FinalSchedule([
-                    'place' => $request->place,
-                    'scheduled' => $request->scheduled,
-                    'final_log_id' => $finalLogId
-                ]);
+                $examiners2 = Examiner::findOrFail($request->examiner2['id'])
+                    ->update([
+                        'role' => $request->examiner2['role'],
+                        'lecturer_id' => $request->examiner2['lecturer_id'],
+                        'final_project_id' => $finalProjectId
+                    ]);
 
-                $finalSchedule->save();
-
-                $examiners1 = new Examiner([
-                    'role' => $request->examiner1['role'],
-                    'lecturer_id' => $request->examiner1['lecturer_id'],
-                    'final_project_id' => $finalProjectId
-                ]);
-
-                $examiners1->save();
-
-                $examiners2 = new Examiner([
-                    'role' => $request->examiner2['role'],
-                    'lecturer_id' => $request->examiner2['lecturer_id'],
-                    'final_project_id' => $finalProjectId
-                ]);
-
-                $examiners2->save();
-
-                $examiners3 = new Examiner([
-                    'role' => $request->examiner3['role'],
-                    'lecturer_id' => $request->examiner3['lecturer_id'],
-                    'final_project_id' => $finalProjectId
-                ]);
-
-                $examiners3->save();
+                $examiners3 = Examiner::findOrFail($request->examiner3['id'])
+                    ->update([
+                        'role' => $request->examiner3['role'],
+                        'lecturer_id' => $request->examiner3['lecturer_id'],
+                        'final_project_id' => $finalProjectId
+                    ]);
             });
         } catch (\Throwable $th) {
             return response()->json("Failed");
