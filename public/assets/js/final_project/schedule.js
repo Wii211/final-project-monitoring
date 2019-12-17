@@ -171,14 +171,14 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
         url: "../final-schedules/" + id,
         dataType: "json",
         success: function (result) {
+
             $('#final-schedule-modal').modal('show')
             $('#final-schedule-title').text("Update Jenis Jadwal Tugas Akhir")
             $('#final-schedule-button').text("Update")
             $('#final-project-schedule-id').val(result.final_log.final_project_id)
 
-            let dateobj = new Date(result.scheduled)
-
-            $('#final-schedule').val(dateobj.toISOString())
+            $('#final-schedule-date').val(result.date)
+            $('#final-schedule-time').val(result.hour)
             $('#place').val(result.place)
             $('#final-schedule-id').val(result.id)
 
