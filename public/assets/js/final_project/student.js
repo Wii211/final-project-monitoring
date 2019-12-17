@@ -18,6 +18,20 @@ let dataTable = $('#finalStudentTable').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return "<button class='btn btn-info transcript fs-12' id='" + buttonId + "'>Transkrip</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
+                return "<button class='btn btn-info latest-study-plan fs-12' id='" + buttonId + "'>SKS Terakhir</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
                 let status = full.is_verified;
                 let buttonId = full.id;
                 if (status == 0) {
@@ -30,6 +44,16 @@ let dataTable = $('#finalStudentTable').DataTable({
     ]
 });
 
+$('#finalStudentTable tbody').on('click', '.transcript', function () {
+    let id = $(this).attr("id")
+
+    $.ajax({
+        url: "students/" + id,
+        success: function (data) {
+            console.log(data)
+        }
+    })
+})
 
 //Update
 $('#finalStudentTable tbody').on('click', '.verification', function () {
