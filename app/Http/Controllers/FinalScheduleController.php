@@ -61,7 +61,7 @@ class FinalScheduleController extends Controller
                 $examiners1 = new Examiner([
                     'role' => $request->examiner1['role'],
                     'lecturer_id' => $request->examiner1['lecturer_id'],
-                    'final_log_id' => $finalLogId
+                    'final_project_id' => $finalProjectId
                 ]);
 
                 $examiners1->save();
@@ -69,7 +69,7 @@ class FinalScheduleController extends Controller
                 $examiners2 = new Examiner([
                     'role' => $request->examiner2['role'],
                     'lecturer_id' => $request->examiner2['lecturer_id'],
-                    'final_log_id' => $finalLogId
+                    'final_project_id' => $finalProjectId
                 ]);
 
                 $examiners2->save();
@@ -77,7 +77,7 @@ class FinalScheduleController extends Controller
                 $examiners3 = new Examiner([
                     'role' => $request->examiner3['role'],
                     'lecturer_id' => $request->examiner3['lecturer_id'],
-                    'final_log_id' => $finalLogId
+                    'final_project_id' => $finalProjectId
                 ]);
 
                 $examiners3->save();
