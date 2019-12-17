@@ -30,9 +30,13 @@ class ExaminerController extends Controller
             $lecturerId[] = [$supervisor->lecturer_id];
         }
 
-        $lecturers = Lecturer::whereNotIn('id', $lecturerId)->primary($primary)->get();
+        $lecturers = Lecturer::whereNotIn('id', $lecturerId);
 
-        return response()->json($lecturers);
+        if ($primary === 'true') {
+            $lecturers = $lecturers->primary($primary);
+        }
+
+        return response()->json($lecturers->get());
     }
 
     /**
