@@ -136,9 +136,8 @@ $(document).on('submit', '#final-schedule-form', function (e) {
             contentType: false,
             processData: false,
             success: function (data) {
-                $('#final-schedule-form')[0].reset();
                 
-                if (data.error === undefined || data !== "Failed") {
+                if (data.error === undefined && data !== "Failed") {
                     Swal.fire({
                             type: 'success',
                             title: 'Data telah ditambahkan!',
@@ -147,6 +146,7 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                         })
                         .then(function () {
                             $('#final-schedule-modal').modal('hide');
+                            $('#final-schedule-form')[0].reset();
                             dataTable.ajax.reload();
                         })
                 } else {
