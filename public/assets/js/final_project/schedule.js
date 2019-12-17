@@ -52,6 +52,7 @@ $('#final-schedule-add').click(function () {
     $('#final-schedule-form')[0].reset()
     $('#final-schedule-title').text("Tambah Jadwal Seminar Proposal/Sidang TA")
     $('#final-schedule-button').text("Tambah")
+    $('#final-schedule-requirement').css('display', 'block')
 })
 
 let dataTable = $('#final-schedule-table').DataTable({
@@ -176,6 +177,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
             $('#final-schedule-title').text("Update Jenis Jadwal Tugas Akhir")
             $('#final-schedule-button').text("Update")
             $('#final-project-schedule-id').val(result.final_log.final_project_id)
+            $('#final-schedule-requirement').css('display', 'none')
 
             $('#final-schedule-date').val(result.date)
             $('#final-schedule-time').val(result.hour)
