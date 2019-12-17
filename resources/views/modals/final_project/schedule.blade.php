@@ -7,57 +7,56 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="final-schedule-form">
+            <form id="final-schedule-form">
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="final-schedule-type">Jenis Jadwal Tugas Akhir</label>
-                        <select class="form-control form-control-sm" id="final-schedule-type">
-                            <option value="seminar">Seminar Proposal</option>
-                            <option value="sidang">Sidang Tugas Akhir</option>
+                        <select class="form-control form-control-sm" id="final-schedule-type" name="status" required>
+                            <option value="proposal">Seminar Proposal</option>
+                            <option value="tugas_akhir">Sidang Tugas Akhir</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="final-project-schedule-id">Judul Tugas Akhir</label>
-                        <select class="form-control form-control-sm" id="final-project-schedule-id">
+                        <select class="form-control form-control-sm" id="final-project-schedule-id" name="final_project_id" required>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="date">Tanggal</label>
-                        <input type="date" class="form-control form-control-sm" id="date">
-                    </div>
-                    <div class="form-group">
-                        <label for="time">Waktu</label>
-                        <input type="time" class="form-control form-control-sm" id="time">
+                        <label for="date">Tanggal & Waktu</label>
+                        <input type="datetime-local" class="form-control form-control-sm" id="date" name="scheduled" required>
                     </div>
                     <div class="form-group">
                         <label for="place">Tempat Seminar</label>
-                        <input type="text" class="form-control form-control-sm" id="place">
+                        <input type="text" class="form-control form-control-sm" id="place" name="place" required>
                     </div>
                     <div class="form-group">
                         <label for="first-examiner-name">Dosen Penguji Pertama</label>
-                        <input type="hidden" name="examiner[role]" id="first-examiner-role">
-                        <select class="form-control form-control-sm" name="examiner[lecturer_id]" id="first-examiner-name">
+                        <input type="hidden" name="examiners[role]" id="first-examiner-role" value="1">
+                        <select class="form-control form-control-sm" name="examiners[lecturer_id]"
+                            id="first-examiner-name" required>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="second-examiner-name">Dosen Penguji Kedua</label>
-                        <input type="hidden" name="examiner[role]" id="second-examiner-role">
-                        <select class="form-control form-control-sm" name="examiner[lecturer_id]" id="second-examiner-name">
+                        <input type="hidden" name="examiners[role]" id="second-examiner-role" value="2">
+                        <select class="form-control form-control-sm" name="examiners[lecturer_id]"
+                            id="second-examiner-name" required>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="third-examiner-name">Dosen Penguji Ketiga</label>
-                        <input type="hidden" name="examiner[role]" id="third-examiner-role">
-                        <select class="form-control form-control-sm" name="examiner[lecturer_id]" id="third-examiner-name">
+                        <input type="hidden" name="examiner[role]" id="third-examiner-role" value="3">
+                        <select class="form-control form-control-sm" name="examiner[lecturer_id]"
+                            id="third-examiner-name" required>
                         </select>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <input type="hidden" id="final-schedule-id">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="final-schedule-button">Ajukan</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="final-schedule-id">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="final-schedule-button">Ajukan</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
