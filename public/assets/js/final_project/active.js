@@ -95,6 +95,7 @@ $('#final-project-table tbody').on('click', '.update', function () {
         url: "../data/final_project/" + id,
         dataType: "json",
         success: function (result) {
+            console.log(result)
             $('#final-project-active-modal').modal('show')
             $('#final-project-active-title').text("Update Tugas Akhir")
             $('#final-project-active-id').val(result.data.id)
@@ -103,11 +104,18 @@ $('#final-project-table tbody').on('click', '.update', function () {
 
             $('#title-active').val(result.data.title)
 
-            result.data.supervisors.forEach(function (data) {
-                $('#supervisors-' + i).val(data.lecturer_id)
-                $('#supervisors-role-' + i).val(data.role)
-                i++
-            })
+            if(result.data.supervisors.length !== 0){
+                result.data.supervisors.forEach(function (data) {
+                    $('#supervisors-' + i).val(data.lecturer_id)
+                    $('#supervisors-role-' + i).val(data.role)
+                    i++
+                })
+            } else {
+                $('#supervisors-1').val('')
+                $('#supervisors-2').val('')
+                $('#supervisors-role-1').val('')
+                $('#supervisors-role-2').val('')
+            }
         }
     })
 });
