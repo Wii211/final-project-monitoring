@@ -218,7 +218,7 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                 url: "../final-schedules/" + id,
                 type: 'DELETE',
                 data: {
-                    'final_student_id': finalId
+                    'final_project_id': finalId
                 }, 
                 success: function () {
                     Swal.fire(
