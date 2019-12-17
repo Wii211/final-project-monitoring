@@ -183,7 +183,11 @@ class FinalScheduleController extends Controller
 
                 $finalProjectId = $request->final_project_id;
 
-                $examiners = Examiner::whereFinalProjectId($finalProjectId)->delete();
+                $examiners = Examiner::whereFinalProjectId($finalProjectId)->get();
+
+                foreach ($examiners as $examiner) {
+                    Examiner::destroy($examiner->id);
+                }
             });
         } catch (\Throwable $th) {
             return response()->json("Failed");
