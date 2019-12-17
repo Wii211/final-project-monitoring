@@ -1,3 +1,9 @@
+$.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 function progressIndex(id, status) {
     let no = 1
 
@@ -7,7 +13,6 @@ function progressIndex(id, status) {
             'final_status': status
         },
         success: function (result) {
-            console.log(result)
             $('#final-project-status').val(status)
             $('#final-project-progress-id').val(id)
             $('#final-project-progress-modal').modal('show')
@@ -23,14 +28,14 @@ function progressIndex(id, status) {
                     }
 
                     let data = '<tr>' +
-                    '<td>' + no + '</td>' +
-                    '<td>' + result.created_at + '</td>' +
-                    '<td>' + result.description + '</td>' +
-                    '<td>' + status + '</td>' +
-                    '<td><button class="btn bg-gradient-danger btn-sm w-100 progress-delete">' + 
-                    '<span class="fas fa-times"></span></button></td>' + 
-                    '</tr>'
-                    
+                        '<td>' + no + '</td>' +
+                        '<td>' + result.created_at + '</td>' +
+                        '<td>' + result.description + '</td>' +
+                        '<td>' + status + '</td>' +
+                        '<td><button class="btn bg-gradient-danger btn-sm w-100 progress-delete" id="' + result.id + '">' +
+                        '<span class="fas fa-times"></span></button></td>' +
+                        '</tr>'
+
                     no++
                     $('#final-project-progress-table tbody').append(data)
                 })
@@ -109,9 +114,17 @@ $('#final-project-progress-table tbody').on('click', '.progress-delete', functio
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+
             $.ajax({
-                // url: "news-report-image/" + id,
-                // type: 'DELETE',
+                url: "project-progress/" + id,
+                type: 'DELETE',
                 success: function () {
                     Swal.fire(
                             'Deleted!',

@@ -15,7 +15,6 @@
                                     <th>#</th>
                                     <th>Tanggal</th>
                                     <th>Deskripsi</th>
-                                    <th><i class="fas fa-file-word"></i> File</th>
                                     <th>Persetujuan<br>Pembimbing</th>
                                     <th width="5%">Action</th>
                                 </tr>
@@ -25,7 +24,6 @@
                                     <td>1</td>
                                     <td>21-01-2019</td>
                                     <td>Konsultasi Pra-Proposal</td>
-                                    <td>File</td>
                                     <td>
                                         <span class="badge badge-success p-2">Telah Disetujui</span>
                                     </td>
@@ -37,7 +35,6 @@
                                     <td>2</td>
                                     <td>21-03-2019</td>
                                     <td>Konsultasi Laporan BAB I</td>
-                                    <td>File</td>
                                     <td>
                                         <span class="badge badge-danger p-2">Belum Disetujui</span>
                                     </td>

@@ -67,3 +67,7 @@ label.check-login {
     top: 0;
     right: 0;
 }
+
+.btn.fs-12 {
+    font-size: 12px !important;
+}

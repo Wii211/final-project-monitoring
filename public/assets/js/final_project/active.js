@@ -59,14 +59,21 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.final_project.id;
-                return "<button class='btn btn-success verification' id='" + buttonId + "'>Verifikasi</button>";
+                return "<button class='btn btn-primary progress-proposal fs-12' id='" + buttonId + "' value='proposal'>Progress Proposal</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.final_project.id;
-                return "<button class='btn btn-primary progress-agreement' id='" + buttonId + "'>Progress</button>";
+                return "<button class='btn btn-primary progress-final-project fs-12' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.final_project.id;
+                return "<button class='btn btn-success verification' id='" + buttonId + "'>Verifikasi</button>";
             }
         },
         {
@@ -141,8 +148,7 @@ function verification(id){
 
 // Verificationx
 $('#final-project-table tbody').on('click', '.verification', function () {
-    let id = $(this).attr("id");
-
+    let id = $(this).attr("id")
     verification(id)
 })
 
@@ -190,9 +196,51 @@ $('#final-status-table tbody').on('click', '.final-status-check', function () {
     })
 })
 
+
+function progressIndex(id, status) {
+    let no = 1
+    $.ajax({
+        url: "project-progress/" + id,
+        data: {
+            'final_status': status
+        },
+        success: function (result) {
+            console.log(result)
+            $('#final-progress-agreement-title').text('Progress Pengerjaan Proposal')
+            $('#final-progress-agreement-modal').modal('show')
+            $('#final-progress-agreement-table tbody').html('')
+            if (result !== "failed") {
+                result.data.forEach(function (result) {
+                    let status
+
+                    if (result.agreement === 1) {
+                        status = '<span class="badge badge-success p-2">Telah disetujui</span>'
+                    } else {
+                        status = '<span class="badge badge-danger p-2">Belum disetujui</span>'
+                    }
+
+                    let data = '<tr>' +
+                        '<td>' + no + '</td>' +
+                        '<td>' + result.created_at + '</td>' +
+                        '<td>' + result.description + '</td>' +
+                        '<td>' + status + '</td>' +
+                        '<td><button class="btn bg-gradient-success btn-sm w-100 progress-agreement-check" id="' + result.id + '">' +
+                        '<span class="fas fa-check"></span></button></td>' +
+                        '</tr>'
+
+                    no++
+                    $('#final-progress-agreement-table tbody').append(data)
+                })
+            }
+        }
+    })
+}
+
 // Agreement
-$('#final-project-table tbody').on('click', '.progress-agreement', function () {
-    $('#final-progress-agreement-modal').modal('show')
+$('#final-project-table tbody').on('click', '.progress-proposal', function () {
+    let id = $(this).attr("id")
+    let status = $(this).val()
+    progressIndex(id, status)
 })
 
 
@@ -247,4 +295,48 @@ $(document).on('submit', '#final-project-active-form', function (e) {
             }
         });
     }
+})
+
+//Progress Agreement
+$('#final-progress-agreement-table tbody').on('click', '.progress-agreement-check', function () {
+    let id = $(this).attr("id")
+    let finalId = $('#final-project-verification-id').val()
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, verified it!'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+            $.ajax({
+                url: "student-status/" + id + "/verify",
+                type: 'POST',
+                data: {
+                    '_method': 'PUT', 
+                    'is_verification': 1
+                }, 
+                success: function () {
+                    Swal.fire(
+                            'Verified!',
+                            'Telah diverifikasi!',
+                            'success'
+                        )
+                        .then(function () {
+                            verification(finalId)
+                        });
+                }
+            });
+        }
+    })
 })
