@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Examiner;
 use App\FinalLog;
+use App\FinalStatus;
 use App\FinalSchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FinalScheduleController extends Controller
 {
@@ -39,7 +42,35 @@ class FinalScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            DB::transaction(function () use ($request) {
+
+                $finalProjectId = $request->final_project_id;
+
+                $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
+                    ->whereFinalStatus(FinalStatus::name($request->status))->first()->id;
+
+                $finalSchedule = new FinalSchedule([
+                    'place' => $request->place,
+                    'scheduled' => $request->scheduled,
+                    'final_log_id' => $finalLogId
+                ]);
+
+                $finalSchedule->save();
+
+                foreach ($request->examiners as $examiner) {
+                    $examiners  = new Examiner([
+                        'role' => $examiner['role'],
+                        'lecturer_id' => $examiner['lecturer_id'],
+                        'final_log_id' => $finalLogId
+                    ]);
+                    $examiners->save();
+                }
+            });
+        } catch (\Throwable $th) {
+            return response()->json("Failed");
+        }
+        return response()->json("Success");
     }
 
     /**
