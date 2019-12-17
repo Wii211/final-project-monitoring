@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalLog;
 use App\FinalSchedule;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class FinalScheduleController extends Controller
      */
     public function index()
     {
-        //
+        $finalSchedule = FinalLog::with(['finalSchedules', 'finalProject.supervisors'])->get();
+
+        return response()->json($finalSchedule);
     }
 
     /**
