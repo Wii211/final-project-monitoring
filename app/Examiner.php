@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Examiner extends Model
 {
+    protected $guarded = ['id'];
+
     public function lecturer()
     {
         return $this->belongsTo(Lecturer::class);
