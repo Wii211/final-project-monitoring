@@ -97,9 +97,14 @@ class FinalScheduleController extends Controller
      * @param  \App\FinalSchedule  $finalSchedule
      * @return \Illuminate\Http\Response
      */
-    public function show(FinalSchedule $finalSchedule)
+    public function show($finalScheduleId)
     {
-        //
+        $finalSchedule = FinalSchedule::with([
+            'finalLog.finalProject.examiners',
+            'finalLog.finalStatus', 'finalLog.finalProject.finalStudent'
+        ])->findOrFail($finalScheduleId);
+
+        return response()->json($finalSchedule);
     }
 
     /**
