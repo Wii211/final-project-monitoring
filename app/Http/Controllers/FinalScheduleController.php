@@ -9,6 +9,7 @@ use App\FinalStatus;
 use App\FinalSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class FinalScheduleController extends Controller
 {
@@ -46,6 +47,17 @@ class FinalScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'final_log_id'   => 'required|unique:final_schedules'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Anda Telah Menetapkan Jadwal',
+                'error' => $validator->errors()
+            ]);
+        }
+
         try {
             DB::transaction(function () use ($request) {
                 $date = $request->date . " " . $request->time;
@@ -192,11 +204,7 @@ class FinalScheduleController extends Controller
 
                 $finalProjectId = $request->final_project_id;
 
-                $examiners = Examiner::whereFinalProjectId($finalProjectId)->get();
-
-                foreach ($examiners as $examiner) {
-                    Examiner::destroy($examiner->id);
-                }
+                $examiners = Examiner::whereFinalProjectId($finalProjectId)->delete();
             });
         } catch (\Throwable $th) {
             return response()->json("Failed");
