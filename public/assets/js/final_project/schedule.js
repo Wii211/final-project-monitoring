@@ -137,8 +137,8 @@ $(document).on('submit', '#final-schedule-form', function (e) {
             processData: false,
             success: function (data) {
                 $('#final-schedule-form')[0].reset();
-
-                if (data !== "Failed") {
+                
+                if (data.error === undefined || data !== "Failed") {
                     Swal.fire({
                             type: 'success',
                             title: 'Data telah ditambahkan!',
@@ -150,9 +150,15 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                             dataTable.ajax.reload();
                         })
                 } else {
+                    let message = "Gagal menambahkan data!"
+
+                    if(data.error !== undefined) {
+                        message = data.message
+                    }
+
                     Swal.fire({
                         type: 'error',
-                        title: 'Gagal menambahkan data!',
+                        title: message,
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -194,7 +200,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
     })
 })
 
-//Progress Agreement
+//Delete
 $('#final-schedule-table tbody').on('click', '.delete', function () {
     let id = $(this).attr("id")
     let finalId = $(this).val()
