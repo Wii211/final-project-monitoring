@@ -22,32 +22,39 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="date">Tanggal & Waktu</label>
-                        <input type="datetime-local" class="form-control form-control-sm" id="date" name="scheduled" required>
+                        <label for="final-schedule-date">Tanggal</label>
+                        <input type="date" class="form-control form-control-sm" id="final-schedule-date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="final-schedule-time">Waktu</label>
+                        <input type="time" class="form-control form-control-sm" id="final-schedule-time" name="time" required>
                     </div>
                     <div class="form-group">
                         <label for="place">Tempat Seminar</label>
                         <input type="text" class="form-control form-control-sm" id="place" name="place" required>
                     </div>
                     <div class="form-group">
-                        <label for="first-examiner-name">Dosen Penguji Pertama</label>
-                        <input type="hidden" name="examiner1[role]" id="first-examiner-role" value="1">
-                        <select class="form-control form-control-sm" name="examiner1[lecturer_id]"
-                            id="first-examiner-name" required>
+                        <label for="examiner-name-1">Dosen Penguji Pertama</label>
+                        <input type="hidden" name="examiner1[role]" id="examiner-role-1" value="1">
+                        <input type="hidden" name="examiner1[id]" id="examiner-id-1">
+                        <select class="form-control form-control-sm" name="examiner1[lecturer_id]" id="examiner-name-1" 
+                        required>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="second-examiner-name">Dosen Penguji Kedua</label>
-                        <input type="hidden" name="examiner2[role]" id="second-examiner-role" value="2">
-                        <select class="form-control form-control-sm" name="examiner2[lecturer_id]"
-                            id="second-examiner-name" required>
+                        <label for="examiner-name-2">Dosen Penguji Kedua</label>
+                        <input type="hidden" name="examiner2[role]" id="examiner-role-2" value="2">
+                        <input type="hidden" name="examiner2[id]" id="examiner-id-2">
+                        <select class="form-control form-control-sm" name="examiner2[lecturer_id]" id="examiner-name-2" 
+                        required>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="third-examiner-name">Dosen Penguji Ketiga</label>
-                        <input type="hidden" name="examiner3[role]" id="third-examiner-role" value="3">
-                        <select class="form-control form-control-sm" name="examiner3[lecturer_id]"
-                            id="third-examiner-name" required>
+                        <label for="examiner-name-3">Dosen Penguji Ketiga</label>
+                        <input type="hidden" name="examiner3[role]" id="examiner-role-3" value="3">
+                        <input type="hidden" name="examiner3[id]" id="examiner-id-3">
+                        <select class="form-control form-control-sm" name="examiner3[lecturer_id]" id="examiner-name-3" 
+                        required>
                         </select>
                     </div>
                 </div>
