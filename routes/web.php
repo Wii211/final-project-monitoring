@@ -66,6 +66,9 @@ Route::group(
         Route::get('/final_projects/students', 'FinalStudentVerifyController@index')
             ->name('final_students_verify.index');
 
+        Route::get('/final_projects/students/{student}', 'FinalStudentVerifyController@show')
+            ->name('final_students_verify.show');
+
         Route::put('/final_projects/students/{student}', 'FinalStudentVerifyController@update')
             ->name('final_students_verify.update');
 
@@ -119,6 +122,14 @@ Route::group(
 
         Route::post('/final-student-import', 'FinalStudentImportController@store')
             ->name('final_import.store');
+
+        Route::get('/project-progress/{finalProjectId}', 'FinalProgressController@show')
+            ->name('project-progress.show');
+
+        Route::put('/project-progress/{finalProjectId}/update', 'FinalProgressController@update')
+            ->name('project-progress.update');
+
+
 
 
 

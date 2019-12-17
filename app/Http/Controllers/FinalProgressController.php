@@ -99,9 +99,16 @@ class FinalProgressController extends Controller
      * @param  \App\FinalProgress  $finalProgress
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FinalProgress $finalProgress)
+    public function update(Request $request, $finalProgressId)
     {
-        //
+        try {
+            $finalProgress = FinalProgress::findOrFail($finalProgressId);
+            $finalProgress->agreement = $request->agreement;
+            $finalProgress->save();
+        } catch (\Throwable $th) {
+            return response()->json("failed");
+        }
+        return response()->json('Success');
     }
 
     /**

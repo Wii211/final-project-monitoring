@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\FinalRegistrationService;
-use App\Http\Services\FinalStudentService;
+use App\FinalStudent;
 use Illuminate\Http\Request;
+use App\Http\Services\FinalStudentService;
+use App\Http\Services\FinalRegistrationService;
 
 class FinalStudentVerifyController extends Controller
 {
@@ -62,9 +63,11 @@ class FinalStudentVerifyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        $finalStudent = FinalStudent::active(1)->whereFinalStudentId($id)->first();
+
+        return response()->json($finalStudent);
     }
 
     /**
