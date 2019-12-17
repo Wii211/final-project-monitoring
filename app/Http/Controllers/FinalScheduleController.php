@@ -58,14 +58,29 @@ class FinalScheduleController extends Controller
 
                 $finalSchedule->save();
 
-                foreach ($request->examiners as $examiner) {
-                    $examiners  = new Examiner([
-                        'role' => $examiner['role'],
-                        'lecturer_id' => $examiner['lecturer_id'],
-                        'final_log_id' => $finalLogId
-                    ]);
-                    $examiners->save();
-                }
+                $examiners1 = new Examiner([
+                    'role' => $request->examiner1['role'],
+                    'lecturer_id' => $request->examiner1['lecturer_id'],
+                    'final_log_id' => $finalLogId
+                ]);
+
+                $examiners1->save();
+
+                $examiners2 = new Examiner([
+                    'role' => $request->examiner2['role'],
+                    'lecturer_id' => $request->examiner2['lecturer_id'],
+                    'final_log_id' => $finalLogId
+                ]);
+
+                $examiners2->save();
+
+                $examiners3 = new Examiner([
+                    'role' => $request->examiner3['role'],
+                    'lecturer_id' => $request->examiner3['lecturer_id'],
+                    'final_log_id' => $finalLogId
+                ]);
+
+                $examiners3->save();
             });
         } catch (\Throwable $th) {
             return response()->json("Failed");
