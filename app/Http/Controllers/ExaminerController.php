@@ -17,7 +17,10 @@ class ExaminerController extends Controller
     public function index(Request $request)
     {
         $projectId = null;
+        $primary = null;
+
         if ($request->has('projectId')) $projectId = $request->query('projectId');
+        if ($request->has('primary')) $primary = $request->query('primary');
 
         $supervisors = Supervisor::whereFinalProjectId($projectId)->get();
 
@@ -27,7 +30,7 @@ class ExaminerController extends Controller
             $lecturerId[] = [$supervisor->lecturer_id];
         }
 
-        $lecturers = Lecturer::whereNotIn('id', $lecturerId)->get();
+        $lecturers = Lecturer::whereNotIn('id', $lecturerId)->primary($primary)->get();
 
         return response()->json($lecturers);
     }
