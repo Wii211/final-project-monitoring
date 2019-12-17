@@ -65,7 +65,7 @@ class FinalStudentVerifyController extends Controller
      */
     public function show($id, Request $request)
     {
-        $finalStudent = FinalStudent::active(1)->whereFinalStudentId($id)->first();
+        $finalStudent = FinalStudent::active(1)->findOrFail($id);
 
         return response()->json($finalStudent);
     }
