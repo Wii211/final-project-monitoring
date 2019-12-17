@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Examiner;
 use App\FinalLog;
+use Carbon\Carbon;
 use App\FinalStatus;
 use App\FinalSchedule;
 use Illuminate\Http\Request;
@@ -47,6 +48,9 @@ class FinalScheduleController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
+                $date = $request->date . " " . $request->time;
+
+                $time = FinalSchedule::convertTime($date);
 
                 $finalProjectId = $request->final_project_id;
 
@@ -55,7 +59,7 @@ class FinalScheduleController extends Controller
 
                 $finalSchedule = new FinalSchedule([
                     'place' => $request->place,
-                    'scheduled' => $request->scheduled,
+                    'scheduled' => $time,
                     'final_log_id' => $finalLogId
                 ]);
 
@@ -86,6 +90,7 @@ class FinalScheduleController extends Controller
                 $examiners3->save();
             });
         } catch (\Throwable $th) {
+            dd($th);
             return response()->json("Failed");
         }
         return response()->json("Success");
@@ -132,13 +137,17 @@ class FinalScheduleController extends Controller
 
                 $finalProjectId = $request->final_project_id;
 
+                $date = $request->date . " " . $request->time;
+
+                $time = FinalSchedule::convertTime($date);
+
                 $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
                     ->whereFinalStatusId(FinalStatus::name($request->status))->first()->id;
 
                 $finalSchedule =  FinalSchedule::findOrFail($finalScheduleId)
                     ->update([
                         'place' => $request->place,
-                        'scheduled' => $request->scheduled,
+                        'scheduled' => $time,
                         'final_log_id' => $finalLogId
                     ]);
 
