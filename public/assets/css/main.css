@@ -71,3 +71,15 @@ label.check-login {
 .btn.fs-12 {
     font-size: 12px !important;
 }
+
+.pdfobject-container {
+    height: 500px;
+}
+
+.pdfobject {
+    border: 1px solid #666;
+}
+
+.table td, .table th {
+    vertical-align: middle !important;
+}
