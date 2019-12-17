@@ -47,27 +47,24 @@ class FinalScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'final_log_id'   => 'required|unique:final_schedules'
-        ]);
+        $finalProjectId = $request->final_project_id;
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Anda Telah Menetapkan Jadwal',
-                'error' => $validator->errors()
-            ]);
+        $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
+            ->whereFinalStatusId(FinalStatus::name($request->status))->first()->id;
+
+        $finalSchedule = FinalSchedule::whereFinalLogId($finalLogId)->first();
+
+        if ($finalSchedule) {
+            return response()->json("Anda Telah Menetapkan Jadwal");
         }
 
         try {
-            DB::transaction(function () use ($request) {
+            DB::transaction(function () use ($request, $finalProjectId, $finalLogId) {
                 $date = $request->date . " " . $request->time;
 
                 $time = FinalSchedule::convertTime($date);
 
-                $finalProjectId = $request->final_project_id;
 
-                $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
-                    ->whereFinalStatusId(FinalStatus::name($request->status))->first()->id;
 
                 $finalSchedule = new FinalSchedule([
                     'place' => $request->place,
