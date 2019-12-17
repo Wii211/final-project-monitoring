@@ -95,6 +95,8 @@ Route::group(
 
         Route::put('/project-progress/{finalProjectId}/update', 'FinalProgressController@update')
             ->name('project-progress-coordinator.update');
+
+        Route::resource('final-schedules', 'FinalScheduleController');
     }
 );
 
