@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class FinalSchedule extends Model
 {
     protected $guarded = ['id'];
+    protected $appends = ['date', 'hour'];
 
     public function finalLog()
     {
@@ -18,5 +19,19 @@ class FinalSchedule extends Model
     public static function convertTime($dateTime)
     {
         return Carbon::createFromFormat('Y-m-d H:i', $dateTime)->toDateTimeString();
+    }
+
+    public function getDateAttribute()
+    {
+        $date = explode(" ", $this->scheduled);
+
+        return $date[0];
+    }
+
+    public function getHourAttribute()
+    {
+        $date = explode(" ", $this->scheduled);
+
+        return $date[1];
     }
 }
