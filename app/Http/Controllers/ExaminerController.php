@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Examiner;
+use App\Lecturer;
+use App\Supervisor;
 use Illuminate\Http\Request;
 
 class ExaminerController extends Controller
@@ -12,9 +14,22 @@ class ExaminerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $projectId = null;
+        if ($request->has('projectId')) $projectId = $request->query('projectId');
+
+        $supervisors = Supervisor::whereFinalProjectId($projectId)->get();
+
+        $lecturerId = [];
+
+        foreach ($supervisors as $supervisor) {
+            $lecturerId[] = [$supervisor->lecturer_id];
+        }
+
+        $lecturers = Lecturer::whereNotIn('id', $lecturerId)->get();
+
+        return response()->json($lecturers);
     }
 
     /**

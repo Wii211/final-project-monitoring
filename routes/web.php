@@ -79,6 +79,7 @@ Route::group(
 
         Route::resource('finished-project', 'FinishedFinalProjectController');
 
+        Route::resource('examiner-available', 'ExaminerController');
 
         //Jadwal Seminar/Sidang
         Route::view('/final_projects/schedules', 'final_projects.schedules')->name('final_schedules.index');
