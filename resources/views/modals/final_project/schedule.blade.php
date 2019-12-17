@@ -31,22 +31,22 @@
                     </div>
                     <div class="form-group">
                         <label for="first-examiner-name">Dosen Penguji Pertama</label>
-                        <input type="hidden" name="examiners1[role]" id="first-examiner-role" value="Pembahas I">
-                        <select class="form-control form-control-sm" name="examiners1[lecturer_id]"
+                        <input type="hidden" name="examiner1[role]" id="first-examiner-role" value="1">
+                        <select class="form-control form-control-sm" name="examiner1[lecturer_id]"
                             id="first-examiner-name" required>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="second-examiner-name">Dosen Penguji Kedua</label>
-                        <input type="hidden" name="examiners2[role]" id="second-examiner-role" value="Pembahas II">
-                        <select class="form-control form-control-sm" name="examiners2[lecturer_id]"
+                        <input type="hidden" name="examiner2[role]" id="second-examiner-role" value="2">
+                        <select class="form-control form-control-sm" name="examiner2[lecturer_id]"
                             id="second-examiner-name" required>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="third-examiner-name">Dosen Penguji Ketiga</label>
-                        <input type="hidden" name="examiners3[role]" id="third-examiner-role" value="Pembahas III">
-                        <select class="form-control form-control-sm" name="examiners3[lecturer_id]"
+                        <input type="hidden" name="examiner3[role]" id="third-examiner-role" value="3">
+                        <select class="form-control form-control-sm" name="examiner3[lecturer_id]"
                             id="third-examiner-name" required>
                         </select>
                     </div>
