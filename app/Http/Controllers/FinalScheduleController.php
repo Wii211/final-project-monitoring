@@ -19,7 +19,7 @@ class FinalScheduleController extends Controller
     public function index()
     {
         $finalSchedule = FinalSchedule::with([
-            'finalLog.finalProject.examiners',
+            'finalLog.finalProject.examiners.lecturer',
             'finalLog.finalStatus', 'finalLog.finalProject.finalStudent'
         ])
             ->latest()->get();
