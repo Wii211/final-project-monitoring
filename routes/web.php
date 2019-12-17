@@ -89,6 +89,12 @@ Route::group(
 
         Route::put('/student-status/{id}/verify', 'FinalLogStudentController@update')
             ->name('student-status.update');
+
+        Route::get('/project-progress/{finalProjectId}', 'FinalProgressController@show')
+            ->name('project-progress-coordinator.show');
+
+        Route::put('/project-progress/{finalProjectId}/update', 'FinalProgressController@update')
+            ->name('project-progress-coordinator.update');
     }
 );
 
@@ -122,17 +128,6 @@ Route::group(
 
         Route::post('/final-student-import', 'FinalStudentImportController@store')
             ->name('final_import.store');
-
-        Route::get('/project-progress/{finalProjectId}', 'FinalProgressController@show')
-            ->name('project-progress.show');
-
-        Route::put('/project-progress/{finalProjectId}/update', 'FinalProgressController@update')
-            ->name('project-progress.update');
-
-
-
-
-
         Route::resource('news-report-image', 'NewsReportImageController');
     }
 );
