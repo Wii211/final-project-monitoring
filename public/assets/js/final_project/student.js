@@ -13,20 +13,27 @@ let dataTable = $('#finalStudentTable').DataTable({
             data: 'student_id'
         },
         {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                image = full.user.image_profile
+                return "<img src='../../storage/" + image + "' class='img-circle'>";
+            }
+        },
+        {
             data: 'name'
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info transcript fs-12' id='" + buttonId + "'>Transkrip</button>";
+                return "<button class='btn btn-info student-information fs-12' value='transcript' id='" + buttonId + "'>Transkrip</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info latest-study-plan fs-12' id='" + buttonId + "'>SKS Terakhir</button>";
+                return "<button class='btn btn-info student-information fs-12' value='latest_study' id='" + buttonId + "'>SKS Terakhir</button>";
             }
         },
         {
@@ -44,13 +51,21 @@ let dataTable = $('#finalStudentTable').DataTable({
     ]
 });
 
-$('#finalStudentTable tbody').on('click', '.transcript', function () {
+$('#finalStudentTable tbody').on('click', '.student-information', function () {
     let id = $(this).attr("id")
+    let status = $(this).val()
 
     $.ajax({
         url: "students/" + id,
         success: function (data) {
-            console.log(data)
+            $('#student-information-modal').modal('show')
+            if (status === "transcript") {
+                PDFObject.embed('../../storage/' + data.transcript, "#student-information-content")
+                $('#student-information-title').text('Transkrip')
+            } else {
+                PDFObject.embed('../../storage/' + data.latest_study_plan, "#student-information-content")
+                $('#student-information-title').text('SKS Terakhir')
+            }
         }
     })
 })
