@@ -15,7 +15,7 @@ class FinalScheduleController extends Controller
      */
     public function index()
     {
-        $finalSchedule = FinalLog::with(['finalSchedules', 'finalProject.supervisors'])->get();
+        $finalSchedule = FinalSchedule::with(['finalLog.finalProject.examiners'])->get();
 
         return response()->json($finalSchedule);
     }
