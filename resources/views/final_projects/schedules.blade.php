@@ -4,6 +4,10 @@
 <!-- If() -->
 @section('title', 'Seminar Proposal / Sidang TA')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+@endsection
+
 <!-- Content -->
 @section('content')
 <section class="content">
@@ -12,21 +16,21 @@
             {{-- <button type="button" class="btn bg-gradient-success mb-2" id="convert">
                 <i class="fas fa-images"></i>
                 Export to Image</button> --}}
-            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal"
+            <button type="submit" class="btn btn-primary mb-2" data-toggle="modal" id="final-schedule-table"
                 data-target="#scheduleFinalProject">Tentukan Seminar/Sidang</button>
         </div>
         <div class="mb-2">
         <div id="result"></div>
         </div>
         <div class="card">
-            <div class="card-body p-0">
-                <table class="table table-bordered" id="myTable">
+            <div class="card-body">
+                <table class="table table-bordered" id="final-schedule-table">
                     <thead>
                         <tr>
-                            <th width="40%">Judul</th>
+                            <th width="30%">Judul</th>
                             <th>Mahasiswa</th>
                             <th>Tempat Tanggal Seminar</th>
-                            <th width="5%"></th>
+                            <th width="30%">Dosen Penguji</th>
                             <th width="5%"></th>
                             <th width="5%"></th>
                         </tr>
@@ -36,10 +40,22 @@
                             <td>Hey aspiring content creators, submit demo musik kamu dan dapatkan kesempatan menangin
                                 HP Pavilion x360, serta mentoring dari Eka.e</td>
                             <td>Winardi Chandra</td>
-                            <td>29-02-2022</td>
-                            <td>
-                                <button class="btn bg-gradient-info btn-sm w-100" data-toggle="modal"
-                                    data-target="#detailFinalProject">Detail</button>
+                            <td>A16, 29-02-2022. Pukul 00:00</td>
+                            <td class="p-0">
+                                <table class="table table-bordered m-0">
+                                    <tr>
+                                        <th>Ketua</th>
+                                        <td>M. Winarto Ramadhani</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pembahas 1</th>
+                                        <td>Wiranto Never Die</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pembahas 2</th>
+                                        <td>Winardi</td>
+                                    </tr>
+                                </table>
                             </td>
                             <td>
                                 <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
@@ -65,7 +81,9 @@
 @include('modals.final_project.update')
 @endsection
 
-{{-- @section('javascript')
-<script type="text/javascript" src="{{ asset('assets/js/html2canvas.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/convertToImage.js') }}"></script>
-@endsection --}}
+@section('javascript')
+    <!-- DataTables -->
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/final_project/schedule.js') }}"></script>
+@endsection
