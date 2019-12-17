@@ -137,7 +137,7 @@ $(document).on('submit', '#final-schedule-form', function (e) {
             processData: false,
             success: function (data) {
                 
-                if (data.error === undefined && data !== "Failed") {
+                if (data === "Success") {
                     Swal.fire({
                             type: 'success',
                             title: 'Data telah ditambahkan!',
@@ -150,15 +150,9 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                             dataTable.ajax.reload();
                         })
                 } else {
-                    let message = "Gagal menambahkan data!"
-
-                    if(data.error !== undefined) {
-                        message = data.message
-                    }
-
                     Swal.fire({
                         type: 'error',
-                        title: message,
+                        title: data,
                         showConfirmButton: false,
                         timer: 1500
                     })
