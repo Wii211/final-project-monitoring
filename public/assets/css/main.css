@@ -89,3 +89,7 @@ label.check-login {
 .info-box {
     margin-bottom: 0px !important;
 }
+
+.login-box {
+    width:400px !important;
+}
