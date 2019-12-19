@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FinalLog extends Model
 {
+    protected $guarded = ['id'];
+
     public function newsReport()
     {
         return $this->hasOne(NewsReport::class);
