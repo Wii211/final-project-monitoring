@@ -65,8 +65,9 @@ let dataTable = $('#final-schedule-table').DataTable({
             "render": function (data, type, full, meta) {
                 let status = full.final_log.final_status.name
                 let title = full.final_log.final_project.title
+                let capitalizeStatus = status.charAt(0).toUpperCase() + status.slice(1)
 
-                return title + ' <span class="badge badge-primary p-2">' + status + '</span>'
+                return '<span class="badge badge-primary p-2">' + capitalizeStatus + '</span> ' + title
             }
         },
         {

@@ -31,14 +31,14 @@ let dataTable = $('#finalStudentTable').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info student-information fs-12' value='transcript' id='" + buttonId + "'>Transkrip</button>";
+                return "<button class='btn btn-info btn-transcript student-information fs-12' value='transcript' id='" + buttonId + "'>Transkrip</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info student-information fs-12' value='latest_study' id='" + buttonId + "'>SKS Terakhir</button>";
+                return "<button class='btn btn-info btn-latest-study student-information fs-12' value='latest_study' id='" + buttonId + "'>SKS Terakhir</button>";
             }
         },
         {
@@ -47,9 +47,9 @@ let dataTable = $('#finalStudentTable').DataTable({
                 let status = full.is_verified;
                 let buttonId = full.id;
                 if (status == 0) {
-                    return "<button class='btn btn-success verification' id='" + buttonId + "' value='" + status + "'>Verification</button>";
+                    return "<button class='btn btn-success verification fs-12' id='" + buttonId + "' value='" + status + "'>Verification</button>";
                 } else {
-                    return "<button class='btn btn-danger verification' id='" + buttonId + "' value='" + status + "'>Unverification</button>";
+                    return "<button class='btn btn-danger verification fs-12' id='" + buttonId + "' value='" + status + "'>Unverification</button>";
                 }
             }
         }
