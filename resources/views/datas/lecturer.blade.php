@@ -28,11 +28,11 @@
                                 <tr>
                                     <th>NIP</th>
                                     <th>NIDN</th>
+                                    <th>Foto</th>
                                     <th>Nama</th>
                                     <th>Status</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th width="5%"></th>
+                                    <th width="5%"></th>
                                 </tr>
                             </thead>
                             <tbody>
