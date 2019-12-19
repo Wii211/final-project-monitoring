@@ -55,7 +55,7 @@ class FinalStudentService
                     'email' => $request->email,
                     'phone_number' => $request->phone_number,
                     'gender' => $request->gender,
-                    'image_profile' => 'https://lorempixel.com/640/480/?40069',
+                    'image_profile' => null,
                     'password' => $request->student_id,
                 ]);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FinalLog;
+use App\FinalStatus;
 use Illuminate\Http\Request;
 
 class FinalLogController extends Controller
@@ -35,7 +36,17 @@ class FinalLogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $finalLog = new FinalLog([
+            'final_project_id' => $request->final_project_id,
+            'final_status_id' => FinalStatus::name($request->status),
+            'is_verification' => 0
+        ]);
+
+        if ($finalLog->save()) {
+            return response()->json("Success");
+        } else {
+            return response()->json("Failed");
+        }
     }
 
     /**
