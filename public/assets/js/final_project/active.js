@@ -58,14 +58,8 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.final_project.id;
-                return "<button class='btn btn-primary progress-proposal fs-12' id='" + buttonId + "' value='proposal'>Progress Proposal</button>";
-            }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.final_project.id;
-                return "<button class='btn btn-primary progress-proposal fs-12' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
+                return "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal</button>" +
+                "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
             }
         },
         {
