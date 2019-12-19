@@ -22,7 +22,7 @@ class FinalStudentsImport implements ToCollection, WithHeadingRow
                 'email' => $row['email'],
                 'phone_number' => $row['nomor_telepon'],
                 'gender' => $row['jenis_kelamin'],
-                'image_profile' => 'https://lorempixel.com/640/480/?40069',
+                'image_profile' => null,
                 'password' => $row['nim'],
             ]);
 
