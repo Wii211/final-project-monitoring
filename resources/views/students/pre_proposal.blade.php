@@ -104,9 +104,13 @@
         @else
         <div class="card">
             <div class="card-body">
-                <div class="alert alert-danger alert-block">
+                <div class="alert alert-primary alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Anda telah mengambil proposal. Silahkan masuk ke halaman <a href="{{ route('final_project.index') }}">tugas akhir.</a></strong>
+                    <i class="fas fa-info-circle"></i> 
+                    <strong>Anda telah mengambil proposal/tugas akhir. Silahkan masuk ke halaman <a href="{{ route('final_project.index') }}">tugas akhir.</a></strong>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <img src="{{ asset('storage/design/undraw_done_a34v.png') }}" class="w-50">
                 </div>
             </div>
         </div>
