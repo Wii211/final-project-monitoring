@@ -28,11 +28,11 @@
                             <div class="col-md-12">
                                 @if(Session::has('success'))
                                 <div class="alert alert-success" role="alert">
-                                    Berhasil
+                                    Berhasil. Profil telah diperbaharui.
                                 </div>
                                 @elseif(Session::has('failed'))
                                 <div class="alert alert-danger" role="alert">
-                                    Error
+                                    Error. Terjadi kesalahan.
                                 </div>
                                 @endif
                                 <form action="{{route('change_profile.update', ['id' => Auth::user()->id]) }}"
