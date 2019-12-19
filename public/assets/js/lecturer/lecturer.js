@@ -16,18 +16,30 @@ let dataTable = $('#lecturerTable').DataTable({
             data: 'lecturer_id'
         },
         {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                image = full.image_profile
+
+                if(image !== null){
+                    return "<img src='../storage/images/" + image + "' class='img-circle'>";
+                } else {
+                    return "<img src='../storage/image_profile/default.png' class='img-circle'>";
+                }
+            }
+        },
+        {
             data: 'name'
         },
         {
             data: 'status'
         },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.id;
-                return "<button class='btn btn-info detail' id='" + buttonId + "'>Detail</button>";
-            }
-        },
+        // {
+        //     sortable: false,
+        //     "render": function (data, type, full, meta) {
+        //         let buttonId = full.id;
+        //         return "<button class='btn btn-info detail' id='" + buttonId + "'>Detail</button>";
+        //     }
+        // },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
@@ -44,7 +56,7 @@ let dataTable = $('#lecturerTable').DataTable({
         }
     ],
     "columnDefs": [{
-        targets: [3],
+        targets: [4],
         render: function (data, type, row) {
             if (data == 1) {
                 return '<span class="badge badge-success p-2">Aktif</span>';
@@ -210,7 +222,7 @@ $(document).on('submit', '#lecturerDataForm', function (e) {
     if (url !== '') {
         Swal.fire({
             title: 'Loading',
-            timer: 2000,
+            timer: 60000,
             onBeforeOpen: () => {
                 Swal.showLoading()
             }
@@ -263,6 +275,13 @@ $('#lecturerTable tbody').on('click', '.delete', function () {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
             $.ajax({
                 url: "lecturers/" + id,
                 type: 'DELETE',
