@@ -16,33 +16,24 @@
                     </div>
                     <div class="col-md-8">
                         <div class="alert alert-info alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert"
-                                aria-hidden="true">&times;</button>
-                            <h6 class="mb-0 pb-0"><i class="icon fas fa-info-circle"></i> Anda login sebagai mahasiswa</h6>
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h6 class="mb-0 pb-0"><i class="icon fas fa-info-circle"></i> Anda login sebagai mahasiswa
+                            </h6>
                         </div>
-                        <div class="info-box bg-gradient-primary">
-                            <span class="info-box-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                        <div class="alert alert-primary bg-gradient-primary">
+                            <h4><i class="icon fas fa-bullhorn"></i> Deadline {{ $endDateAndDiffDate['finalStatus'] }}</h4>
+                            <b>
+                                @if($endDateAndDiffDate['finalDescription'] !== "berakhir")
+                                {{$endDateAndDiffDate['finalStatus']}} akan ditutup
+                                {{$endDateAndDiffDate['differenceBetweenDate']}}
+                                hari lagi, pada tanggal
+                                {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}.
+                                @else
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">
-                                    <h4>Deadline {{ $endDateAndDiffDate['finalStatus'] }}</h4>
-                                </span>
-
-                                <span class="progress-description">
-                                    <b>
-                                        @if($endDateAndDiffDate['finalDescription'] !== "berakhir")
-                                        {{$endDateAndDiffDate['finalStatus']}} akan ditutup
-                                        {{$endDateAndDiffDate['differenceBetweenDate']}}
-                                        hari lagi, pada tanggal
-                                        {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
-                                        @else
-
-                                        {{$endDateAndDiffDate['finalStatus']}} telah berakhir pada
-                                        {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
-                                        @endif
-                                    </b>
-                                </span>
-                            </div>
+                                {{$endDateAndDiffDate['finalStatus']}} telah berakhir pada
+                                {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}.
+                                @endif
+                            </b>
                         </div>
                         <div class="callout callout-info mt-3">
                             <h5>Peringatan!</h5>
@@ -74,28 +65,38 @@
             </div>
             @elseif(Session::has('Failed'))
             <div class="alert alert-danger" role="alert">
-                Error.
+                Error. Terjadi kesalahan.
             </div>
             @endif
             <div class="card-body">
                 <form method="POST" action="{{route('final_registration.store')}}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="alert alert-warning alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
-                        Lengkapi syarat pendaftaran proposal terlebih dahulu untuk bisa mengakses halaman berikutnya.
+                    <div class="row">
+                        <div class="col-md-8">
+                            @csrf
+                            <div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true">&times;</button>
+                                Lengkapi syarat pendaftaran proposal terlebih dahulu untuk bisa mengakses halaman
+                                lainnya. Pastikan telah mengisi file dengan benar!
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Upload Transkip Nilai (.pdf)</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                    name="transcript" accept="application/pdf">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Upload Rencana Studi Terakhir (.pdf)</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                    name="latest_study_plan" accept="application/pdf">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ asset('storage/design/undraw_fill_forms_yltj.png') }}" class="w-100" srcset="">
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn bg-gradient-primary mb-2 w-100">Verifikasi</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Upload Transkip Nilai</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="transcript"
-                            accept="application/pdf">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Upload Rencana Studi Terakhir</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                            name="latest_study_plan" accept="application/pdf">
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2 w-100">Verifikasi</button>
                 </form>
             </div>
         </div>
