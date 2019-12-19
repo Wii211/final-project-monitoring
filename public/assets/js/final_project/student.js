@@ -16,7 +16,12 @@ let dataTable = $('#finalStudentTable').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 image = full.user.image_profile
-                return "<img src='../../storage/" + image + "' class='img-circle'>";
+
+                if(image !== null){
+                    return "<img src='../../storage/" + image + "' class='img-circle'>";
+                } else {
+                    return "<img src='../../storage/image_profile/default.png' class='img-circle'>";
+                }
             }
         },
         {
@@ -59,13 +64,19 @@ $('#finalStudentTable tbody').on('click', '.student-information', function () {
         url: "students/" + id,
         success: function (data) {
             $('#student-information-modal').modal('show')
-            if (status === "transcript") {
-                PDFObject.embed('../../storage/' + data.transcript, "#student-information-content")
-                $('#student-information-title').text('Transkrip')
-            } else {
-                PDFObject.embed('../../storage/' + data.latest_study_plan, "#student-information-content")
-                $('#student-information-title').text('SKS Terakhir')
-            }
+                if (status === "transcript" && data.transcript !== null) {
+                    PDFObject.embed('../../storage/' + data.transcript, "#student-information-content")
+                    $('#student-information-title').text('Transkrip')
+                    $('#student-information-content').css('height', '500')
+                } else if(data.latest_study_plan !== null) {
+                    PDFObject.embed('../../storage/' + data.latest_study_plan, "#student-information-content")
+                    $('#student-information-title').text('SKS Terakhir')
+                    $('#student-information-content').css('height', '500')
+                } else {
+                    $('#student-information-title').text('Data tidak ditemukan.')
+                    $('#student-information-content').html('<img class="w-100" src="../../storage/design/undraw_empty_xct9.png">')
+                    $('#student-information-content').css('height', '100%')
+                }
         }
     })
 })
