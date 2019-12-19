@@ -77,7 +77,8 @@ let dataTable = $('#final-schedule-table').DataTable({
             "render": function (data, type, full, meta) {
                 return '<table class="table m-0">' +
                 '<tr><th>Ruangan</th><td>' + full.place + '</td></tr>' +
-                '<tr><th>Tanggal</th><td>' + full.scheduled + '</td></tr></table>'
+                '<tr><th>Tanggal</th><td>' + full.date + '</td></tr>' +
+                '<tr><th>Waktu</th><td>' + full.hour + '</td></tr></table>'
             }
         },
         {

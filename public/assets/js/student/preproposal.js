@@ -107,7 +107,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                 if (data !== "Failed") {
                     Swal.fire({
                             type: 'success',
-                            title: data.success,
+                            title: 'Berhasil menambahkan data!',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -118,7 +118,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: data.error,
+                        title: 'Gagal menambahkan data!',
                         showConfirmButton: false,
                         timer: 1500
                     })

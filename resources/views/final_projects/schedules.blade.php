@@ -30,7 +30,7 @@
                             <tr>
                                 <th width="30%">Judul</th>
                                 <th>Mahasiswa</th>
-                                <th>Tempat Tanggal Seminar</th>
+                                <th width="19%">Tempat Tanggal Seminar</th>
                                 <th width="30%">Dosen Penguji</th>
                                 <th width="5%"></th>
                             </tr>
