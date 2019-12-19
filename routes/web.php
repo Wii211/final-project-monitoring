@@ -32,6 +32,8 @@ Route::group(
         Route::delete('/project-progress/{finalProjectId}', 'FinalProgressController@destroy')
             ->name('project-progress.destroy');
 
+        Route::resource('final-log', 'FinalLogController');
+
 
         Route::group(
             ['middleware' => ['auth', 'verify']],
