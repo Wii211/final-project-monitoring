@@ -76,6 +76,7 @@ $('#recommendationTitleTable tbody').on('click', '.update', function () {
         success: function (result) {
             console.log(result)
             $('#recomendationTitleModal').modal('show');
+            $('#recomendationTitleModalTitle').text("Update Data Rekomendasi Judul");
             $('#recomendationTitleModalButton').text('Update');
 
             result.topics.forEach(function (topic) {
