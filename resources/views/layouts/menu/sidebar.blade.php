@@ -89,7 +89,6 @@
                           <i class="nav-icon fas fa-user-graduate"></i>
                           <p>
                               Mahasiswa TA
-                              <span class="badge badge-danger right">2</span>
                           </p>
                       </a>
                   </li>
@@ -99,7 +98,6 @@
                           <i class="nav-icon fas fa-book"></i>
                           <p>
                               Tugas Akhir
-                              <span class="badge badge-danger right">2</span>
                           </p>
                       </a>
                   </li>
