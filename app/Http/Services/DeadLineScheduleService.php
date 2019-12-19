@@ -58,6 +58,10 @@ class DeadLineScheduleService
             $finalStatus = "pendaftaran";
         }
 
+        if (Carbon::now() > $endDate) {
+            return "Sudah Lewat Dari DeadLine Teehee uwu";
+        }
+
 
 
         return compact('endDate', 'differenceBetweenDate', 'finalStatus');
