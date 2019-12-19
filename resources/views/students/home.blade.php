@@ -10,23 +10,45 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-6">
-                        <img src="{{ asset('storage/design/undraw_time_management_30iu.png') }}" class="w-100" srcset="">
+                    <div class="col-md-4">
+                        <img src="{{ asset('storage/design/undraw_time_management_30iu.png') }}" class="w-100"
+                            srcset="">
                     </div>
-                    <div class="col-md-6">
-                        <div class="info-box bg-gradient-danger pb-0">
-                            <span class="info-box-icon"><i class="fas fa-clock"></i></span>
-        
+                    <div class="col-md-8">
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">&times;</button>
+                            <h5 class="mb-0 pb-0"><i class="icon fas fa-info-circle"></i> Anda login sebagai mahasiswa</h5>
+                        </div>
+                        <div class="info-box bg-gradient-primary">
+                            <span class="info-box-icon"><i class="fas fa-exclamation-triangle"></i></span>
+
                             <div class="info-box-content">
-                                <span class="info-box-text">Deadline {{ ucfirst($endDateAndDiffDate['finalStatus']) }}</span>
-        
-                                <span class="progress-description mt-2">
+                                <span class="info-box-text">
+                                    <h4>Deadline {{ $endDateAndDiffDate['finalStatus'] }}</h4>
+                                </span>
+
+                                <span class="progress-description">
                                     <b>
-                                        {{ucfirst($endDateAndDiffDate['finalStatus'])}} akan ditutup {{$endDateAndDiffDate['differenceBetweenDate']}}
-                                        hari lagi, pada tanggal {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
+                                        @if($endDateAndDiffDate['finalDescription'] !== "berakhir")
+                                        {{$endDateAndDiffDate['finalStatus']}} akan ditutup
+                                        {{$endDateAndDiffDate['differenceBetweenDate']}}
+                                        hari lagi, pada tanggal
+                                        {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
+                                        @else
+
+                                        {{$endDateAndDiffDate['finalStatus']}} telah berakhir pada
+                                        {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
+                                        @endif
                                     </b>
                                 </span>
                             </div>
+                        </div>
+                        <div class="callout callout-info mt-3">
+                            <h5>Peringatan!</h5>
+
+                            <p>Pastikan untuk selalu memperhatikan deadline pada tiap status yang ada di tugas akhir.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -65,7 +87,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Upload Transkip Nilai</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="transcript" accept="application/pdf">
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="transcript"
+                            accept="application/pdf">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Upload Rencana Studi Terakhir</label>

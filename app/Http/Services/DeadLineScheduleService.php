@@ -27,6 +27,7 @@ class DeadLineScheduleService
         $endDate = "";
         $differenceBetweenDate = "";
         $finalStatus = "";
+        $finalDescription = "";
 
 
         $finalProjectId = $this->finalProject
@@ -59,14 +60,12 @@ class DeadLineScheduleService
         }
 
         if ($endDate->isPast()) {
-            $finalStatus = "berakhir";
-            $differenceBetweenDate = "";
-            $endDate = "";
+            $finalDescription = "berakhir";
         }
 
 
 
-        return compact('endDate', 'differenceBetweenDate', 'finalStatus');
+        return compact('endDate', 'differenceBetweenDate', 'finalStatus', 'finalDescription');
     }
 
     public function getListData()
