@@ -24,19 +24,41 @@ class DeadLineScheduleService
     }
     public function showProposalRegisterDeadLine()
     {
+        $endDate = "";
+        $differenceBetweenDate = "";
+        $finalStatus = "";
+
+
         $finalProjectId = $this->finalProject
-            ->whereFinalStudentId($this->finalStudent->getStudentId())->first()->id;
+            ->whereFinalStudentId($this->finalStudent->getStudentId())->first();
 
-        $finalLog = FinalLog::whereFinalProjectId($finalProjectId)->latest()->first();
+        if ($finalProjectId) {
 
-        $deadlineSchedule = $this->deadlineSchedule
-            ->whereFinalStatusId($finalLog->final_status_id)->first();
+            $finalProjectId = $finalProjectId->id;
 
-        $endDate = Carbon::parse($deadlineSchedule->end_date);
+            $finalLog = FinalLog::whereFinalProjectId($finalProjectId)->latest()->first();
 
-        $differenceBetweenDate = $endDate->diffInDays(Carbon::now());
+            $deadlineSchedule = $this->deadlineSchedule
+                ->whereFinalStatusId($finalLog->final_status_id)->first();
 
-        $finalStatus = $this->finalStatus->findOrFail($finalLog->final_status_id)->name;
+            $endDate = Carbon::parse($deadlineSchedule->end_date);
+
+            $differenceBetweenDate = $endDate->diffInDays(Carbon::now());
+
+            $finalStatus = $this->finalStatus->findOrFail($finalLog->final_status_id)->name;
+        } else {
+
+            $deadlineSchedule = $this->deadlineSchedule
+                ->whereFinalStatusId($this->finalStatus->name('pendaftaran'))->first();
+
+            $endDate = Carbon::parse($deadlineSchedule->end_date);
+
+            $differenceBetweenDate = $endDate->diffInDays(Carbon::now());
+
+            $finalStatus = "pendaftaran";
+        }
+
+
 
         return compact('endDate', 'differenceBetweenDate', 'finalStatus');
     }
