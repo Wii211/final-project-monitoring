@@ -11,32 +11,34 @@
             @if($data->checkIsVerify($data->id, "pra-proposal"))
                 <div class="card">
                     <div class="card-body p-0">
-                        <table class="table" id="final-project-table">
-                            <thead>
-                                <tr>
-                                    <th colspan="4">Deskripsi Proposal/Tugas Akhir</th>
-                                </tr>
-                                <tr>
-                                    <th>Judul</th>
-                                    <th>Tanggal</th>
-                                    <th>Status</th>
-                                    <th width="10%"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ $data->title }}</td>
-                                    <td>{{ $data->created_at }}</td>
-                                    @foreach($data->finalLogs as $finalLog)
-                                        @php $status = $finalLog->finalStatus->name @endphp
-                                    @endforeach
-                                    <td><span class="badge badge-primary p-2">{{ ucfirst($status) }}</span></td>
-                                    <td>
-                                        <button type="button" class="btn bg-gradient-primary btn-sm w-100 btn-progress progress-input" id="{{ $data->id }}" value="{{ $status }}">Progress</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table" id="final-project-table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">Deskripsi Proposal/Tugas Akhir</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Judul</th>
+                                        <th>Tanggal</th>
+                                        <th>Status</th>
+                                        <th width="10%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $data->title }}</td>
+                                        <td>{{ $data->created_at }}</td>
+                                        @foreach($data->finalLogs as $finalLog)
+                                            @php $status = $finalLog->finalStatus->name @endphp
+                                        @endforeach
+                                        <td><span class="badge badge-primary p-2">{{ ucfirst($status) }}</span></td>
+                                        <td>
+                                            <button type="button" class="btn bg-gradient-primary btn-sm w-100 btn-progress progress-input" id="{{ $data->id }}" value="{{ $status }}">Progress</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
@@ -117,8 +119,8 @@
                 @endforeach
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <div class="p-2 bd-highlight">
-                        @if($data->checkIsVerify($data->id, "proposal"))
-                        <button type="button" class="btn btn-success mb-2 submit-final-project" value="{{ $data->id }}">Mulai Mengerjakan Tugas Akhir / Skripsi</button>
+                        @if($data->checkIsVerify($data->id, "proposal") && $status !== "tugas_akhir")
+                        <button type="button" class="btn btn-success mb-2 submit-final-project" id="{{ $data->id }}">Mulai Mengerjakan Tugas Akhir / Skripsi</button>
                         @endif
                     </div>
                 </div>
