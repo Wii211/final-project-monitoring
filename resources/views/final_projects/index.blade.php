@@ -19,34 +19,12 @@
                             <th>Nama</th>
                             <th>Judul</th>
                             <th>Status</th>
-                            <th>Progress</th>
-                            <th></th>
-                            <th width="10%"></th>
-                            <th width="10%"></th>
+                            <th width="15%">Progress</th>
+                            <th width="7%"></th>
+                            <th width="7%"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Achmad Mujaddid Islami</td>
-                            <td>Update software without click</td>
-                            <td><span class="badge badge-primary p-2">Pra-Proposal</span></td>
-                            <td>
-                                <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
-                                    data-target="#progressFinalProject">Verifikasi</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#progressFinalProject">Progress Proposal</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#progressFinalProject">Progress Tugas Akhir</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#detailFinalProject">Update</button>
-                            </td>
-                        </tr>
                     </tbody> 
                 </table>
             </div>
