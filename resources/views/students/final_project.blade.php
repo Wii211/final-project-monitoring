@@ -80,19 +80,10 @@
                                 <tr>
                                     <td>1.</td>
                                     <td>Pedoman Proposal/Tugas Akhir</td>
-                                    <td><a href="#">Download Berkas Lampiran</a> </td>
+                                    <td><a href="{{ asset('storage/pedoman_tugas_akhir.docx') }}" download>Download Berkas Lampiran</a> </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div class="d-flex flex-row-reverse bd-highlight">
-                    <div class="p-2 bd-highlight">
-                        @if($data->checkIsVerify($data->id, "proposal"))
-                            <button type="submit" class="btn btn-success mb-2">Mulai Mengerjakan Tugas Akhir / Skripsi</button>
-                        @elseif($data->checkIsVerify($data->id, "tugas_akhir"))
-                            <button type="submit" class="btn btn-success mb-2">Ajukan Sidang Tugas Akhir</button>
-                        @endif
                     </div>
                 </div>
                 @foreach($data->finalLogs as $finalLog)
@@ -124,6 +115,13 @@
                         </div>
                     @endif
                 @endforeach
+                <div class="d-flex flex-row-reverse bd-highlight">
+                    <div class="p-2 bd-highlight">
+                        @if($data->checkIsVerify($data->id, "proposal"))
+                        <button type="button" class="btn btn-success mb-2 submit-final-project" value="{{ $data->id }}">Mulai Mengerjakan Tugas Akhir / Skripsi</button>
+                        @endif
+                    </div>
+                </div>
             @else
                 <div class="card">
                     <div class="card-body">
