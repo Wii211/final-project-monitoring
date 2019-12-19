@@ -2,30 +2,43 @@
 
 namespace App\Http\Services;
 
+use App\User;
 use Carbon\Carbon;
-use App\DeadlineSchedule;
 use App\FinalStatus;
+use App\FinalProject;
+use App\DeadlineSchedule;
+use App\FinalLog;
+use App\FinalStudent;
 use Illuminate\Http\Request;
 
 class DeadLineScheduleService
 {
-    private $deadlineSchedule, $finalStatus;
+    private $deadlineSchedule, $finalStatus, $finalProject, $finalStudent;
 
-    public function __construct(DeadlineSchedule $deadlineSchedule, FinalStatus $finalStatus)
+    public function __construct(DeadlineSchedule $deadlineSchedule, FinalStatus $finalStatus, FinalProject $finalProject, FinalStudent $finalStudent)
     {
         $this->deadlineSchedule = $deadlineSchedule;
         $this->finalStatus = $finalStatus;
+        $this->finalProject = $finalProject;
+        $this->finalStudent = $finalStudent;
     }
     public function showProposalRegisterDeadLine()
     {
+        $finalProjectId = $this->finalProject
+            ->whereFinalStudentId($this->finalStudent->getStudentId())->first()->id;
+
+        $finalLog = FinalLog::whereFinalProjectId($finalProjectId)->latest()->first();
+
         $deadlineSchedule = $this->deadlineSchedule
-            ->whereFinalStatusId($this->finalStatus->name('pendaftaran'))->first();
+            ->whereFinalStatusId($finalLog->final_status_id)->first();
 
         $endDate = Carbon::parse($deadlineSchedule->end_date);
 
         $differenceBetweenDate = $endDate->diffInDays(Carbon::now());
 
-        return compact('endDate', 'differenceBetweenDate');
+        $finalStatus = $this->finalStatus->findOrFail($finalLog->final_status_id)->name;
+
+        return compact('endDate', 'differenceBetweenDate', 'finalStatus');
     }
 
     public function getListData()
