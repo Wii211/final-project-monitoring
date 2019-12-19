@@ -1,17 +1,3 @@
-$(function () {
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-        event.preventDefault();
-        $(this).ekkoLightbox({
-            alwaysShowClose: true
-        });
-    });
-
-    $('.btn[data-filter]').on('click', function () {
-        $('.btn[data-filter]').removeClass('active');
-        $(this).addClass('active');
-    });
-});
-
 // CSRF 
 $.ajaxSetup({
     headers: {
@@ -37,14 +23,8 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-primary btn-sm news-report-proposal' id='" + buttonId + "'>Berita Acara Proposal</button>";
-            }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = full.id;
-                return "<button class='btn btn-primary btn-sm news-report-final-project' id='" + buttonId + "'>Berita Acara Tugas Akhir</button>";
+                return "<button class='btn btn-info btn-sm news-report-proposal fs-12 w-100' id='" + buttonId + "'>Proposal</button>" + 
+                "<button class='btn btn-primary btn-sm news-report-final-project fs-12 w-100 mt-2' id='" + buttonId + "'>Tugas Akhir</button>";
             }
         },
         {
