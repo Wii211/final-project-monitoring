@@ -22,35 +22,37 @@
         @if($status !== 'proposal')
         <div class="card">
             <div class="card-body">
-                <table class="table" id="preproposal-table">
-                    <thead>
-                        <tr>
-                            <th>Judul</th>
-                            <th>Tanggal</th>
-                            <th>Status Skripsi</th>
-                            <th>Status Verifikasi</th>
-                            <th width="10%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ $data->title }}</td>
-                            <td>{{ $data->created_at }}</td>
-                            <td><span
-                                    class="badge badge-primary p-2">{{ ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span>
-                            </td>
-                            @if($data->checkIsVerify($data->id, "pra-proposal"))
-                            <td><span class="badge badge-success p-2">Telah diverifikasi</span></td>
-                            @else
-                            <td><span class="badge badge-warning p-2">Menunggu verifikasi</span></td>
-                            @endif
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100 update"
-                                    id="{{ $data->id }}">Update</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table" id="preproposal-table">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Tanggal</th>
+                                <th>Status Skripsi</th>
+                                <th>Status Verifikasi</th>
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $data->title }}</td>
+                                <td>{{ $data->created_at }}</td>
+                                <td><span
+                                        class="badge badge-primary p-2">{{ ucfirst($data->finalLogsPraProposal[0]->finalStatus->name) }}</span>
+                                </td>
+                                @if($data->checkIsVerify($data->id, "pra-proposal"))
+                                <td><span class="badge badge-success p-2">Telah diverifikasi</span></td>
+                                @else
+                                <td><span class="badge badge-warning p-2">Menunggu verifikasi</span></td>
+                                @endif
+                                <td>
+                                    <button class="btn bg-gradient-warning btn-sm w-100 update"
+                                        id="{{ $data->id }}">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -106,8 +108,9 @@
             <div class="card-body">
                 <div class="alert alert-primary alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
-                    <i class="fas fa-info-circle"></i> 
-                    <strong>Anda telah mengambil proposal/tugas akhir. Silahkan masuk ke halaman <a href="{{ route('final_project.index') }}">tugas akhir.</a></strong>
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Anda telah mengambil proposal/tugas akhir. Silahkan masuk ke halaman <a
+                            href="{{ route('final_project.index') }}">tugas akhir.</a></strong>
                 </div>
                 <div class="d-flex justify-content-center">
                     <img src="{{ asset('storage/design/undraw_done_a34v.png') }}" class="w-50">

@@ -13,6 +13,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table" id="final-project-table">
                     <thead>
                         <tr>
@@ -27,6 +28,7 @@
                     <tbody>
                     </tbody> 
                 </table>
+                </div>
             </div>
         </div>
     </div>

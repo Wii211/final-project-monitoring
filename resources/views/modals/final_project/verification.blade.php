@@ -10,18 +10,20 @@
             <form id="final-project-verification-form">
                 @csrf
                 <div class="modal-body">
-                    <table class="table table-striped" id="final-status-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Status Tugas Akhir</th>
-                                <th>Keterangan</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="final-status-table-row">
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="final-status-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Status Tugas Akhir</th>
+                                    <th>Keterangan</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="final-status-table-row">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="final-project-verification-id">

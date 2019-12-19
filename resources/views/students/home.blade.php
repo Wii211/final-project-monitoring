@@ -18,7 +18,7 @@
                         <div class="alert alert-info alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert"
                                 aria-hidden="true">&times;</button>
-                            <h5 class="mb-0 pb-0"><i class="icon fas fa-info-circle"></i> Anda login sebagai mahasiswa</h5>
+                            <h6 class="mb-0 pb-0"><i class="icon fas fa-info-circle"></i> Anda login sebagai mahasiswa</h6>
                         </div>
                         <div class="info-box bg-gradient-primary">
                             <span class="info-box-icon"><i class="fas fa-exclamation-triangle"></i></span>

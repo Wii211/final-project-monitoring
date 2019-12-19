@@ -28,23 +28,26 @@
                 </form>
                 <div class="mt-3">
                     @if(Session::has('success'))
-                    <div class="alert alert-success" role="alert">
-                        Berhasil. Judul milik ini anda!
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Berhasil. Judul telah anda ambil. Pastikan menghubungi dosen yang bersangkutan untuk informasi lebih lanjut.
                     </div>
                     @elseif(Session::has('failed'))
-                    <div class="alert alert-danger" role="alert">
-                        Error
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Error. Telah terjadi kesalahan pada sistem.
                     </div>
                     @elseif(Session::has('duplicate'))
-                    <div class="alert alert-warning" role="alert">
-                        Anda mengambil judul yang lain. Jangan maruk!
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Anda telah mengambil judul yang lain. Jangan maruk!
                     </div>
                     @endif
                 </div>
             </div>
             <div class="card-body pt-0">
                 <div class="table-responsive">
-                    <table class="table" id="recommendationTitleTable">
+                    <table class="table table-hover" id="recommendationTitleTable">
                         <thead>
                             <tr>
                                 <th>Topik</th>
@@ -89,15 +92,16 @@
                                         @csrf
                                         <input type="hidden" name="title" value="{{ $title->title }}">
                                         <input type="hidden" name="title_id" value="{{ $title->id }}">
-                                        <input type="hidden" name="supervisors[lecturer_id]" value="{{ $title->lecturer->id }}">
+                                        <input type="hidden" name="supervisors[lecturer_id]"
+                                            value="{{ $title->lecturer->id }}">
                                         <input type="hidden" name="type" value="recommendation-title">
                                         <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
                                             data-target="#updateProposal">Ambil</button>
                                     </form>
                                     @elseif($title->final_student_id === Auth::user()->finalStudent->id)
-                                    <span class="badge badge-warning">Judul telah anda ambil</span>
+                                    <span class="badge badge-primary p-2">Judul telah anda ambil</span>
                                     @else
-                                    <span class="badge badge-danger">Judul telah diambil</span>
+                                    <span class="badge badge-danger p-2">Judul telah diambil</span>
                                     @endif
                                 </td>
                                 @endif
