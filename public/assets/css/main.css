@@ -84,3 +84,7 @@ label.check-login {
 .table td, .table th {
     vertical-align: middle !important;
 }
+
+.info-box {
+    margin-bottom: 0px !important;
+}
