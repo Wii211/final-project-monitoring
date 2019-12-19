@@ -163,8 +163,12 @@ $(document).on('click', '.submit-final-project', function(){
             })
 
             $.ajax({
-                // url: "project-progress/" + id,
-                type: 'DELETE',
+                url: "final-log",
+                type: 'POST',
+                data: {
+                    'final_project_id': id,
+                    'status': 'tugas_akhir'
+                },
                 success: function () {
                     Swal.fire(
                             'Deleted!',
