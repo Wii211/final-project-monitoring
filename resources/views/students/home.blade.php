@@ -9,20 +9,26 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="info-box bg-gradient-danger mb-0">
-                    <span class="info-box-icon"><i class="fas fa-clock"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Deadline Pendaftaran Proposal Tugas Akhir</span>
-
-                        <span class="progress-description mt-2">
-                            <b>
-                                Pendaftaran akan ditutup {{$endDateAndDiffDate['differenceBetweenDate']}}
-                                hari lagi, pada tanggal {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
-                            </b>
-                        </span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ asset('storage/design/undraw_time_management_30iu.png') }}" class="w-100" srcset="">
                     </div>
-                    <!-- /.info-box-content -->
+                    <div class="col-md-6">
+                        <div class="info-box bg-gradient-danger pb-0">
+                            <span class="info-box-icon"><i class="fas fa-clock"></i></span>
+        
+                            <div class="info-box-content">
+                                <span class="info-box-text">Deadline {{ ucfirst($endDateAndDiffDate['finalStatus']) }}</span>
+        
+                                <span class="progress-description mt-2">
+                                    <b>
+                                        {{ucfirst($endDateAndDiffDate['finalStatus'])}} akan ditutup {{$endDateAndDiffDate['differenceBetweenDate']}}
+                                        hari lagi, pada tanggal {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}
+                                    </b>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {{-- TODO ERROR MESSAGE AND SUCCESS MESSAGE --}}
