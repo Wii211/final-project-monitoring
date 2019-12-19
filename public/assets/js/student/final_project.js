@@ -139,3 +139,43 @@ $('#final-project-progress-table tbody').on('click', '.progress-delete', functio
         }
     })
 });
+
+
+$(document).on('click', '.submit-final-project', function(){
+    let id = $(this).attr("id")
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, submit it!'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+
+            $.ajax({
+                // url: "project-progress/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Deleted!',
+                            'Telah diajukan!',
+                            'success'
+                        )
+                        .then(function () {
+                            window.location.reload()
+                        });
+                }
+            });
+        }
+    })
+})
