@@ -25,7 +25,9 @@
                     <thead>
                         <tr>
                             <th>NIM</th>
+                            <th>Foto</th>
                             <th>Nama</th>
+                            <th>Telepon</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
