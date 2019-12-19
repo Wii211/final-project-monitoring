@@ -19,7 +19,22 @@ let dataTable = $('#student-table').DataTable({
             data: 'student_id'
         },
         {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                image = full.user.image_profile
+
+                if(image !== null){
+                    return "<img src='../../storage/" + image + "' class='img-circle'>";
+                } else {
+                    return "<img src='../../storage/image_profile/default.png' class='img-circle'>";
+                }
+            }
+        },
+        {
             data: 'name'
+        },
+        {
+            data: 'user.phone_number'
         },
         {
             data: 'status'
@@ -33,7 +48,7 @@ let dataTable = $('#student-table').DataTable({
         }
     ],
     "columnDefs": [{
-        targets: [2],
+        targets: [3],
         render: function (data, type, row) {
             if (data == "Aktif" || data == 1) {
                 return '<span class="badge badge-success p-2">Aktif</span>';
