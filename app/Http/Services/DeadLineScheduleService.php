@@ -59,7 +59,7 @@ class DeadLineScheduleService
         }
 
         if (Carbon::now() > $endDate) {
-            return "Sudah Lewat Dari DeadLine Teehee uwu";
+            $finalStatus = "berakhir";
         }
 
 
