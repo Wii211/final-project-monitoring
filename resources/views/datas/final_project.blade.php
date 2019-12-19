@@ -18,43 +18,22 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <table class="table" id="final-project-table">
-                    <thead>
-                        <tr>
-                            <th width="30%">Judul</th>
-                            <th>Mahasiswa</th>
-                            <th>Tanggal</th>
-                            <th></th>
-                            <th></th>
-                            <th width="5%"></th>
-                            <th width="5%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- <tr>
-                            <td>Hey aspiring content creators, submit demo musik kamu dan dapatkan kesempatan menangin
-                                HP Pavilion x360, serta mentoring dari Eka.e</td>
-                            <td>Winardi Chandra</td>
-                            <td>29-02-2022</td>
-                            <td>
-                                <button class="btn bg-gradient-primary btn-sm w-100" data-toggle="modal"
-                                    data-target="#newsReport">Berita Acara</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-info btn-sm w-100" data-toggle="modal"
-                                    data-target="#detailFinalProject">View</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-warning btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Update</button>
-                            </td>
-                            <td>
-                                <button class="btn bg-gradient-danger btn-sm w-100" data-toggle="modal"
-                                    data-target="#updateProposal">Delete</button>
-                            </td>
-                        </tr> --}}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table" id="final-project-table">
+                        <thead>
+                            <tr>
+                                <th width="30%">Judul</th>
+                                <th>Mahasiswa</th>
+                                <th>Tanggal</th>
+                                <th width="10%">Berita Acara</th>
+                                <th width="5%"></th>
+                                <th width="5%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -72,7 +51,6 @@
 
 @section('javascript')
 <!-- DataTables -->
-<script type="text/javascript" src="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 
