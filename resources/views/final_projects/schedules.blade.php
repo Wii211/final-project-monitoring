@@ -28,7 +28,7 @@
                     <table class="table w-100" id="final-schedule-table">
                         <thead>
                             <tr>
-                                <th width="30%">Judul</th>
+                                <th width="25%">Judul</th>
                                 <th>Mahasiswa</th>
                                 <th width="19%">Tempat Tanggal Seminar</th>
                                 <th width="30%">Dosen Penguji</th>
