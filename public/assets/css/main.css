@@ -26,6 +26,7 @@ label.check-login {
 }
 
 .bg-gradient-warning,
+.btn-warning,
 .badge-warning {
     color: #FFF !important;
 }

@@ -111,10 +111,10 @@ $(document).on('submit', '#student-form', function (e) {
             success: function (data) {
                 $('#student-form')[0].reset();
 
-                if (data !== "false") {
+                if (data !== "Failed") {
                     Swal.fire({
                             type: 'success',
-                            title: data.success,
+                            title: 'Berhasil menambahkan data!',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -125,7 +125,7 @@ $(document).on('submit', '#student-form', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: data.error,
+                        title: 'Gagal menambahkan data!',
                         showConfirmButton: false,
                         timer: 1500
                     })

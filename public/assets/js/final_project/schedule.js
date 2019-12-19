@@ -52,6 +52,7 @@ $('#final-schedule-add').click(function () {
     $('#final-schedule-form')[0].reset()
     $('#final-schedule-title').text("Tambah Jadwal Seminar Proposal/Sidang TA")
     $('#final-schedule-button').text("Tambah")
+    $('#final-schedule-requirement').css('display', 'block')
 })
 
 let dataTable = $('#final-schedule-table').DataTable({
@@ -76,7 +77,8 @@ let dataTable = $('#final-schedule-table').DataTable({
             "render": function (data, type, full, meta) {
                 return '<table class="table m-0">' +
                 '<tr><th>Ruangan</th><td>' + full.place + '</td></tr>' +
-                '<tr><th>Tanggal</th><td>' + full.scheduled + '</td></tr></table>'
+                '<tr><th>Tanggal</th><td>' + full.date + '</td></tr>' +
+                '<tr><th>Waktu</th><td>' + full.hour + '</td></tr></table>'
             }
         },
         {
@@ -135,9 +137,8 @@ $(document).on('submit', '#final-schedule-form', function (e) {
             contentType: false,
             processData: false,
             success: function (data) {
-                $('#final-schedule-form')[0].reset();
-
-                if (data !== "Failed") {
+                
+                if (data === "Success") {
                     Swal.fire({
                             type: 'success',
                             title: 'Data telah ditambahkan!',
@@ -146,12 +147,13 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                         })
                         .then(function () {
                             $('#final-schedule-modal').modal('hide');
+                            $('#final-schedule-form')[0].reset();
                             dataTable.ajax.reload();
                         })
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: 'Gagal menambahkan data!',
+                        title: data,
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -176,6 +178,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
             $('#final-schedule-title').text("Update Jenis Jadwal Tugas Akhir")
             $('#final-schedule-button').text("Update")
             $('#final-project-schedule-id').val(result.final_log.final_project_id)
+            $('#final-schedule-requirement').css('display', 'none')
 
             $('#final-schedule-date').val(result.date)
             $('#final-schedule-time').val(result.hour)
@@ -192,7 +195,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
     })
 })
 
-//Progress Agreement
+//Delete
 $('#final-schedule-table tbody').on('click', '.delete', function () {
     let id = $(this).attr("id")
     let finalId = $(this).val()

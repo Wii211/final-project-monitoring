@@ -89,11 +89,9 @@
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <div class="p-2 bd-highlight">
                         @if($data->checkIsVerify($data->id, "proposal"))
-                            <button type="submit" class="btn btn-success mb-2" data-toggle="modal"
-                                data-target="#pengajuanProposal">Ajukan Seminar Proposal</button>
+                            <button type="submit" class="btn btn-success mb-2">Mulai Mengerjakan Tugas Akhir / Skripsi</button>
                         @elseif($data->checkIsVerify($data->id, "tugas_akhir"))
-                            <button type="submit" class="btn btn-success mb-2" data-toggle="modal"
-                                data-target="#pengajuanProposal">Ajukan Sidang Tugas Akhir</button>
+                            <button type="submit" class="btn btn-success mb-2">Ajukan Sidang Tugas Akhir</button>
                         @endif
                     </div>
                 </div>
