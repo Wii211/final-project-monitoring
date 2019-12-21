@@ -82,7 +82,8 @@ label.check-login {
     border: 1px solid #666;
 }
 
-.table td, .table th {
+.table td,
+.table th {
     vertical-align: middle !important;
 }
 
@@ -91,5 +92,31 @@ label.check-login {
 }
 
 .login-box {
-    width:400px !important;
+    width: 400px !important;
+}
+
+.main-sidebar {
+    background: linear-gradient(#203852, #204d7e, #254870) !important
+}
+
+.brand-link {
+    border-bottom: 0px !important
+}
+
+.nav-link {
+    color: #FFF !important
+}
+
+.user-panel {
+    background: linear-gradient(#0088ff, #227fd2) !important;
+    padding-top: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
+}
+
+.navbar-primary,
+.btn-primary,
+.nav-link.active {
+    background: linear-gradient(#0088ff, #227fd2) !important;
+    font-weight: 500 !important;
 }
