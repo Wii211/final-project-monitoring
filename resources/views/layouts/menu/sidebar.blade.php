@@ -1,10 +1,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <a href="index3.html" class="brand-link">
-          {{-- <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image
-          img-circle elevation-3"
+      <a href="#" class="brand-link">
+          <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image"
           style="opacity: .8">
-          <span class="brand-text font-weight-light">TEMON </span> --}}
+          <span class="brand-text font-weight-light text-white"><h6><b>Sistem Monitoring</b></h6></span>
       </a>
 
       <!-- Sidebar -->
@@ -21,10 +20,10 @@
               </div>
               <div class="info">
                   @if(Auth::user()->finalStudent !== null)
-                  <div class="text-white d-block">{{ Auth::user()->finalStudent->name }}</div>
+                  <div class="text-white d-block"><b>{{ Auth::user()->finalStudent->name }}</b></div>
                   <div class="text-white d-block text-NIM">{{ Auth::user()->finalStudent->student_id }}</div>
                   @else
-                  <div class="text-white d-block">{{ Auth::user()->user_name }}</div>
+                  <div class="text-white d-block"><b>{{ Auth::user()->user_name }}</b></div>
                   @endif
               </div>
           </div>
