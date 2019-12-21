@@ -24,24 +24,24 @@
                         <div class="col-md-9">
 
                             <div class="form-group row">
-                                <label class="col-3" for="oldPassword">Password Lama</label>
-                                <div class="col-9">
+                                <label class="col-md-3" for="oldPassword">Password Lama</label>
+                                <div class="col-md-9">
                                     <input type="password" class="form-control form-control-sm" id="oldPassword"
                                         name="old_password" required>
                                 </div>
                             </div>
                             <hr>
                             <div class="form-group row">
-                                <label class="col-3" for="password">Password Baru</label>
-                                <div class="col-9">
+                                <label class="col-md-3" for="password">Password Baru</label>
+                                <div class="col-md-9">
                                     <input type="password" class="form-control form-control-sm" id="password"
                                         name="password" minLength="8" maxlength="16" required>
                                     <div id="passwordStatus"></div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-3" for="exampleFormControlInput1">Konfirmasi Password Baru</label>
-                                <div class="col-9">
+                                <label class="col-md-3" for="exampleFormControlInput1">Konfirmasi Password Baru</label>
+                                <div class="col-md-9">
                                     <small class="form-text">Panjang kata sandi harus 8-16 karakter.</small>
                                     <input type="password" class="form-control form-control-sm" id="confirmPassword"
                                         minLength="8" maxlength="16" name="confirm_password" required>
