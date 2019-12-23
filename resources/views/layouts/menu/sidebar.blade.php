@@ -52,7 +52,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="studentFinalProject" href="{{ route('final_project.index') }}"
+                      <a href="{{ route('final_project.index') }}"
                           class="nav-link {{ Request::is('student/final_project') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
@@ -63,7 +63,7 @@
                   @endif
                   @if(Auth::user()->isCoordinator())
                   <li class="nav-item">
-                      <a id="coorHome" href="{{ route('coordinator_dashboard.index') }}"
+                      <a href="{{ route('coordinator_dashboard.index') }}"
                           class="nav-link {{ Request::is('coordinator') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-home"></i>
                           <p>
@@ -73,7 +73,7 @@
                   </li>
                   @endif
                   <li class="nav-item">
-                      <a id="coorFinalProjectStudent" href="{{ route('recomendation-title.index') }}"
+                      <a href="{{ route('coordinator.recomendation-title.index') }}"
                           class="nav-link {{ Request::is('recomendation-title') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-user-graduate"></i>
                           <p>
@@ -83,7 +83,7 @@
                   </li>
                   @if(Auth::user()->isCoordinator())
                   <li class="nav-item">
-                      <a id="coorFinalProjectStudent" href="{{ route('final_students_verify.index') }}"
+                      <a href="{{ route('final_students_verify.index') }}"
                           class="nav-link {{ Request::is('coordinator/final_projects/students*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-user-graduate"></i>
                           <p>
@@ -92,7 +92,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="coorFinalProject" href="{{ route('final_actives.index') }}"
+                      <a href="{{ route('final_actives.index') }}"
                           class="nav-link {{ Request::is('coordinator/final_projects') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-book"></i>
                           <p>
@@ -101,7 +101,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="coorFinalProjectSchedule" href="{{ route('final_schedules.index') }}"
+                      <a href="{{ route('final_schedules.index') }}"
                           class="nav-link {{ Request::is('coordinator/final_projects/schedules') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-calendar-alt"></i>
                           <p>
@@ -122,7 +122,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="lecturer" href="{{ route('lecturers.index') }}"
+                      <a href="{{ route('lecturers.index') }}"
                           class="nav-link {{ Request::is('data/lecturers') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
@@ -131,7 +131,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a id="student" href="{{ route('students.index') }}"
+                      <a href="{{ route('students.index') }}"
                           class="nav-link {{ Request::is('data/students') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-users"></i>
                           <p>
@@ -142,7 +142,7 @@
                   @endif
                   <li class="nav-header">PROFILE</li>
                   <li class="nav-item">
-                      <a id="changeProfile" href="{{ route('change_profile.index') }}"
+                      <a href="{{ route('change_profile.index') }}"
                           class="nav-link {{ Request::is('profile/change_profile') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-key"></i>
                           <p>
