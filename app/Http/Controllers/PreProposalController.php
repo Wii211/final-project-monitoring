@@ -77,6 +77,9 @@ class PreProposalController extends Controller
                 return redirect()->back()->with('failed', ['Failed']);
             }
         } else {
+            if ($this->preProposalService->checkDuplicate()) {
+                return redirect()->back()->with('duplicate', ['Duplicate']);
+            }
             if ($this->preProposalService->submit($request)) {
 
                 return response()->json("Success");
