@@ -4,6 +4,9 @@ namespace App;
 
 use App\Role;
 use App\Admin;
+use App\FinalLog;
+use Carbon\Carbon;
+use App\FinalStatus;
 use App\FinalStudent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -112,5 +115,29 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function isPastDeadlineFinalProject()
+    {
+        $finalProjectId = $this->finalProject
+            ->whereFinalStudentId($this->finalStudent->getStudentId())->first();
+
+        if ($finalProjectId) {
+            $finalProjectId = $finalProjectId->id;
+
+            $finalLog = FinalLog::whereFinalProjectId($finalProjectId)
+                ->whereFinalStatusId(FinalStatus::name('tugas_akhir'))->first();
+
+            $deadlineSchedule = DeadlineSchedule::whereFinalStatusId($finalLog->final_status_id)->first();
+
+            $endDate = Carbon::parse($deadlineSchedule->end_date);
+
+            if ($endDate->isPast()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 }
