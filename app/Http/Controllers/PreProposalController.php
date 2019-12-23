@@ -9,19 +9,22 @@ use App\FinalStatus;
 use App\FinalStudent;
 use Illuminate\Http\Request;
 use App\Http\Services\PreProposalService;
+use App\Supervisor;
 
 class PreProposalController extends Controller
 {
-    private $preProposalService, $finalStudent, $finalStatus;
+    private $preProposalService, $finalStudent, $finalStatus, $supervisor;
 
     public function __construct(
         PreProposalService $preProposalService,
         FinalStudent $finalStudent,
-        FinalStatus $finalStatus
+        FinalStatus $finalStatus,
+        Supervisor $supervisor
     ) {
         $this->preProposalService = $preProposalService;
         $this->finalStudent = $finalStudent;
         $this->finalStatus = $finalStatus;
+        $this->supervisor = $supervisor;
     }
 
     /**
@@ -66,6 +69,14 @@ class PreProposalController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($this->supervisor->checkSupervisorsQuota($request->supervisors['lecturer_id'])) {
+            return response()->json("Dosen Yang Anda Pilih Telah Memenuhi Kuota Pilih Yang Lain");
+        }
+
+        if ($this->supervisor->checkSupervisorsQuota($request->supervisors2['lecturer_id'])) {
+            return response()->json("Dosen Yang Anda Pilih Telah Memenuhi Kuota Pilih Yang Lain");
+        }
 
         if ($request->has('title_id')) {
             if ($this->preProposalService->checkDuplicate()) {

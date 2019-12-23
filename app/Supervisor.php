@@ -25,4 +25,11 @@ class Supervisor extends Model
     {
         return $this->hasMany(FinalProgress::class);
     }
+
+    public function checkSupervisorsQuota($lecturerId)
+    {
+        $lecturerCount = $this->whereLecturerId($lecturerId)->count();
+
+        return $lecturerCount >= 8 ? true : false;
+    }
 }
