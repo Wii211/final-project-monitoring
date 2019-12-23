@@ -17,7 +17,7 @@
         @endif
         <div class="card">
             <div class="card-body pb-0">
-                <form class="row" action="{{route('recomendation-title.index')}}" method="GET">
+                <form class="row" action="{{route('coordinator.recomendation-title.index')}}" method="GET">
                     <div class="form-group col-md-9">
                         <input type="text" name="q" class="form-control form-control-sm" placeholder="Cari judul..."
                             id="" required>
