@@ -40,6 +40,7 @@ Route::group(
             function () {
                 Route::resource('/pre_proposal', 'PreProposalController');
                 Route::resource('/final_project', 'FinalProjectController');
+                Route::resource('recomendation-title', 'RecomendationTitleController');
             }
         );
 
@@ -145,7 +146,13 @@ Route::prefix('user')->group(function () {
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
-Route::resource('recomendation-title', 'RecomendationTitleController');
+Route::resource(
+    'recomendation-title',
+    'RecomendationTitleController',
+    [
+        'as' => 'coordinator'
+    ]
+);
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:admin']], function () {
     Route::view('/test', 'welcome');
