@@ -57,49 +57,51 @@
 
             </div>
         </div>
-        @if(Auth::user()->isVerified() == 0)
-        <div class="card">
-            @if(Session::has('Success'))
-            <div class="alert alert-success" role="alert">
-                Berhasil. Silahkan tunggu proses verifikasi.
-            </div>
-            @elseif(Session::has('Failed'))
-            <div class="alert alert-danger" role="alert">
-                Error. Terjadi kesalahan.
+        @if($endDateAndDiffDate['finalDescription'] !== "berakhir")
+            @if(Auth::user()->isVerified() == 0)
+            <div class="card">
+                @if(Session::has('Success'))
+                <div class="alert alert-success" role="alert">
+                    Berhasil. Silahkan tunggu proses verifikasi.
+                </div>
+                @elseif(Session::has('Failed'))
+                <div class="alert alert-danger" role="alert">
+                    Error. Terjadi kesalahan.
+                </div>
+                @endif
+                <div class="card-body">
+                    <form method="POST" action="{{route('final_registration.store')}}" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @csrf
+                                <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                    Lengkapi syarat pendaftaran proposal terlebih dahulu untuk bisa mengakses halaman
+                                    lainnya. Pastikan telah mengisi file dengan benar!
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Upload Transkip Nilai (.pdf)</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                        name="transcript" accept="application/pdf">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Upload Rencana Studi Terakhir (.pdf)</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                        name="latest_study_plan" accept="application/pdf">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('storage/design/undraw_fill_forms_yltj.png') }}" class="w-100" srcset="">
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn bg-gradient-primary mb-2 w-100">Verifikasi</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             @endif
-            <div class="card-body">
-                <form method="POST" action="{{route('final_registration.store')}}" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-8">
-                            @csrf
-                            <div class="alert alert-info alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
-                                Lengkapi syarat pendaftaran proposal terlebih dahulu untuk bisa mengakses halaman
-                                lainnya. Pastikan telah mengisi file dengan benar!
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload Transkip Nilai (.pdf)</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                    name="transcript" accept="application/pdf">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload Rencana Studi Terakhir (.pdf)</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                    name="latest_study_plan" accept="application/pdf">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <img src="{{ asset('storage/design/undraw_fill_forms_yltj.png') }}" class="w-100" srcset="">
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn bg-gradient-primary mb-2 w-100">Verifikasi</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
         @endif
     </div>
 </section>
