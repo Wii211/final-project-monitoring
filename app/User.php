@@ -140,4 +140,11 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isPastDeadLineSchedule()
+    {
+        $deadlineSchedule = new DeadlineSchedule;
+
+        return $deadlineSchedule->checkPastDeadLineSchedule ? true : false;
+    }
 }
