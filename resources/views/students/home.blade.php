@@ -58,7 +58,6 @@
             </div>
         </div>
         @if($endDateAndDiffDate['finalDescription'] !== "berakhir")
-            @if(Auth::user()->isVerified() == 0)
             <div class="card">
                 @if(Session::has('Success'))
                 <div class="alert alert-success" role="alert">
@@ -69,6 +68,7 @@
                     Error. Terjadi kesalahan.
                 </div>
                 @endif
+                @if(Auth::user()->isVerified() == 0)
                 <div class="card-body">
                     <form method="POST" action="{{route('final_registration.store')}}" enctype="multipart/form-data">
                         <div class="row">
@@ -100,8 +100,8 @@
                         </div>
                     </form>
                 </div>
+                @endif
             </div>
-            @endif
         @endif
     </div>
 </section>
