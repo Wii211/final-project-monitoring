@@ -41,7 +41,7 @@ class FinalRegistrationController extends Controller
             $alreadyUploaded = true;
         }
 
-        return view('students.home', compact('endDateAndDiffDate', $alreadyUploaded));
+        return view('students.home', compact('endDateAndDiffDate', "alreadyUploaded"));
     }
 
     /**
