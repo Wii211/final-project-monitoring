@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 
 use App\FinalLog;
+use App\FinalProject;
 use App\FinalStatus;
 use App\FinalStudent;
 use Illuminate\Http\Request;
@@ -13,18 +14,20 @@ use App\Supervisor;
 
 class PreProposalController extends Controller
 {
-    private $preProposalService, $finalStudent, $finalStatus, $supervisor;
+    private $preProposalService, $finalStudent, $finalStatus, $supervisor, $finalProject;
 
     public function __construct(
         PreProposalService $preProposalService,
         FinalStudent $finalStudent,
         FinalStatus $finalStatus,
-        Supervisor $supervisor
+        Supervisor $supervisor,
+        FinalProject $finalProject
     ) {
         $this->preProposalService = $preProposalService;
         $this->finalStudent = $finalStudent;
         $this->finalStatus = $finalStatus;
         $this->supervisor = $supervisor;
+        $this->finalProject = $finalProject;
     }
 
     /**
@@ -69,6 +72,10 @@ class PreProposalController extends Controller
      */
     public function store(Request $request)
     {
+        if ($this->preProposalService->checkDuplicate()) {
+
+            return redirect()->back()->with('duplicate', ['Duplicate']);
+        }
 
         if ($this->supervisor->checkSupervisorsQuota($request->supervisors['lecturer_id'])) {
             return response()->json("Dosen Yang Anda Pilih Telah Memenuhi Kuota Pilih Yang Lain");
@@ -79,20 +86,13 @@ class PreProposalController extends Controller
         }
 
         if ($request->has('title_id')) {
-            if ($this->preProposalService->checkDuplicate()) {
-                return redirect()->back()->with('duplicate', ['Duplicate']);
-            }
             if ($this->preProposalService->submitWithRecomendationTitle($request)) {
                 return redirect()->back()->with('success', ['Success']);
             } else {
                 return redirect()->back()->with('failed', ['Failed']);
             }
         } else {
-            if ($this->preProposalService->checkDuplicate()) {
-                return redirect()->back()->with('duplicate', ['Duplicate']);
-            }
             if ($this->preProposalService->submit($request)) {
-
                 return response()->json("Success");
             } else {
                 return response()->json('Failed');
