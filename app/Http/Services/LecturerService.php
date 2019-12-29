@@ -54,7 +54,7 @@ class LecturerService
             if ($request->hasFile('image_profile')) {
                 $fileName = $this->uploadHelper->uploadImage(
                     $request->file('image_profile'),
-                    $request->name,
+                    explode(" ", $request->name)[0],
                     'lecturers'
                 );
             }
@@ -69,6 +69,7 @@ class LecturerService
             )->topics()->attach($request->topics);
             return true;
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
     }
@@ -87,7 +88,7 @@ class LecturerService
                 }
                 $fileName = $this->uploadHelper->uploadImage(
                     $request->file('image_profile'),
-                    $request->name,
+                    explode(" ", $request->name)[0],
                     'lecturers'
                 );
             }
