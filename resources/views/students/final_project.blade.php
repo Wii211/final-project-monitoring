@@ -45,38 +45,42 @@
                 </div>
             </div>
             @foreach($data->finalLogs as $finalLog)
-                @foreach($finalLog->finalSchedules as $finalSchedule)
-                    @php $date = $finalSchedule->date @endphp
-                    @php $time = $finalSchedule->hour @endphp
-                    @php $place = $finalSchedule->place @endphp
-                @endforeach
+                @if(!is_null($finalLog->finalSchedules))
+                    @foreach($finalLog->finalSchedules as $finalSchedule)
+                        @php $date = $finalSchedule->date @endphp
+                        @php $time = $finalSchedule->hour @endphp
+                        @php $place = $finalSchedule->place @endphp
+                    @endforeach
+                @endif
             @endforeach
             @if(!is_null($data->finalLogs))
-            <div class="card">
-                <div class="card-body p-0">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th colspan="4">Seminar</th>
-                            </tr>
-                            <tr>
-                                <th style="width:5%">#</th>
-                                <th>Tanggal</th>
-                                <th>Waktu</th>
-                                <th>Tempat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>{{ $date }}</td>
-                                <td>{{ $time }}</td>
-                                <td>Ruangan {{ $place }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                @if(!is_null($data->finalLogs[0]->finalShedules))
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">Seminar</th>
+                                </tr>
+                                <tr>
+                                    <th style="width:5%">#</th>
+                                    <th>Tanggal</th>
+                                    <th>Waktu</th>
+                                    <th>Tempat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>{{ $date }}</td>
+                                    <td>{{ $time }}</td>
+                                    <td>Ruangan {{ $place }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+                @endif
             @endif
             <div class="card">
                 <div class="card-body p-0">
