@@ -108,7 +108,26 @@
                         </div>
                     </form>
                 </div>
+                @else
+                <div class="card">
+                    <div class="card-body">
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">&times;</button>
+                            Anda telah diverifikasi. Anda dapat mengakses halaman lain.
+                        </div>
+                    </div>
+                </div>
                 @endif
+            </div>
+        @else 
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Deadline pendaftaran telah berakhir. Terimakasih.</strong>
+                    </div>
+                </div>
             </div>
         @endif
     </div>
