@@ -63,8 +63,8 @@ let dataTable = $('#final-schedule-table').DataTable({
     "columns": [
         {
             "render": function (data, type, full, meta) {
-                let status = full.final_log.final_status.name
-                let title = full.final_log.final_project.title
+                let status = full.final_status
+                let title = full.title
 
                 if(status == "tugas_akhir"){
                     status = '<span class="badge badge-primary p-2 d-block w-100">Sidang Tugas Akhir</span> '
@@ -75,7 +75,7 @@ let dataTable = $('#final-schedule-table').DataTable({
             }
         },
         {
-            data: 'final_log.final_project.final_student.name'
+            data: 'student_name'
         },
         {
             sortable: false,
@@ -87,12 +87,13 @@ let dataTable = $('#final-schedule-table').DataTable({
             }
         },
         {
-            data: 'final_log.final_project.examiners',
+            data: 'examiners',
             "render": function(value, type, row){
                 let val = ''
+                
                 val += '<table class="table m-0">'
                 value.forEach(function(data){
-                    val += '<tr><th>Pembahas ' + data.role + '</th><td>' + data.lecturer.name + '</td></tr>'
+                        val += '<tr><th>Pembahas ' + data.role + '</th><td>' + data.lecturer.name + '</td></tr>'
                 })
                 val += '</table>'
                 return val
@@ -102,7 +103,7 @@ let dataTable = $('#final-schedule-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let id = full.id;
-                let finalId = full.final_log.final_project_id;
+                let finalId = full.final_project_id;
                 return "<button class='btn btn-warning update w-100' id='" + id + "'>Update</button>" +
                     "<button class='btn btn-danger delete mt-3 w-100' id='" + id + "' value='" + finalId + "'>Delete</button>";
             }
@@ -146,7 +147,7 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                 if (data === "Success") {
                     Swal.fire({
                             type: 'success',
-                            title: 'Data telah ditambahkan!',
+                            title: 'Data berhasil dieksekusi!',
                             showConfirmButton: false,
                             timer: 1500
                         })
