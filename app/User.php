@@ -145,6 +145,6 @@ class User extends Authenticatable
     {
         $deadlineSchedule = new DeadlineSchedule;
 
-        return $deadlineSchedule->checkPastDeadLineSchedule ? true : false;
+        return $deadlineSchedule->checkPastDeadLineSchedule() ? true : false;
     }
 }
