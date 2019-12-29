@@ -26,7 +26,7 @@ class Examiner extends Model
 
         foreach ($examiners as $examiner) {
             if ($examiner->final_status_id  === $statusId) {
-                $filteredData[] = $examiner->lecturer;
+                $filteredData[] = $examiner;
             }
         }
 
