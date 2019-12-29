@@ -194,10 +194,10 @@ class PreProposalService
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
-        if ($this->recomendationTitle->checkIfSubmited($finalStudentId)) {
-            return true;
-        } else {
-            return false;
-        }
+        if ($this->finalProject->checkDuplicate($finalStudentId)) return true;
+
+        if ($this->recomendationTitle->checkIfSubmited($finalStudentId)) return true;
+
+        return false;
     }
 }

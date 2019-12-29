@@ -60,4 +60,14 @@ class FinalProject extends Model
             ->whereFinalStatusId(FinalStatus::name($finalStatusName))
             ->whereIsVerification(1)->first() ? true : false;
     }
+
+    public function checkDuplicate($finalStudentId)
+    {
+
+        if ($this->whereFinalStudentId($finalStudentId)->first()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
