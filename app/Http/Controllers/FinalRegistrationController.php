@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalStudent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Services\DeadLineScheduleService;
 use App\Http\Requests\FinalRegistrasionRequest;
 use App\Http\Services\FinalRegistrationService;
@@ -29,7 +31,17 @@ class FinalRegistrationController extends Controller
     {
         $endDateAndDiffDate = $this->deadLineScheduleService->showProposalRegisterDeadLine();
 
-        return view('students.home', compact('endDateAndDiffDate'));
+        $finalStudentId = Auth::user()->finalStudent->id;
+
+        $finalStudent = FinalStudent::findOrFail($finalStudentId);
+
+        $alreadyUploaded = false;
+
+        if ($finalStudent->transcript->isEmpty() && $finalStudent->latest_study_plan->isEmpty()) {
+            $alreadyUploaded = true;
+        }
+
+        return view('students.home', compact('endDateAndDiffDate', "alreadyUploaded"));
     }
 
     /**
