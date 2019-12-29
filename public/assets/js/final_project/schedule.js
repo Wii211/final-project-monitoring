@@ -60,14 +60,18 @@ let dataTable = $('#final-schedule-table').DataTable({
     "ajax": {
         url: "../final-schedules"
     },
-    "columns": [{
-            sortable: false,
+    "columns": [
+        {
             "render": function (data, type, full, meta) {
                 let status = full.final_log.final_status.name
                 let title = full.final_log.final_project.title
-                let capitalizeStatus = status.charAt(0).toUpperCase() + status.slice(1)
 
-                return '<span class="badge badge-primary p-2">' + capitalizeStatus + '</span> ' + title
+                if(status == "tugas_akhir"){
+                    status = '<span class="badge badge-primary p-2 d-block w-100">Sidang Tugas Akhir</span> '
+                } else {
+                    status = '<span class="badge badge-info p-2 d-block w-100">Seminar Proposal</span> '
+                }
+                return status + title
             }
         },
         {

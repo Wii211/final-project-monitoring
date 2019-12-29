@@ -58,28 +58,36 @@
             </div>
         </div>
         @if($endDateAndDiffDate['finalDescription'] !== "berakhir")
-            @if(Auth::user()->isVerified() == 0)
             <div class="card">
                 @if(Session::has('Success'))
-                <div class="alert alert-success" role="alert">
-                    Berhasil. Silahkan tunggu proses verifikasi.
-                </div>
+                    <div class="alert alert-success" role="alert">
+                        Berhasil. Silahkan tunggu proses verifikasi.
+                    </div>
                 @elseif(Session::has('Failed'))
-                <div class="alert alert-danger" role="alert">
-                    Error. Terjadi kesalahan.
-                </div>
+                    <div class="alert alert-danger" role="alert">
+                        Error. Terjadi kesalahan.
+                    </div>
                 @endif
+                @if(Auth::user()->isVerified() == 0)
                 <div class="card-body">
                     <form method="POST" action="{{route('final_registration.store')}}" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-8">
                                 @csrf
+                                @if(!$alreadyUploaded)
                                 <div class="alert alert-info alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert"
                                         aria-hidden="true">&times;</button>
                                     Lengkapi syarat pendaftaran proposal terlebih dahulu untuk bisa mengakses halaman
                                     lainnya. Pastikan telah mengisi file dengan benar!
                                 </div>
+                                @else
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                    Anda telah mengunggah berkas yang berkaitan. Silahkan tunggu beberapa saat untuk menunggu verifikasi dari koordinator.
+                                </div>
+                                @endif
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Upload Transkip Nilai (.pdf)</label>
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1"
@@ -100,8 +108,8 @@
                         </div>
                     </form>
                 </div>
+                @endif
             </div>
-            @endif
         @endif
     </div>
 </section>
