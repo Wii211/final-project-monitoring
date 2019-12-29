@@ -7,6 +7,7 @@ use App\FinalLog;
 use Carbon\Carbon;
 use App\FinalStatus;
 use App\FinalSchedule;
+use App\Http\Resources\FinalScheduleCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -26,7 +27,7 @@ class FinalScheduleController extends Controller
         ])
             ->latest()->get();
 
-        return response()->json(['data' => $finalSchedule]);
+        return new FinalScheduleCollection($finalSchedule);
     }
 
     /**
@@ -77,7 +78,7 @@ class FinalScheduleController extends Controller
                     'role' => $request->examiner1['role'],
                     'lecturer_id' => $request->examiner1['lecturer_id'],
                     'final_project_id' => $finalProjectId,
-                    'status' => $request->status
+                    'final_status_id' => FinalStatus::name($request->status)
                 ]);
 
                 $examiners1->save();
@@ -86,7 +87,7 @@ class FinalScheduleController extends Controller
                     'role' => $request->examiner2['role'],
                     'lecturer_id' => $request->examiner2['lecturer_id'],
                     'final_project_id' => $finalProjectId,
-                    'status' => $request->status
+                    'final_status_id' => FinalStatus::name($request->status)
                 ]);
 
                 $examiners2->save();
@@ -95,7 +96,7 @@ class FinalScheduleController extends Controller
                     'role' => $request->examiner3['role'],
                     'lecturer_id' => $request->examiner3['lecturer_id'],
                     'final_project_id' => $finalProjectId,
-                    'status' => $request->status
+                    'final_status_id' => FinalStatus::name($request->status)
                 ]);
 
                 $examiners3->save();
@@ -167,7 +168,7 @@ class FinalScheduleController extends Controller
                         'role' => $request->examiner1['role'],
                         'lecturer_id' => $request->examiner1['lecturer_id'],
                         'final_project_id' => $finalProjectId,
-                        'status' => $request->status
+                        'final_status_id' => FinalStatus::name($request->status)
                     ]);
 
                 $examiners2 = Examiner::findOrFail($request->examiner2['id'])
@@ -175,7 +176,7 @@ class FinalScheduleController extends Controller
                         'role' => $request->examiner2['role'],
                         'lecturer_id' => $request->examiner2['lecturer_id'],
                         'final_project_id' => $finalProjectId,
-                        'status' => $request->status
+                        'final_status_id' => FinalStatus::name($request->status)
                     ]);
 
                 $examiners3 = Examiner::findOrFail($request->examiner3['id'])
@@ -183,7 +184,7 @@ class FinalScheduleController extends Controller
                         'role' => $request->examiner3['role'],
                         'lecturer_id' => $request->examiner3['lecturer_id'],
                         'final_project_id' => $finalProjectId,
-                        'status' => $request->status
+                        'final_status_id' => FinalStatus::name($request->status)
                     ]);
             });
         } catch (\Throwable $th) {
