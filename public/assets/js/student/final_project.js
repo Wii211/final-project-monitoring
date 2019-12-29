@@ -171,7 +171,7 @@ $(document).on('click', '.submit-final-project', function(){
                 },
                 success: function () {
                     Swal.fire(
-                            'Deleted!',
+                            'Berhasil!',
                             'Telah diajukan!',
                             'success'
                         )
