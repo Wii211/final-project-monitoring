@@ -19,4 +19,17 @@ class Examiner extends Model
     {
         return $this->belongsTo(FinalProject::class);
     }
+
+    public static function filterExaminer($statusId, $examiners)
+    {
+        $filteredData = [];
+
+        foreach ($examiners as $examiner) {
+            if ($examiner->final_status_id  === $statusId) {
+                $filteredData[] = $examiner->lecturer;
+            }
+        }
+
+        return $filteredData;
+    }
 }
