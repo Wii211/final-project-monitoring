@@ -23,6 +23,7 @@ class FinalScheduleItem extends JsonResource
             'place' => $this->place,
             'date' => $this->date,
             'hour' => $this->hour,
+            'final_status' => $this->finalLog->finalStatus->name,
             'examiners' => Examiner::filterExaminer($this->finalLog->final_status_id, $this->finalLog->finalProject->examiners)
         ];
     }
