@@ -58,13 +58,12 @@ class FinalScheduleController extends Controller
             return response()->json("Anda Telah Menetapkan Jadwal");
         }
 
+
         try {
             DB::transaction(function () use ($request, $finalProjectId, $finalLogId) {
                 $date = $request->date . " " . $request->time;
 
                 $time = FinalSchedule::convertTime($date);
-
-
 
                 $finalSchedule = new FinalSchedule([
                     'place' => $request->place,
@@ -77,7 +76,8 @@ class FinalScheduleController extends Controller
                 $examiners1 = new Examiner([
                     'role' => $request->examiner1['role'],
                     'lecturer_id' => $request->examiner1['lecturer_id'],
-                    'final_project_id' => $finalProjectId
+                    'final_project_id' => $finalProjectId,
+                    'status' => $request->status
                 ]);
 
                 $examiners1->save();
@@ -85,7 +85,8 @@ class FinalScheduleController extends Controller
                 $examiners2 = new Examiner([
                     'role' => $request->examiner2['role'],
                     'lecturer_id' => $request->examiner2['lecturer_id'],
-                    'final_project_id' => $finalProjectId
+                    'final_project_id' => $finalProjectId,
+                    'status' => $request->status
                 ]);
 
                 $examiners2->save();
@@ -93,7 +94,8 @@ class FinalScheduleController extends Controller
                 $examiners3 = new Examiner([
                     'role' => $request->examiner3['role'],
                     'lecturer_id' => $request->examiner3['lecturer_id'],
-                    'final_project_id' => $finalProjectId
+                    'final_project_id' => $finalProjectId,
+                    'status' => $request->status
                 ]);
 
                 $examiners3->save();
@@ -164,21 +166,24 @@ class FinalScheduleController extends Controller
                     ->update([
                         'role' => $request->examiner1['role'],
                         'lecturer_id' => $request->examiner1['lecturer_id'],
-                        'final_project_id' => $finalProjectId
+                        'final_project_id' => $finalProjectId,
+                        'status' => $request->status
                     ]);
 
                 $examiners2 = Examiner::findOrFail($request->examiner2['id'])
                     ->update([
                         'role' => $request->examiner2['role'],
                         'lecturer_id' => $request->examiner2['lecturer_id'],
-                        'final_project_id' => $finalProjectId
+                        'final_project_id' => $finalProjectId,
+                        'status' => $request->status
                     ]);
 
                 $examiners3 = Examiner::findOrFail($request->examiner3['id'])
                     ->update([
                         'role' => $request->examiner3['role'],
                         'lecturer_id' => $request->examiner3['lecturer_id'],
-                        'final_project_id' => $finalProjectId
+                        'final_project_id' => $finalProjectId,
+                        'status' => $request->status
                     ]);
             });
         } catch (\Throwable $th) {
