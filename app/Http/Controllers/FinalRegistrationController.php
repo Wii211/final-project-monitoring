@@ -37,7 +37,7 @@ class FinalRegistrationController extends Controller
 
         $alreadyUploaded = false;
 
-        if ($finalStudent->transcript->isEmpty() && $finalStudent->latest_study_plan->isEmpty()) {
+        if (!$finalStudent->transcript->isEmpty() && !$finalStudent->latest_study_plan->isEmpty()) {
             $alreadyUploaded = true;
         }
 
