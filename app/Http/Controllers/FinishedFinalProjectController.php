@@ -21,10 +21,14 @@ class FinishedFinalProjectController extends Controller
         if ($request->has('status')) $status = $request->query('status');
 
 
+
         $finalProject = FinalProject::whereHas('finalLogs', function ($query) use ($status) {
+
             $query->whereFinalStatusId(FinalStatus::name($status));
             $query->whereIsVerification(1);
-        })->get();
+            $query->whereHas('finalRequirements');
+        })
+            ->get();
 
         return response()->json($finalProject);
     }
