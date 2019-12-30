@@ -103,16 +103,7 @@
                             </form>
                         </div>
                     @endif
-                @elseif(!Auth::user()->isPastDeadlineSchedule())
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="alert alert-danger alert-block">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <strong>Deadline mengajukan judul pra-proposal telah berakhir. Terimakasih.</strong>
-                            </div>
-                        </div>
-                    </div>
-                @else
+                @elseif($status === 'proposal' || $status === 'tugas_akhir')
                     <div class="card">
                         <div class="card-body">
                             <div class="alert alert-primary alert-block">
@@ -123,6 +114,15 @@
                             </div>
                             <div class="d-flex justify-content-center">
                                 <img src="{{ asset('storage/design/undraw_done_a34v.png') }}" class="w-50">
+                            </div>
+                        </div>
+                    </div>
+                @elseif(Auth::user()->isPastDeadlineSchedule())
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="alert alert-danger alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>Deadline mengajukan judul pra-proposal telah berakhir. Terimakasih.</strong>
                             </div>
                         </div>
                     </div>
