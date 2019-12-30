@@ -4,8 +4,8 @@ $.ajaxSetup({
     }
 })
 
-$(document).on('click', '#final-project-lists', function(){
-    let status = $('#final-schedule-type').val()
+$(document).on('change', '#final-schedule-type', function(){
+    let status = $(this).val()
     $.ajax({
         url: "../finished-project?status=" + status,
         type: "GET",
