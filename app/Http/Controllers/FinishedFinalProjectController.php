@@ -17,17 +17,19 @@ class FinishedFinalProjectController extends Controller
     {
         //ready for presents Final Project
 
-        $status = 'proposal';
+        $status = 'tugas_akhir';
         if ($request->has('status')) $status = $request->query('status');
 
 
 
         $finalProject = FinalProject::whereHas('finalLogs', function ($query) use ($status) {
-
+            $query->whereHas('finalRequirements');
             $query->whereFinalStatusId(FinalStatus::name($status));
             $query->whereIsVerification(1);
+        })->with(['finalLogs' => function ($query) {
             $query->whereHas('finalRequirements');
-        })
+            $query->with('finalRequirements');
+        }])
             ->get();
 
         return response()->json($finalProject);
