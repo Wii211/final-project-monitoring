@@ -107,6 +107,11 @@ class User extends Authenticatable
         return Auth::user()->id;
     }
 
+    public static function getName()
+    {
+        return Auth::user()->user_name;
+    }
+
     public function isVerified()
     {
         return Auth::user()->finalStudent->is_verified;
