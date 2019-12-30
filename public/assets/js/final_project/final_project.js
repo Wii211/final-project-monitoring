@@ -23,6 +23,14 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
+                return "<button class='btn btn-info btn-sm document-show fs-12 w-100' value='proposal' id='" + buttonId + "'>Proposal</button>" + 
+                "<button class='btn btn-primary btn-sm document-show fs-12 w-100 mt-2' value='tugas_akhir' id='" + buttonId + "'>Tugas Akhir</button>";
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = full.id;
                 return "<button class='btn btn-info btn-sm news-report-proposal fs-12 w-100' id='" + buttonId + "'>Proposal</button>" + 
                 "<button class='btn btn-primary btn-sm news-report-final-project fs-12 w-100 mt-2' id='" + buttonId + "'>Tugas Akhir</button>";
             }
@@ -30,7 +38,7 @@ let dataTable = $('#final-project-table').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let buttonId = full.id;
+                let buttonId = full.id
                 return "<button class='btn btn-warning btn-sm update' id='" + buttonId + "'>Update</button>";
             }
         },
@@ -215,15 +223,47 @@ $('#final-project-table tbody').on('click', '.delete', function () {
 
 
 // Proposal
-let j = 1;
+function readFinalProjectDocument(finalProjectId, finalStatusName) {
+    $.ajax({
+        url: 'final-requirement/show',
+        type: "GET",
+        dataType: "json",
+        data: {
+            final_project_id: finalProjectId,
+            final_status_name: finalStatusName
+        },
+        success: function (data) {
+            console.log(data)
+            $('#student-information-modal').modal('show')
 
+            // if (document !== null) {
+            //     PDFObject.embed('../../storage/' + document, "#student-information-content")
+            //     $('#student-information-title').text('Berkas Proposal/Tugas Akhir')
+            //     $('#student-information-content').css('height', '500')
+            // } else {
+            //     $('#student-information-title').text('Data tidak ditemukan.')
+            //     $('#student-information-content').html('<img class="w-100" src="../../storage/design/undraw_empty_xct9.png">')
+            //     $('#student-information-content').css('height', '100%')
+            // }
+
+        }
+    })
+}
+
+$(document).on('click', '.document-show', function(){
+    const finalProjectId = $(this).attr('id')
+    const finalStatusName = $(this).val()
+
+    readFinalProjectDocument(finalProjectId, finalStatusName)
+})
+
+let j = 1;
 function newsReportProposal(id, name) {
     $.ajax({
         url: "news-report-image/" + id + "?finalStatusName=" + name,
         type: "GET",
         dataType: "json",
         success: function (data) {
-            console.log(id);
             $('#final-news-project-id').val(id);
 
             $('#news-report-modal').modal('show');
