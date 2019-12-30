@@ -4,7 +4,7 @@ $.ajaxSetup({
     }
 })
 
-$(document).on('change', '#final-schedule-type', function(){
+$(document).on('change', '#final-schedule-type', function () {
     let status = $(this).val()
     $.ajax({
         url: "../finished-project?status=" + status,
@@ -13,15 +13,29 @@ $(document).on('change', '#final-schedule-type', function(){
         success: function (finalProjects) {
             $('#final-project-schedule-id').html('')
             finalProjects.forEach(function (result) {
-                let data = '<option value="' + result.id + '">' + result.title + '</option>'
+                let data = '<option id="' + result.final_logs[0].final_requirements[0].document_result +
+                    '" value="' + result.id + '">' + result.title + '</option>'
                 $('#final-project-schedule-id').append(data)
             })
         }
     })
 })
 
-// $(document).on('click', '#final-project-lists', function(){
-// })
+$(document).on('click', '#final-project-checked', function(){
+    let document = $('#final-project-schedule-id option').attr('id')
+
+    $('#student-information-modal').modal('show')
+    $('#final-schedule-modal').modal('hide')
+    if (document !== null) {
+        PDFObject.embed('../../storage/' + document, "#student-information-content")
+        $('#student-information-title').text('Berkas Proposal/Tugas Akhir')
+        $('#student-information-content').css('height', '500')
+    } else {
+        $('#student-information-title').text('Data tidak ditemukan.')
+        $('#student-information-content').html('<img class="w-100" src="../../storage/design/undraw_empty_xct9.png">')
+        $('#student-information-content').css('height', '100%')
+    }
+})
 
 $(document).ready(function () {
 
@@ -67,13 +81,12 @@ let dataTable = $('#final-schedule-table').DataTable({
     "ajax": {
         url: "../final-schedules"
     },
-    "columns": [
-        {
+    "columns": [{
             "render": function (data, type, full, meta) {
                 let status = full.final_status
                 let title = full.title
 
-                if(status == "tugas_akhir"){
+                if (status == "tugas_akhir") {
                     status = '<span class="badge badge-primary p-2 d-block w-100">Sidang Tugas Akhir</span> '
                 } else {
                     status = '<span class="badge badge-info p-2 d-block w-100">Seminar Proposal</span> '
@@ -88,19 +101,19 @@ let dataTable = $('#final-schedule-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 return '<table class="table m-0">' +
-                '<tr><th>Ruangan</th><td>' + full.place + '</td></tr>' +
-                '<tr><th>Tanggal</th><td>' + full.date + '</td></tr>' +
-                '<tr><th>Waktu</th><td>' + full.hour + '</td></tr></table>'
+                    '<tr><th>Ruangan</th><td>' + full.place + '</td></tr>' +
+                    '<tr><th>Tanggal</th><td>' + full.date + '</td></tr>' +
+                    '<tr><th>Waktu</th><td>' + full.hour + '</td></tr></table>'
             }
         },
         {
             data: 'examiners',
-            "render": function(value, type, row){
+            "render": function (value, type, row) {
                 let val = ''
-                
+
                 val += '<table class="table m-0">'
-                value.forEach(function(data){
-                        val += '<tr><th>Pembahas ' + data.role + '</th><td>' + data.lecturer.name + '</td></tr>'
+                value.forEach(function (data) {
+                    val += '<tr><th>Pembahas ' + data.role + '</th><td>' + data.lecturer.name + '</td></tr>'
                 })
                 val += '</table>'
                 return val
@@ -150,7 +163,7 @@ $(document).on('submit', '#final-schedule-form', function (e) {
             contentType: false,
             processData: false,
             success: function (data) {
-                
+
                 if (data === "Success") {
                     Swal.fire({
                             type: 'success',
@@ -235,7 +248,7 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                 type: 'DELETE',
                 data: {
                     'final_project_id': finalId
-                }, 
+                },
                 success: function () {
                     Swal.fire(
                             'Deleted!',
