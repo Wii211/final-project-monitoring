@@ -17,7 +17,7 @@ class FinalRequirement extends Model
     public function alreadySubmitted($finalLogId)
     {
         try {
-            $finalRequirement  = $this->finalRequirement->findOrFail($finalLogId);
+            $finalRequirement  = $this->findOrFail($finalLogId);
             return $finalRequirement ? true : false;
         } catch (\Throwable $th) {
             return false;
