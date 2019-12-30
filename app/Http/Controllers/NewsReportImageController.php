@@ -53,7 +53,13 @@ class NewsReportImageController extends Controller
 
         $finalLogId = $this->finalLog->whereFinalProjectId($request->final_project_id)
             ->whereFinalStatusId(FinalStatus::name($request->final_status_name))
-            ->first()->id;
+            ->first();
+
+        if (!$finalLogId) {
+            return response()->json("Failed");
+        }
+
+        $finalLogId = $finalLogId->id;
 
         $newsReport = new NewsReport;
         $newsReport->final_log_id = $finalLogId;
