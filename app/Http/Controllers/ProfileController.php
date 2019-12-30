@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use App\Http\Services\ProfileService;
 
@@ -42,7 +43,8 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { }
+    {
+    }
 
     /**
      * Display the specified resource.
@@ -62,7 +64,7 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfileRequest $request, $id)
     {
         if ($this->profileService->changeProfile($request, $id)) {
             return redirect()->back()->with('success', ['Success']);
