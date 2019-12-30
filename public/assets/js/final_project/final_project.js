@@ -225,7 +225,7 @@ $('#final-project-table tbody').on('click', '.delete', function () {
 // Proposal
 function readFinalProjectDocument(finalProjectId, finalStatusName) {
     $.ajax({
-        url: 'final-requirement/show',
+        url: 'final-requirement/1',
         type: "GET",
         dataType: "json",
         data: {
@@ -233,18 +233,17 @@ function readFinalProjectDocument(finalProjectId, finalStatusName) {
             final_status_name: finalStatusName
         },
         success: function (data) {
-            console.log(data)
             $('#student-information-modal').modal('show')
 
-            // if (document !== null) {
-            //     PDFObject.embed('../../storage/' + document, "#student-information-content")
-            //     $('#student-information-title').text('Berkas Proposal/Tugas Akhir')
-            //     $('#student-information-content').css('height', '500')
-            // } else {
-            //     $('#student-information-title').text('Data tidak ditemukan.')
-            //     $('#student-information-content').html('<img class="w-100" src="../../storage/design/undraw_empty_xct9.png">')
-            //     $('#student-information-content').css('height', '100%')
-            // }
+            if (data.document_result !== null && data !== "Failed" && data.document_result !== undefined) {
+                PDFObject.embed('../storage/' + data.document_result, "#student-information-content")
+                $('#student-information-title').text('Berkas Proposal/Tugas Akhir')
+                $('#student-information-content').css('height', '500')
+            } else {
+                $('#student-information-title').text('Data tidak ditemukan.')
+                $('#student-information-content').html('<img class="w-100" src="../storage/design/undraw_empty_xct9.png">')
+                $('#student-information-content').css('height', '100%')
+            }
 
         }
     })
