@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalLog;
 use App\User;
 use App\FinalRequirement;
+use App\FinalStatus;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
 use App\Http\Requests\FinalRequirementRequest;
@@ -77,9 +79,20 @@ class FinalRequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        try {
+            $finalLog = FinalLog::whereFinalProjectId($request->final_projectId)
+                ->whereFinalStatusId(FinalStatus::name($request->final_status_name))
+                ->first();
+
+            $finalRequirement = FinalRequirement::whereFinalLogId($finalLog->id)
+                ->first();
+
+            return response()->json($finalRequirement);
+        } catch (\Throwable $th) {
+            return response()->json("Failed");
+        }
     }
 
     /**
