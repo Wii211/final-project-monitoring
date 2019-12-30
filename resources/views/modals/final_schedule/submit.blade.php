@@ -22,7 +22,8 @@
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="final-schedule-checked" required>
                         <label class="custom-control-label" for="final-schedule-checked">
-                            Saya yakin untuk mengajukan proposal/tugas akhir ini dan dosen pembimbing mengetahuinya.</label> 
+                            Saya yakin untuk mengajukan proposal/tugas akhir ini dan dosen pembimbing
+                            mengetahuinya.</label>
                     </div>
                     <input type="hidden" name="final_log_id" id="final-log-id">
                     <input type="hidden" name="final_status_name" id="final-status-name">
