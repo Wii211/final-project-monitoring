@@ -67,7 +67,7 @@
                             @endif
                         @endforeach
                     @if(!is_null($data->finalLogs))
-                        @if(!is_null($data->finalLogs[0]->finalShedules))
+                        @if(is_null($data->finalLogs[0]->finalShedules))
                         <div class="card">
                             <div class="card-body p-0">
                                 <table class="table table-bordered">
@@ -158,7 +158,7 @@
                                         </b>
                                 </div>
                                 @else
-                                <button type="button" class="btn btn-success mb-2 submit-proposal-schedule" id="{{ $finalLogId }}"
+                                <button type="button" class="btn btn-success mb-2 submit-schedule" id="{{ $finalLogId }}"
                                     value="{{ $status }}">
                                     Ajukan Seminar Proposal</button>
                                 @endif
@@ -175,8 +175,9 @@
                                         </b>
                                 </div>
                                 @else
-                                <button type="button" class="btn btn-success mb-2 submit-final-project-schedule" id="{{ $finalLogId }}">
-                                    Ajukan Seminar Tugas Akhir</button>
+                                <button type="button" class="btn btn-success mb-2 submit-schedule" id="{{ $finalLogId }}"
+                                    value="{{ $status }}">
+                                    Ajukan Sidang Tugas Akhir</button>
                                 @endif
                             @endif
                         </div>
