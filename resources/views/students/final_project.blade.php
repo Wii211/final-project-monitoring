@@ -11,6 +11,7 @@
             @if($data->checkIsVerify($data->id, "pra-proposal"))
                 @foreach($data->finalLogs as $finalLog)
                 @php $status = $finalLog->finalStatus->name @endphp
+                @php $finalLogId = $finalLog->id @endphp
                 @endforeach
                 @if(Auth::user()->isPastDeadlineSchedule())
                 <div class="card">
@@ -148,13 +149,22 @@
                             <button type="button" class="btn btn-success mb-2 submit-final-project" id="{{ $data->id }}">Mulai
                                 Mengerjakan Tugas Akhir / Skripsi</button>
                             @elseif((!$data->checkIsVerify($data->id, "proposal")) && $status !== "tugas_akhir")
-                            <button type="button" class="btn btn-success mb-2 submit-proposal-schedule" id="{{ $data->id }}">
-                                Ajukan Seminar Proposal</button>
+                                @if(Auth::user()->finalRequirementAlreadySubmitted($finalLogId))
+                                <button type="button" class="btn btn-success mb-2 submit-proposal-schedule" id="{{ $finalLogId }}"
+                                    value="{{ $status }}">
+                                    Ajukan Seminar Proposal</button>
+                                @else
+                                <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                    Anda telah mengajukan seminar proposal. Silahkan menunggu jadwal dari koordinator.
+                                </div>
+                                @endif
                             @elseif($data->checkIsVerify($data->id, "tugas_akhir") && $status === "tugas_akhir")
                             <button type="button" class="btn btn-primary mb-2 submit-finish-final-project" id="{{ $data->id }}">
                                 Klik di sini apabila tugas akhir selesai</button>
                             @elseif((!$data->checkIsVerify($data->id, "tugas_akhir")) && $status === "tugas_akhir")
-                            <button type="button" class="btn btn-success mb-2 submit-final-project-schedule" id="{{ $data->id }}">
+                            <button type="button" class="btn btn-success mb-2 submit-final-project-schedule" id="{{ $finalLogId }}">
                                 Ajukan Seminar Tugas Akhir</button>
                             @endif
                         </div>
@@ -195,6 +205,7 @@
 @section('modal')
 @include('modals.final_project.progress')
 @include('modals.final_project.detail')
+@include('modals.final_schedule.submit')
 @endsection
 
 @section('javascript')
