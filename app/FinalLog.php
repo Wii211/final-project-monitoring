@@ -6,6 +6,7 @@ use App\NewsReport;
 use App\FinalStatus;
 use App\FinalProject;
 use App\FinalSchedule;
+use App\FinalRequirement;
 use Illuminate\Database\Eloquent\Model;
 
 class FinalLog extends Model
@@ -20,6 +21,11 @@ class FinalLog extends Model
     public function finalSchedules()
     {
         return $this->hasMany(FinalSchedule::class, 'final_log_id');
+    }
+
+    public function finalRequirements()
+    {
+        return $this->hasMany(FinalRequirement::class, 'final_log_id');
     }
 
     public function finalProject()
