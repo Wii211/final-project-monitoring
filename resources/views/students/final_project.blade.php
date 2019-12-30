@@ -134,6 +134,15 @@
                     @if($data->checkIsVerify($data->id, "proposal") && $status !== "tugas_akhir")
                     <button type="button" class="btn btn-success mb-2 submit-final-project" id="{{ $data->id }}">Mulai
                         Mengerjakan Tugas Akhir / Skripsi</button>
+                    @elseif((!$data->checkIsVerify($data->id, "proposal")) && $status !== "tugas_akhir")
+                    <button type="button" class="btn btn-success mb-2 submit-final-project" id="{{ $data->id }}">
+                        Ajukan Seminar Proposal</button>
+                    @elseif($data->checkIsVerify($data->id, "tugas_akhir") && $status === "tugas_akhir")
+                    <button type="button" class="btn btn-primary mb-2 submit-final-project" id="{{ $data->id }}">
+                        Klik di sini apabila tugas akhir selesai</button>
+                    @elseif((!$data->checkIsVerify($data->id, "tugas_akhir")) && $status === "tugas_akhir")
+                    <button type="button" class="btn btn-success mb-2 submit-final-project" id="{{ $data->id }}">
+                        Ajukan Seminar Tugas Akhir</button>
                     @endif
                 </div>
             </div>
