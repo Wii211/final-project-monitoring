@@ -183,3 +183,14 @@ $(document).on('click', '.submit-final-project', function(){
         }
     })
 })
+
+$(document).on('click', '.submit-proposal-schedule', function(){
+    let finalId = $(this).attr('id')
+    let status = $(this).val()
+    
+    $('#final-schedule-modal').modal('show')
+    $('#final-log-id').val(finalId)
+    $('#final-status-name').val(status)
+    $('#final-schedule-title').val('Pengajuan Seminar Proposal')
+    $('#upload-document-name').text('Upload Berkas Proposal (.pdf)')
+})
