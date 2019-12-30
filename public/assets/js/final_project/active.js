@@ -40,16 +40,26 @@ let dataTable = $('#final-project-table').DataTable({
             data: 'name'
         },
         {
-            data: 'final_project.title'
+            "render": function (data, type, full, meta) {
+                let title = ''
+
+                if(full.final_project !== null){
+                    title =  full.final_project.title
+                }
+
+                return title
+            }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let status
+                let status = ''
 
-                full.final_project.final_logs.forEach(function (data) {
-                    status = data.final_status.name
-                })
+                if(full.final_project !== null){
+                    full.final_project.final_logs.forEach(function (data) {
+                        status = data.final_status.name
+                    })
+                }
 
                 return '<span class="badge badge-primary p-2">' + status + '</span>'
             }
@@ -57,7 +67,12 @@ let dataTable = $('#final-project-table').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let buttonId = full.final_project.id;
+
+                let buttonId = ''
+
+                if(full.final_project !== null){
+                    buttonId = full.final_project.id
+                }
                 return "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal</button>" +
                 "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
             }
@@ -65,14 +80,22 @@ let dataTable = $('#final-project-table').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let buttonId = full.final_project.id;
+                let buttonId = ''
+
+                if(full.final_project !== null){
+                    buttonId = full.final_project.id
+                }
                 return "<button class='btn btn-success verification' id='" + buttonId + "'>Verifikasi</button>";
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let buttonId = full.final_project.id;
+                let buttonId = ''
+
+                if(full.final_project !== null){
+                    buttonId = full.final_project.id
+                }
                 return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
             }
         }
