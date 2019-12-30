@@ -14,15 +14,20 @@
                             <label for="final-schedule-type">Jenis Jadwal Tugas Akhir</label>
                             <select class="form-control form-control-sm" id="final-schedule-type" name="status"
                                 required>
+                                <option value="" disabled selected>Pilih jenis jadwal...</option>
                                 <option value="proposal">Seminar Proposal</option>
                                 <option value="tugas_akhir">Sidang Tugas Akhir</option>
                             </select>
+                            <small>Pilih untuk mencari proposal/tugas akhir.</small>
+                            <hr>
                         </div>
                         <div class="form-group">
                             <label for="final-project-schedule-id">Judul Tugas Akhir</label>
-                            <select class="form-control form-control-sm" id="final-project-schedule-id"
+                            <select class="form-control" id="final-project-schedule-id"
                                 name="final_project_id" required>
                             </select>
+                            <button type="button" class="btn btn-primary w-100 mt-1" id="final-project-checked">Cek Berkas Tugas Akhir</button>
+                            <small>Klik untuk melihat berkas proposal/tugas akhir.</small>
                         </div>
                     </div>
                     <div class="form-group">
