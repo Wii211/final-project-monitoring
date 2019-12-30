@@ -48,6 +48,7 @@
 @include('modals.final_project.news_report')
 @include('modals.final_project.news_report_detail')
 @include('modals.student.import')
+@include('modals.student.information')
 @endsection
 
 @section('javascript')
@@ -56,5 +57,6 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 
 <!-- -->
+<script type="text/javascript" src="{{ asset('assets/js/pdfobject.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/final_project/final_project.js') }}"></script>
 @endsection
