@@ -58,10 +58,9 @@ class ProfileService
         $user = $this->user->findOrFail($this->user->getAuthId());
 
         if (!Hash::check($request->old_password, $user->password)) {
-            return response()->json([
-                'message' => 'Password Lama Salah'
-            ]);
+            return false;
         }
+
         $user->password = $request->password;
 
         if ($user->save()) {
