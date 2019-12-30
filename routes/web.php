@@ -134,8 +134,10 @@ Route::group(
             [
                 'as' => 'data'
             ]
-
         );
+
+        Route::post('/final-requirement/show', 'FinalRequirementController@show')
+            ->name('final-requirement.show');
 
         Route::post('/final-student-import', 'FinalStudentImportController@store')
             ->name('final_import.store');
