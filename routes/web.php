@@ -34,6 +34,9 @@ Route::group(
 
         Route::resource('final-log', 'FinalLogController');
 
+        Route::post('/final-requirement', 'FinalRequirement@store')
+            ->name('final-requirement.store');
+
 
         Route::group(
             ['middleware' => ['auth', 'verify']],
