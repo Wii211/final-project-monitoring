@@ -20,22 +20,25 @@ class DeadlineSchedule extends Model
     {
         $finalStudent = new FinalStudent;
 
-        $finalProject = FinalProject::whereFinalStudentId($finalStudent->getStudentId())->first();
+        $finalProject = FinalProject::whereFinalStudentId($finalStudent->getStudentId())
+            ->first();
+
+        $finalStatusId = null;
 
         if (!$finalProject) {
-            return "Anda Masih Dalam Tahap Pendaftaran";
+            $finalStatusId = FinalStatus::name('pendaftaran');
+        } else {
+            $finalLog = FinalLog::whereFinalProjectId($finalProject->id)
+                ->latest()->first();
+
+            $finalStatusId = $finalLog->final_status_id;
         }
 
-        $finalLog = FinalLog::whereFinalProjectId($finalProject->id)->latest()->first();
-
-        $deadlineSchedule = $this->whereFinalStatusId($finalLog->final_status_id)->first();
+        $deadlineSchedule = $this->whereFinalStatusId($finalStatusId)
+            ->first();
 
         $endDate = Carbon::parse($deadlineSchedule->end_date);
 
-        if ($endDate->isPast()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $endDate->isPast() ? true : false;
     }
 }
