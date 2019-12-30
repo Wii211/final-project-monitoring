@@ -79,7 +79,7 @@
                             <input type="hidden" class="form-control form-control-sm"
                                 name="revision_final_project_end_date"
                                 value="{{ date('Y-m-d', strtotime($deadlineSchedule[5]->end_date)) }}">
-                        {{-- </div> --}} --}}
+                        {{-- </div> --}}
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Perbarui Deadline</button>
                 </form>

@@ -184,7 +184,7 @@ $(document).on('click', '.submit-final-project', function(){
     })
 })
 
-$(document).on('click', '.submit-proposal-schedule', function(){
+$(document).on('click', '.submit-schedule', function(){
     let finalId = $(this).attr('id')
     let status = $(this).val()
     
