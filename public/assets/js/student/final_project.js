@@ -239,3 +239,46 @@ $(document).on('submit', '#final-schedule-form', function (e) {
 })
 
 
+// Finish FINAL PROJECT!
+$(document).on('click', '.submit-finish-final-project', function(){
+    let id = $(this).attr("id")
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, submit it!'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+
+            $.ajax({
+                url: "final-log",
+                type: 'POST',
+                data: {
+                    'final_project_id': id,
+                    'status': 'tugas_akhir_selesai'
+                },
+                success: function () {
+                    Swal.fire(
+                            'Berhasil!',
+                            'Telah diajukan!',
+                            'success'
+                        )
+                        .then(function () {
+                            window.location.reload()
+                        });
+                }
+            });
+        }
+    })
+})
