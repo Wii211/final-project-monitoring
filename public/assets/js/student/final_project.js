@@ -224,7 +224,7 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                         timer: 1500
                     })
                     .then(function () {
-                        progressIndex(finalProjectId, status)
+                        window.location.reload()
                     });
             } else {
                 Swal.fire({
