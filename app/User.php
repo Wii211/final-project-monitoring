@@ -8,6 +8,7 @@ use App\FinalLog;
 use Carbon\Carbon;
 use App\FinalStatus;
 use App\FinalStudent;
+use App\FinalRequirement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -151,5 +152,12 @@ class User extends Authenticatable
         $deadlineSchedule = new DeadlineSchedule;
 
         return $deadlineSchedule->checkPastDeadLineSchedule() ? true : false;
+    }
+
+    public function finalRequirementAlreadySubmitted($finalLogId)
+    {
+        $finalRequirement = new FinalRequirement;
+
+        return $finalRequirement->alreadySubmitted($finalLogId) ? true : false;
     }
 }
