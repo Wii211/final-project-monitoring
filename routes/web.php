@@ -136,7 +136,7 @@ Route::group(
             ]
         );
 
-        Route::get('/final-requirement/show', 'FinalRequirementController@show')
+        Route::get('/final-requirement/{id}', 'FinalRequirementController@show')
             ->name('final-requirement.show');
 
         Route::post('/final-student-import', 'FinalStudentImportController@store')
