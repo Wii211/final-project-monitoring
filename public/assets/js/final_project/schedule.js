@@ -4,9 +4,10 @@ $.ajaxSetup({
     }
 })
 
-$(document).ready(function () {
+$(document).on('click', '#final-project-lists', function(){
+    let status = $('#final-schedule-type').val()
     $.ajax({
-        url: "../finished-project",
+        url: "../finished-project?status=" + status,
         type: "GET",
         dataType: "json",
         success: function (finalProjects) {
@@ -17,6 +18,12 @@ $(document).ready(function () {
             })
         }
     })
+})
+
+// $(document).on('click', '#final-project-lists', function(){
+// })
+
+$(document).ready(function () {
 
     // Examiner
     $.ajax({
