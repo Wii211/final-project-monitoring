@@ -93,11 +93,13 @@
 @include('modals.final_project.schedule')
 @include('modals.final_project.detail')
 @include('modals.final_project.update')
+@include('modals.student.information')
 @endsection
 
 @section('javascript')
 <!-- DataTables -->
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/pdfobject.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/final_project/schedule.js') }}"></script>
 @endsection
