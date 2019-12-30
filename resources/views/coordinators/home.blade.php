@@ -61,11 +61,10 @@
                     </div>
                     <div class="form-group row">
                         {{-- <label class="col-md-2" for="exampleFormControlInput1">Deadline Revisi Proposal</label>
-                        <div class="col-md-4">
-                            <input type="date" class="form-control form-control-sm" name="revision_proposal_end_date"
+                        <div class="col-md-4"> --}}
+                            <input type="hidden" class="form-control form-control-sm" name="revision_proposal_end_date"
                                 value="{{ date('Y-m-d', strtotime($deadlineSchedule[3]->end_date)) }}">
-                            Dimulai setelah deadline proposal.
-                        </div> --}}
+                        {{-- </div> --}}
                         <label class="col-md-2" for="exampleFormControlInput1">Deadline Tugas Akhir</label>
                         <div class="col-md-4">
                             <input type="date" class="form-control form-control-sm" name="final_project_end_date"
@@ -75,13 +74,12 @@
                     </div>
                     <hr>
                     <div class="form-group row">
-                        {{-- <label class="col-md-2" for="exampleFormControlInput1">Deadline Revisi Tugas Akhir</label>
-                        <div class="col-md-4">
-                            <input type="date" class="form-control form-control-sm"
+                        {{-- {{-- <label class="col-md-2" for="exampleFormControlInput1">Deadline Revisi Tugas Akhir</label>
+                        <div class="col-md-4"> --}}
+                            <input type="hidden" class="form-control form-control-sm"
                                 name="revision_final_project_end_date"
-                                value="{{ date('Y-m-d', strtotime($deadlineSchedule[5]->end_date)) }}"> Dimulai setelah
-                            deadline tugas akhir.
-                        </div> --}}
+                                value="{{ date('Y-m-d', strtotime($deadlineSchedule[5]->end_date)) }}">
+                        {{-- </div> --}} --}}
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Perbarui Deadline</button>
                 </form>

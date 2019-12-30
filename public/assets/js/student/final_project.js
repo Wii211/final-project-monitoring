@@ -183,3 +183,59 @@ $(document).on('click', '.submit-final-project', function(){
         }
     })
 })
+
+$(document).on('click', '.submit-proposal-schedule', function(){
+    let finalId = $(this).attr('id')
+    let status = $(this).val()
+    
+    $('#final-schedule-modal').modal('show')
+    $('#final-log-id').val(finalId)
+    $('#final-status-name').val(status)
+    $('#final-schedule-title').val('Pengajuan Seminar Proposal')
+    $('#upload-document-name').text('Upload Berkas Proposal (.pdf)')
+})
+
+//Submit Berkas
+$(document).on('submit', '#final-schedule-form', function (e) {
+    e.preventDefault()
+    let formData = new FormData(this);
+
+    Swal.fire({
+        title: 'Loading',
+        timer: 60000,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        }
+    });
+
+    $.ajax({
+        url: 'final-requirement',
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $('#final-schedule-modal').modal('hide')
+            if (data !== "Failed") {
+                Swal.fire({
+                        type: 'success',
+                        title: "Berkas persyaratan berhasil ditambahkan",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    .then(function () {
+                        progressIndex(finalProjectId, status)
+                    });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: "Berkas gagal ditambahkan",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+    })
+})
+
+
