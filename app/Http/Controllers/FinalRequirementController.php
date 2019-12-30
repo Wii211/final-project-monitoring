@@ -82,7 +82,7 @@ class FinalRequirementController extends Controller
     public function show($id, Request $request)
     {
         try {
-            $finalLog = FinalLog::whereFinalProjectId($request->final_projectId)
+            $finalLog = FinalLog::whereFinalProjectId($request->final_project_id)
                 ->whereFinalStatusId(FinalStatus::name($request->final_status_name))
                 ->first();
 
