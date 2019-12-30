@@ -154,18 +154,30 @@
                                     value="{{ $status }}">
                                     Ajukan Seminar Proposal</button>
                                 @else
-                                <div class="alert alert-info alert-dismissible">
+                                <div class="alert alert-primary alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert"
                                         aria-hidden="true">&times;</button>
-                                    Anda telah mengajukan seminar proposal. Silahkan menunggu jadwal dari koordinator.
+                                        <b>
+                                            Anda telah mengajukan seminar proposal. Silahkan menunggu jadwal dari koordinator.
+                                        </b>
                                 </div>
                                 @endif
                             @elseif($data->checkIsVerify($data->id, "tugas_akhir") && $status === "tugas_akhir")
                             <button type="button" class="btn btn-primary mb-2 submit-finish-final-project" id="{{ $data->id }}">
                                 Klik di sini apabila tugas akhir selesai</button>
                             @elseif((!$data->checkIsVerify($data->id, "tugas_akhir")) && $status === "tugas_akhir")
-                            <button type="button" class="btn btn-success mb-2 submit-final-project-schedule" id="{{ $finalLogId }}">
-                                Ajukan Seminar Tugas Akhir</button>
+                                @if(Auth::user()->finalRequirementAlreadySubmitted($finalLogId))
+                                <button type="button" class="btn btn-success mb-2 submit-final-project-schedule" id="{{ $finalLogId }}">
+                                    Ajukan Seminar Tugas Akhir</button>
+                                @else
+                                <div class="alert alert-primary alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                        <b>
+                                            Anda telah mengajukan sidang tugas akhir. Silahkan menunggu jadwal dari koordinator.
+                                        </b>
+                                </div>
+                                @endif
                             @endif
                         </div>
                     </div>
