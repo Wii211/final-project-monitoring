@@ -9,6 +9,7 @@ use App\NewsReportImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
+use App\Http\Requests\NewsReportImageRequest;
 use Illuminate\Support\Facades\DB;
 
 class NewsReportImageController extends Controller
@@ -48,7 +49,7 @@ class NewsReportImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewsReportImageRequest $request)
     {
 
         $finalLogId = $this->finalLog->whereFinalProjectId($request->final_project_id)

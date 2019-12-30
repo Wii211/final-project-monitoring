@@ -34,7 +34,7 @@ Route::group(
 
         Route::resource('final-log', 'FinalLogController');
 
-        Route::post('/final-requirement', 'FinalRequirement@store')
+        Route::post('/final-requirement', 'FinalRequirementController@store')
             ->name('final-requirement.store');
 
 
