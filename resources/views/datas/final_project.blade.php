@@ -25,6 +25,7 @@
                                 <th width="30%">Judul</th>
                                 <th>Mahasiswa</th>
                                 <th>Tanggal</th>
+                                <th width="10%">Berkas</th>
                                 <th width="10%">Berita Acara</th>
                                 <th width="5%"></th>
                                 <th width="5%"></th>
