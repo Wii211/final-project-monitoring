@@ -85,10 +85,10 @@ class PasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
+
             return redirect()->back()
                 ->with('failed', ['Password berbeda dengan confirm password']);
         }
-
 
         if ($this->profileService->changePassword($request)) {
             return redirect()->back()->with('success', ['Success']);
