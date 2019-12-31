@@ -129,7 +129,7 @@ $(document).on('submit', '#student-form', function (e) {
                 if (data !== "Failed") {
                     Swal.fire({
                             type: 'success',
-                            title: 'Berhasil menambahkan data!',
+                            title: 'Data berhasil dieksekusi',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -140,7 +140,7 @@ $(document).on('submit', '#student-form', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: 'Gagal menambahkan data!',
+                        title: 'Data gagal dieksekusi',
                         showConfirmButton: false,
                         timer: 1500
                     })
