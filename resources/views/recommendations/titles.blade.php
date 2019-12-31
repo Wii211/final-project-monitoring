@@ -52,13 +52,16 @@
                             <tr>
                                 <th>Topik</th>
                                 <th>Judul</th>
+                                <th>Mahasiswa</th>
                                 <th>Dosen</th>
-                                <th width="30%">Keterangan</th>
+                                <th width="25%">Keterangan</th>
                                 @if(Auth::user()->isAdmin())
                                 <th width="5%"></th>
                                 <th width="5%"></th>
-                                @endif
                                 <th width="5%"></th>
+                                @else
+                                <th width="5%"></th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -74,6 +77,11 @@
                                     </ul>
                                 </td>
                                 <td> {{$title->title}} </td>
+                                @if(!is_null($title->finalStudent))
+                                <td>{{$title->finalStudent->name}}</td>
+                                @else 
+                                <td><span class="badge badge-danger p-2">Belum ada mahasiswa</span></td>
+                                @endif
                                 <td>{{$title->lecturer->name}}</td>
                                 <td>{{$title->description}}</td>
                                 @if(Auth::user()->isAdmin())
@@ -84,6 +92,12 @@
                                 <td>
                                     <button class="btn bg-gradient-danger btn-sm w-100 delete"
                                         id="{{ $title->id }}">Delete</button>
+                                </td>
+                                <td>
+                                    <button class="btn bg-gradient-success btn-sm w-100 accept"
+                                        id="{{ $title->id }}">Terima</button>
+                                    <button class="btn bg-gradient-danger btn-sm w-100 mt-1 decline"
+                                        id="{{ $title->id }}">Tolak</button>
                                 </td>
                                 @elseif(Auth::user()->isStudent())
                                     @if(Auth::user()->isPastDeadlineSchedule())
