@@ -85,6 +85,16 @@
                                 <td>{{$title->lecturer->name}}</td>
                                 <td>{{$title->description}}</td>
                                 @if(Auth::user()->isAdmin())
+                                @if(!is_null($title->finalStudent))
+                                <td>
+                                    <button class="btn bg-gradient-success btn-sm w-100 accept"
+                                        id="{{ $title->id }}">Terima</button>
+                                    <button class="btn bg-gradient-info btn-sm w-100 mt-1 decline"
+                                        id="{{ $title->id }}">Tolak</button>
+                                </td>
+                                @else 
+                                <td></td>
+                                @endif 
                                 <td>
                                     <button class="btn bg-gradient-warning btn-sm w-100 update"
                                         id="{{ $title->id }}">Update</button>
@@ -92,12 +102,6 @@
                                 <td>
                                     <button class="btn bg-gradient-danger btn-sm w-100 delete"
                                         id="{{ $title->id }}">Delete</button>
-                                </td>
-                                <td>
-                                    <button class="btn bg-gradient-success btn-sm w-100 accept"
-                                        id="{{ $title->id }}">Terima</button>
-                                    <button class="btn bg-gradient-danger btn-sm w-100 mt-1 decline"
-                                        id="{{ $title->id }}">Tolak</button>
                                 </td>
                                 @elseif(Auth::user()->isStudent())
                                     @if(Auth::user()->isPastDeadlineSchedule())
