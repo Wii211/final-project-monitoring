@@ -73,7 +73,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th colspan="4">Seminar</th>
+                                            <th colspan="4">Seminar {{ $status }}</th>
                                         </tr>
                                         <tr>
                                             <th style="width:5%">#</th>
@@ -180,6 +180,18 @@
                                     Ajukan Sidang Tugas Akhir</button>
                                 @endif
                             @endif
+                        </div>
+                    </div>
+                @elseif($status === "tugas_akhir_selesai")
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="alert alert-primary alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>Selamat! Anda telah menyelesaikan tugas akhir.</strong>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <img src="{{ asset('storage/design/undraw_super_thank_you_obwk.png') }}" class="w-50">
+                            </div>
                         </div>
                     </div>
                 @endif
