@@ -10,6 +10,9 @@
         @if(!is_null($data))
             @if($data->checkIsVerify($data->id, "pra-proposal"))
                 @foreach($data->finalLogs as $finalLog)
+                @php $date = '' @endphp
+                @php $time = '' @endphp
+                @php $place = '' @endphp
                 @php $status = $finalLog->finalStatus->name @endphp
                 @php $finalLogId = $finalLog->id @endphp
                 @endforeach
