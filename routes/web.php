@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/home', 'welcome');
+Route::get('/', function () {
+    return redirect()->route('login.index');
+});
 
 Route::group(
     ['prefix' => 'student', 'middleware' => ['auth', 'role:mahasiswa']],
