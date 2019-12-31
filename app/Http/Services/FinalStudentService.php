@@ -96,7 +96,7 @@ class FinalStudentService
                 $user = $this->user->findOrFail($finalStudent->user_id);
 
                 $user->user_name = $request->student_id;
-                // $user->email = $request->email;
+                $user->email = $request->email;
                 $user->phone_number = $request->phone_number;
                 $user->gender = $request->gender;
 
