@@ -120,6 +120,7 @@ function topicLecturer(name) {
 
 function detailLecturer(personnel, id, name, phone, email, status, lastEducation, position,
     positionPrimary, image) {
+    $('#lecturerModalTitle').text("Update Data Dosen Teknologi Informasi");
     $('#detailPersonalId').text(personnel);
     $('#detailLecturerId').text(id);
     $('#detailName').text(name);
