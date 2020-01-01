@@ -34,4 +34,9 @@ class FinalSchedule extends Model
 
         return $date[1];
     }
+
+    public function scheduleStatus($finalLogId)
+    {
+        return $this->whereFinalLogId($finalLogId)->first()->status;
+    }
 }
