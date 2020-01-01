@@ -60,7 +60,7 @@
                             required>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="final-project-examiner-3" style="display:none">
                         <label for="examiner-name-3">Dosen Penguji Ketiga</label>
                         <input type="hidden" name="examiner3[role]" id="examiner-role-3" value="3">
                         <input type="hidden" name="examiner3[id]" id="examiner-id-3">
