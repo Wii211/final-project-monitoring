@@ -15,6 +15,9 @@ $(document).on('change', '#final-schedule-type', function () {
 
     $.ajax({
         url: "../finished-project?status=" + status,
+        data: {
+            verification: 1
+        },
         type: "GET",
         dataType: "json",
         success: function (finalProjects) {
