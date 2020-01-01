@@ -13,6 +13,10 @@
                     <div class="alert alert-success" role="alert">
                         Deadline telah diperbaharui!
                     </div>
+                    @elseif(Session::has('failed'))
+                    <div class="alert alert-danger" role="alert">
+                        Deadline gagal diperbaharui!
+                    </div>
                     @endif
                 </div>
                 <form action="{{route('dead-line.store')}}" method="POST">
