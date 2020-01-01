@@ -92,14 +92,16 @@ class FinalScheduleController extends Controller
 
                 $examiners2->save();
 
-                $examiners3 = new Examiner([
-                    'role' => $request->examiner3['role'],
-                    'lecturer_id' => $request->examiner3['lecturer_id'],
-                    'final_project_id' => $finalProjectId,
-                    'final_status_id' => FinalStatus::name($request->status)
-                ]);
+                if ($request->status === 'tugas_akhir') {
+                    $examiners3 = new Examiner([
+                        'role' => $request->examiner3['role'],
+                        'lecturer_id' => $request->examiner3['lecturer_id'],
+                        'final_project_id' => $finalProjectId,
+                        'final_status_id' => FinalStatus::name($request->status)
+                    ]);
 
-                $examiners3->save();
+                    $examiners3->save();
+                }
             });
         } catch (\Throwable $th) {
             dd($th);
