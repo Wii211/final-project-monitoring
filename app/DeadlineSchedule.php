@@ -44,11 +44,15 @@ class DeadlineSchedule extends Model
 
     public function scheduleValidation($finalStatuses)
     {
+
         foreach ($finalStatuses as $key => $finalStatus) {
 
-            if (Carbon::parse($finalStatus['start_date'])->greaterThan(Carbon::parse($finalStatus['end_date']))) return false;
+            if ($key === 'registration' || $key === 'pre_proposal' || $key === 'proposal') {
+                if (Carbon::parse($finalStatus['start_date'])
+                    ->greaterThan(Carbon::parse($finalStatus['end_date']))
+                ) return false;
+            }
         }
-
         return true;
     }
 }
