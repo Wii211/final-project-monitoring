@@ -41,4 +41,14 @@ class DeadlineSchedule extends Model
 
         return $endDate->isPast() ? true : false;
     }
+
+    public function scheduleValidation($finalStatuses)
+    {
+        foreach ($finalStatuses as $key => $finalStatus) {
+
+            if (Carbon::parse($finalStatus['start_date'])->greaterThan(Carbon::parse($finalStatus['end_date']))) return false;
+        }
+
+        return true;
+    }
 }
