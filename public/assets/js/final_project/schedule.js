@@ -6,6 +6,13 @@ $.ajaxSetup({
 
 $(document).on('change', '#final-schedule-type', function () {
     let status = $(this).val()
+
+    if(status === "tugas_akhir"){
+        $('#final-project-examiner-3').css('display', 'block')
+    } else {
+        $('#final-project-examiner-3').css('display', 'none')
+    }
+
     $.ajax({
         url: "../finished-project?status=" + status,
         type: "GET",
