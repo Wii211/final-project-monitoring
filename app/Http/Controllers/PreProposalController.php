@@ -78,11 +78,11 @@ class PreProposalController extends Controller
         }
 
         if ($this->supervisor->checkSupervisorsQuota($request->supervisors['lecturer_id'])) {
-            return response()->json("Dosen Yang Anda Pilih Telah Memenuhi Kuota Pilih Yang Lain");
+            return response()->json("Dosen Full");
         }
 
         if ($this->supervisor->checkSupervisorsQuota($request->supervisors2['lecturer_id'])) {
-            return response()->json("Dosen Yang Anda Pilih Telah Memenuhi Kuota Pilih Yang Lain");
+            return response()->json("Dosen Full");
         }
 
         if ($request->has('title_id')) {
