@@ -79,7 +79,7 @@ class RecomendationTitleTempService
                 $finalProject = $this->finalProject;
 
                 $finalProject->title = $recomendationTitle->title;
-                $finalProject->final_student_id = $this->finalStudent->getStudentId();
+                $finalProject->final_student_id = $recomendationTitle->final_student_id;
                 $finalProject->description = $recomendationTitle->description;
 
                 $finalProject->save();
@@ -107,6 +107,7 @@ class RecomendationTitleTempService
                 $this->deleteData($recomendationTitleId);
             });
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
         return true;
