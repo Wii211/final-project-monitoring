@@ -66,8 +66,6 @@
                         </thead>
                         <tbody>
                             @foreach ($recomendationTitles as $title)
-
-
                             <tr>
                                 <td>
                                     <ul>
@@ -78,7 +76,7 @@
                                 </td>
                                 <td> {{$title->title}} </td>
                                 @if(!is_null($title->finalStudent))
-                                <td>{{$title->finalStudent->name}}</td>
+                                <td><span class="badge badge-primary p-2">{{$title->finalStudent->name}}</span></td>
                                 @else 
                                 <td><span class="badge badge-danger p-2">Belum ada mahasiswa</span></td>
                                 @endif
@@ -111,15 +109,14 @@
                                     @else
                                     <td>
                                         @if(!$title->final_student_id)
-                                        <form action="{{ route('pre_proposal.store') }}" method="POST">
+                                        <form id="fetch-title-form" action="{{ route('pre_proposal.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="title" value="{{ $title->title }}">
                                             <input type="hidden" name="title_id" value="{{ $title->id }}">
                                             <input type="hidden" name="supervisors[lecturer_id]"
                                                 value="{{ $title->lecturer->id }}">
                                             <input type="hidden" name="type" value="recommendation-title">
-                                            <button class="btn bg-gradient-success btn-sm w-100" data-toggle="modal"
-                                                data-target="#updateProposal">Ambil</button>
+                                            <button type="button" id="fetch-title-action" class="btn bg-gradient-success btn-sm w-100">Ambil</button>
                                         </form>
                                         @elseif($title->final_student_id === Auth::user()->finalStudent->id)
                                         <span class="badge badge-primary p-2">Judul telah anda ambil</span>
