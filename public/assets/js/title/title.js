@@ -181,3 +181,68 @@ $('#recommendationTitleTable tbody').on('click', '.delete', function () {
         }
     })
 });
+
+//accept
+$('#recommendationTitleTable tbody').on('click', '.accept', function () {
+    let id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, accept it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "accept-recomendation-title/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Accepted!',
+                            'Mahasiswa telah disetujui untuk mengambil judul tersebut.',
+                            'success'
+                        )
+                        .then(function () {
+                            window.location.reload();
+                        });
+                }
+            });
+        }
+    })
+});
+
+
+//Delete
+$('#recommendationTitleTable tbody').on('click', '.decline', function () {
+    let id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, decline it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: "decline-recomendation-title/" + id,
+                type: 'DELETE',
+                success: function () {
+                    Swal.fire(
+                            'Sukses!',
+                            'Mahasiswa telah ditolak untuk mengambil judul tersebut.',
+                            'success'
+                        )
+                        .then(function () {
+                            window.location.reload();
+                        });
+                }
+            });
+        }
+    })
+});
