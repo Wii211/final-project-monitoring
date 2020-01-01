@@ -97,7 +97,7 @@ class User extends Authenticatable
         if ($this->isCoordinator()) {
             return 'coordinator_dashboard.index';
         } elseif ($this->isAdmin()) {
-            return 'final_project.index';
+            return 'final_projects.index';
         } elseif ($this->isStudent()) {
             return 'final_registration.index';
         }

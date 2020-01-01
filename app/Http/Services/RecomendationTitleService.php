@@ -18,7 +18,7 @@ class RecomendationTitleService
 
     public function getListData($search)
     {
-        return $this->recomendationTitle->with(['lecturer', 'topics'])
+        return $this->recomendationTitle->with(['lecturer', 'topics', 'finalStudent'])
             ->search($search)->paginate(5);
     }
 

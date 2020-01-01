@@ -57,7 +57,7 @@ class DeadlineScheduleController extends Controller
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function show(Schedule $schedule)
+    public function show($schedule)
     {
         //
     }
@@ -68,7 +68,7 @@ class DeadlineScheduleController extends Controller
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function edit(Schedule $schedule)
+    public function edit($schedule)
     {
         //
     }
@@ -82,12 +82,12 @@ class DeadlineScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            $this->deadLineScheduleService->updateData($request, $id);
-            return response()->json("Success");
-        } catch (\Throwable $th) {
-            return response()->json("Error " . $th);
-        }
+        // try {
+        //     $this->deadLineScheduleService->updateData($request, $id);
+        //     return response()->json("Success");
+        // } catch (\Throwable $th) {
+        //     return response()->json("Error " . $th);
+        // }
     }
 
     /**
@@ -96,7 +96,7 @@ class DeadlineScheduleController extends Controller
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Schedule $schedule)
+    public function destroy($schedule)
     {
         //
     }
