@@ -14,9 +14,11 @@ class NewsReportFinalProjectController extends Controller
     ) {
         $finalProject = $newsReportService->generateReport(
             $finalProjectId,
-            $request->status_name
+            'tugas_akhir'
         );
 
-        return view('news_reports.final_project', $finalProject);
+        $todayDate = $newsReportService->getTodayDate();
+
+        return view('news_reports.final_project', compact('finalProject', 'todayDate'));
     }
 }

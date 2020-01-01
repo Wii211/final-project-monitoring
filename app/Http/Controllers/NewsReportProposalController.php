@@ -17,9 +17,12 @@ class NewsReportProposalController extends Controller
     ) {
         $proposal = $newsReportService->generateReport(
             $finalProjectId,
-            $request->status_name
+            'proposal'
         );
 
-        return view('news_reports.proposal', $proposal);
+        $todayDate = $newsReportService->getTodayDate();
+
+
+        return view('news_reports.proposal', compact('proposal', 'todayDate'));
     }
 }
