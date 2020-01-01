@@ -8,6 +8,7 @@ use App\FinalLog;
 use Carbon\Carbon;
 use App\FinalStatus;
 use App\FinalStudent;
+use App\FinalSchedule;
 use App\FinalRequirement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -159,5 +160,12 @@ class User extends Authenticatable
         $finalRequirement = new FinalRequirement;
 
         return $finalRequirement->alreadySubmitted($finalLogId) ? true : false;
+    }
+
+    public function finalScheduleStatus($finalLogId)
+    {
+        $finalSchedule = new FinalSchedule;
+
+        return $finalSchedule->scheduleStatus($finalLogId);
     }
 }
