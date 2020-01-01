@@ -7,7 +7,7 @@ $.ajaxSetup({
 $(document).on('change', '#final-schedule-type', function () {
     let status = $(this).val()
 
-    if(status === "tugas_akhir"){
+    if (status === "tugas_akhir") {
         $('#final-project-examiner-3').css('display', 'block')
     } else {
         $('#final-project-examiner-3').css('display', 'none')
@@ -31,7 +31,7 @@ $(document).on('change', '#final-schedule-type', function () {
     })
 })
 
-$(document).on('click', '#final-project-checked', function(){
+$(document).on('click', '#final-project-checked', function () {
     let document = $('#final-project-schedule-id option').attr('id')
 
     $('#student-information-modal').modal('show')
@@ -133,9 +133,23 @@ let dataTable = $('#final-schedule-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let id = full.id;
-                let finalId = full.final_project_id;
-                return "<button class='btn btn-warning update w-100' id='" + id + "'>Update</button>" +
-                    "<button class='btn btn-danger delete mt-3 w-100' id='" + id + "' value='" + finalId + "'>Delete</button>";
+                return "<button class='btn btn-warning update w-100' id='" + id + "'>Update</button>"
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let id = full.final_log_id
+                let status = full.final_status
+                return "<button class='btn btn-success success w-100' id='" + id + "' value='" + status + "'>Berhasil</button>" +
+                    "<button class='btn btn-danger failed w-100 mt-1' id='" + id + "' value='" + status + "'>Gagal</button>"
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let id = full.id;
+                return "<button class='btn btn-default print w-100' id='" + id + "'>Print</button>"
             }
         }
     ]
@@ -270,6 +284,80 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                         });
                 }
             });
+        }
+    })
+})
+
+//Accept Final Schedule
+$('#recommendationTitleTable tbody').on('click', '.success', function () {
+    const finalLogId = $(this).attr('id')
+    const finalStatus = $(this).val()
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, accept it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                // url: "coordinator/decline-recomendation-title/" + id,
+                type: 'POST',
+                data: {
+                    final_log_id: finalLogId,
+                    final_status_name: finalStatus
+                },
+                success: function () {
+                    Swal.fire(
+                            'Sukses!',
+                            'Mahasiswa telah selesai melakukan seminar.',
+                            'success'
+                        )
+                        .then(function () {
+                            window.location.reload()
+                        })
+                }
+            })
+        }
+    })
+})
+
+//Accept Final Schedule
+$('#recommendationTitleTable tbody').on('click', '.failed', function () {
+    const finalLogId = $(this).attr('id')
+    const finalStatus = $(this).val()
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, accept it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                // url: "coordinator/decline-recomendation-title/" + id,
+                type: 'POST',
+                data: {
+                    final_log_id: finalLogId,
+                    final_status_name: finalStatus
+                },
+                success: function () {
+                    Swal.fire(
+                            'Sukses!',
+                            'Mahasiswa gagal melakukan seminar.',
+                            'success'
+                        )
+                        .then(function () {
+                            window.location.reload()
+                        })
+                }
+            })
         }
     })
 })
