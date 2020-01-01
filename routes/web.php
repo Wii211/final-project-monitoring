@@ -116,6 +116,12 @@ Route::group(
         Route::put('accept-thesis-defence/{id}', 'FinalScheduleStatusController@update');
 
         Route::delete('decline-thesis-defence/{id}', 'FinalScheduleStatusController@destroy');
+
+        Route::get('/news-report-proposal/{finalProjectId}', 'NewsReportProposalController@show')
+            ->name('news-report-proposal.show');
+
+        Route::get('/news-report-final-project/{finalProjectId}', 'NewsReportFinalProjectController@show')
+            ->name('news-report-finalproject.show');
     }
 );
 
