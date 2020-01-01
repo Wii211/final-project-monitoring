@@ -5,29 +5,33 @@ namespace App\Http\Controllers;
 use App\User;
 
 use App\FinalLog;
-use App\FinalProject;
+use App\Supervisor;
 use App\FinalStatus;
+use App\FinalProject;
 use App\FinalStudent;
 use Illuminate\Http\Request;
 use App\Http\Services\PreProposalService;
-use App\Supervisor;
+use App\Http\Services\RecomendationTitleTempService;
 
 class PreProposalController extends Controller
 {
-    private $preProposalService, $finalStudent, $finalStatus, $supervisor, $finalProject;
+    private $preProposalService, $finalStudent, $titleTempService,
+        $finalStatus, $supervisor, $finalProject;
 
     public function __construct(
         PreProposalService $preProposalService,
         FinalStudent $finalStudent,
         FinalStatus $finalStatus,
         Supervisor $supervisor,
-        FinalProject $finalProject
+        FinalProject $finalProject,
+        RecomendationTitleTempService $titleTempService
     ) {
         $this->preProposalService = $preProposalService;
         $this->finalStudent = $finalStudent;
         $this->finalStatus = $finalStatus;
         $this->supervisor = $supervisor;
         $this->finalProject = $finalProject;
+        $this->titleTempService = $titleTempService;
     }
 
     /**
@@ -78,15 +82,15 @@ class PreProposalController extends Controller
         }
 
         if ($this->supervisor->checkSupervisorsQuota($request->supervisors['lecturer_id'])) {
-            return response()->json("Dosen Yang Anda Pilih Telah Memenuhi Kuota Pilih Yang Lain");
+            return response()->json("Dosen Full");
         }
 
         if ($this->supervisor->checkSupervisorsQuota($request->supervisors2['lecturer_id'])) {
-            return response()->json("Dosen Yang Anda Pilih Telah Memenuhi Kuota Pilih Yang Lain");
+            return response()->json("Dosen Full");
         }
 
         if ($request->has('title_id')) {
-            if ($this->preProposalService->submitWithRecomendationTitle($request)) {
+            if ($this->titleTempService->requestTitle($request)) {
                 return redirect()->back()->with('success', ['Success']);
             } else {
                 return redirect()->back()->with('failed', ['Failed']);

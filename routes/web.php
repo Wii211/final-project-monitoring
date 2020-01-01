@@ -108,6 +108,10 @@ Route::group(
             ->name('project-progress-coordinator.update');
 
         Route::resource('final-schedules', 'FinalScheduleController');
+
+        Route::put('accept-recomendation-title/{recomendationTitleId}', 'RecomendationTitleProcessController@update');
+
+        Route::delete('decline-recomendation-title/{recomendationTitleId}', 'RecomendationTitleProcessController@destroy');
     }
 );
 
