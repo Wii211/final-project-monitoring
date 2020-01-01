@@ -109,9 +109,9 @@ Route::group(
 
         Route::resource('final-schedules', 'FinalScheduleController');
 
-        Route::put('accept-recomendation-title', 'RecomendationTitleProcessController@update');
+        Route::put('accept-recomendation-title/{recomendationTitleId}', 'RecomendationTitleProcessController@update');
 
-        Route::delete('decline-recomendation-title', 'RecomendationTitleProcessController@destroy');
+        Route::delete('decline-recomendation-title/{recomendationTitleId}', 'RecomendationTitleProcessController@destroy');
     }
 );
 
