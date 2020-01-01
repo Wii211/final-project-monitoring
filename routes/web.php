@@ -112,6 +112,10 @@ Route::group(
         Route::put('accept-recomendation-title/{recomendationTitleId}', 'RecomendationTitleProcessController@update');
 
         Route::delete('decline-recomendation-title/{recomendationTitleId}', 'RecomendationTitleProcessController@destroy');
+
+        Route::put('accept-thesis-defence/{id}', 'FinalScheduleStatusController@update');
+
+        Route::delete('decline-thesis-defence/{id}', 'FinalScheduleStatusController@destroy');
     }
 );
 
