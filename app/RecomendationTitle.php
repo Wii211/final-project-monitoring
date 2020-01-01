@@ -7,6 +7,7 @@ use App\Admin;
 use App\Topic;
 use App\Lecturer;
 use App\FinalStudent;
+use App\RecomendationTitleTemp;
 use Illuminate\Database\Eloquent\Model;
 
 class RecomendationTitle extends Model
@@ -46,6 +47,11 @@ class RecomendationTitle extends Model
 
             return false;
         }
+    }
+
+    public function recomendationTitleTemp()
+    {
+        return $this->hasOne(RecomendationTitleTemp::class);
     }
 
     /** 
