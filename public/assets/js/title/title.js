@@ -1,24 +1,3 @@
-// $('#title-table tbody').on('submit', '#field-title', function (e) {
-//     e.preventDefault();
-//     let role = 1;
-//     let lecturer = $('#lecturerId').val();
-
-//     let supervisors = {
-//         'lecturer': lecturer,
-//         'role': role
-//     };
-//     let formData = new FormData(this);
-
-//     formData.append('supervisors', supervisors);
-
-//     $.ajax({
-//         type: "POST",
-//         data: formData,
-//         contentType: false,
-//         processData: false
-//     })
-
-// })
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -40,6 +19,24 @@ function getLecturers(id, value) {
     let data = '<option value="' + id + '">' + value + '</option>';
     $('#lecturers').append(data);
 }
+
+$('#recommendationTitleTable tbody').on('click', '#fetch-title-action', function () {
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, decline it!'
+    }).then((result) => {
+        if (result.value) {
+            $("#fetch-title-form").submit();
+        }
+    })
+
+})
 
 $(document).ready(function () {
     $.ajax({
@@ -197,8 +194,11 @@ $('#recommendationTitleTable tbody').on('click', '.accept', function () {
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                url: "accept-recomendation-title/" + id,
-                type: 'DELETE',
+                url: "coordinator/accept-recomendation-title/" + id,
+                type: 'POST',
+                data: {
+                    '_method': 'PUT'
+                },
                 success: function () {
                     Swal.fire(
                             'Accepted!',
@@ -230,7 +230,7 @@ $('#recommendationTitleTable tbody').on('click', '.decline', function () {
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                url: "decline-recomendation-title/" + id,
+                url: "coordinator/decline-recomendation-title/" + id,
                 type: 'DELETE',
                 success: function () {
                     Swal.fire(
@@ -239,10 +239,10 @@ $('#recommendationTitleTable tbody').on('click', '.decline', function () {
                             'success'
                         )
                         .then(function () {
-                            window.location.reload();
-                        });
+                            window.location.reload()
+                        })
                 }
             });
         }
     })
-});
+})
