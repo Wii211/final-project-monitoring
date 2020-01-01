@@ -114,6 +114,10 @@ class DeadLineScheduleService
             ],
         ];
 
+        if (!$this->deadlineSchedule->scheduleValidation($finalStatuses)) {
+            return false;
+        }
+
         try {
             foreach ($finalStatuses as $finalStatus) {
 
