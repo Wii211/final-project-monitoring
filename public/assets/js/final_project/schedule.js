@@ -95,13 +95,22 @@ let dataTable = $('#final-schedule-table').DataTable({
             "render": function (data, type, full, meta) {
                 let status = full.final_status
                 let title = full.title
+                let finalScheduleStatus = full.status
+                let info
 
-                if (status == "tugas_akhir") {
+                if (finalScheduleStatus === 0) {
+                    info = '<span class="badge badge-warning p-2 d-block w-100">Sedang Seminar</span>'
+                } else if (finalScheduleStatus === 2) {
+                    info = '<span class="badge badge-danger p-2 d-block w-100">Gagal Seminar</span>'
+                }
+
+
+                if (status === "tugas_akhir") {
                     status = '<span class="badge badge-primary p-2 d-block w-100">Sidang Tugas Akhir</span> '
                 } else {
                     status = '<span class="badge badge-info p-2 d-block w-100">Seminar Proposal</span> '
                 }
-                return status + title
+                return info + status + title
             }
         },
         {
@@ -132,17 +141,17 @@ let dataTable = $('#final-schedule-table').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let id = full.id;
-                return "<button class='btn btn-warning update w-100' id='" + id + "'>Update</button>"
+                let id = full.final_log_id
+                let status = full.final_status
+                return "<button class='btn btn-success success-final-schedule w-100' id='" + id + "' value='" + status + "'>Berhasil</button>" +
+                    "<button class='btn btn-danger failed-final-schedule w-100 mt-1' id='" + id + "' value='" + status + "'>Gagal</button>"
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let id = full.final_log_id
-                let status = full.final_status
-                return "<button class='btn btn-success success w-100' id='" + id + "' value='" + status + "'>Berhasil</button>" +
-                    "<button class='btn btn-danger failed w-100 mt-1' id='" + id + "' value='" + status + "'>Gagal</button>"
+                let id = full.id;
+                return "<button class='btn btn-warning update w-100' id='" + id + "'>Update</button>"
             }
         },
         {
@@ -273,15 +282,28 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                 data: {
                     'final_project_id': finalId
                 },
-                success: function () {
-                    Swal.fire(
-                            'Deleted!',
-                            'Telah dihapus!',
-                            'success'
-                        )
-                        .then(function () {
-                            dataTable.ajax.reload();
-                        });
+                success: function (data) {
+                    if (data !== "Failed") {
+                        Swal.fire(
+                                'Deleted!',
+                                'Telah dihapus!',
+                                'success'
+                            )
+                            .then(function () {
+                                dataTable.ajax.reload();
+                            });
+
+                    } else {
+
+                        Swal.fire(
+                                'Failed!',
+                                'Gagal menghapus!',
+                                'error'
+                            )
+                            .then(function () {
+                                dataTable.ajax.reload();
+                            });
+                    }
                 }
             });
         }
@@ -289,7 +311,7 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
 })
 
 //Accept Final Schedule
-$('#recommendationTitleTable tbody').on('click', '.success', function () {
+$('#final-schedule-table tbody').on('click', '.success-final-schedule', function () {
     const finalLogId = $(this).attr('id')
     const finalStatus = $(this).val()
 
@@ -304,29 +326,42 @@ $('#recommendationTitleTable tbody').on('click', '.success', function () {
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                // url: "coordinator/decline-recomendation-title/" + id,
+                url: "../accept-thesis-defence/1",
                 type: 'POST',
                 data: {
                     final_log_id: finalLogId,
-                    final_status_name: finalStatus
+                    final_status_name: finalStatus,
+                    _method: 'PUT'
                 },
                 success: function () {
-                    Swal.fire(
-                            'Sukses!',
-                            'Mahasiswa telah selesai melakukan seminar.',
-                            'success'
-                        )
-                        .then(function () {
-                            window.location.reload()
-                        })
+                    if (data !== "Failed") {
+                        Swal.fire(
+                                'Sukses!',
+                                'Mahasiswa telah selesai melakukan seminar.',
+                                'success'
+                            )
+                            .then(function () {
+                                dataTable.ajax.reload()
+                            })
+                    } else {
+                        Swal.fire(
+                                'Gagal!',
+                                'Gagal mengeksekusi data.',
+                                'error'
+                            )
+                            .then(function () {
+                                dataTable.ajax.reload()
+                            })
+
+                    }
                 }
             })
         }
     })
 })
 
-//Accept Final Schedule
-$('#recommendationTitleTable tbody').on('click', '.failed', function () {
+//Decline Final Schedule
+$('#final-schedule-table tbody').on('click', '.failed-final-schedule', function () {
     const finalLogId = $(this).attr('id')
     const finalStatus = $(this).val()
 
@@ -337,25 +372,36 @@ $('#recommendationTitleTable tbody').on('click', '.failed', function () {
         showCancelButton: true,
         confirmButtonColor: '#dc3545',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, accept it!'
+        confirmButtonText: 'Yes, sure.'
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                // url: "coordinator/decline-recomendation-title/" + id,
-                type: 'POST',
+                url: "../decline-thesis-defence/1",
+                type: 'DELETE',
                 data: {
                     final_log_id: finalLogId,
                     final_status_name: finalStatus
                 },
                 success: function () {
-                    Swal.fire(
-                            'Sukses!',
-                            'Mahasiswa gagal melakukan seminar.',
-                            'success'
-                        )
-                        .then(function () {
-                            window.location.reload()
-                        })
+                    if (data !== "Failed") {
+                        Swal.fire(
+                                'Sukses!',
+                                'Mahasiswa gagal melakukan seminar.',
+                                'success'
+                            )
+                            .then(function () {
+                                dataTable.ajax.reload()
+                            })
+                    } else {
+                        Swal.fire(
+                                'Gagal!',
+                                'Gagal mengeksekusi data.',
+                                'error'
+                            )
+                            .then(function () {
+                                dataTable.ajax.reload()
+                            })
+                    }
                 }
             })
         }
