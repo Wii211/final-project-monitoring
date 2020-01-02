@@ -76,4 +76,9 @@ class FinalProject extends Model
             return false;
         }
     }
+
+    public function getFinalProjectFromStudent()
+    {
+        return $this->whereFinalStudentId(FinalStudent::getStudentId());
+    }
 }
