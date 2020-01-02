@@ -10,6 +10,21 @@
     <div class="container-fluid">
         {{-- {{dd($data)}} --}}
             @if(is_null($data))
+                @if(Auth::user()->finalScheduleStatus() === 0)
+                <div class="card">
+                    <div class="card-body">
+                        <div class="alert alert-warning alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Anda sedang menunggu verifikasi dari Koordinator TA 
+                                untuk pengambilan topik/judul dari dosen yang bersangkutan</strong>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ asset('storage/design/undraw_done_a34v.png') }}" class="w-50">
+                        </div>
+                    </div>
+                </div>
+                @else
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <div class="p-2 bd-highlight">
                         <button type="submit" class="btn btn-primary mb-2" id="preproposal-add" data-toggle="modal"
@@ -17,6 +32,7 @@
                     </div>
                 </div>
                 <hr>
+                @endif
             @endif
             @if(!is_null($data))
                 @if($status !== 'proposal')
