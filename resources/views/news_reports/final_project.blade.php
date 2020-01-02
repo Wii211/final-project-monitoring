@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <meta name="generator" content="pdf2htmlEX"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>Berita Acara Tugas Akhir</title>
 <style type="text/css">
 /*! 
  * Base CSS for pdf2htmlEX
@@ -1619,3 +1620,4 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 </div>
 </body>
 </html>
+{{-- @dd($finalProject) --}}
