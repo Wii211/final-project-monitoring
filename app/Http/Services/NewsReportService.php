@@ -18,7 +18,7 @@ class NewsReportService
             ->whereFinalStatusId(FinalStatus::name($statusName))
             ->with([
                 'finalProject.supervisors', 'finalProject.examiners',
-                'finalSchedules'
+                'finalSchedules', 'finalProject.finalStudent'
             ])
             ->first();
 
