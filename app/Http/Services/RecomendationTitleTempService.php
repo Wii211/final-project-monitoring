@@ -13,11 +13,12 @@ use App\RecomendationTitle;
 use Illuminate\Http\Request;
 use App\RecomendationTitleTemp;
 use Illuminate\Support\Facades\DB;
+use App\Http\Services\RecomendationTitleService;
 
 class RecomendationTitleTempService
 {
     private $recomendationTitle, $titleTemp, $finalStudent,
-        $lecturer, $supervisor, $finalProject;
+        $lecturer, $supervisor, $finalProject, $recomendationTitleService;
 
     public function __construct(
         RecomendationTitle $recomendationTitle,
@@ -25,7 +26,8 @@ class RecomendationTitleTempService
         FinalStudent $finalStudent,
         Lecturer $lecturer,
         FinalProject $finalProject,
-        Supervisor $supervisor
+        Supervisor $supervisor,
+        RecomendationTitleService $recomendationTitleService
     ) {
         $this->recomendationTitle = $recomendationTitle;
         $this->titleTemp = $titleTemp;
@@ -33,6 +35,7 @@ class RecomendationTitleTempService
         $this->lecturer = $lecturer;
         $this->finalProject = $finalProject;
         $this->supervisor = $supervisor;
+        $this->recomendationTitleService = $recomendationTitleService;
     }
 
     public function requestTitle(Request $request)
@@ -105,6 +108,7 @@ class RecomendationTitleTempService
                 $supervisor->save();
 
                 $this->deleteData($recomendationTitleId);
+                $this->recomendationTitleService->deleteData($recomendationTitleId);
             });
         } catch (\Throwable $th) {
             dd($th);
