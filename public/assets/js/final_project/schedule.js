@@ -16,7 +16,7 @@ $(document).on('change', '#final-schedule-type', function () {
     $.ajax({
         url: "../finished-project?status=" + status,
         data: {
-            verification: 1
+            verification: 0
         },
         type: "GET",
         dataType: "json",
@@ -157,12 +157,34 @@ let dataTable = $('#final-schedule-table').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let id = full.id;
-                return "<button class='btn btn-default print w-100' id='" + id + "'>Print</button>"
+                let finalProjectId = full.final_project_id
+                let finalStatusName = full.final_status
+
+                if(finalStatusName === "proposal"){
+                    return '<form action="../news-report-proposal/' + finalProjectId + '" method="GET">' + 
+                    '<button type="submit" class="btn btn-default w-100">Print</button>' +
+                    '</form>'
+                } else {
+                    return '<form action="../news-report-final-project/' + finalProjectId + '" method="GET">' + 
+                    '<button type="submit" class="btn btn-default w-100">Print</button>' +
+                    '</form>'
+                }
             }
         }
     ]
 })
+
+// $('#final-schedule-table tbody').on('click', '.print', function () {
+//     const finalProjectId = $(this).attr('id')
+//     const finalStatusName = $(this).val()
+
+//     if(finalStatusName === "tugas_akhir") {
+//         window.location.href = '../news-report-proposal/' + finalProjectId
+//     } else {
+//         window.location.href = '../news-report-final-project/' + finalProjectId
+//     }
+// })
+
 
 // Store
 $(document).on('submit', '#final-schedule-form', function (e) {
