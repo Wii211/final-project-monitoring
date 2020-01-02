@@ -79,7 +79,7 @@ class FinalProject extends Model
 
     public function getFinalProjectFromStudent()
     {
-$finalStudent = new FinalStudent;
-        return $this->whereFinalStudentId($finalStudent->getStudentId());
+        $finalStudent = new FinalStudent;
+        return $this->whereFinalStudentId($finalStudent->getStudentId())->first();
     }
 }
