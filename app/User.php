@@ -162,10 +162,10 @@ class User extends Authenticatable
         return $finalRequirement->alreadySubmitted($finalLogId) ? true : false;
     }
 
-    public function finalScheduleStatus($finalLogId)
+    public function finalScheduleStatus()
     {
         $finalSchedule = new FinalSchedule;
 
-        return $finalSchedule->scheduleStatus($finalLogId);
+        return $finalSchedule->scheduleStatus();
     }
 }
