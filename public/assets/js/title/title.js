@@ -29,7 +29,7 @@ $('#recommendationTitleTable tbody').on('click', '#fetch-title-action', function
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, decline it!'
+        confirmButtonText: 'Yes, sure!'
     }).then((result) => {
         if (result.value) {
             $("#fetch-title-form").submit();
