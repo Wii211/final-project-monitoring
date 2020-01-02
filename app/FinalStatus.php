@@ -22,4 +22,9 @@ class FinalStatus extends Model
     {
         return $query->whereName($name)->first()->id;
     }
+
+    public function getNameAttribute($value)
+    {
+        return implode(" ", explode("_", $value));
+    }
 }
