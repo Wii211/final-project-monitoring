@@ -4,6 +4,7 @@ namespace App;
 
 use App\FinalLog;
 use Carbon\Carbon;
+use App\FinalProject;
 use Illuminate\Database\Eloquent\Model;
 
 class FinalSchedule extends Model
@@ -35,8 +36,13 @@ class FinalSchedule extends Model
         return $date[1];
     }
 
-    public function scheduleStatus($finalLogId)
+    public function scheduleStatus()
     {
-        return $this->whereFinalLogId($finalLogId)->first()->status;
+        $finalProjectId = new FinalProject;
+        $finalProjectId = $finalProjectId->getFinalProjectFromStudent->id;
+        $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
+            ->latest()->first()->id;
+
+        return $this->whereFinalLogId($finalLogId)->latest()->first()->status;
     }
 }
