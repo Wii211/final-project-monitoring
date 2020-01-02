@@ -11,10 +11,6 @@ let dataTable = $('#student-table').DataTable({
     "ajax": {
         url: "students"
     },
-    dom: 'Bfrti',
-    buttons: [
-        'copy', 'csv', 'excel', 'pdf'
-    ],
     "columns": [{
             data: 'student_id'
         },
