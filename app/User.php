@@ -163,11 +163,11 @@ class User extends Authenticatable
         return $finalRequirement->alreadySubmitted($finalLogId) ? true : false;
     }
 
-    public function finalScheduleStatus()
+    public function finalScheduleStatus($finalLogId)
     {
         $finalSchedule = new FinalSchedule;
 
-        return $finalSchedule->scheduleStatus();
+        return $finalSchedule->scheduleStatus($finalLogId);
     }
 
     public function recomendationTitleIsPicked()
