@@ -28,6 +28,7 @@
                                 <th>NIM</th>
                                 <th>Foto</th>
                                 <th>Nama</th>
+                                <th>IPK</th>
                                 <th>Telepon</th>
                                 <th>Status</th>
                                 <th></th>
