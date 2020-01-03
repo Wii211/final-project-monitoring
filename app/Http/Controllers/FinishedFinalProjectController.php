@@ -35,7 +35,7 @@ class FinishedFinalProjectController extends Controller
         }, 'finalStudent'])
             ->get();
 
-        return response()->json($finalProject);
+        return response()->json(['data' => $finalProject]);
     }
 
     /**
