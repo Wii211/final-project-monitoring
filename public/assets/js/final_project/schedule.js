@@ -147,8 +147,16 @@ let dataTable = $('#final-schedule-table').DataTable({
             "render": function (data, type, full, meta) {
                 let id = full.final_log_id
                 let status = full.final_status
-                return "<button class='btn btn-success success-final-schedule w-100' id='" + id + "' value='" + status + "'>Berhasil</button>" +
-                    "<button class='btn btn-danger failed-final-schedule w-100 mt-1' id='" + id + "' value='" + status + "'>Gagal</button>"
+                let finalScheduleStatus = full.status
+
+                let success = "<button class='btn btn-success success-final-schedule w-100' id='" + id + "' value='" + status + "'>Berhasil</button>"
+                let failed = "<button class='btn btn-danger failed-final-schedule w-100 mt-1' id='" + id + "' value='" + status + "'>Gagal</button>"
+
+                if(finalScheduleStatus === 0){
+                    return success + failed
+                } else if(finalScheduleStatus === 2){
+                    return success
+                }
             }
         },
         {
