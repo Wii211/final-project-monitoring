@@ -22,7 +22,14 @@ class NewsReportProposalController extends Controller
 
         $todayDate = $newsReportService->getTodayDate();
 
+        $finalProjectTitle = FinalProject::convertTitleForNewsReport(
+            $proposal->finalProject->title
+        );
 
-        return view('news_reports.proposal', compact('proposal', 'todayDate'));
+        return view('news_reports.proposal', compact(
+            'proposal',
+            'todayDate',
+            'finalProjectTitle'
+        ));
     }
 }
