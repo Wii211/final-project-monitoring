@@ -90,8 +90,8 @@ class PreProposalController extends Controller
         }
 
         if ($request->has('title_id')) {
-            if ($this->titleTempService->requestTitle($request) === 'duplicate') {
-                return redirect()->back()->with('duplicate', ['Duplicate']);
+            if ($this->titleTempService->requestTitle($request) === 'full') {
+                return redirect()->back()->with('full', ['Full']);
             }
             if ($this->titleTempService->requestTitle($request)) {
                 return redirect()->back()->with('success', ['Success']);
