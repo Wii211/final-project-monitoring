@@ -36,7 +36,7 @@ let dataTable = $('#final-project-table').DataTable({
     "ajax": {
         url: "monitoring"
     },
-    "order": [[ 1, "desc" ]],
+    "order": [[ 2, "desc" ]],
     "columns": [{
             data: 'name'
         },
