@@ -120,3 +120,19 @@ label.check-login {
     background: linear-gradient(#0088ff, #227fd2) !important;
     font-weight: 500 !important;
 }
+
+.btn-finish-final-project {
+    background: #000 !important
+}
+
+.btn-final-project {
+    background: #0619a7 
+}
+
+.btn-proposal {
+    background: #046596
+}
+
+.btn-pra-proposal {
+    background: #039479;
+}
