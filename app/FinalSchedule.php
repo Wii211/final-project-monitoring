@@ -38,8 +38,8 @@ class FinalSchedule extends Model
 
     public function scheduleStatus($finalLogId)
     {
-        $finalSchedule = $this->whereFinalLogId($finalLogId)->first()->status;
+        $finalSchedule = $this->whereFinalLogId($finalLogId)->first();
 
-        return $finalSchedule ? $finalSchedule : false;
+        return $finalSchedule ? $finalSchedule->status : false;
     }
 }
