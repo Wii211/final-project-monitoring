@@ -78,4 +78,18 @@ class RecomendationTitle extends Model
                 $query->where('name', 'LIKE', "%{$q}%");
             });
     }
+
+    public function isPicked()
+    {
+        $finalStudentId = new FinalStudent;
+
+        $recomendationTitle =  $this->whereFinalStudent($finalStudentId->getStudentId())
+            ->whereHas('recomendationTitleTemp')->first();
+
+        if ($recomendationTitle) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
