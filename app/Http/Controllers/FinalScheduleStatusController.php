@@ -71,7 +71,7 @@ class FinalScheduleStatusController extends Controller
     {
         //Accept finalSchedule
         try {
-            $finalSchedule = FinalSchedule::whereFinalLogId($request->finalLogId);
+            $finalSchedule = FinalSchedule::whereFinalLogId($request->final_log_id);
             $finalSchedule->status = 1;
             $finalSchedule->save();
         } catch (\Throwable $th) {
@@ -91,7 +91,7 @@ class FinalScheduleStatusController extends Controller
         //Decline finalSchedule
         //Accept finalSchedule
         try {
-            $finalSchedule = FinalSchedule::whereFinalLogId($request->finalLogId);
+            $finalSchedule = FinalSchedule::whereFinalLogId($request->final_log_id);
             $finalSchedule->status = 2;
             $finalSchedule->save();
         } catch (\Throwable $th) {
