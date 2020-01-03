@@ -98,16 +98,20 @@ let dataTable = $('#final-schedule-table').DataTable({
                 let finalScheduleStatus = full.status
                 let info
 
-                if (finalScheduleStatus === 0) {
-                    info = '<span class="badge badge-warning p-2 d-block w-100">Sedang Seminar</span>'
-                } else if (finalScheduleStatus === 2) {
-                    info = '<span class="badge badge-danger p-2 d-block w-100">Gagal Seminar</span>'
-                }
-
-
                 if (status === "tugas_akhir") {
+                    if (finalScheduleStatus === 0) {
+                        info = '<span class="badge badge-warning p-2 d-block w-100">Sedang Sidang</span>'
+                    } else if (finalScheduleStatus === 2) {
+                        info = '<span class="badge badge-danger p-2 d-block w-100">Gagal Sidang</span>'
+                    }
                     status = '<span class="badge badge-primary p-2 d-block w-100">Sidang Tugas Akhir</span> '
                 } else {
+                    if (finalScheduleStatus === 0) {
+                        info = '<span class="badge badge-warning p-2 d-block w-100">Sedang Seminar</span>'
+                    } else if (finalScheduleStatus === 2) {
+                        info = '<span class="badge badge-danger p-2 d-block w-100">Gagal Seminar</span>'
+                    }
+                    
                     status = '<span class="badge badge-info p-2 d-block w-100">Seminar Proposal</span> '
                 }
                 return info + status + title
@@ -322,9 +326,6 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                                 'Gagal menghapus!',
                                 'error'
                             )
-                            .then(function () {
-                                dataTable.ajax.reload();
-                            });
                     }
                 }
             });
@@ -355,7 +356,7 @@ $('#final-schedule-table tbody').on('click', '.success-final-schedule', function
                     final_status_name: finalStatus,
                     _method: 'PUT'
                 },
-                success: function () {
+                success: function (data) {
                     if (data !== "Failed") {
                         Swal.fire(
                                 'Sukses!',
@@ -371,10 +372,6 @@ $('#final-schedule-table tbody').on('click', '.success-final-schedule', function
                                 'Gagal mengeksekusi data.',
                                 'error'
                             )
-                            .then(function () {
-                                dataTable.ajax.reload()
-                            })
-
                     }
                 }
             })
@@ -392,7 +389,7 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
         text: "You won't be able to revert this!",
         type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#dc3545',
+        confirmButtonColor: '#28a745',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, sure.'
     }).then((result) => {
@@ -404,7 +401,7 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
                     final_log_id: finalLogId,
                     final_status_name: finalStatus
                 },
-                success: function () {
+                success: function (data) {
                     if (data !== "Failed") {
                         Swal.fire(
                                 'Sukses!',
