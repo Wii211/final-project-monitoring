@@ -10,6 +10,7 @@ use App\FinalStatus;
 use App\FinalStudent;
 use App\FinalSchedule;
 use App\FinalRequirement;
+use App\RecomendationTitle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -167,5 +168,12 @@ class User extends Authenticatable
         $finalSchedule = new FinalSchedule;
 
         return $finalSchedule->scheduleStatus();
+    }
+
+    public function recomendationTitleIsPicked()
+    {
+        $recomendationTitle = new RecomendationTitle;
+
+        return $recomendationTitle->isPicked();
     }
 }
