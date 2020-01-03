@@ -32,7 +32,7 @@ class FinishedFinalProjectController extends Controller
             $query->whereFinalStatusId(FinalStatus::name($status));
             $query->whereHas('finalRequirements');
             $query->with('finalRequirements');
-        }])
+        }, 'finalStudent'])
             ->get();
 
         return response()->json($finalProject);
