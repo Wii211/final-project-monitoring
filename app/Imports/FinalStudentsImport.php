@@ -36,7 +36,8 @@ class FinalStudentsImport implements ToCollection, WithHeadingRow
                     'status' => FinalStudent::convertActive($row['status']),
                     'is_verified' => 0,
                     'user_id' => $user->id,
-                    'name' => $row['nama']
+                    'name' => $row['nama'],
+                    'gpa' => $row['ipk']
                 ]
             );
         }
