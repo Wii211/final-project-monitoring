@@ -51,7 +51,7 @@ class RecomendationTitleTempService
                 if ($this->supervisor
                     ->checkSupervisorsQuota($recomendationTitle->lecturer_id)
                 ) {
-                    return "duplicate";
+                    return "full";
                 }
 
                 $recomendationTitle->save();
