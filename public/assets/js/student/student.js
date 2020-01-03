@@ -47,7 +47,7 @@ let dataTable = $('#student-table').DataTable({
         }
     ],
     "columnDefs": [{
-        targets: [4],
+        targets: [5],
         render: function (data, type, row) {
             if (data == "Aktif" || data == 1) {
                 return '<span class="badge badge-success p-2">Aktif</span>';
