@@ -48,6 +48,12 @@ class RecomendationTitleTempService
                 $recomendationTitle->final_student_id =
                     $this->finalStudent->getStudentId();
 
+                if ($this->supervisor
+                    ->checkSupervisorsQuota($recomendationTitle->lecturer_id)
+                ) {
+                    return "duplicate";
+                }
+
                 $recomendationTitle->save();
 
                 $titleTemp = $this->titleTemp;
