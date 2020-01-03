@@ -10,7 +10,7 @@
     <div class="container-fluid">
         {{-- {{dd($data)}} --}}
             @if(is_null($data))
-                @if(Auth::user()->finalScheduleStatus() === 0)
+                @if(Auth::user()->recomendationTitleIsPicked())
                 <div class="card">
                     <div class="card-body">
                         <div class="alert alert-warning alert-block">
