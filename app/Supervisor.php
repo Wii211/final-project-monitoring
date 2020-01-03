@@ -33,6 +33,6 @@ class Supervisor extends Model
         })
             ->whereLecturerId($lecturerId)->count();
 
-        return $lecturerCount >= 8 ? true : false;
+        return $lecturerCount > 8 ? true : false;
     }
 }
