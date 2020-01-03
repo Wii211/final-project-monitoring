@@ -16,6 +16,7 @@ class DeadlineSchedule extends Model
         return $this->belongsTo(FinalStatus::class);
     }
 
+
     public function checkPastDeadLineSchedule()
     {
         $finalStudent = new FinalStudent;
@@ -33,6 +34,11 @@ class DeadlineSchedule extends Model
 
             $finalStatusId = $finalLog->final_status_id;
         }
+
+        if ($finalStatusId === FinalStatus::name('tugas_akhir_selesai')) {
+            return false;
+        }
+
 
         $deadlineSchedule = $this->whereFinalStatusId($finalStatusId)
             ->first();
