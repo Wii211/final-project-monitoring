@@ -48,7 +48,11 @@
                                         <tr>
                                             <td>{{ $data->title }}</td>
                                             <td>{{ $data->created_at }}</td>
-                                            <td><span class="badge badge-primary p-2">{{ ucfirst($status) }}</span></td>
+                                            @if($status === "tugas_akhir")
+                                                <td><span class="badge badge-primary p-2">Tugas Akhir</span></td>
+                                            @else 
+                                                <td><span class="badge badge-primary p-2">{{ ucfirst($status) }}</span></td>
+                                            @endif 
                                             <td>
                                                 <button type="button"
                                                     class="btn bg-gradient-primary btn-sm w-100 btn-progress progress-input"
@@ -75,7 +79,7 @@
                             @dd($data->finalLogs)
                             @if($data->finalLogs[0]->id === $finalLogId) --}}
                             @if(Auth::user()->finalScheduleStatus($finalLogId) !== false)
-                                @if(Auth::user()->finalScheduleStatus($finalLogId) === 0)
+                                @if(Auth::user()->finalScheduleStatus($finalLogId) === 0 || Auth::user()->finalScheduleStatus($finalLogId) === 2)
                                 <div class="card">
                                     <div class="card-body p-0">
                                         <table class="table table-bordered">
