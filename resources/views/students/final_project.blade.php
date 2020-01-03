@@ -71,31 +71,39 @@
                         @endforeach
                     @if(!is_null($data->finalLogs))
                         @if(is_null($data->finalLogs[0]->finalShedules))
-                        <div class="card">
-                            <div class="card-body p-0">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="4">Seminar {{ $status }}</th>
-                                        </tr>
-                                        <tr>
-                                            <th style="width:5%">#</th>
-                                            <th>Tanggal</th>
-                                            <th>Waktu</th>
-                                            <th>Tempat</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1.</td>
-                                            <td>{{ $date }}</td>
-                                            <td>{{ $time }}</td>
-                                            <td>Ruangan {{ $place }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                            {{-- @dd($data->finalLogs[0]->id)
+                            @dd($data->finalLogs)
+                            @if($data->finalLogs[0]->id === $finalLogId) --}}
+                            @if(Auth::user()->finalScheduleStatus($finalLogId) !== false)
+                                @if(Auth::user()->finalScheduleStatus($finalLogId) === 0)
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="4">Seminar {{ $status }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width:5%">#</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Waktu</th>
+                                                    <th>Tempat</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1.</td>
+                                                    <td>{{ $date }}</td>
+                                                    <td>{{ $time }}</td>
+                                                    <td>Ruangan {{ $place }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                @endif
+                            @endif
+                            {{-- @endif --}}
                         @endif
                     @endif
                     <div class="card">
@@ -153,34 +161,76 @@
                                 Mengerjakan Tugas Akhir / Skripsi</button>
                             @elseif((!$data->checkIsVerify($data->id, "proposal")) && $status !== "tugas_akhir")
                                 @if(Auth::user()->finalRequirementAlreadySubmitted($finalLogId))
-                                <div class="alert alert-primary alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert"
-                                        aria-hidden="true">&times;</button>
-                                        <b>
-                                            Anda telah mengajukan seminar proposal. Silahkan menunggu jadwal dari koordinator.
-                                        </b>
-                                </div>
+                                    @if(Auth::user()->finalScheduleStatus($finalLogId) !== false)
+                                        @if(Auth::user()->finalScheduleStatus($finalLogId) === 0)
+                                        <div class="alert alert-info alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda sedang melaksanakan seminar proposal.
+                                                </b>
+                                        </div>
+                                        @elseif(Auth::user()->finalScheduleStatus($finalLogId) === 2)
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda gagal melaksanakan seminar proposal.
+                                                </b>
+                                        </div>
+                                        @elseif(Auth::user()->finalScheduleStatus($finalLogId) === 1)
+                                        @endif
+                                    @else
+                                        <div class="alert alert-primary alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda telah mengajukan seminar proposal. Silahkan menunggu jadwal dari koordinator.
+                                                </b>
+                                        </div>
+                                    @endif
                                 @else
-                                <button type="button" class="btn btn-success mb-2 submit-schedule" id="{{ $finalLogId }}"
-                                    value="{{ $status }}">
-                                    Ajukan Seminar Proposal</button>
+                                    <button type="button" class="btn btn-success mb-2 submit-schedule" id="{{ $finalLogId }}"
+                                        value="{{ $status }}">
+                                        Ajukan Seminar Proposal</button>
                                 @endif
                             @elseif($data->checkIsVerify($data->id, "tugas_akhir") && $status === "tugas_akhir")
                             <button type="button" class="btn btn-primary mb-2 submit-finish-final-project" id="{{ $data->id }}">
                                 Klik di sini apabila tugas akhir selesai</button>
                             @elseif((!$data->checkIsVerify($data->id, "tugas_akhir")) && $status === "tugas_akhir")
                                 @if(Auth::user()->finalRequirementAlreadySubmitted($finalLogId))
-                                <div class="alert alert-primary alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert"
-                                        aria-hidden="true">&times;</button>
-                                        <b>
-                                            Anda telah mengajukan sidang tugas akhir. Silahkan menunggu jadwal dari koordinator.
-                                        </b>
-                                </div>
+                                    @if(Auth::user()->finalScheduleStatus($finalLogId) !== false)
+                                        @if(Auth::user()->finalScheduleStatus($finalLogId) === 0)
+                                        <div class="alert alert-info alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda sedang melaksanakan sidang tugas akhir.
+                                                </b>
+                                        </div>
+                                        @elseif(Auth::user()->finalScheduleStatus($finalLogId) === 2)
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda gagal melaksanakan sidang tugas akhir.
+                                                </b>
+                                        </div>
+                                        @elseif(Auth::user()->finalScheduleStatus($finalLogId) === 1)
+                                        @endif
+                                    @else
+                                        <div class="alert alert-primary alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda telah mengajukan sidang tugas akhir. Silahkan menunggu jadwal dari koordinator.
+                                                </b>
+                                        </div>
+                                    @endif
                                 @else
-                                <button type="button" class="btn btn-success mb-2 submit-schedule" id="{{ $finalLogId }}"
-                                    value="{{ $status }}">
-                                    Ajukan Sidang Tugas Akhir</button>
+                                    <button type="button" class="btn btn-success mb-2 submit-schedule" id="{{ $finalLogId }}"
+                                        value="{{ $status }}">
+                                        Ajukan Sidang Tugas Akhir</button>
                                 @endif
                             @endif
                         </div>
