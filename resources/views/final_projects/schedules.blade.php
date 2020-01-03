@@ -43,6 +43,48 @@
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <div class="card">
+            <div class="card-header btn-primary">
+                <h3 class="card-title"><b>Daftar Mahasiswa Mengajukan Seminar Proposal</b></h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive ">
+                    <table class="table w-100" id="student-proposal-schedule">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Mahasiswa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header btn-primary">
+                <h3 class="card-title"><b>Daftar Mahasiswa Mengajukan Sidang Tugas Akhir</b></h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive ">
+                    <table class="table w-100" id="student-final-project-schedule">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Mahasiswa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @endsection
