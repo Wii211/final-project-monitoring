@@ -30,6 +30,9 @@ let dataTable = $('#student-table').DataTable({
             data: 'name'
         },
         {
+            data: 'gpa'
+        },
+        {
             data: 'user.phone_number'
         },
         {
