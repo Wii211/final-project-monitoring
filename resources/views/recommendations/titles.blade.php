@@ -42,6 +42,11 @@
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         Anda telah mengambil judul yang lain. Jangan maruk!
                     </div>
+                    @elseif(Session::has('full'))
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Kuota dosen telah memenuhi batas. Silahkan konsultasi ke Koordinator.
+                    </div>
                     @endif
                 </div>
             </div>
