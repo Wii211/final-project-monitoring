@@ -36,6 +36,7 @@ let dataTable = $('#final-project-table').DataTable({
     "ajax": {
         url: "monitoring"
     },
+    "order": [[ 1, "desc" ]],
     "columns": [{
             data: 'name'
         },
@@ -54,14 +55,28 @@ let dataTable = $('#final-project-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let status = ''
+                let colour = ''
 
                 if(full.final_project !== null){
                     full.final_project.final_logs.forEach(function (data) {
                         status = data.final_status.name
+                        if(status === "tugas_akhir") {
+                            status = "Tugas Akhir"
+                            colour = "btn-final-project"
+                        } else if (status === "proposal") {
+                            status = "Proposal"
+                            colour = "btn-proposal"
+                        } else if (status == "pra-proposal") {
+                            status = "Pra-Proposal"
+                            colour = "btn-pra-proposal"
+                        } else if (status === "tugas_akhir_selesai") {
+                            status = "Tugas Akhir Selesai"
+                            colour = "btn-finish-final-project"
+                        }
                     })
                 }
 
-                return '<span class="badge badge-primary p-2">' + status + '</span>'
+                return '<span class="badge badge-primary p-2 w-100 ' + colour + ' ">' + status + '</span>'
             }
         },
         {
@@ -98,7 +113,7 @@ let dataTable = $('#final-project-table').DataTable({
                 }
                 return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
             }
-        }
+        },
     ]
 })
 
