@@ -84,4 +84,20 @@ class FinalProject extends Model
         $finalStudent = new FinalStudent;
         return $this->whereFinalStudentId($finalStudent->getStudentId())->first();
     }
+
+    public static function convertTitleForNewsReport($title)
+    {
+        $titleExplode = explode(" ", $title);
+        $titles = [];
+        $i = 5;
+        foreach ($titleExplode as $index => $title) {
+            if ($index == $i) {
+                $titles[] = $title . '~%';
+                $i += 5;
+            }
+            $titles[] = $title;
+        }
+        $implode =  implode(" ", $titles);
+        return explode("~%", $implode);
+    }
 }
