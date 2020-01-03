@@ -9,6 +9,7 @@ let dataTable = $('#finalStudentTable').DataTable({
     "ajax": {
         // dataSrc: ""
     },
+    "order": [[ 5, "desc" ]],
     "columns": [{
             data: 'student_id'
         },
@@ -42,7 +43,6 @@ let dataTable = $('#finalStudentTable').DataTable({
             }
         },
         {
-            sortable: false,
             "render": function (data, type, full, meta) {
                 let status = full.is_verified;
                 let buttonId = full.id;

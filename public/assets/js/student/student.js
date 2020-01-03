@@ -52,7 +52,8 @@ let dataTable = $('#student-table').DataTable({
                 return '<span class="badge badge-danger p-2">Tidak Aktif</span>';
             }
         }
-    }]
+    }],
+    "order": [[ 4, "desc" ]],
 });
 
 // Click Button Add
