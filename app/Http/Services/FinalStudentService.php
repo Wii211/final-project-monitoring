@@ -68,7 +68,8 @@ class FinalStudentService
                     'status' => $request->status,
                     'is_verified' => 0,
                     'user_id' => $user->id,
-                    'name' => $request->name
+                    'name' => $request->name,
+                    'gpa' => $request->gpa
                 ]);
 
                 $finalStudent->save();
@@ -89,6 +90,7 @@ class FinalStudentService
                 $finalStudent->name = $request->name;
                 $finalStudent->student_id = $request->student_id;
                 $finalStudent->status = $request->status;
+                $finalStudent->gpa = $request->gpa;
                 // $finalStudent->is_verified = $request->is_verified;
 
                 $finalStudent->save();
