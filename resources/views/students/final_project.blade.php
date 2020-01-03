@@ -82,10 +82,15 @@
                                 @if(Auth::user()->finalScheduleStatus($finalLogId) === 0 || Auth::user()->finalScheduleStatus($finalLogId) === 2)
                                 <div class="card">
                                     <div class="card-body p-0">
+                                        @if($status === "tugas_akhir")
+                                            @php $statusSchedule = "Sidang Tugas Akhir" @endphp
+                                        @else
+                                            @php $statusSchedule = "Seminar Proposal" @endphp
+                                        @endif
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="4">Seminar {{ $status }}</th>
+                                                    <th colspan="4">{{ $statusSchedule }}</th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width:5%">#</th>

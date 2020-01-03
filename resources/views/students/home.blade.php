@@ -21,16 +21,23 @@
                             </h6>
                         </div>
                         <div class="alert alert-primary bg-gradient-primary">
-                            <h4><i class="icon fas fa-bullhorn"></i> Deadline {{ $endDateAndDiffDate['finalStatus'] }}</h4>
+                            @if($endDateAndDiffDate['finalStatus'] === "tugas_akhir")
+                                @php $status = "tugas akhir" @endphp
+                            @elseif($endDateAndDiffDate['finalStatus'] === "tugas_akhir_selesai")
+                                @php $status = "penyelesaian tugas akhir" @endphp
+                            @else
+                                @php $status = $endDateAndDiffDate['finalStatus'] @endphp
+                            @endif
+                            <h4><i class="icon fas fa-bullhorn"></i> Deadline {{ $status }}</h4>
                             <b>
                                 @if($endDateAndDiffDate['finalDescription'] !== "berakhir")
-                                {{$endDateAndDiffDate['finalStatus']}} akan ditutup
+                                {{$status}} akan ditutup
                                 {{$endDateAndDiffDate['differenceBetweenDate']}}
                                 hari lagi, pada tanggal
                                 {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}.
                                 @else
 
-                                {{$endDateAndDiffDate['finalStatus']}} telah berakhir pada
+                                {{$status}} telah berakhir pada
                                 {{$endDateAndDiffDate['endDate']->toFormattedDateString()}}.
                                 @endif
                             </b>
@@ -136,13 +143,26 @@
         @else 
             <div class="card">
                 <div class="card-body">
+                    @if(Auth::user()->isPastDeadlineSchedule())
                     <div class="alert alert-danger alert-block">
                         <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>Deadline {{$endDateAndDiffDate['finalStatus']}} telah berakhir. Terimakasih.</strong>
+                        @if($endDateAndDiffDate['finalStatus'] === "tugas_akhir")
+                            <strong>Deadline tugas akhir telah berakhir. Terimakasih.</strong>
+                        @elseif($endDateAndDiffDate['finalStatus'] === "tugas_akhir_selesai")
+                            <strong>Deadline penyelesaian tugas akhir telah berakhir. Terimakasih.</strong>
+                        @else
+                            <strong>Deadline {{$endDateAndDiffDate['finalStatus']}} telah berakhir. Terimakasih.</strong>
+                        @endif
                     </div>
                     <div class="d-flex justify-content-center">
                         <img src="{{ asset('storage/design/undraw_throw_down_ub2l.png') }}" class="w-50">
                     </div>
+                    @else
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Anda telah menyelesaikan tugas akhir.</strong>
+                    </div>
+                    @endif
                 </div>
             </div>
         @endif
