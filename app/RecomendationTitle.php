@@ -83,7 +83,7 @@ class RecomendationTitle extends Model
     {
         $finalStudentId = new FinalStudent;
 
-        $recomendationTitle =  $this->whereFinalStudent($finalStudentId->getStudentId())
+        $recomendationTitle =  $this->whereFinalStudentId($finalStudentId->getStudentId())
             ->whereHas('recomendationTitleTemp')->first();
 
         if ($recomendationTitle) {
