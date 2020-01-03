@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="title">Judul/Topik Proposal</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
+                        <input type="text" class="form-control" id="title" name="title" required maxlength="120">
                     </div>
                     <div class="form-group">
                         <label for="description">Deskripsi Umum Proposal Tugas Akhir</label>
