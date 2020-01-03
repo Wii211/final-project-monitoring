@@ -39,7 +39,7 @@ class FinalSchedule extends Model
     public function scheduleStatus()
     {
         $finalProjectId = new FinalProject;
-        $finalProjectId = $finalProjectId->getFinalProjectFromStudent->id;
+        $finalProjectId = $finalProjectId->getFinalProjectFromStudent()->id;
         $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
             ->latest()->first()->id;
 
