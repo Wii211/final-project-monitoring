@@ -22,13 +22,39 @@ $(document).on('change', '#final-schedule-type', function () {
         dataType: "json",
         success: function (finalProjects) {
             $('#final-project-schedule-id').html('')
-            finalProjects.forEach(function (result) {
+            finalProjects.data.forEach(function (result) {
                 let data = '<option id="' + result.final_logs[0].final_requirements[0].document_result +
                     '" value="' + result.id + '">' + result.title + '</option>'
                 $('#final-project-schedule-id').append(data)
             })
         }
     })
+})
+
+
+$('#student-final-project-schedule').DataTable({
+    "ajax": {
+        url: "../finished-project?status=tugas_akhir&verification=0"
+    },
+    "columns": [{
+        data: 'title'
+    },
+    {
+        data: 'final_student.name'
+    }]
+})
+
+
+$('#student-proposal-schedule').DataTable({
+    "ajax": {
+        url: "../finished-project?status=proposal&verification=0"
+    },
+    "columns": [{
+        data: 'title'
+    },
+    {
+        data: 'final_student.name'
+    }]
 })
 
 $(document).on('click', '#final-project-checked', function () {
