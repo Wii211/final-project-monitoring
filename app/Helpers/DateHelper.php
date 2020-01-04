@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class DateHelper
 {
-    public static function getTodayDate()
+    public function getTodayDate()
     {
         return $this->formatDate(Carbon::now());
     }

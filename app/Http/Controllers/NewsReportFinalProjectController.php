@@ -12,7 +12,8 @@ class NewsReportFinalProjectController extends Controller
     public function show(
         $finalProjectId,
         NewsReportService $newsReportService,
-        Request $request
+        Request $request,
+        DateHelper $dateHelper
     ) {
         $finalProject = $newsReportService->generateReport(
             $finalProjectId,
@@ -23,7 +24,7 @@ class NewsReportFinalProjectController extends Controller
             $finalProject->finalProject->title
         );
 
-        $todayDate = DateHelper::getTodayDate();
+        $todayDate = $dateHelper->getTodayDate();
 
         return view('news_reports.final_project', compact(
             'finalProject',

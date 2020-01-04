@@ -14,14 +14,15 @@ class NewsReportProposalController extends Controller
     public function show(
         $finalProjectId,
         NewsReportService $newsReportService,
-        Request $request
+        Request $request,
+        DateHelper $dateHelper
     ) {
         $proposal = $newsReportService->generateReport(
             $finalProjectId,
             'proposal'
         );
 
-        $todayDate = DateHelper::getTodayDate();
+        $todayDate = $dateHelper->getTodayDate();
 
         $finalProjectTitle = FinalProject::convertTitleForNewsReport(
             $proposal->finalProject->title
