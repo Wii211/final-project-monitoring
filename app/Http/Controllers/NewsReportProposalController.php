@@ -28,10 +28,24 @@ class NewsReportProposalController extends Controller
             $proposal->finalProject->title
         );
 
+        $thesisDefenceSchedule = $dateHelper->formatDate(
+            $proposal->final_schedule_for_report->scheduled
+        );
+
+        $startTime = $dateHelper
+            ->convertTimeHour($proposal->final_schedule_for_report->scheduled);
+
+        $endTime = $dateHelper
+            ->convertTimeHour($proposal->final_schedule_for_report->end_date);
+
+        $thesisDefenceTime = $startTime . " - " . $endTime . " WITA";
+
         return view('news_reports.proposal', compact(
             'proposal',
             'todayDate',
-            'finalProjectTitle'
+            'finalProjectTitle',
+            'thesisDefenceSchedule',
+            'thesisDefenceTime'
         ));
     }
 }
