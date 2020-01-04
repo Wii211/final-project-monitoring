@@ -42,7 +42,7 @@ let dataTable = $('#final-project-table').DataTable({
         },
         {
             "render": function (data, type, full, meta) {
-                let title = ''
+                let title = '<span class="badge badge-danger p-2">Belum Ada Judul</span>'
 
                 if(full.final_project !== null){
                     title =  full.final_project.title
@@ -54,8 +54,8 @@ let dataTable = $('#final-project-table').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-                let status = ''
-                let colour = ''
+                let status = 'Pendaftaran'
+                let colour = 'btn-register'
 
                 if(full.final_project !== null){
                     full.final_project.final_logs.forEach(function (data) {
@@ -82,25 +82,28 @@ let dataTable = $('#final-project-table').DataTable({
         {
             sortable: false,
             "render": function (data, type, full, meta) {
-
+                let progress = ''
                 let buttonId = ''
 
                 if(full.final_project !== null){
                     buttonId = full.final_project.id
+                    progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal</button>" +
+                    "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>"
                 }
-                return "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal</button>" +
-                "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>";
+                return progress
             }
         },
         {
             sortable: false,
             "render": function (data, type, full, meta) {
+                let verification = ''
                 let buttonId = ''
 
                 if(full.final_project !== null){
                     buttonId = full.final_project.id
+                    verification = "<button class='btn btn-success verification' id='" + buttonId + "'>Verifikasi</button>"
                 }
-                return "<button class='btn btn-success verification' id='" + buttonId + "'>Verifikasi</button>";
+                return verification
             }
         },
         {
