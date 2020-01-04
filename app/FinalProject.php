@@ -94,10 +94,11 @@ class FinalProject extends Model
             if ($index == $i) {
                 $titles[] = $title . '~%';
                 $i += 5;
+            } else {
+                $titles[] = $title;
             }
-            $titles[] = $title;
         }
         $implode =  implode(" ", $titles);
-        return explode("~%", $implode);
+        return explode("~% ", $implode);
     }
 }
