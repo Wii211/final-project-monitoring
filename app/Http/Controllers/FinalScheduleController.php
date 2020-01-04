@@ -65,12 +65,15 @@ class FinalScheduleController extends Controller
             DB::transaction(function () use ($request, $finalProjectId, $finalLogId) {
                 $date = $request->date . " " . $request->time;
 
+                $endDate = $request->date . " " . $request->end_time;
+
                 $time = FinalSchedule::convertTime($date);
 
                 $finalSchedule = new FinalSchedule([
                     'place' => $request->place,
                     'scheduled' => $time,
-                    'final_log_id' => $finalLogId
+                    'final_log_id' => $finalLogId,
+                    'end_date' => FinalSchedule::convertTime($endDate)
                 ]);
 
                 $finalSchedule->save();
@@ -154,6 +157,8 @@ class FinalScheduleController extends Controller
 
                 $date = $request->date . " " . $request->time;
 
+                $endDate = $request->date . " " . $request->end_time;
+
                 $time = FinalSchedule::convertTime($date);
 
                 $finalLogId = FinalLog::whereFinalProjectId($finalProjectId)
@@ -163,7 +168,9 @@ class FinalScheduleController extends Controller
                     ->update([
                         'place' => $request->place,
                         'scheduled' => $time,
-                        'final_log_id' => $finalLogId
+                        'final_log_id' => $finalLogId,
+                        'end_date' => FinalSchedule::convertTime($endDate)
+
                     ]);
 
                 $examiners1 = Examiner::findOrFail($request->examiner1['id'])
