@@ -114,7 +114,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                 } else if (data !== "Failed") {
                     Swal.fire({
                             type: 'success',
-                            title: 'Berhasil menambahkan judul!',
+                            title: 'Berhasil!',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -125,7 +125,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                 } else {
                     Swal.fire({
                         type: 'error',
-                        title: 'Gagal menambahkan judul!',
+                        title: 'Gagal menambahkan/memperbaharui judul!',
                         showConfirmButton: false,
                         timer: 1500
                     })
