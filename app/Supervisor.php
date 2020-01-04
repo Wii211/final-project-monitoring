@@ -29,7 +29,7 @@ class Supervisor extends Model
     public function checkSupervisorsQuota($lecturerId)
     {
         $lecturerCount = $this->whereHas('finalProject', function ($q) {
-            $q->whereHas('finalLogEndOfFinal');
+            $q->whereDoesntHave('finalLogEndOfFinal');
         })
             ->whereLecturerId($lecturerId)->count();
 
