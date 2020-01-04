@@ -203,13 +203,9 @@ let dataTable = $('#final-schedule-table').DataTable({
                 let finalStatusName = full.final_status
 
                 if(finalStatusName === "proposal"){
-                    return '<form action="../news-report-proposal/' + finalProjectId + '" method="GET">' + 
-                    '<button type="submit" class="btn btn-default w-100">Print</button>' +
-                    '</form>'
+                    return '<a class="btn btn-default w-100" href="../news-report-proposal/' + finalProjectId + '" target="blank">Print</a>'
                 } else {
-                    return '<form action="../news-report-final-project/' + finalProjectId + '" method="GET">' + 
-                    '<button type="submit" class="btn btn-default w-100">Print</button>' +
-                    '</form>'
+                    return '<a class="btn btn-default w-100" href="../news-report-final-project/' + finalProjectId + '" target="blank">Print</a>'
                 }
             }
         }
