@@ -109,7 +109,6 @@ class FinalScheduleController extends Controller
                 }
             });
         } catch (\Throwable $th) {
-            dd($th);
             return response()->json("Failed");
         }
         return response()->json("Success");
@@ -190,13 +189,15 @@ class FinalScheduleController extends Controller
                         'final_status_id' => FinalStatus::name($request->status)
                     ]);
 
-                $examiners3 = Examiner::findOrFail($request->examiner3['id'])
-                    ->update([
-                        'role' => $request->examiner3['role'],
-                        'lecturer_id' => $request->examiner3['lecturer_id'],
-                        'final_project_id' => $finalProjectId,
-                        'final_status_id' => FinalStatus::name($request->status)
-                    ]);
+                if ($request->status === 'tugas_akhir') {
+                    $examiners3 = Examiner::findOrFail($request->examiner3['id'])
+                        ->update([
+                            'role' => $request->examiner3['role'],
+                            'lecturer_id' => $request->examiner3['lecturer_id'],
+                            'final_project_id' => $finalProjectId,
+                            'final_status_id' => FinalStatus::name($request->status)
+                        ]);
+                }
             });
         } catch (\Throwable $th) {
             return response()->json("Failed");
