@@ -19,7 +19,7 @@ class FinalSchedule extends Model
 
     public static function convertTime($dateTime)
     {
-        return Carbon::createFromFormat('Y-m-d H:i', $dateTime)->toDateTimeString();
+        return Carbon::createFromFormat('Y-m-d H:i:s', $dateTime)->toDateTimeString();
     }
 
     public function getDateAttribute()
