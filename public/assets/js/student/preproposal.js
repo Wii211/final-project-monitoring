@@ -103,8 +103,15 @@ $(document).on('submit', '#preproposal-form', function (e) {
             processData: false,
             success: function (data) {
                 $('#preproposal-form')[0].reset();
-
-                if (data !== "Failed") {
+                
+                if (data === "Dosen Full") {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Kouta dosen telah melampaui batas kuota!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else if (data !== "Failed") {
                     Swal.fire({
                             type: 'success',
                             title: 'Berhasil menambahkan judul!',
@@ -115,15 +122,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                             $('#preproposal-modal').modal('hide');
                             window.location.reload();
                         });
-                } else if (data !== "Dosen Full") {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Kouta dosen telah melampaui batas kuota!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-                else {
+                } else {
                     Swal.fire({
                         type: 'error',
                         title: 'Gagal menambahkan judul!',
