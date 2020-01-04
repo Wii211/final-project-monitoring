@@ -39,7 +39,7 @@ let dataTable = $('#finalStudentTable').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let buttonId = full.id;
-                return "<button class='btn btn-info btn-latest-study student-information fs-12' value='latest_study' id='" + buttonId + "'>SKS Terakhir</button>";
+                return "<button class='btn btn-info btn-latest-study student-information fs-12' value='latest_study' id='" + buttonId + "'>KRS Terakhir</button>";
             }
         },
         {
@@ -96,13 +96,13 @@ $('#finalStudentTable tbody').on('click', '.verification', function () {
     }
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, do it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             $.ajax({
