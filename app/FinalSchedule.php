@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class FinalSchedule extends Model
 {
     protected $guarded = ['id'];
-    protected $appends = ['date', 'hour'];
+    protected $appends = ['date', 'hour', 'end_date_hour'];
 
     public function finalLog()
     {
@@ -32,6 +32,13 @@ class FinalSchedule extends Model
     public function getHourAttribute()
     {
         $date = explode(" ", $this->scheduled);
+
+        return $date[1];
+    }
+
+    public function getEndDateHourAttribute()
+    {
+        $date = explode(' ', $this->end_date);
 
         return $date[1];
     }
