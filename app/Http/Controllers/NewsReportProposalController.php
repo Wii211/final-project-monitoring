@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\FinalLog;
 use App\FinalStatus;
 use App\FinalProject;
-use App\Http\Services\NewsReportService;
+use App\Helpers\DateHelper;
 use Illuminate\Http\Request;
+use App\Http\Services\NewsReportService;
 
 class NewsReportProposalController extends Controller
 {
@@ -20,7 +21,7 @@ class NewsReportProposalController extends Controller
             'proposal'
         );
 
-        $todayDate = $newsReportService->getTodayDate();
+        $todayDate = DateHelper::getTodayDate();
 
         $finalProjectTitle = FinalProject::convertTitleForNewsReport(
             $proposal->finalProject->title
