@@ -36,13 +36,18 @@
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="final-schedule-time">Waktu</label>
+                        <label for="final-schedule-time">Waktu Mulai</label>
                         <input type="time" class="form-control form-control-sm" id="final-schedule-time" name="time"
                             required>
                     </div>
                     <div class="form-group">
+                        <label for="final-schedule-time">Waktu Berakhir</label>
+                        <input type="time" class="form-control form-control-sm" id="final-schedule-time-end" name="time_end"
+                            required>
+                    </div>
+                    <div class="form-group">
                         <label for="place">Tempat Seminar</label>
-                        <input type="text" class="form-control form-control-sm" id="place" name="place" required>
+                        <input type="text" class="form-control form-control-sm" id="place" name="place" placeholder="(Misal: A16)" required>
                     </div>
                     <div class="form-group">
                         <label for="examiner-name-1">Dosen Penguji Pertama</label>
