@@ -17,7 +17,8 @@ class NewsReportService
         $finalProject = FinalLog::whereFinalProjectId($finalProjectId)
             ->whereFinalStatusId(FinalStatus::name($statusName))
             ->with([
-                'finalProject.supervisors', 'finalProject.examiners',
+                'finalProject.supervisors.lecturer',
+                'finalProject.examiners.lecturer',
                 'finalSchedules', 'finalProject.finalStudent'
             ])
             ->first();
