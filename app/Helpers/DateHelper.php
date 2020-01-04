@@ -12,7 +12,7 @@ class DateHelper
         return $this->formatDate(Carbon::now());
     }
 
-    public static function formatDate($date)
+    public function formatDate($date)
     {
         setlocale(LC_TIME, 'id_ID.utf8');
 
