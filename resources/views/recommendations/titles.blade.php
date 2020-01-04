@@ -81,9 +81,9 @@
                                 </td>
                                 <td> {{$title->title}} </td>
                                 @if(!is_null($title->finalStudent))
-                                <td><span class="badge badge-primary p-2">{{$title->finalStudent->name}}</span></td>
+                                <td><span class="badge badge-primary p-2 w-100">{{$title->finalStudent->name}}</span></td>
                                 @else 
-                                <td><span class="badge badge-danger p-2">Belum ada mahasiswa</span></td>
+                                <td><span class="badge badge-danger p-2 w-100">Belum ada mahasiswa</span></td>
                                 @endif
                                 <td>{{$title->lecturer->name}}</td>
                                 <td>{{$title->description}}</td>
