@@ -43,7 +43,7 @@
                                     <thead>
                                         <tr>
                                             <th>Judul</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Diajukan</th>
                                             <th>Status Skripsi</th>
                                             <th>Status Verifikasi</th>
                                             <th width="10%"></th>
