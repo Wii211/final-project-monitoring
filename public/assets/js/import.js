@@ -7,7 +7,7 @@ $(document).on('submit', '#import-form', function (e) {
 
     Swal.fire({
         title: 'Loading',
-        timer: 60000,
+        timer: 600000,
         onBeforeOpen: () => {
             Swal.showLoading()
         }
