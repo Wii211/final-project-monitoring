@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FinalLog;
+use Carbon\Carbon;
 use App\FinalStatus;
 use App\FinalProject;
 use App\Helpers\DateHelper;
@@ -29,14 +30,14 @@ class NewsReportProposalController extends Controller
         );
 
         $thesisDefenceSchedule = $dateHelper->formatDate(
-            $proposal->final_schedule_for_report->scheduled
+            Carbon::parse($proposal->finalScheduleForReport->scheduled)
         );
 
         $startTime = $dateHelper
-            ->convertTimeHour($proposal->final_schedule_for_report->scheduled);
+            ->convertTimeHour($proposal->finalScheduleForReport->scheduled);
 
         $endTime = $dateHelper
-            ->convertTimeHour($proposal->final_schedule_for_report->end_date);
+            ->convertTimeHour($proposal->finalScheduleForReport->end_date);
 
         $thesisDefenceTime = $startTime . " - " . $endTime . " WITA";
 
