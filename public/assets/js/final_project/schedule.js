@@ -113,6 +113,7 @@ $('#final-schedule-add').click(function () {
     $('#final-project-schedule-id').html('')
     $('#final-schedule-type').attr('required', 'required')
     $('#final-project-schedule-id').attr('required', 'required')
+    $('#final-project-schedule-hidden-id').removeAttr('name')
 })
 
 let dataTable = $('#final-schedule-table').DataTable({
@@ -297,7 +298,6 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
         url: "../final-schedules/" + id,
         dataType: "json",
         success: function (result) {
-            console.log(result)
             $('#final-schedule-modal').modal('show')
             $('#final-schedule-title').text("Update Jenis Jadwal Tugas Akhir")
             $('#final-schedule-button').text("Update")
@@ -305,6 +305,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
             $('#final-schedule-requirement').css('display', 'none')
             $('#final-schedule-type').removeAttr('required')
             $('#final-project-schedule-id').removeAttr('required')
+            $('#final-project-schedule-hidden-id').attr('name', 'final_project_id')
 
             $('#final-schedule-date').val(result.date)
             $('#final-schedule-time').val(result.hour)
@@ -312,6 +313,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
             $('#place').val(result.place)
             $('#final-schedule-id').val(result.id)
             $('#final-schedule-status').val(result.final_log.final_status.name)
+            $('#final-schedule-type').val(result.final_log.final_status.name)
             if(result.final_log.final_status.name === "tugas_akhir"){
                 $('#final-project-examiner-3').css('display', 'block')
             } else {
