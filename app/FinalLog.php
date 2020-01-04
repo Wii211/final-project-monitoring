@@ -23,6 +23,11 @@ class FinalLog extends Model
         return $this->hasMany(FinalSchedule::class, 'final_log_id');
     }
 
+    public function finalScheduleForReport()
+    {
+        return $this->hasOne(FinalSchedule::class, 'final_log_id');
+    }
+
     public function finalRequirements()
     {
         return $this->hasMany(FinalRequirement::class, 'final_log_id');
