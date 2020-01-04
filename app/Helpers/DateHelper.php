@@ -18,4 +18,9 @@ class DateHelper
 
         return $date->formatLocalized('%d %B %Y');
     }
+
+    public static function convertTimeHour($time)
+    {
+        return date('H:i', strtotime($time));
+    }
 }
