@@ -33,12 +33,15 @@ class FinishedFinalProjectController extends Controller
             function ($query) use ($status, $verification) {
                 $query->whereHas('finalRequirements', function ($query) {
                 });
+                $query->whereDoesntHave('finalSchedules');
+                $query->where('final_status_id', '!=', FinalStatus::name('tugas_akhir_selesai'));
                 $query->whereFinalStatusId(FinalStatus::name($status));
                 $query->whereIsVerification($verification);
             }
         )->with(['finalLogs' => function ($query) use ($status) {
             $query->whereFinalStatusId(FinalStatus::name($status));
             $query->where('final_status_id', '!=', FinalStatus::name('tugas_akhir_selesai'));
+            $query->whereDoesntHave('finalSchedules');
             $query->whereHas('finalRequirements');
             $query->with('finalRequirements');
         }, 'finalStudent'])
