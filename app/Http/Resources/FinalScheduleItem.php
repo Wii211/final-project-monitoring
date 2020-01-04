@@ -23,6 +23,7 @@ class FinalScheduleItem extends JsonResource
             'place' => $this->place,
             'date' => $this->date,
             'hour' => $this->hour,
+            'end_date_hour' => $this->end_date_hour,
             'final_status' => $this->finalLog->finalStatus->name,
             'final_project_id' => $this->finalLog->finalProject->id,
             'status' => $this->status,
