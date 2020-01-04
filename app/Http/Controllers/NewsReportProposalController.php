@@ -29,7 +29,7 @@ class NewsReportProposalController extends Controller
             $proposal->finalProject->title
         );
 
-        $thesisDefenceSchedule = $dateHelper->formatDate(
+        $thesisDefenceSchedule = $dateHelper->formatDateWithDayName(
             Carbon::parse($proposal->finalScheduleForReport->scheduled)
         );
 
