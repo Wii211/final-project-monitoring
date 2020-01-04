@@ -7,10 +7,11 @@ use App\FinalLog;
 use Carbon\Carbon;
 use App\FinalStatus;
 use App\FinalSchedule;
-use App\Http\Resources\FinalScheduleCollection;
+use App\Helpers\DateHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\FinalScheduleCollection;
 
 class FinalScheduleController extends Controller
 {
@@ -63,9 +64,9 @@ class FinalScheduleController extends Controller
 
         try {
             DB::transaction(function () use ($request, $finalProjectId, $finalLogId) {
-                $date = $request->date . " " . $request->time;
+                $date = $request->date . " " . DateHelper::convertTimeHour($request->time);
 
-                $endDate = $request->date . " " . $request->end_time;
+                $endDate = $request->date . " " . DateHelper::convertTimeHour($request->end_time);
 
                 $time = FinalSchedule::convertTime($date);
 
@@ -155,9 +156,9 @@ class FinalScheduleController extends Controller
 
                 $finalProjectId = $request->final_project_id;
 
-                $date = $request->date . " " . $request->time;
+                $date = $request->date . " " . DateHelper::convertTimeHour($request->time);
 
-                $endDate = $request->date . " " . $request->end_time;
+                $endDate = $request->date . " " . DateHelper::convertTimeHour($request->end_time);
 
                 $time = FinalSchedule::convertTime($date);
 
