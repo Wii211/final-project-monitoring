@@ -37,11 +37,12 @@ let DataTableFinalProject = $('#student-final-project-schedule').DataTable({
         url: "../finished-project?status=tugas_akhir&verification=0"
     },
     "columns": [{
-        data: 'title'
-    },
-    {
-        data: 'final_student.name'
-    }]
+            data: 'title'
+        },
+        {
+            data: 'final_student.name'
+        }
+    ]
 })
 
 
@@ -50,11 +51,12 @@ let DataTableProposal = $('#student-proposal-schedule').DataTable({
         url: "../finished-project?status=proposal&verification=0"
     },
     "columns": [{
-        data: 'title'
-    },
-    {
-        data: 'final_student.name'
-    }]
+            data: 'title'
+        },
+        {
+            data: 'final_student.name'
+        }
+    ]
 })
 
 $(document).on('click', '#final-project-checked', function () {
@@ -124,7 +126,7 @@ let dataTable = $('#final-schedule-table').DataTable({
     "columns": [{
             "render": function (data, type, full, meta) {
                 let status = full.final_status
-                let title = '<div class="text-justify mb-1">'+full.title+'</div>'
+                let title = '<div class="text-justify mb-1">' + full.title + '</div>'
                 let finalScheduleStatus = full.status
                 let info
 
@@ -141,7 +143,7 @@ let dataTable = $('#final-schedule-table').DataTable({
                     } else if (finalScheduleStatus === 2) {
                         info = '<span class="badge badge-danger p-2 d-block w-100">Gagal Seminar</span>'
                     }
-                    
+
                     status = '<span class="badge badge-info p-2 d-block w-100">Seminar Proposal</span> '
                 }
                 return title + info + status
@@ -182,9 +184,9 @@ let dataTable = $('#final-schedule-table').DataTable({
                 let success = "<button class='btn btn-success success-final-schedule w-100' id='" + id + "' value='" + status + "'>Berhasil</button>"
                 let failed = "<button class='btn btn-danger failed-final-schedule w-100 mt-1' id='" + id + "' value='" + status + "'>Gagal</button>"
 
-                if(finalScheduleStatus === 0){
+                if (finalScheduleStatus === 0) {
                     return success + failed
-                } else if(finalScheduleStatus === 2){
+                } else if (finalScheduleStatus === 2) {
                     return success
                 }
             }
@@ -202,7 +204,7 @@ let dataTable = $('#final-schedule-table').DataTable({
                 let finalProjectId = full.final_project_id
                 let finalStatusName = full.final_status
 
-                if(finalStatusName === "proposal"){
+                if (finalStatusName === "proposal") {
                     return '<a class="btn btn-default w-100" href="../news-report-proposal/' + finalProjectId + '" target="blank">Print</a>'
                 } else {
                     return '<a class="btn btn-default w-100" href="../news-report-final-project/' + finalProjectId + '" target="blank">Print</a>'
@@ -310,7 +312,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
             $('#final-schedule-id').val(result.id)
             $('#final-schedule-status').val(result.final_log.final_status.name)
             $('#final-schedule-type').val(result.final_log.final_status.name)
-            if(result.final_log.final_status.name === "tugas_akhir"){
+            if (result.final_log.final_status.name === "tugas_akhir") {
                 $('#final-project-examiner-3').css('display', 'block')
             } else {
                 $('#final-project-examiner-3').css('display', 'none')
@@ -333,13 +335,14 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
     let finalId = $(this).val()
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikannya!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, agreed it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             Swal.fire({
@@ -371,10 +374,10 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                     } else {
 
                         Swal.fire(
-                                'Failed!',
-                                'Gagal menghapus!',
-                                'error'
-                            )
+                            'Failed!',
+                            'Gagal menghapus!',
+                            'error'
+                        )
                     }
                 }
             });
@@ -388,15 +391,23 @@ $('#final-schedule-table tbody').on('click', '.success-final-schedule', function
     const finalStatus = $(this).val()
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
         type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#28a745',
+        confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, accept it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+
             $.ajax({
                 url: "../accept-thesis-defence/1",
                 type: 'POST',
@@ -407,11 +418,14 @@ $('#final-schedule-table tbody').on('click', '.success-final-schedule', function
                 },
                 success: function (data) {
                     if (data !== "Failed") {
-                        Swal.fire(
-                                'Sukses!',
-                                'Mahasiswa telah selesai melakukan seminar.',
-                                'success'
-                            )
+                        Swal.fire({
+                                title: 'Mahasiswa telah berhasil melakukan seminar/sidang',
+                                html: 'Silahkan verifikasi keberhasilan mahasisa pada halaman <a href="final_projects">Tugas Akhir</a>',
+                                type: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Ok',
+                            })
                             .then(function () {
                                 dataTable.ajax.reload()
                                 DataTableProposal.ajax.reload()
@@ -419,10 +433,10 @@ $('#final-schedule-table tbody').on('click', '.success-final-schedule', function
                             })
                     } else {
                         Swal.fire(
-                                'Gagal!',
-                                'Gagal mengeksekusi data.',
-                                'error'
-                            )
+                            'Gagal!',
+                            'Gagal mengeksekusi data.',
+                            'error'
+                        )
                     }
                 }
             })
@@ -436,15 +450,23 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
     const finalStatus = $(this).val()
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
+        title: 'Apakah anda yakin?',
+        type: 'error',
         showCancelButton: true,
-        confirmButtonColor: '#28a745',
+        confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, sure.'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
+            Swal.fire({
+                title: 'Loading',
+                timer: 60000,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            })
+
             $.ajax({
                 url: "../decline-thesis-defence/1",
                 type: 'DELETE',
@@ -466,10 +488,10 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
                             })
                     } else {
                         Swal.fire(
-                                'Gagal!',
-                                'Gagal mengeksekusi data.',
-                                'error'
-                            )
+                            'Gagal!',
+                            'Gagal mengeksekusi data.',
+                            'error'
+                        )
                     }
                 }
             })
