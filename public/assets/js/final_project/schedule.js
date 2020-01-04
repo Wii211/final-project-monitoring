@@ -32,7 +32,7 @@ $(document).on('change', '#final-schedule-type', function () {
 })
 
 
-$('#student-final-project-schedule').DataTable({
+let DataTableFinalProject = $('#student-final-project-schedule').DataTable({
     "ajax": {
         url: "../finished-project?status=tugas_akhir&verification=0"
     },
@@ -45,7 +45,7 @@ $('#student-final-project-schedule').DataTable({
 })
 
 
-$('#student-proposal-schedule').DataTable({
+let DataTableProposal = $('#student-proposal-schedule').DataTable({
     "ajax": {
         url: "../finished-project?status=proposal&verification=0"
     },
@@ -110,6 +110,7 @@ $('#final-schedule-add').click(function () {
     $('#final-schedule-title').text("Tambah Jadwal Seminar Proposal/Sidang TA")
     $('#final-schedule-button').text("Tambah")
     $('#final-schedule-requirement').css('display', 'block')
+    $('#final-project-schedule-id').html('')
 })
 
 let dataTable = $('#final-schedule-table').DataTable({
@@ -120,7 +121,7 @@ let dataTable = $('#final-schedule-table').DataTable({
     "columns": [{
             "render": function (data, type, full, meta) {
                 let status = full.final_status
-                let title = full.title
+                let title = '<div class="text-justify mb-1">'+full.title+'</div>'
                 let finalScheduleStatus = full.status
                 let info
 
@@ -140,7 +141,7 @@ let dataTable = $('#final-schedule-table').DataTable({
                     
                     status = '<span class="badge badge-info p-2 d-block w-100">Seminar Proposal</span> '
                 }
-                return info + status + title
+                return title + info + status
             }
         },
         {
@@ -265,9 +266,11 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                             timer: 1500
                         })
                         .then(function () {
-                            $('#final-schedule-modal').modal('hide');
-                            $('#final-schedule-form')[0].reset();
-                            dataTable.ajax.reload();
+                            $('#final-schedule-modal').modal('hide')
+                            $('#final-schedule-form')[0].reset()
+                            dataTable.ajax.reload()
+                            DataTableProposal.ajax.reload()
+                            DataTableFinalProject.ajax.reload()
                         })
                 } else {
                     Swal.fire({
@@ -301,6 +304,7 @@ $('#final-schedule-table tbody').on('click', '.update', function () {
 
             $('#final-schedule-date').val(result.date)
             $('#final-schedule-time').val(result.hour)
+            $('#final-schedule-time-end').val(result.hour)
             $('#place').val(result.place)
             $('#final-schedule-id').val(result.id)
 
@@ -350,7 +354,9 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                                 'success'
                             )
                             .then(function () {
-                                dataTable.ajax.reload();
+                                dataTable.ajax.reload()
+                                DataTableProposal.ajax.reload()
+                                DataTableFinalProject.ajax.reload()
                             });
 
                     } else {
@@ -399,6 +405,8 @@ $('#final-schedule-table tbody').on('click', '.success-final-schedule', function
                             )
                             .then(function () {
                                 dataTable.ajax.reload()
+                                DataTableProposal.ajax.reload()
+                                DataTableFinalProject.ajax.reload()
                             })
                     } else {
                         Swal.fire(
@@ -444,6 +452,8 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
                             )
                             .then(function () {
                                 dataTable.ajax.reload()
+                                DataTableProposal.ajax.reload()
+                                DataTableFinalProject.ajax.reload()
                             })
                     } else {
                         Swal.fire(
@@ -451,9 +461,6 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
                                 'Gagal mengeksekusi data.',
                                 'error'
                             )
-                            .then(function () {
-                                dataTable.ajax.reload()
-                            })
                     }
                 }
             })
