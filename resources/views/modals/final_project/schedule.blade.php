@@ -41,8 +41,8 @@
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="final-schedule-time">Waktu Berakhir</label>
-                        <input type="time" class="form-control form-control-sm" id="final-schedule-time-end" name="time_end"
+                        <label for="final-schedule-time-end">Waktu Berakhir</label>
+                        <input type="time" class="form-control form-control-sm" id="final-schedule-time-end" name="end_time"
                             required>
                     </div>
                     <div class="form-group">
@@ -76,6 +76,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="final-schedule-id">
+                    <input type="hidden" id="final-schedule-status" name="status">
+                    <input type="hidden" id="final-project-schedule-hidden-id" name="final_project_id">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="final-schedule-button">Ajukan</button>
                 </div>
