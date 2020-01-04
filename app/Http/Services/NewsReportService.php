@@ -14,7 +14,7 @@ class NewsReportService
             ->with([
                 'finalProject.supervisors.lecturer',
                 'finalProject.examiners.lecturer',
-                'finalSchedules', 'finalProject.finalStudent'
+                'finalScheduleForReport', 'finalProject.finalStudent'
             ])
             ->first();
 
