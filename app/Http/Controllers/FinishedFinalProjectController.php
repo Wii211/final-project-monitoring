@@ -18,18 +18,30 @@ class FinishedFinalProjectController extends Controller
         //ready for presents Final Project
 
         $status = 'tugas_akhir';
+
         $verification = 1;
-        if ($request->has('status')) $status = $request->query('status');
-        if ($request->has('verification')) $verification = $request->query('verification');
+
+        if ($request->has('status'))
+            $status = $request->query('status');
+
+        if ($request->has('verification')) $verification =
+            $request->query('verification');
 
 
-        $finalProject = FinalProject::whereHas('finalLogs', function ($query) use ($status, $verification) {
-            $query->whereHas('finalRequirements', function ($query) {
-            });
+        $finalProject = FinalProject::whereHas(
+            'finalLogs',
+            function ($query) use ($status, $verification) {
+                $query->whereHas('finalRequirements', function ($query) {
+                });
+                $query->whereDoesntHave('finalSchedules');
+                $query->where('final_status_id', '!=', FinalStatus::name('tugas_akhir_selesai'));
+                $query->whereFinalStatusId(FinalStatus::name($status));
+                $query->whereIsVerification($verification);
+            }
+        )->with(['finalLogs' => function ($query) use ($status) {
             $query->whereFinalStatusId(FinalStatus::name($status));
-            $query->whereIsVerification($verification);
-        })->with(['finalLogs' => function ($query) use ($status) {
-            $query->whereFinalStatusId(FinalStatus::name($status));
+            $query->where('final_status_id', '!=', FinalStatus::name('tugas_akhir_selesai'));
+            $query->whereDoesntHave('finalSchedules');
             $query->whereHas('finalRequirements');
             $query->with('finalRequirements');
         }, 'finalStudent'])
