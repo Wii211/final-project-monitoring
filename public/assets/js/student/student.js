@@ -74,7 +74,6 @@ $('#student-table tbody').on('click', '.update', function () {
         url: "students/" + id,
         dataType: "json",
         success: function (result) {
-            console.log(result);
             $('#student-modal').modal('show');
             $('#student-title').text("Update student");
             $('#student-action').text("Update");

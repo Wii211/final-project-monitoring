@@ -101,7 +101,7 @@
                                         name="transcript" accept="application/pdf">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlFile1">Upload Rencana Studi Terakhir (.pdf)</label>
+                                    <label for="exampleFormControlFile1">Upload Kartu Rencana Studi Terakhir (.pdf)</label>
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1"
                                         name="latest_study_plan" accept="application/pdf">
                                 </div>
@@ -110,7 +110,7 @@
                                 <img src="{{ asset('storage/design/undraw_fill_forms_yltj.png') }}" class="w-100" srcset="">
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="btn bg-gradient-primary mb-2 w-100">Verifikasi</button>
+                                <button type="submit" class="btn bg-gradient-primary mb-2 w-100"><b>Verifikasi Pendaftaran</b></button>
                             </div>
                         </div>
                     </form>

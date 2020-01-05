@@ -105,13 +105,14 @@ $('#final-project-progress-table tbody').on('click', '.progress-delete', functio
     let status = $('#final-project-status').val()
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikannya!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             Swal.fire({
@@ -127,8 +128,8 @@ $('#final-project-progress-table tbody').on('click', '.progress-delete', functio
                 type: 'DELETE',
                 success: function () {
                     Swal.fire(
-                            'Deleted!',
-                            'Telah dihapus!',
+                            'Berhasil!',
+                            'Progres telah dihapus!',
                             'success'
                         )
                         .then(function () {
@@ -145,13 +146,14 @@ $(document).on('click', '.submit-final-project', function(){
     let id = $(this).attr("id")
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'info',
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikannya!",
+        type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, submit it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             Swal.fire({
@@ -244,13 +246,14 @@ $(document).on('click', '.submit-finish-final-project', function(){
     let id = $(this).attr("id")
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'info',
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikannya!",
+        type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, submit it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             Swal.fire({

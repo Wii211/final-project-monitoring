@@ -188,6 +188,13 @@
                                                 </b>
                                         </div>
                                         @elseif(Auth::user()->finalScheduleStatus($finalLogId) === 1)
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda berhasil melaksanakan seminar proposal. Silahkan menunggu koordinator TA untuk melakukan verifikasi penyelesaian proposal.
+                                                </b>
+                                        </div>
                                         @endif
                                     @else
                                         <div class="alert alert-primary alert-dismissible">
@@ -226,6 +233,13 @@
                                                 </b>
                                         </div>
                                         @elseif(Auth::user()->finalScheduleStatus($finalLogId) === 1)
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-hidden="true">&times;</button>
+                                                <b>
+                                                    Anda berhasil melaksanakan sidang tugas akhir. Silahkan menunggu koordinator TA untuk melakukan verifikasi penyelesaian tugas akhir.
+                                                </b>
+                                        </div>
                                         @endif
                                     @else
                                         <div class="alert alert-primary alert-dismissible">

@@ -36,7 +36,7 @@ let dataTable = $('#final-project-table').DataTable({
     "ajax": {
         url: "monitoring"
     },
-    "order": [[ 2, "desc" ]],
+    "order": [[ 2, "asc" ]],
     "columns": [{
             data: 'name'
         },
@@ -200,13 +200,14 @@ $('#final-status-table tbody').on('click', '.final-status-check', function () {
     let finalId = $('#final-project-verification-id').val()
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikannya!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, verified it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             Swal.fire({
@@ -241,14 +242,19 @@ $('#final-status-table tbody').on('click', '.final-status-check', function () {
 
 function progressIndex(id, status) {
     let no = 1
+    let finalStatus = ''
     $.ajax({
         url: "project-progress/" + id,
         data: {
             'final_status': status
         },
         success: function (result) {
-            console.log(result)
-            $('#final-progress-agreement-title').text('Progress Pengerjaan Proposal')
+            if(status === "tugas_akhir"){
+                finalStatus = "Tugas Akhir"
+            } else {
+                finalStatus = "Proposal"
+            }
+            $('#final-progress-agreement-title').text('Progress Pengerjaan ' + finalStatus)
             $('#final-progress-agreement-modal').modal('show')
             $('#final-progress-agreement-table tbody').html('')
             if (result !== "failed") {
@@ -353,13 +359,14 @@ $('#final-progress-agreement-table tbody').on('click', '.progress-agreement-chec
     let status = $('#final-project-agreement-status').val()
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikannya!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, agreed it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             Swal.fire({

@@ -9,6 +9,7 @@ let dataTable = $('#lecturerTable').DataTable({
     "ajax": {
         // dataSrc: ""
     },
+    "order": [[ 4, "asc" ]],
     "columns": [{
             data: 'personnel_id'
         },
@@ -267,13 +268,14 @@ $('#lecturerTable tbody').on('click', '.delete', function () {
     let id = $(this).attr("id");
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikannya!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak'
     }).then((result) => {
         if (result.value) {
             Swal.fire({
