@@ -15,8 +15,9 @@ class FinalStudentsImport implements ToCollection, WithHeadingRow
      * @param Collection $collection
      */
     public function collection(Collection $rows)
-    {
-        foreach ($rows as $row) {
+    {   
+        foreach ($rows as $row) {       
+            if($row->filter()->isNotEmpty()){
             $user  = User::updateOrCreate(
                 ['user_name' => $row['nim']],
                 [
@@ -42,4 +43,8 @@ class FinalStudentsImport implements ToCollection, WithHeadingRow
             );
         }
     }
+    }
 }
+
+
+
