@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    name="phone_number" value="{{ $data->phone_number }}">
+                                                    name="phone_number" placeholder="Nomor Telepon" value="{{ $data->phone_number }}">
                                             </div>
                                         </div>
                                     </div>
