@@ -87,7 +87,7 @@
                                 @endif
                                 <td>{{$title->lecturer->name}}</td>
                                 <td>{{$title->description}}</td>
-                                @if(Auth::user()->isAdmin())
+                                @if(Auth::user()->isCoordinator())
                                 @if(!is_null($title->finalStudent))
                                 <td>
                                     <button class="btn bg-gradient-success btn-sm w-100 accept"
