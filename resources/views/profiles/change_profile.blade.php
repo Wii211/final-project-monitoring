@@ -46,6 +46,10 @@
                                                     value="{{ $data->user_name }}" readonly>
                                             </div>
                                             <div class="form-group">
+                                                <input type="email" class="form-control form-control-sm"
+                                                    name="email" placeholder="Email" value="{{ $data->email }}">
+                                            </div>
+                                            <div class="form-group">
                                                 <input type="text" class="form-control form-control-sm"
                                                     name="phone_number" placeholder="Nomor Telepon" value="{{ $data->phone_number }}">
                                             </div>
