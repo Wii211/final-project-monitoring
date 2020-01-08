@@ -47,9 +47,9 @@ let dataTable = $('#finalStudentTable').DataTable({
                 let status = full.is_verified;
                 let buttonId = full.id;
                 if (status == 0) {
-                    return "<button class='btn btn-success verification fs-12 w-100' id='" + buttonId + "' value='" + status + "'>Verification</button>";
+                    return "<button class='btn btn-success verification fs-12 w-100' id='" + buttonId + "' value='" + status + "'>Verifikasi</button>";
                 } else {
-                    return "<button class='btn btn-danger verification fs-12 w-100' id='" + buttonId + "' value='" + status + "'>Unverification</button>";
+                    return "<button class='btn btn-danger verification fs-12 w-100' id='" + buttonId + "' value='" + status + "'>Batalkan Verifikasi</button>";
                 }
             }
         }
