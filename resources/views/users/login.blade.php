@@ -16,7 +16,7 @@
                 @endif
 
                 <div class="login-logo">
-                    <a href="#"><b>Sistem Monitoring </b><br>Login</a>
+                    <a href="#"><b>Sistem Monitoring TA</b><br>Login</a>
                 </div>
                 <div class="d-flex justify-content-center">
                     <img src="{{ asset('storage/design/undraw_welcome_3gvl.png') }}" class="w-75" srcset="">
