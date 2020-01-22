@@ -1,9 +1,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="#" class="brand-link">
-          <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image"
+          <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image mt-1"
           style="opacity: .8">
-          <span class="brand-text font-weight-light text-white"><h6><b>Sistem Monitoring</b></h6></span>
+          <span class="brand-text font-weight-light text-white"><h6><b>Sistem Monitoring <BR>Tugas Akhir</b></h6></span>
       </a>
 
       <!-- Sidebar -->
