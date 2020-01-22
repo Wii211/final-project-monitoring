@@ -29,10 +29,10 @@ class FinalStudentService
         $this->role = $role;
     }
 
-    public function getListData($relation = null, $active, $verify)
+    public function getListData($relation = null, $active, $verify, $conditional)
     {
-        $query = $relation == null ? $this->finalStudent
-            : $this->finalStudent->with($relation);
+        $query = $relation == null ? $this->finalStudent->whereNotNull($conditional)
+            : $this->finalStudent->with($relation)->whereNotNull($conditional);
 
         return $query->active($active)->verify($verify)->get();
     }

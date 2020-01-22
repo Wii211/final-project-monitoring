@@ -32,7 +32,7 @@ class FinalStudentVerifyController extends Controller
 
         return $request->ajax() ?  response()->json(
             ['data' => $this->finalStudentService
-                ->getListData('user', 1, $verify)]
+                ->getListData('user', 1, $verify, 'transcript')]
         ) : view('final_projects.students');
     }
 
