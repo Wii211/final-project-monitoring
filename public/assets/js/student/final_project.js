@@ -26,7 +26,7 @@ function progressIndex(id, status) {
                         status = '<span class="badge badge-success p-2">Disetujui</span>'
                     } else {
                         status = '<span class="badge badge-danger p-2">Belum disetujui</span>'
-                        buttonDelete = '<span class="fas fa-times"></span></button></td>'
+                        buttonDelete = '<button class="btn bg-gradient-danger btn-sm w-100 progress-delete" id="' + result.id + '"><span class="fas fa-times"></span></button>'
                     }
 
                     let data = '<tr>' +
@@ -34,8 +34,7 @@ function progressIndex(id, status) {
                         '<td>' + result.created_at + '</td>' +
                         '<td>' + result.description + '</td>' +
                         '<td>' + status + '</td>' +
-                        '<td><button class="btn bg-gradient-danger btn-sm w-100 progress-delete" id="' + result.id + '">' +
-                        buttonDelete +
+                        '<td>' + buttonDelete  + '</td>' +
                         '</tr>'
 
                     no++
