@@ -123,7 +123,7 @@ class PreProposalService
 
                 $verificationFile = "";
 
-                if ($request->hasFile('file' . $request->supervisors)) {
+                if ($request->hasFile('file')['$request->supervisors']) {
                     $verificationFile = $this->uploadHelper->uploadFile(
                         $request->supervisors['file'],
                         $request->title . " " . $request->$request->supervisors['lecturer_id']
@@ -140,9 +140,9 @@ class PreProposalService
                     'verification_file' => $verificationFile
                 ]);
 
-                if (isset($request->supervisors2)) {
+                if (isset($request->is_supervisors)) {
                     $verificationFile2 = "";
-                    if ($request->hasFile('file' . $request->supervisors2)) {
+                    if ($request->hasFile('file')['$request->supervisor2']) {
                         $verificationFile2 = $this->uploadHelper->uploadFile(
                             $request->supervisors2['file'],
                             $request->title . " " . $request->$request->supervisors2['lecturer_id']
