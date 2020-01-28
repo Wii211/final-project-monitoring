@@ -111,7 +111,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                } else if (data !== "Failed") {
+                } else if (data === "Success") {
                     Swal.fire({
                             type: 'success',
                             title: 'Berhasil!',
@@ -119,8 +119,8 @@ $(document).on('submit', '#preproposal-form', function (e) {
                             timer: 1500
                         })
                         .then(function () {
-                            $('#preproposal-modal').modal('hide');
-                            window.location.reload();
+                            // $('#preproposal-modal').modal('hide');
+                            // window.location.reload();
                         });
                 } else {
                     Swal.fire({
