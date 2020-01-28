@@ -118,18 +118,44 @@ class PreProposalService
 
                 $finalLog->save();
 
-                $finalProject->supervisors()->createMany([
-                    [
-                        'role' => $request->supervisors['role'],
-                        'lecturer_id' => $request->supervisors['lecturer_id'],
-                        'final_project_id' => $finalProject->id
-                    ],
-                    [
+                $verificationFile = "";
+
+                if ($request->hasFile('file' . $request->supervisors)) {
+                    $verificationFile = $this->uploadHelper->uploadFile(
+                        $request->supervisors['file'],
+                        $request->title . " " . $request->$request->supervisors['lecturer_id']
+                            . " " . $request->supervisors['role'],
+                        'supervisors_verification'
+                    );
+                }
+
+                $finalProject->supervisors()->create([
+                    'role' => $request->supervisors['role'],
+                    'lecturer_id' => $request->supervisors['lecturer_id'],
+                    'final_project_id' => $finalProject->id,
+                    'is_agree' => 0,
+                    'verification_file' => $verificationFile
+                ]);
+
+                if (isset($request->supervisors2)) {
+                    $verificationFile2 = "";
+                    if ($request->hasFile('file' . $request->supervisors2)) {
+                        $verificationFile2 = $this->uploadHelper->uploadFile(
+                            $request->supervisors2['file'],
+                            $request->title . " " . $request->$request->supervisors2['lecturer_id']
+                                . " " . $request->supervisors2['role'],
+                            'supervisors_verification'
+                        );
+                    }
+
+                    $finalProject->supervisors()->create([
                         'role' => $request->supervisors2['role'],
                         'lecturer_id' => $request->supervisors2['lecturer_id'],
-                        'final_project_id' => $finalProject->id
-                    ]
-                ]);
+                        'final_project_id' => $finalProject->id,
+                        'is_agree' => 0,
+                        'verification_file' => $verificationFile2
+                    ]);
+                }
             });
         } catch (\Throwable $th) {
             dd($th);

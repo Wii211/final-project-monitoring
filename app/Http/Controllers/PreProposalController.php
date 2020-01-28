@@ -90,17 +90,19 @@ class PreProposalController extends Controller
                 return redirect()->back()->with('failed', ['Failed']);
             }
         } else {
-            if ($this->supervisor->checkSupervisorsQuota(
-                $request->supervisors['lecturer_id'], 1
-            )) {
-                return response()->json("Dosen Full");
-            }
+            // if ($this->supervisor->checkSupervisorsQuota(
+            //     $request->supervisors['lecturer_id'],
+            //     1
+            // )) {
+            //     return response()->json("Dosen Full");
+            // }
 
-            if ($this->supervisor->checkSupervisorsQuota(
-                $request->supervisors2['lecturer_id'], 2
-            )) {
-                return response()->json("Dosen Full");
-            }
+            // if ($this->supervisor->checkSupervisorsQuota(
+            //     $request->supervisors2['lecturer_id'],
+            //     2
+            // )) {
+            //     return response()->json("Dosen Full");
+            // }
             if ($this->preProposalService->submit($request)) {
                 return response()->json("Success");
             } else {
