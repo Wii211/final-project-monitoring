@@ -25,8 +25,8 @@
                         <input type="hidden" id="supervisors-role-1" name="supervisors[role]" value="1">
                     </div>
                     <div class="form-group">
-                        <label for="supervisors-file-1">Berkas Persetujuan Pembimbing Pertama</label>
-                        <input type="file" id="supervisors-file-1" name="supervisors[file]" value="1">
+                        <label for="supervisors-file-1">Berkas Persetujuan Pembimbing Pertama (Image[.PNG, .JPG] Maks. 1 MB)</label>
+                        <input type="file" id="supervisors-file-1" name="supervisors_file" accept="image/*" required>
                     </div>
                     <hr>
                     <div class="form-check mb-3">
@@ -43,8 +43,8 @@
                             <input type="hidden" id="supervisors-role-2" name="supervisors2[role]" value="2">
                         </div>
                         <div class="form-group">
-                            <label for="supervisors-file-2">Berkas Persetujuan Pembimbing Kedua</label>
-                            <input type="file" id="supervisors-file-2" name="supervisors2[file]" value="1">
+                            <label for="supervisors-file-2">Berkas Persetujuan Pembimbing Kedua (Image[.PNG, .JPG] Maks. 1 MB)</label>
+                            <input type="file" id="supervisors-file-2" name="supervisors2_file" accept="image/*">
                         </div>
                     </div>
                     <hr>

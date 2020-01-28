@@ -61,7 +61,7 @@
                                             Ukuran maks. 1 MB :: Format .PNG, .JPEG, .JPG
                                         </small>
                                         <input type="file" class="form-control-file mt-2" name="image_profile"
-                                            id="image-profile">
+                                            id="image-profile" accept="image/*">
                                     </div>
                                     <input type="hidden" name="_method" value="PUT">
                                     <button type="submit" class="btn btn-primary mb-2 w-100">Update Profile</button>

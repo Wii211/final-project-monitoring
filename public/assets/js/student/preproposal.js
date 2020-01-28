@@ -102,7 +102,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
             contentType: false,
             processData: false,
             success: function (data) {
-                $('#preproposal-form')[0].reset();
+                // $('#preproposal-form')[0].reset();
 
                 if (data === "Dosen Full") {
                     Swal.fire({
