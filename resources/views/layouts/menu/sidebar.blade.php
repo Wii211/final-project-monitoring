@@ -83,20 +83,20 @@
                   </li>
                   @if(Auth::user()->isCoordinator())
                   <li class="nav-item">
-                      <a href="{{ route('final_students_verify.index') }}"
-                          class="nav-link {{ Request::is('coordinator/final_projects/students*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-user-graduate"></i>
-                          <p>
-                              Mahasiswa TA
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
                       <a href="{{ route('final_actives.index') }}"
                           class="nav-link {{ Request::is('coordinator/final_projects') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-book"></i>
                           <p>
                               Tugas Akhir
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('final_students_verify.index') }}"
+                          class="nav-link {{ Request::is('coordinator/final_projects/students*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-user-graduate"></i>
+                          <p>
+                              Pendaftaran Mahasiswa
                           </p>
                       </a>
                   </li>
