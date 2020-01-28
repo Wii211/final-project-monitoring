@@ -9,6 +9,7 @@ use App\Supervisor;
 use App\FinalStatus;
 use App\FinalProject;
 use App\FinalStudent;
+use App\Helpers\UploadHelper;
 use App\RecomendationTitle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class PreProposalService
 {
     private $finalProject, $finalStudent, $finalLog, $recomendationTitle,
-        $finalStatus, $lecturer, $supervisor;
+        $finalStatus, $lecturer, $supervisor, $uploadHelper;
 
     public function __construct(
         FinalProject $finalProject,
@@ -26,7 +27,8 @@ class PreProposalService
         RecomendationTitle $recomendationTitle,
         FinalStatus $finalStatus,
         Lecturer $lecturer,
-        Supervisor $supervisor
+        Supervisor $supervisor,
+        UploadHelper $uploadHelper
     ) {
         $this->finalProject = $finalProject;
         $this->finalStudent = $finalStudent;
@@ -35,6 +37,7 @@ class PreProposalService
         $this->finalStatus = $finalStatus;
         $this->lecturer = $lecturer;
         $this->supervisor = $supervisor;
+        $this->uploadHelper = $uploadHelper;
     }
 
     public function getData($id, $relation)
