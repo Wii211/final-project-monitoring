@@ -103,7 +103,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
             processData: false,
             success: function (data) {
                 $('#preproposal-form')[0].reset();
-                
+
                 if (data === "Dosen Full") {
                     Swal.fire({
                         type: 'error',
@@ -120,7 +120,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                         })
                         .then(function () {
                             $('#preproposal-modal').modal('hide');
-                            window.location.reload();
+                            // window.location.reload();
                         });
                 } else {
                     Swal.fire({
@@ -137,9 +137,9 @@ $(document).on('submit', '#preproposal-form', function (e) {
 
 //  Supervisor 2
 let check = true;
-$(document).on('click', '#supervisor-check', function(e){
-    
-    if(check) {
+$(document).on('click', '#supervisor-check', function (e) {
+
+    if (check) {
         $('#add-supervisors-2').addClass('d-block').removeClass('d-none')
         check = false
     } else {
