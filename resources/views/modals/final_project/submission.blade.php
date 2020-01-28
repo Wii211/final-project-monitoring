@@ -25,13 +25,31 @@
                         <input type="hidden" id="supervisors-role-1" name="supervisors[role]" value="1">
                     </div>
                     <div class="form-group">
-                        <label for="supervisors-2">Dosen Pembimbing Kedua</label>
-                        <select class="form-control" id="supervisors-2" name="supervisors2[lecturer_id]" required>
-                        </select>
-                        <input type="hidden" id="supervisors-role-2" name="supervisors2[role]" value="2">
+                        <label for="supervisors-file-1">Berkas Persetujuan Pembimbing Pertama</label>
+                        <input type="file" id="supervisors-file-1" name="supervisors[file]" value="1">
                     </div>
                     <hr>
-                    <a href="{{ route('recomendation-title.index') }}" class="btn bg-gradient-primary w-100">Klik di sini untuk memilih judul dari dosen, tersedia topik baru!</a>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="1" id="supervisor-check" name="is_supervisors">
+                        <label class="form-check-label" for="supervisor-check">
+                          <b>Punya dosen pembimbing kedua?</b>
+                        </label>
+                      </div>
+                    <div id="add-supervisors-2" class="d-none">
+                        <div class="form-group">
+                            <label for="supervisors-2">Dosen Pembimbing Kedua</label>
+                            <select class="form-control" id="supervisors-2" name="supervisors2[lecturer_id]" required>
+                            </select>
+                            <input type="hidden" id="supervisors-role-2" name="supervisors2[role]" value="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="supervisors-file-2">Berkas Persetujuan Pembimbing Kedua</label>
+                            <input type="file" id="supervisors-file-2" name="supervisors2[file]" value="1">
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="{{ route('recomendation-title.index') }}" class="btn bg-gradient-primary w-100">Klik di
+                        sini untuk memilih judul dari dosen, tersedia topik baru!</a>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="preproposal-id">
