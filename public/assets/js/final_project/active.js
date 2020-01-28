@@ -110,7 +110,7 @@ let dataTable = $('#final-project-table').DataTable({
                 if(full.final_project !== null){
                     buttonId = full.final_project.id
                 }
-                return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
+                return "<button class='btn btn-sm btn-info update w-100' id='" + buttonId + "'>Detail</button>";
             }
         },
         {
@@ -121,7 +121,7 @@ let dataTable = $('#final-project-table').DataTable({
 
                 if(full.final_project !== null){
                     buttonId = full.final_project.id
-                    verification = "<button class='btn btn-success verification' id='" + buttonId + "'>Verifikasi</button>"
+                    verification = "<button class='btn btn-sm btn-success verification w-100' id='" + buttonId + "'>Verifikasi</button>"
                 }
                 return verification
             }
