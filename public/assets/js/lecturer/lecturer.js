@@ -32,6 +32,12 @@ let dataTable = $('#lecturerTable').DataTable({
             data: 'name'
         },
         {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                return "0";
+            }
+        },
+        {
             data: 'status'
         },
         // {
@@ -57,7 +63,7 @@ let dataTable = $('#lecturerTable').DataTable({
         }
     ],
     "columnDefs": [{
-        targets: [4],
+        targets: [5],
         render: function (data, type, row) {
             if (data == 1) {
                 return '<span class="badge badge-success p-2">Aktif</span>';
