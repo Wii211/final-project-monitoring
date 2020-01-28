@@ -91,13 +91,13 @@ class PreProposalController extends Controller
             }
         } else {
             if ($this->supervisor->checkSupervisorsQuota(
-                $request->supervisors['lecturer_id']
+                $request->supervisors['lecturer_id'], 1
             )) {
                 return response()->json("Dosen Full");
             }
 
             if ($this->supervisor->checkSupervisorsQuota(
-                $request->supervisors2['lecturer_id']
+                $request->supervisors2['lecturer_id'], 2
             )) {
                 return response()->json("Dosen Full");
             }
