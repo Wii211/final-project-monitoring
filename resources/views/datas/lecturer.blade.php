@@ -30,6 +30,7 @@
                                 <th>NIDN</th>
                                 <th>Foto</th>
                                 <th>Nama</th>
+                                <th>Kuota</th>
                                 <th>Status</th>
                                 <th width="5%"></th>
                                 <th width="5%"></th>
