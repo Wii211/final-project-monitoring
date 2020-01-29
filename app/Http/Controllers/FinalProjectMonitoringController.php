@@ -18,8 +18,8 @@ class FinalProjectMonitoringController extends Controller
         $data = FinalStudent::active(1)->verify(1)
             ->with([
                 'finalProject.finalLogs' => function ($q) {
-                    $q->where('final_status_id', '!=', FinalStatus::name('pendaftaran'));
-                    $q->where('final_status_id', '!=', FinalStatus::name('tugas_akhir_selesai'));
+                    $q->where('final_status_id', '!=', FinalStatus::name('pendaftaran'))->latest();
+                    $q->where('final_status_id', '!=', FinalStatus::name('tugas_akhir_selesai'))->latest();
                 },
                 'finalProject.finalLogs.finalStatus'
             ])
