@@ -102,7 +102,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
             contentType: false,
             processData: false,
             success: function (data) {
-                // $('#preproposal-form')[0].reset();
+                $('#preproposal-form')[0].reset();
 
                 if (data === "Dosen Full") {
                     Swal.fire({
@@ -119,8 +119,8 @@ $(document).on('submit', '#preproposal-form', function (e) {
                             timer: 1500
                         })
                         .then(function () {
-                            // $('#preproposal-modal').modal('hide');
-                            // window.location.reload();
+                            $('#preproposal-modal').modal('hide');
+                            window.location.reload();
                         });
                 } else {
                     Swal.fire({
