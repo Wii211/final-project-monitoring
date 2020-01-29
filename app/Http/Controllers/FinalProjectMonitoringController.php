@@ -15,8 +15,10 @@ class FinalProjectMonitoringController extends Controller
     public function index()
     {
         $data = FinalStudent::active(1)->verify(1)
+            ->whereDoesntHave('finalProject.finalLogEndOfFinal')
+            ->whereDoesntHave('finalProject.finalLogsRegister')
             ->with(['finalProject.finalLogs.finalStatus'])
-            ->whereDoesntHave('finalProject.finalLogEndOfFinal')->get();
+            ->get();
 
         return response()->json(['data' => $data]);
     }

@@ -52,6 +52,12 @@ class FinalProject extends Model
             ->whereFinalStatusId(FinalStatus::name('tugas_akhir_selesai'));
     }
 
+    public function finalLogsRegister()
+    {
+        return $this->hasMany(FinalLog::class)
+            ->whereFinalStatusId(FinalStatus::name('pendaftaran'));
+    }
+
     public function topics()
     {
         return $this->belongsToMany(
