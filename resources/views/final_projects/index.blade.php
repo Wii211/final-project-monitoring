@@ -20,8 +20,8 @@
                             <th>Nama</th>
                             <th>Judul</th>
                             <th>Status</th>
-                            <th width="15%">Progress</th>
-                            <th width="7%"></th>
+                            <th>Progress</th>
+                            <th width="7%">Detail/Update</th>
                             <th width="7%"></th>
                         </tr>
                     </thead>

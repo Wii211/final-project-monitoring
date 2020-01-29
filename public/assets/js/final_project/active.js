@@ -11,6 +11,8 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (lecturer) {
+            let dataBlank = '<option value=""></option>'
+            $('#supervisors-1').append(dataBlank)
             lecturer.data.forEach(function (result) {
                 let data = '<option value="' + result.id + '">' + result.name + '</option>';
                 $('#supervisors-1').append(data);
@@ -23,6 +25,9 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (lecturer) {
+            let dataBlank = '<option value=""></option>'
+            $('#supervisors-2').append(dataBlank)
+
             lecturer.data.forEach(function (result) {
                 let data = '<option value="' + result.id + '">' + result.name + '</option>';
                 $('#supervisors-2').append(data);
@@ -36,7 +41,7 @@ let dataTable = $('#final-project-table').DataTable({
     "ajax": {
         url: "monitoring"
     },
-    "order": [[ 2, "asc" ]],
+    "order": [[ 2, "desc" ]],
     "columns": [{
             data: 'name'
         },
@@ -84,13 +89,33 @@ let dataTable = $('#final-project-table').DataTable({
             "render": function (data, type, full, meta) {
                 let progress = ''
                 let buttonId = ''
+                let status = ''
+
+                if(full.final_project !== null){
+                    full.final_project.final_logs.forEach(function (data) {
+                        status = data.final_status.name
+                    })
+
+                    buttonId = full.final_project.id
+
+                    if(status === "proposal") {
+                        progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal</button>"
+                    } else if (status === "tugas_akhir") {
+                        progress = "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>"
+                    }
+                }
+                return progress
+            }
+        },
+        {
+            sortable: false,
+            "render": function (data, type, full, meta) {
+                let buttonId = ''
 
                 if(full.final_project !== null){
                     buttonId = full.final_project.id
-                    progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal</button>" +
-                    "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>"
                 }
-                return progress
+                return "<button class='btn btn-sm btn-info update w-100' id='" + buttonId + "'>Detail</button>";
             }
         },
         {
@@ -101,20 +126,9 @@ let dataTable = $('#final-project-table').DataTable({
 
                 if(full.final_project !== null){
                     buttonId = full.final_project.id
-                    verification = "<button class='btn btn-success verification' id='" + buttonId + "'>Verifikasi</button>"
+                    verification = "<button class='btn btn-sm btn-success verification w-100' id='" + buttonId + "'>Verifikasi</button>"
                 }
                 return verification
-            }
-        },
-        {
-            sortable: false,
-            "render": function (data, type, full, meta) {
-                let buttonId = ''
-
-                if(full.final_project !== null){
-                    buttonId = full.final_project.id
-                }
-                return "<button class='btn btn-warning update' id='" + buttonId + "'>Update</button>";
             }
         },
     ]
@@ -129,27 +143,42 @@ $('#final-project-table tbody').on('click', '.update', function () {
         url: "../data/final_project/" + id,
         dataType: "json",
         success: function (result) {
-            console.log(result)
+            // console.log(result)
             $('#final-project-active-modal').modal('show')
-            $('#final-project-active-title').text("Update Tugas Akhir")
+            $('#final-project-active-title').text("Tugas Akhir ")
             $('#final-project-active-id').val(result.data.id)
             $('#final-student-active-id').val(result.data.final_student_id)
             $('#description-active').val(result.data.description)
 
             $('#title-active').val(result.data.title)
 
-            if(result.data.supervisors.length !== 0){
+            $('#supervisors-1').val('')
+            $('#supervisors-2').val('')
+            $('#supervisors-role-1').val('')
+            $('#supervisors-role-2').val('')
+            $('#supervisors-file-1').text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
+            $('#supervisors-file-2').text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
+
+            if(result.data.supervisors !== undefined){
                 result.data.supervisors.forEach(function (data) {
-                    $('#supervisors-' + i).val(data.lecturer_id)
-                    $('#supervisors-role-' + i).val(data.role)
+                    if(data !== undefined){
+                        $('#supervisors-' + i).val(data.lecturer_id)
+                        $('#supervisors-role-' + i).val(data.role)
+
+                        if(data.verification_file !== null) {
+                            $('#supervisors-file-' + i).attr('href', '../storage/images/' + data.verification_file)
+                            $('#supervisors-file-' + i).text('Berkas Persetujuan Dosen Pembimbing-' + i).addClass('btn-info').removeClass('btn-danger')
+                        } else {
+                            $('#supervisors-file-' + i).text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
+                        }
+
+                    } else {
+                        $('#supervisors-file-' + i).text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
+                    }
+
                     i++
                 })
-            } else {
-                $('#supervisors-1').val('')
-                $('#supervisors-2').val('')
-                $('#supervisors-role-1').val('')
-                $('#supervisors-role-2').val('')
-            }
+            } 
         }
     })
 });

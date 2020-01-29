@@ -28,6 +28,16 @@ class Lecturer extends Model
         return $this->hasMany(Supervisor::class);
     }
 
+    public function primarySupervisors()
+    {
+        return $this->hasMany(Supervisor::class)->whereRole(1);
+    }
+
+    public function secondarySupervisors()
+    {
+        return $this->hasMany(Supervisor::class)->whereRole(2);
+    }
+
     public function position()
     {
         return $this->belongsTo(Position::class);

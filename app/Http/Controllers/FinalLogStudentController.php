@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FinalLog;
+use App\Supervisor;
 use Illuminate\Http\Request;
 
 class FinalLogStudentController extends Controller
@@ -70,9 +71,41 @@ class FinalLogStudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Supervisor $supervisor)
     {
         $finalLog = FinalLog::FindOrFail($id);
+
+
+        if ($supervisor->checkSupervisorsQuota(
+            $finalLog->finalProject->supervisors[0]->id,
+            1
+        )) {
+            return response()->json("Dosen Full");
+        }
+
+        $supervisor1 = $supervisor->findOrFail(
+            $finalLog->finalProject->supervisors[0]->id
+        );
+
+        $supervisor1->is_agree = 1;
+        $supervisor1->save();
+
+        if (isset($finalLog->finalProject->supervisors[1])) {
+
+            if ($supervisor->checkSupervisorsQuota(
+                $finalLog->finalProject->supervisors[0]->id,
+                2
+            )) {
+                return response()->json("Dosen Full");
+            }
+
+            $supervisor2 = $supervisor->findOrFail(
+                $finalLog->finalProject->supervisors[1]->id
+            );
+
+            $supervisor2->is_agree = 1;
+            $supervisor2->save();
+        }
 
         $finalLog->is_verification = $request->is_verification;
 

@@ -9,6 +9,7 @@ use App\Supervisor;
 use App\FinalStatus;
 use App\FinalProject;
 use App\FinalStudent;
+use App\Helpers\UploadHelper;
 use App\RecomendationTitle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class PreProposalService
 {
     private $finalProject, $finalStudent, $finalLog, $recomendationTitle,
-        $finalStatus, $lecturer, $supervisor;
+        $finalStatus, $lecturer, $supervisor, $uploadHelper;
 
     public function __construct(
         FinalProject $finalProject,
@@ -26,7 +27,8 @@ class PreProposalService
         RecomendationTitle $recomendationTitle,
         FinalStatus $finalStatus,
         Lecturer $lecturer,
-        Supervisor $supervisor
+        Supervisor $supervisor,
+        UploadHelper $uploadHelper
     ) {
         $this->finalProject = $finalProject;
         $this->finalStudent = $finalStudent;
@@ -35,6 +37,7 @@ class PreProposalService
         $this->finalStatus = $finalStatus;
         $this->lecturer = $lecturer;
         $this->supervisor = $supervisor;
+        $this->uploadHelper = $uploadHelper;
     }
 
     public function getData($id, $relation)
@@ -100,6 +103,7 @@ class PreProposalService
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
+
         try {
             DB::transaction(function () use ($request, $finalStudentId) {
 
@@ -118,18 +122,44 @@ class PreProposalService
 
                 $finalLog->save();
 
-                $finalProject->supervisors()->createMany([
-                    [
-                        'role' => $request->supervisors['role'],
-                        'lecturer_id' => $request->supervisors['lecturer_id'],
-                        'final_project_id' => $finalProject->id
-                    ],
-                    [
+                $verificationFile = "";
+
+                if ($request->hasFile('supervisors_file')) {
+                    $verificationFile = $this->uploadHelper->uploadImage(
+                        $request->file('supervisors_file'),
+                        $request->title . " " . $request->supervisors['lecturer_id']
+                            . " " . $request->supervisors['role'],
+                        'supervisors_verification'
+                    );
+                }
+
+                $finalProject->supervisors()->create([
+                    'role' => $request->supervisors['role'],
+                    'lecturer_id' => $request->supervisors['lecturer_id'],
+                    'final_project_id' => $finalProject->id,
+                    'is_agree' => 0,
+                    'verification_file' => $verificationFile
+                ]);
+
+                if (isset($request->is_supervisors)) {
+                    $verificationFile2 = "";
+                    if ($request->hasFile('supervisors2_file')) {
+                        $verificationFile2 = $this->uploadHelper->uploadImage(
+                            $request->file('supervisor2_file'),
+                            $request->title . " " . $request->$request->supervisors2['lecturer_id']
+                                . " " . $request->supervisors2['role'],
+                            'supervisors_verification'
+                        );
+                    }
+
+                    $finalProject->supervisors()->create([
                         'role' => $request->supervisors2['role'],
                         'lecturer_id' => $request->supervisors2['lecturer_id'],
-                        'final_project_id' => $finalProject->id
-                    ]
-                ]);
+                        'final_project_id' => $finalProject->id,
+                        'is_agree' => 0,
+                        'verification_file' => $verificationFile2
+                    ]);
+                }
             });
         } catch (\Throwable $th) {
             dd($th);

@@ -20,7 +20,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        url: "../supervisor?primary=false",
+        url: "../supervisor",
         type: "GET",
         dataType: "json",
         success: function (lecturer) {
@@ -103,7 +103,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
             processData: false,
             success: function (data) {
                 $('#preproposal-form')[0].reset();
-                
+
                 if (data === "Dosen Full") {
                     Swal.fire({
                         type: 'error',
@@ -111,7 +111,7 @@ $(document).on('submit', '#preproposal-form', function (e) {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                } else if (data !== "Failed") {
+                } else if (data === "Success") {
                     Swal.fire({
                             type: 'success',
                             title: 'Berhasil!',
@@ -134,3 +134,16 @@ $(document).on('submit', '#preproposal-form', function (e) {
         });
     }
 });
+
+//  Supervisor 2
+let check = true;
+$(document).on('click', '#supervisor-check', function (e) {
+
+    if (check) {
+        $('#add-supervisors-2').addClass('d-block').removeClass('d-none')
+        check = false
+    } else {
+        $('#add-supervisors-2').addClass('d-none').removeClass('d-block')
+        check = true
+    }
+})

@@ -9,7 +9,7 @@ let dataTable = $('#lecturerTable').DataTable({
     "ajax": {
         // dataSrc: ""
     },
-    "order": [[ 4, "asc" ]],
+    "order": [[ 6, "asc" ]],
     "columns": [{
             data: 'personnel_id'
         },
@@ -30,6 +30,12 @@ let dataTable = $('#lecturerTable').DataTable({
         },
         {
             data: 'name'
+        },
+        {
+            data: 'primary_supervisors_count'
+        },
+        {
+            data: 'secondary_supervisors_count'
         },
         {
             data: 'status'
@@ -57,7 +63,7 @@ let dataTable = $('#lecturerTable').DataTable({
         }
     ],
     "columnDefs": [{
-        targets: [4],
+        targets: [6],
         render: function (data, type, row) {
             if (data == 1) {
                 return '<span class="badge badge-success p-2">Aktif</span>';

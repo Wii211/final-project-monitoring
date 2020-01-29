@@ -30,6 +30,8 @@
                                 <th>NIDN</th>
                                 <th>Foto</th>
                                 <th>Nama</th>
+                                <th>Kuota <br> Pembimbing-1</th>
+                                <th>Kuota <br> Pembimbing-2</th>
                                 <th>Status</th>
                                 <th width="5%"></th>
                                 <th width="5%"></th>

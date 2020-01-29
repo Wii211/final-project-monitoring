@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalStatus;
 use App\FinalStudent;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class FinalProjectMonitoringController extends Controller
      */
     public function index()
     {
-        $data = FinalStudent::active(1)->verify(1)->with(['finalProject.finalLogs.finalStatus'])->get();
+        $data = FinalStudent::active(1)->verify(1)
+        ->whereHas('finalProject.finalLogsProcess')
+            ->with(['finalProject.finalLogs.finalStatus'])
+            ->get();
 
         return response()->json(['data' => $data]);
     }

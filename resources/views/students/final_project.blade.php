@@ -67,8 +67,10 @@
                         @foreach($data->finalLogs as $finalLog)
                             @if(!is_null($finalLog->finalSchedules))
                                 @foreach($finalLog->finalSchedules as $finalSchedule)
+                                    
                                     @php $date = $finalSchedule->date @endphp
                                     @php $time = $finalSchedule->hour @endphp
+                                    @php $endTime = $finalSchedule->end_date_hour @endphp
                                     @php $place = $finalSchedule->place @endphp
                                 @endforeach
                             @endif
@@ -103,7 +105,7 @@
                                                 <tr>
                                                     <td>1.</td>
                                                     <td>{{ $date }}</td>
-                                                    <td>{{ $time }}</td>
+                                                    <td>{{ $time }} - {{ $endTime }}</td>
                                                     <td>Ruangan {{ $place }}</td>
                                                 </tr>
                                             </tbody>
