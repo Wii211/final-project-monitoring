@@ -100,6 +100,7 @@ class FinalScheduleStatusController extends Controller
             $finalSchedule->save();
 
             if ($request->final_log_id === FinalStatus::name('proposal')) {
+                FinalSchedule::whereFinalLogId($request->final_log_id)->delete();
                 FinalLog::destroy($request->final_log_id);
             }
         } catch (\Throwable $th) {
