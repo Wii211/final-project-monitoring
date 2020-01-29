@@ -30,10 +30,10 @@ class Supervisor extends Model
     {
         $lecturerCount = $this->whereHas('finalProject', function ($q) {
             $q->whereDoesntHave('finalLogEndOfFinal');
-        })->whereRole($role)
+        })->whereRole($role)->whereIsAgree(1)
             ->whereLecturerId($lecturerId)->count();
 
-        
+
         return $lecturerCount > 8 ? true : false;
     }
 }
