@@ -18,12 +18,14 @@
                         <label for="supervisors-1">Dosen Pembimbing Pertama</label>
                         <select class="form-control" id="supervisors-1" name="supervisors[lecturer_id]" required>
                         </select>
+                        <a id="supervisors-file-1" class="btn btn-danger w-100 d-block text-white" target="_blank">Tidak Ada Berkas Persetujuan</a>
                         <input type="hidden" id="supervisors-role-1" name="supervisors[role]" value="1">
                     </div>
                     <div class="form-group">
                         <label for="supervisors-2">Dosen Pembimbing Kedua</label>
                         <select class="form-control" id="supervisors-2" name="supervisors2[lecturer_id]" required>
                         </select>
+                        <a id="supervisors-file-2" class="btn btn-danger w-100 d-block text-white" target="_blank">Tidak Ada Berkas Persetujuan</a>
                         <input type="hidden" id="supervisors-role-2" name="supervisors2[role]" value="2">
                     </div>
                     <hr>

@@ -16,13 +16,8 @@ class FinalProjectMonitoringController extends Controller
     public function index()
     {
         $data = FinalStudent::active(1)->verify(1)
-            ->with([
-                'finalProject.finalLogs' => function ($q) {
-                    $q->where('final_status_id', '!=', FinalStatus::name('pendaftaran'))->latest();
-                    $q->where('final_status_id', '!=', FinalStatus::name('tugas_akhir_selesai'))->latest();
-                },
-                'finalProject.finalLogs.finalStatus'
-            ])
+        ->whereHas('finalProject.finalLogsProcess')
+            ->with(['finalProject.finalLogs.finalStatus'])
             ->get();
 
         return response()->json(['data' => $data]);
