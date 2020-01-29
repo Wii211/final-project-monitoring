@@ -1,0 +1,9 @@
+[31-Dec-2019 05:10:28 UTC] PHP Warning:  require(/home/tatiftulmac/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:10:28 UTC] PHP Warning:  require(/home/tatiftulmac/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:10:28 UTC] PHP Fatal error:  require(): Failed opening required '/home/tatiftulmac/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:10:51 UTC] PHP Warning:  require(/home/tatiftulmac/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:10:51 UTC] PHP Warning:  require(/home/tatiftulmac/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:10:51 UTC] PHP Fatal error:  require(): Failed opening required '/home/tatiftulmac/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:11:00 UTC] PHP Warning:  require(/home/tatiftulmac/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:11:00 UTC] PHP Warning:  require(/home/tatiftulmac/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/tatiftulmac/public_html/artisan on line 18
+[31-Dec-2019 05:11:00 UTC] PHP Fatal error:  require(): Failed opening required '/home/tatiftulmac/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/tatiftulmac/public_html/artisan on line 18

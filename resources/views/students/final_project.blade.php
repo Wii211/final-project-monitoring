@@ -156,7 +156,7 @@
                                     <tr>
                                         <td>1.</td>
                                         <td>Pedoman Proposal/Tugas Akhir</td>
-                                        <td><a href="{{ asset('storage/pedoman_tugas_akhir.docx') }}" download>Download Berkas
+                                        <td><a href="{{ asset('storage/PEDOMAN TUGAS AKHIR PRODI TI.pdf') }}" download>Download Berkas
                                                 Lampiran</a> </td>
                                     </tr>
                                 </tbody>

@@ -1,0 +1,1 @@
+<?php header('location: https://ta.ti.ft.ulm.ac.id/public/'); ?>
