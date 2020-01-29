@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\FinalLog;
 use App\FinalSchedule;
+use App\FinalStatus;
 use Illuminate\Http\Request;
 
 class FinalScheduleStatusController extends Controller
@@ -96,6 +98,10 @@ class FinalScheduleStatusController extends Controller
                 ->first();
             $finalSchedule->status = 2;
             $finalSchedule->save();
+
+            if ($request->final_log_id === FinalStatus::name('proposal')) {
+                FinalLog::destroy($request->final_log_id);
+            }
         } catch (\Throwable $th) {
             return response()->json("Failed");
         }
