@@ -31,7 +31,7 @@ class FinalProjectDataController extends Controller
      */
     public function index()
     {
-        $data = FinalProject::with('finalStudent')->get();
+        $data = FinalProject::with('finalStudent')->whereHas('finalLogEndOfFinal')->get();
 
         return response()->json(['data' => $data]);
     }
