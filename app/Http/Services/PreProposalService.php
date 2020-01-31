@@ -103,7 +103,6 @@ class PreProposalService
     {
         $finalStudentId = $this->finalStudent->getStudentId();
 
-
         try {
             DB::transaction(function () use ($request, $finalStudentId) {
 
@@ -146,7 +145,7 @@ class PreProposalService
                     if ($request->hasFile('supervisors2_file')) {
                         $verificationFile2 = $this->uploadHelper->uploadImage(
                             $request->file('supervisor2_file'),
-                            $request->title . " " . $request->$request->supervisors2['lecturer_id']
+                            $request->title . " " . $request->supervisors2['lecturer_id']
                                 . " " . $request->supervisors2['role'],
                             'supervisors_verification'
                         );
