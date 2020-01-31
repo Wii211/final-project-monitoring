@@ -193,6 +193,45 @@ class PreProposalService
                             'lecturer_id' => $request->supervisors2['lecturer_id']
                         ]
                     );
+
+                $supervisor1 = $this->supervisor
+                    ->whereFinalProjectId($finalProjectId)->whereRole(1)->first();
+
+                if ($request->hasFile('supervisors_file')) {
+                    $verificationFile = $this->uploadHelper->uploadImage(
+                        $request->file('supervisors_file'),
+                        $request->title . " " . $request->supervisors['lecturer_id']
+                            . " " . $request->supervisors['role'],
+                        'supervisors_verification'
+                    );
+                    if ($supervisor1->verification_file) {
+                        $this->uploadHelper
+                            ->deleteFile($supervisor1->verification_file);
+                    }
+                    $supervisor1->verification_file = $verificationFile;
+                    $supervisor1->save();
+                }
+
+                if (isset($request->is_supervisors)) {
+                    $supervisor2 = $this->supervisor
+                        ->whereFinalProjectId($finalProjectId)->whereRole(2)->first();
+                    $verificationFile2 = "";
+                    if ($request->hasFile('supervisors2_file')) {
+                        $verificationFile2 = $this->uploadHelper->uploadImage(
+                            $request->file('supervisors2_file'),
+                            $request->title . " " . $request->supervisors2['lecturer_id']
+                                . " " . $request->supervisors2['role'],
+                            'supervisors_verification'
+                        );
+
+                        if ($supervisor2->verification_file) {
+                            $this->uploadHelper
+                                ->deleteFile($supervisor2->verification_file);
+                        }
+                        $supervisor2->verification_file = $verificationFile2;
+                        $supervisor2->save();
+                    }
+                }
             });
         } catch (\Throwable $th) {
             dd($th);
