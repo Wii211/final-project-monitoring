@@ -30,12 +30,14 @@ class Lecturer extends Model
 
     public function primarySupervisors()
     {
-        return $this->hasMany(Supervisor::class)->whereRole(1);
+        return $this->hasMany(Supervisor::class)
+            ->whereRole(1)->whereIsAgree(1);
     }
 
     public function secondarySupervisors()
     {
-        return $this->hasMany(Supervisor::class)->whereRole(2);
+        return $this->hasMany(Supervisor::class)
+            ->whereRole(2)->whereIsAgree(1);
     }
 
     public function position()

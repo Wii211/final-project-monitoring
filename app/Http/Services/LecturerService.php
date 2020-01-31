@@ -33,7 +33,8 @@ class LecturerService
         $query = $relation == null ? $this->lecturer
             : $this->lecturer->with($relation);
 
-        return $query->primary($q)->withCount('primarySupervisors')->withCount('secondarySupervisors')->get($data);
+        return $query->primary($q)->withCount('primarySupervisors')
+            ->withCount('secondarySupervisors')->get($data);
     }
 
     public function getListDataPrimary($relation = null)
