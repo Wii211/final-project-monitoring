@@ -35,7 +35,7 @@
                           <b>Punya dosen pembimbing kedua?</b>
                         </label>
                       </div>
-                    <div id="add-supervisors-2" class="d-none">
+                    <div id="add-supervisors-2" style="display:none">
                         <div class="form-group">
                             <label for="supervisors-2">Dosen Pembimbing Kedua</label>
                             <select class="form-control" id="supervisors-2" name="supervisors2[lecturer_id]" required>
