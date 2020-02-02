@@ -144,27 +144,6 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="width:5%">#</th>
-                                        <th>Berkas</th>
-                                        <th style="width:60%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>Pedoman Proposal/Tugas Akhir</td>
-                                        <td><a href="{{ asset('storage/PEDOMAN TUGAS AKHIR PRODI TI.pdf') }}" download>Download Berkas
-                                                Lampiran</a> </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     <div class="d-flex flex-row-reverse bd-highlight">
                         <div class="p-2 bd-highlight">
                             @if($data->checkIsVerify($data->id, "proposal") && $status !== "tugas_akhir")
