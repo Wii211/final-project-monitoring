@@ -136,14 +136,6 @@ $(document).on('submit', '#preproposal-form', function (e) {
 });
 
 //  Supervisor 2
-let check = true;
-$(document).on('click', '#supervisor-check', function (e) {
-
-    if (check) {
-        $('#add-supervisors-2').addClass('d-block').removeClass('d-none')
-        check = false
-    } else {
-        $('#add-supervisors-2').addClass('d-none').removeClass('d-block')
-        check = true
-    }
-})
+$('#supervisor-check').click(function() {
+    $("#add-supervisors-2").toggle(this.checked);
+});
