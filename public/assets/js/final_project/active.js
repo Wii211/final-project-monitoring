@@ -156,8 +156,8 @@ $('#final-project-table tbody').on('click', '.update', function () {
             $('#supervisors-2').val('')
             $('#supervisors-role-1').val('')
             $('#supervisors-role-2').val('')
-            $('#supervisors-file-1').text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
-            $('#supervisors-file-2').text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
+            $('#supervisors-file-1').text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info').removeAttr('href')
+            $('#supervisors-file-2').text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info').removeAttr('href')
 
             if(result.data.supervisors !== undefined){
                 result.data.supervisors.forEach(function (data) {
@@ -169,11 +169,11 @@ $('#final-project-table tbody').on('click', '.update', function () {
                             $('#supervisors-file-' + i).attr('href', '../storage/images/' + data.verification_file)
                             $('#supervisors-file-' + i).text('Berkas Persetujuan Dosen Pembimbing-' + i).addClass('btn-info').removeClass('btn-danger')
                         } else {
-                            $('#supervisors-file-' + i).text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
+                            $('#supervisors-file-' + i).text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info').removeAttr('href')
                         }
 
                     } else {
-                        $('#supervisors-file-' + i).text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info')
+                        $('#supervisors-file-' + i).text('Tidak Ada Berkas Persetujuan').addClass('btn-danger').removeClass('btn-info').removeAttr('href')
                     }
 
                     i++
