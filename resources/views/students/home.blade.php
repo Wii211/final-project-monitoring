@@ -117,6 +117,33 @@
                 </div>
                 @else
                 <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%">#</th>
+                                    <th>Berkas</th>
+                                    <th style="width:60%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>Pedoman Proposal/Tugas Akhir</td>
+                                    <td><a href="{{ asset('storage/PEDOMAN TUGAS AKHIR PRODI TI.pdf') }}" download>Download Berkas
+                                            </a> </td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td>Formulir Pernyataan Kesediaan Membimbing Tugas Akhir</td>
+                                    <td><a href="{{ asset('storage/PERNYATAAN KESEDIAN MEMBIMBING TUGAS AKHIR.pdf') }}" download>Download Berkas
+                                            </a> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-10">
