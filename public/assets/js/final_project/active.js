@@ -21,7 +21,7 @@ $(document).ready(function () {
     })
 
     $.ajax({
-        url: "../supervisor?primary=false",
+        url: "../supervisor",
         type: "GET",
         dataType: "json",
         success: function (lecturer) {
