@@ -47,7 +47,7 @@
                         <input type="file" class="form-control-file" name="image_profile" id="lecturerImage" value="12121">
                     </div>
                     <div class="form-group">
-                        <label for="positions">Posisi</label>
+                        <label for="positions">Jabatan Fungsional</label>
                         <select class="form-control" id="positions" name="position_id">
                         </select>
                     </div>
