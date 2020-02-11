@@ -55,7 +55,7 @@ class LecturerService
             if ($request->hasFile('image_profile')) {
                 $fileName = $this->uploadHelper->uploadImage(
                     $request->file('image_profile'),
-                    explode(" ", $request->name)[0],
+                    $request->personnel_id,
                     'lecturers'
                 );
             }
@@ -89,7 +89,7 @@ class LecturerService
                 }
                 $fileName = $this->uploadHelper->uploadImage(
                     $request->file('image_profile'),
-                    explode(" ", $request->name)[0],
+                    $request->personnel_id,
                     'lecturers'
                 );
             }
