@@ -24,7 +24,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        return  new PositionCollection($this->position->get());
+        return  new PositionCollection($this->position->latest()->get());
     }
 
     /**
