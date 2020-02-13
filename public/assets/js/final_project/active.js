@@ -487,6 +487,7 @@ $(document).on('click', '#final-schedule-add', function () {
             }
 
             $('#final-schedule-modal').modal('show')
+            $('#final-progress-agreement-modal').modal('hide')
             $('#final-schedule-title').text("Tambah Jadwal Seminar Proposal/Sidang TA")
             $('#final-schedule-button').text("Tentukan Jadwal")
 
