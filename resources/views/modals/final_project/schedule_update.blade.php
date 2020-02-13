@@ -9,32 +9,6 @@
             </div>
             <form id="final-schedule-form">
                 <div class="modal-body">
-                    <div class="mx-auto"><h4>Informasi Mahasiswa</h4></div>
-                    <div class="form-group">
-                        <label for="final-project-student">Nama Mahasiswa</label>
-                        <input type="text" class="form-control form-control-sm" id="final-project-student" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="final-project-title">Judul Tugas Akhir</label>
-                        <textarea class="form-control" id="final-project-title" rows="3" disabled></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="supervisor-1">Dosen Pembimbing Pertama</label>
-                        <select class="form-control form-control-sm" id="supervisor-1"
-                        disabled>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="supervisor-2">Dosen Pembimbing Kedua</label>
-                        <select class="form-control form-control-sm" id="supervisor-2"
-                        disabled>
-                        </select>
-                    </div>
-                    {{-- <button type="button" class="btn btn-primary w-100 mt-1" id="final-project-checked">Cek Berkas
-                        Persetujuan Sidang/Seminar</button>
-                    <small>Klik untuk melihat berkas persetujuan proposal/tugas akhir.</small> --}}
-                    <hr>
-                    <div class="mx-auto"><h4>Jadwal Seminar Mahasiswa</h4></div>
                     <div class="form-group">
                         <label for="final-schedule-date">Tanggal</label>
                         <input type="date" class="form-control form-control-sm" id="final-schedule-date" name="date"
@@ -71,7 +45,7 @@
                             required>
                         </select>
                     </div>
-                    <div class="form-group" id="final-project-examiner-3">
+                    <div class="form-group">
                         <label for="examiner-name-3">Dosen Penguji Ketiga</label>
                         <input type="hidden" name="examiner3[role]" id="examiner-role-3" value="3">
                         <input type="hidden" name="examiner3[id]" id="examiner-id-3">
@@ -79,7 +53,7 @@
                             required>
                         </select>
                     </div>
-                    <div class="form-group" id="final-project-examiner-4">
+                    <div class="form-group">
                         <label for="examiner-name-4">Dosen Penguji Keempat</label>
                         <input type="hidden" name="examiner4[role]" id="examiner-role-4" value="4">
                         <input type="hidden" name="examiner4[id]" id="examiner-id-4">
@@ -97,6 +71,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="final-schedule-id">
                     <input type="hidden" id="final-project-status" name="status">
                     <input type="hidden" id="final-project-schedule-hidden-id" name="final_project_id">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

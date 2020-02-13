@@ -4,104 +4,26 @@ $.ajaxSetup({
     }
 })
 
-$(document).on('change', '#final-schedule-type', function () {
-    let status = $(this).val()
-
-    if (status === "tugas_akhir") {
-        $('#final-project-examiner-3').css('display', 'block')
-    } else {
-        $('#final-project-examiner-3').css('display', 'none')
-    }
-
-    $.ajax({
-        url: "../finished-project?status=" + status,
-        data: {
-            verification: 0
-        },
-        type: "GET",
-        dataType: "json",
-        success: function (finalProjects) {
-            $('#final-project-schedule-id').html('')
-            finalProjects.data.forEach(function (result) {
-                let data = '<option id="' + result.final_logs[0].final_requirements[0].document_result +
-                    '" value="' + result.id + '">' + result.title + '</option>'
-                $('#final-project-schedule-id').append(data)
-            })
-        }
-    })
-})
-
-
-let DataTableFinalProject = $('#student-final-project-schedule').DataTable({
-    "ajax": {
-        url: "../finished-project?status=tugas_akhir&verification=0"
-    },
-    "columns": [{
-            data: 'title'
-        },
-        {
-            data: 'final_student.name'
-        }
-    ]
-})
-
-
-let DataTableProposal = $('#student-proposal-schedule').DataTable({
-    "ajax": {
-        url: "../finished-project?status=proposal&verification=0"
-    },
-    "columns": [{
-            data: 'title'
-        },
-        {
-            data: 'final_student.name'
-        }
-    ]
-})
-
-$(document).on('click', '#final-project-checked', function () {
-    let document = $('#final-project-schedule-id option').attr('id')
-
-    $('#student-information-modal').modal('show')
-    $('#final-schedule-modal').modal('hide')
-    if (document !== null) {
-        PDFObject.embed('../../storage/' + document, "#student-information-content")
-        $('#student-information-title').text('Berkas Proposal/Tugas Akhir')
-        $('#student-information-content').css('height', '500')
-    } else {
-        $('#student-information-title').text('Data tidak ditemukan.')
-        $('#student-information-content').html('<img class="w-100" src="../../storage/design/undraw_empty_xct9.png">')
-        $('#student-information-content').css('height', '100%')
-    }
-})
-
 $(document).ready(function () {
 
     // Examiner
-    $.ajax({
-        url: "../examiner-available?primary=true",
-        type: "GET",
-        dataType: "json",
-        success: function (lecturers) {
-            $('#examiner-name-1').html('')
-            lecturers.forEach(function (result) {
-                let data = '<option value="' + result.id + '">' + result.name + '</option>'
-                $('#examiner-name-1').append(data)
-            })
-        }
-    })
-
     $.ajax({
         url: "../examiner-available",
         type: "GET",
         dataType: "json",
         success: function (lecturers) {
+            $('#examiner-name-1').html('')
             $('#examiner-name-2').html('')
             $('#examiner-name-3').html('')
+            $('#examiner-name-4').html('')
+            $('#examiner-name-5').html('')
             lecturers.forEach(function (result) {
                 let data = '<option value="' + result.id + '">' + result.name + '</option>'
+                $('#examiner-name-1').append(data)
                 $('#examiner-name-2').append(data)
                 $('#examiner-name-3').append(data)
+                $('#examiner-name-4').append(data)
+                $('#examiner-name-5').append(data)
             })
         }
     })
@@ -195,7 +117,8 @@ let dataTable = $('#final-schedule-table').DataTable({
             sortable: false,
             "render": function (data, type, full, meta) {
                 let id = full.id;
-                return "<button class='btn btn-warning update w-100' id='" + id + "'>Update</button>"
+                let status = full.final_status;
+                return "<button class='btn btn-warning update w-100' id='" + id + "' value='" + status + "'>Update</button>"
             }
         },
         {
@@ -270,8 +193,6 @@ $(document).on('submit', '#final-schedule-form', function (e) {
                             $('#final-schedule-modal').modal('hide')
                             $('#final-schedule-form')[0].reset()
                             dataTable.ajax.reload()
-                            DataTableProposal.ajax.reload()
-                            DataTableFinalProject.ajax.reload()
                         })
                 } else {
                     Swal.fire({
@@ -286,36 +207,36 @@ $(document).on('submit', '#final-schedule-form', function (e) {
     }
 })
 
+$('#final-schedule-modal').on('hidden.bs.modal', function (e) {
+    $("#final-project-examiner-5").hide()
+})
 
 //Fetch datas for update
 $('#final-schedule-table tbody').on('click', '.update', function () {
     let i = 1;
     let id = $(this).attr('id');
+    let status = $(this).val();
 
     $.ajax({
-        url: "../final-schedules/" + id,
+        url: "../final-schedules/" + id + "?status=" + status,
         dataType: "json",
         success: function (result) {
             $('#final-schedule-modal').modal('show')
-            $('#final-schedule-title').text("Update Jenis Jadwal Tugas Akhir")
+            $('#final-schedule-title').text("Update Jadwal Seminar atau Sidang")
             $('#final-schedule-button').text("Update")
             $('#final-project-schedule-hidden-id').val(result.final_log.final_project_id)
-            $('#final-schedule-requirement').css('display', 'none')
-            $('#final-schedule-type').removeAttr('required')
-            $('#final-project-schedule-id').removeAttr('required')
-            $('#final-project-schedule-hidden-id').attr('name', 'final_project_id')
 
             $('#final-schedule-date').val(result.date)
             $('#final-schedule-time').val(result.hour)
             $('#final-schedule-time-end').val(result.end_date_hour)
             $('#place').val(result.place)
             $('#final-schedule-id').val(result.id)
-            $('#final-schedule-status').val(result.final_log.final_status.name)
-            $('#final-schedule-type').val(result.final_log.final_status.name)
+            $('#final-project-status').val(result.final_log.final_status.name)
+            
             if (result.final_log.final_status.name === "tugas_akhir") {
-                $('#final-project-examiner-3').css('display', 'block')
+                $("#final-project-examiner-5").toggle()
             } else {
-                $('#final-project-examiner-3').css('display', 'none')
+                $("#final-project-examiner-5").hide()
             }
 
 
@@ -367,8 +288,6 @@ $('#final-schedule-table tbody').on('click', '.delete', function () {
                             )
                             .then(function () {
                                 dataTable.ajax.reload()
-                                DataTableProposal.ajax.reload()
-                                DataTableFinalProject.ajax.reload()
                             });
 
                     } else {
@@ -428,8 +347,6 @@ $('#final-schedule-table tbody').on('click', '.success-final-schedule', function
                             })
                             .then(function () {
                                 dataTable.ajax.reload()
-                                DataTableProposal.ajax.reload()
-                                DataTableFinalProject.ajax.reload()
                             })
                     } else {
                         Swal.fire(
@@ -483,8 +400,6 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
                             )
                             .then(function () {
                                 dataTable.ajax.reload()
-                                DataTableProposal.ajax.reload()
-                                DataTableFinalProject.ajax.reload()
                             })
                     } else {
                         Swal.fire(
@@ -494,6 +409,33 @@ $('#final-schedule-table tbody').on('click', '.failed-final-schedule', function 
                         )
                     }
                 }
+            })
+        }
+    })
+})
+
+$(document).on('change', '#final-schedule-type', function () {
+    let status = $(this).val()
+
+    if (status === "tugas_akhir") {
+        $('#final-project-examiner-3').css('display', 'block')
+    } else {
+        $('#final-project-examiner-3').css('display', 'none')
+    }
+
+    $.ajax({
+        url: "../finished-project?status=" + status,
+        data: {
+            verification: 0
+        },
+        type: "GET",
+        dataType: "json",
+        success: function (finalProjects) {
+            $('#final-project-schedule-id').html('')
+            finalProjects.data.forEach(function (result) {
+                let data = '<option id="' + result.final_logs[0].final_requirements[0].document_result +
+                    '" value="' + result.id + '">' + result.title + '</option>'
+                $('#final-project-schedule-id').append(data)
             })
         }
     })

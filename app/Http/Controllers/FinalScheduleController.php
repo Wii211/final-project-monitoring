@@ -97,15 +97,33 @@ class FinalScheduleController extends Controller
 
                 $examiners2->save();
 
+                $examiners3 = new Examiner([
+                    'role' => $request->examiner3['role'],
+                    'lecturer_id' => $request->examiner3['lecturer_id'],
+                    'final_project_id' => $finalProjectId,
+                    'final_status_id' => FinalStatus::name($request->status)
+                ]);
+
+                $examiners3->save();
+
+                $examiners4 = new Examiner([
+                    'role' => $request->examiner4['role'],
+                    'lecturer_id' => $request->examiner4['lecturer_id'],
+                    'final_project_id' => $finalProjectId,
+                    'final_status_id' => FinalStatus::name($request->status)
+                ]);
+
+                $examiners4->save();
+
                 if ($request->status === 'tugas_akhir') {
-                    $examiners3 = new Examiner([
-                        'role' => $request->examiner3['role'],
-                        'lecturer_id' => $request->examiner3['lecturer_id'],
+                    $examiners5 = new Examiner([
+                        'role' => $request->examiner5['role'],
+                        'lecturer_id' => $request->examiner5['lecturer_id'],
                         'final_project_id' => $finalProjectId,
                         'final_status_id' => FinalStatus::name($request->status)
                     ]);
 
-                    $examiners3->save();
+                    $examiners5->save();
                 }
             });
         } catch (\Throwable $th) {
@@ -120,10 +138,12 @@ class FinalScheduleController extends Controller
      * @param  \App\FinalSchedule  $finalSchedule
      * @return \Illuminate\Http\Response
      */
-    public function show($finalScheduleId)
+    public function show($finalScheduleId, Request $request)
     {
         $finalSchedule = FinalSchedule::with([
-            'finalLog.finalProject.examiners',
+            'finalLog.finalProject.examiners'=> function($q) use($request) {
+                $q->whereFinalStatusId(FinalStatus::name($request->status));
+            },
             'finalLog.finalStatus', 'finalLog.finalProject.finalStudent'
         ])->findOrFail($finalScheduleId);
 
@@ -188,12 +208,28 @@ class FinalScheduleController extends Controller
                         'final_project_id' => $finalProjectId,
                         'final_status_id' => FinalStatus::name($request->status)
                     ]);
+                
+                $examiners3 = Examiner::findOrFail($request->examiner3['id'])
+                        ->update([
+                        'role' => $request->examiner3['role'],
+                        'lecturer_id' => $request->examiner3['lecturer_id'],
+                        'final_project_id' => $finalProjectId,
+                        'final_status_id' => FinalStatus::name($request->status)
+                ]);
+                
+                $examiners4 = Examiner::findOrFail($request->examiner4['id'])
+                        ->update([
+                        'role' => $request->examiner4['role'],
+                        'lecturer_id' => $request->examiner4['lecturer_id'],
+                        'final_project_id' => $finalProjectId,
+                        'final_status_id' => FinalStatus::name($request->status)
+                ]);
 
                 if ($request->status === 'tugas_akhir') {
-                    $examiners3 = Examiner::findOrFail($request->examiner3['id'])
+                    $examiners5 = Examiner::findOrFail($request->examiner5['id'])
                         ->update([
-                            'role' => $request->examiner3['role'],
-                            'lecturer_id' => $request->examiner3['lecturer_id'],
+                            'role' => $request->examiner5['role'],
+                            'lecturer_id' => $request->examiner5['lecturer_id'],
                             'final_project_id' => $finalProjectId,
                             'final_status_id' => FinalStatus::name($request->status)
                         ]);
