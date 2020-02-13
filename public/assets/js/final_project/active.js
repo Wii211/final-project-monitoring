@@ -473,9 +473,6 @@ let z = 1
 $(document).on('click', '#final-schedule-add', function () {
     let status = $(this).val()
     let id = $(this).attr('data-target')
-
-    $('#final-schedule-form')[0].reset()
-
     $.ajax({
         url: "../data/final_project/" + id,
         dataType: "json",
