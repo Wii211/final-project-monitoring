@@ -469,8 +469,8 @@ $('#final-progress-agreement-table tbody').on('click', '.progress-agreement-chec
 })
 
 //Schedule
-let z = 1
 $(document).on('click', '#final-schedule-add', function () {
+    let z = 1
     let status = $(this).val()
     let id = $(this).attr('data-target')
     $.ajax({
@@ -492,7 +492,9 @@ $(document).on('click', '#final-schedule-add', function () {
 
             if (result.data.supervisors !== undefined) {
                 result.data.supervisors.forEach(function (data) {
-                    $('#supervisor-' + z).val(data.lecturer_id)
+                    if (data !== undefined) {
+                        $('#supervisor-' + z).val(data.lecturer_id)
+                    }
                     z++
                 })
             }
