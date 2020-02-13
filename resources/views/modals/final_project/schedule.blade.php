@@ -21,13 +21,13 @@
                     <div class="form-group">
                         <label for="supervisor-1">Dosen Pembimbing Pertama</label>
                         <select class="form-control form-control-sm" id="supervisor-1"
-                        >
+                        disabled>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="supervisor-2">Dosen Pembimbing Kedua</label>
                         <select class="form-control form-control-sm" id="supervisor-2"
-                        >
+                        disabled>
                         </select>
                     </div>
                     {{-- <button type="button" class="btn btn-primary w-100 mt-1" id="final-project-checked">Cek Berkas
