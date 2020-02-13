@@ -178,8 +178,6 @@ class PreProposalService
                 $finalProject->description = $request->description;
                 $finalProject->save();
 
-
-
                 $this->supervisor->whereFinalProjectId($finalProjectId)->whereRole(1)
                     ->update(
                         [
@@ -187,12 +185,14 @@ class PreProposalService
                         ]
                     );
 
-                $this->supervisor->whereFinalProjectId($finalProjectId)->whereRole(2)
-                    ->update(
-                        [
-                            'lecturer_id' => $request->supervisors2['lecturer_id']
-                        ]
-                    );
+                Supervisor::updateOrCreate(
+                    [
+                        'lecturer_id' => $request->supervisors2['lecturer_id'],
+                        'is_agree' => 0
+                    ],
+                    ['final_project_id' => $finalProjectId, 'role' => 2]
+
+                );
 
                 $supervisor1 = $this->supervisor
                     ->whereFinalProjectId($finalProjectId)->whereRole(1)->first();
