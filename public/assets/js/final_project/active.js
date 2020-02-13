@@ -151,8 +151,8 @@ let dataTable = $('#final-project-table').DataTable({
 })
 
 //Fetch datas for update
+let i = 1;
 $('#final-project-table tbody').on('click', '.update', function () {
-    let i = 1;
     let id = $(this).attr('id');
 
     $.ajax({
@@ -469,7 +469,7 @@ $('#final-progress-agreement-table tbody').on('click', '.progress-agreement-chec
 })
 
 //Schedule
-let i = 1
+let z = 1
 $(document).on('click', '#final-schedule-add', function () {
     let status = $(this).val()
     let id = $(this).attr('data-target')
@@ -496,9 +496,9 @@ $(document).on('click', '#final-schedule-add', function () {
             if (result.data.supervisors !== undefined) {
                 result.data.supervisors.forEach(function (data) {
                     if (data !== undefined) {
-                        $('#supervisor-' + i).val(data.lecturer_id)
+                        $('#supervisor-' + z).val(data.lecturer_id)
                     }
-                    i++
+                    z++
                 })
             }
         }
