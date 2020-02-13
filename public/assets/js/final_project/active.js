@@ -492,10 +492,7 @@ $(document).on('click', '#final-schedule-add', function () {
 
             if (result.data.supervisors !== undefined) {
                 result.data.supervisors.forEach(function (data) {
-                    console.log(data)
-                    if (data !== undefined) {
-                        $('#supervisor-' + z).val(data.lecturer_id)
-                    }
+                    $('#supervisor-' + z).val(data.lecturer_id)
                     z++
                 })
             }
