@@ -195,7 +195,12 @@ $(document).on('click', '.submit-schedule', function(){
     $('#final-log-id').val(finalId)
     $('#final-status-name').val(status)
     $('#final-schedule-title').val('Pengajuan Seminar Proposal')
-    $('#upload-document-name').text('Upload Berkas Proposal (.pdf)')
+
+    if(status === "proposal") {
+        $('#upload-document-name').text('Upload Berkas Persetujuan Seminar Proposal (.pdf)')
+    } else {
+        $('#upload-document-name').text('Upload Berkas Persetujuan Sidang Tugas Akhir (.pdf)')
+    }
 })
 
 //Submit Berkas
