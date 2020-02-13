@@ -473,6 +473,7 @@ $(document).on('click', '#final-schedule-add', function () {
     let z = 1
     let status = $(this).val()
     let id = $(this).attr('data-target')
+    $('#final-progress-agreement-modal').modal('hide')
     $.ajax({
         url: "../data/final_project/" + id,
         dataType: "json",
@@ -487,7 +488,6 @@ $(document).on('click', '#final-schedule-add', function () {
             }
 
             $('#final-schedule-modal').modal('show')
-            $('#final-progress-agreement-modal').modal('hide')
             $('#final-schedule-title').text("Tambah Jadwal Seminar Proposal/Sidang TA")
             $('#final-schedule-button').text("Tentukan Jadwal")
 
