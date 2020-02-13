@@ -22,7 +22,7 @@
                             <th>Status</th>
                             <th>Progress</th>
                             <th width="7%">Detail/Update</th>
-                            <th width="7%"></th>
+                            <th width="17%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +40,7 @@
 @include('modals.final_project.verification')
 @include('modals.final_project.progress_agreement')
 @include('modals.final_project.detail')
+@include('modals.final_project.schedule')
 @endsection
 
 @section('javascript')
