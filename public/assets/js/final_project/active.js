@@ -473,7 +473,7 @@ $(document).on('click', '#final-schedule-add', function () {
     let z = 1
     let status = $(this).val()
     let id = $(this).attr('data-target')
-    $('#final-progress-agreement-modal').modal('hide')
+    
     $.ajax({
         url: "../data/final_project/" + id,
         dataType: "json",
