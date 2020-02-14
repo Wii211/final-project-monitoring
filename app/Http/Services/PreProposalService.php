@@ -185,14 +185,25 @@ class PreProposalService
                         ]
                     );
 
-                Supervisor::updateOrCreate(
-                    [
+
+                if ($this->supervisor->whereFinalProjectId($finalProjectId)->whereRole(2)->first()) {
+                    $this->supervisor->whereFinalProjectId($finalProjectId)->whereRole(2)
+                        ->update(
+                            [
+                                'lecturer_id' => $request->supervisors2['lecturer_id']
+                            ]
+                        );
+                } else {
+                    $newSupervisor = new Supervisor([
+                        'role' => 2,
+                        'final_project_id' => $finalProjectId,
                         'lecturer_id' => $request->supervisors2['lecturer_id'],
                         'is_agree' => 0
-                    ],
-                    ['final_project_id' => $finalProjectId, 'role' => 2]
+                    ]);
 
-                );
+                    $newSupervisor->save();
+                }
+
 
                 $supervisor1 = $this->supervisor
                     ->whereFinalProjectId($finalProjectId)->whereRole(1)->first();
