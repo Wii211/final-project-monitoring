@@ -43,6 +43,20 @@ $(document).ready(function () {
     })
 })
 
+getAlert(id, status) {
+    $.ajax({
+        url: "finished-project/" + id + "?status=" + status,
+        data: {
+            verification: 0
+        },
+        type: "GET",
+        dataType: "json",
+        success: function (result) {
+            return result.data
+        }
+    })
+}
+
 let dataTable = $('#final-project-table').DataTable({
     "processing": true,
     "ajax": {
@@ -99,31 +113,20 @@ let dataTable = $('#final-project-table').DataTable({
                 let progress = ''
                 let buttonId = ''
                 let status = ''
-                let alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
-
+                let alertStyle = 'none'
+                let alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:'+alertStyle+'"></i>'
                 if (full.final_project !== null) {
                     full.final_project.final_logs.forEach(function (data) {
                         status = data.final_status.name
                     })
 
                     buttonId = full.final_project.id
+                    if (getAlert(buttonId, status) === 1) {
+                        alertStyle = 'inline-block'
+                    } else {
+                        alertStyle = 'none'
+                    }
 
-                    // $.ajax({
-                    //     url: "finished-project/" + buttonId + "?status=" + status,
-                    //     data: {
-                    //         verification: 0
-                    //     },
-                    //     type: "GET",
-                    //     dataType: "json",
-                    //     success: function (result) {
-                    //         // console.log(result)
-                    //         if(result.data === 1) {
-                    //             $(".final-schedule-alert").toggle();
-                    //         } else {
-                    //             $(".final-schedule-alert").hide();
-                    //         }
-                    //     }
-                    // })
                     if (status === "proposal") {
                         progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal " + alert + "</button>"
                     } else if (status === "tugas_akhir") {
@@ -364,7 +367,7 @@ function progressIndex(id, status) {
         dataType: "json",
         success: function (result) {
             // console.log(result)
-            if(result.data === 1) {
+            if (result.data === 1) {
                 $("#final-schedule-add").toggle();
             } else {
                 $("#final-schedule-add").hide();
@@ -490,7 +493,7 @@ $(document).on('click', '#final-schedule-add', function () {
     let z = 1
     let status = $(this).val()
     let id = $(this).attr('data-target')
-    
+
     $.ajax({
         url: "../data/final_project/" + id,
         dataType: "json",
@@ -500,7 +503,7 @@ $(document).on('click', '#final-schedule-add', function () {
             $('#final-project-schedule-hidden-id').val(result.data.id)
             $('#final-project-status').val(status)
 
-            if(status === "tugas_akhir") {
+            if (status === "tugas_akhir") {
                 $("#final-project-examiner-5").toggle()
             }
 
