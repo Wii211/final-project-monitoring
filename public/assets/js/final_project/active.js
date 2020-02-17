@@ -113,8 +113,7 @@ let dataTable = $('#final-project-table').DataTable({
                 let progress = ''
                 let buttonId = ''
                 let status = ''
-                let alertStyle = 'none'
-                let alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:'+alertStyle+'"></i>'
+                let alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
                 if (full.final_project !== null) {
                     full.final_project.final_logs.forEach(function (data) {
                         status = data.final_status.name
@@ -122,9 +121,9 @@ let dataTable = $('#final-project-table').DataTable({
 
                     buttonId = full.final_project.id
                     if (getAlert(buttonId, status) === 1) {
-                        alertStyle = 'inline-block'
+                        alertStyle = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;"></i>'
                     } else {
-                        alertStyle = 'none'
+                        alertStyle = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
                     }
 
                     if (status === "proposal") {
