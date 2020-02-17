@@ -99,7 +99,7 @@ let dataTable = $('#final-project-table').DataTable({
                 let progress = ''
                 let buttonId = ''
                 let status = ''
-                let alert = '<i id="final-schedule-alert" class="fas fa-exclamation-triangle ml-1" style="color:yellow;display:none"></i>'
+                let alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
 
                 if (full.final_project !== null) {
                     full.final_project.final_logs.forEach(function (data) {
@@ -118,9 +118,9 @@ let dataTable = $('#final-project-table').DataTable({
                         success: function (result) {
                             // console.log(result)
                             if(result.data === 1) {
-                                $("#final-schedule-alert").toggle();
+                                $(".final-schedule-alert").toggle();
                             } else {
-                                $("#final-schedule-alert").hide();
+                                $(".final-schedule-alert").hide();
                             }
                         }
                     })
