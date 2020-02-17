@@ -43,19 +43,21 @@ $(document).ready(function () {
     })
 })
 
-function getAlert(id, status) {
-    $.ajax({
-        url: "finished-project/" + id + "?status=" + status,
-        data: {
-            verification: 0
-        },
-        type: "GET",
-        dataType: "json",
-        success: function (result) {
-            return result.data
-        }
-    })
-}
+// function getAlert(id, status) {
+//     let alert = ''
+//     $.ajax({
+//         url: "finished-project/" + id + "?status=" + status,
+//         data: {
+//             verification: 0
+//         },
+//         type: "GET",
+//         dataType: "json",
+//         success: function (result) {
+//             alert = result.data
+//         }
+//     })
+//     return alert
+// }
 
 let dataTable = $('#final-project-table').DataTable({
     "processing": true,
@@ -120,11 +122,12 @@ let dataTable = $('#final-project-table').DataTable({
                     })
 
                     buttonId = full.final_project.id
-                    if (getAlert(buttonId, status) === 1) {
-                        alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;"></i>'
-                    } else {
-                        alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
-                    }
+                    
+                    // if (getAlert(buttonId, status) === 1) {
+                    //     alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;"></i>'
+                    // } else {
+                    //     alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
+                    // }
 
                     if (status === "proposal") {
                         progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal " + alert + "</button>"
