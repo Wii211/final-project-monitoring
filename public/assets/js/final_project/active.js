@@ -99,6 +99,7 @@ let dataTable = $('#final-project-table').DataTable({
                 let progress = ''
                 let buttonId = ''
                 let status = ''
+                let alert = '<i id="final-schedule-alert" class="fas fa-exclamation-triangle ml-1" style="color:yellow;display:none"></i>'
 
                 if (full.final_project !== null) {
                     full.final_project.final_logs.forEach(function (data) {
@@ -107,10 +108,26 @@ let dataTable = $('#final-project-table').DataTable({
 
                     buttonId = full.final_project.id
 
+                    $.ajax({
+                        url: "finished-project/" + buttonId + "?status=" + status,
+                        data: {
+                            verification: 0
+                        },
+                        type: "GET",
+                        dataType: "json",
+                        success: function (result) {
+                            // console.log(result)
+                            if(result.data === 1) {
+                                $("#final-schedule-alert").toggle();
+                            } else {
+                                $("#final-schedule-alert").hide();
+                            }
+                        }
+                    })
                     if (status === "proposal") {
-                        progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal</button>"
+                        progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal " + alert + "</button>"
                     } else if (status === "tugas_akhir") {
-                        progress = "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA</button>"
+                        progress = "<button class='btn btn-info progress-proposal fs-12 w-100 mt-1' id='" + buttonId + "' value='tugas_akhir'>Progress TA " + alert + "</button>"
                     }
                 }
                 return progress
