@@ -25,7 +25,7 @@ class FinalRequirementRequest extends FormRequest
     {
         return [
             'document_result' => [
-                'mimetypes:application/pdf',
+                'mimetypes:application/pdf,image/jpeg,image/png',
                 'required'
             ]
         ];
