@@ -121,9 +121,9 @@ let dataTable = $('#final-project-table').DataTable({
 
                     buttonId = full.final_project.id
                     if (getAlert(buttonId, status) === 1) {
-                        alertStyle = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;"></i>'
+                        alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;"></i>'
                     } else {
-                        alertStyle = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
+                        alert = '<i id="" class="fas fa-exclamation-triangle ml-1 final-schedule-alert" style="color:yellow;display:none"></i>'
                     }
 
                     if (status === "proposal") {
