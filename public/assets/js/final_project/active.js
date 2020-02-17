@@ -43,7 +43,7 @@ $(document).ready(function () {
     })
 })
 
-getAlert(id, status) {
+function getAlert(id, status) {
     $.ajax({
         url: "finished-project/" + id + "?status=" + status,
         data: {
