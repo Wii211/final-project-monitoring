@@ -108,22 +108,22 @@ let dataTable = $('#final-project-table').DataTable({
 
                     buttonId = full.final_project.id
 
-                    $.ajax({
-                        url: "finished-project/" + buttonId + "?status=" + status,
-                        data: {
-                            verification: 0
-                        },
-                        type: "GET",
-                        dataType: "json",
-                        success: function (result) {
-                            // console.log(result)
-                            if(result.data === 1) {
-                                $(".final-schedule-alert").toggle();
-                            } else {
-                                $(".final-schedule-alert").hide();
-                            }
-                        }
-                    })
+                    // $.ajax({
+                    //     url: "finished-project/" + buttonId + "?status=" + status,
+                    //     data: {
+                    //         verification: 0
+                    //     },
+                    //     type: "GET",
+                    //     dataType: "json",
+                    //     success: function (result) {
+                    //         // console.log(result)
+                    //         if(result.data === 1) {
+                    //             $(".final-schedule-alert").toggle();
+                    //         } else {
+                    //             $(".final-schedule-alert").hide();
+                    //         }
+                    //     }
+                    // })
                     if (status === "proposal") {
                         progress = "<button class='btn btn-primary progress-proposal fs-12 w-100' id='" + buttonId + "' value='proposal'>Progress Proposal " + alert + "</button>"
                     } else if (status === "tugas_akhir") {
