@@ -151,8 +151,8 @@ let dataTable = $('#final-project-table').DataTable({
 })
 
 //Fetch datas for update
-let i = 1;
 $('#final-project-table tbody').on('click', '.update', function () {
+    let i = 1;
     let id = $(this).attr('id');
 
     $.ajax({
