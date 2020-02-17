@@ -23,11 +23,9 @@
                         </tbody>
                     </table>
                 </div>
-                <br>
-                <br>
                 <hr>
                 <button type="button" class="btn bg-gradient-primary w-100" id="final-schedule-add" data-target="" style="display:none"><b>Tentukan Tanggal
-                        Seminar</b></button>
+                        Seminar/Sidang</b></button>
             </div>
             <div class="modal-footer">
                 <input type="hidden" id="final-project-agreement-id">
