@@ -140,7 +140,7 @@ let dataTable = $('#final-project-table').DataTable({
                         if (data.is_verification === 1) {
                             verification += "<button class='d-inline-block btn btn-sm btn-success p-2 mr-1' id='" + data.id + "' value='" + buttonId + "'><i class='fas fa-check'></i></button>"
                         } else {
-                            verification += "<button class='d-inline-block btn btn-sm btn-danger p-2 mr-1 final-status-check' id='" + data.id + "' value='" + buttonId + "'><i class='fas fa-times'></i></button>"
+                            verification += "<button class='d-inline-block btn btn-sm btn-danger p-2 mr-1 final-status-check' id='" + data.id + "' value='" + buttonId + "'><i class='fas fa-question'></i></button>"
                         }
                     })
                 }
