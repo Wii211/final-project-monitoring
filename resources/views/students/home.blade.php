@@ -139,6 +139,12 @@
                                     <td><a href="{{ asset('storage/PERNYATAAN KESEDIAN MEMBIMBING TUGAS AKHIR.pdf') }}" download>Download Berkas
                                             </a> </td>
                                 </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td>Formulir Pernyataan Kesediaan Menghadiri Seminar atau Sidang Tugas Akhir</td>
+                                    <td><a href="{{ asset('storage/Surat kesedian seminar&sidang.pdf') }}" download>Download Berkas
+                                            </a> </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
