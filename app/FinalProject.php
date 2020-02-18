@@ -106,12 +106,13 @@ class FinalProject extends Model
         foreach ($titleExplode as $index => $title) {
             if ($index == $i) {
                 $titles[] = $title . '~%';
-                $i += 5;
+                $i += 6;
             } else {
-                $titles[] = $title;
+                $titles[] = $title . " ";
             }
         }
         $implode =  implode(" ", $titles);
+        
         return explode("~% ", $implode);
     }
 }
