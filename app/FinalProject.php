@@ -105,7 +105,7 @@ class FinalProject extends Model
         $i = 5;
         foreach ($titleExplode as $index => $title) {
             if ($index == $i) {
-                $titles[] = $title . '~%';
+                $titles[] = $title . '~% ';
                 $i += 6;
             } else {
                 $titles[] = $title . " ";
