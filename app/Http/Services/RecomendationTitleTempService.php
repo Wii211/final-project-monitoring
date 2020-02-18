@@ -48,8 +48,16 @@ class RecomendationTitleTempService
                 $recomendationTitle->final_student_id =
                     $this->finalStudent->getStudentId();
 
+                $role = "";
+
+                if ($this->lecturer->canPrimary($recomendationTitle->lecturer_id)) {
+                    $role = 1;
+                } else {
+                    $role = 2;
+                }
+
                 if ($this->supervisor
-                    ->checkSupervisorsQuota($recomendationTitle->lecturer_id)
+                    ->checkSupervisorsQuota($recomendationTitle->lecturer_id, $role)
                 ) {
                     return "full";
                 }
