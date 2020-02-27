@@ -105,14 +105,14 @@ class FinalProject extends Model
         $i = 5;
         foreach ($titleExplode as $index => $title) {
             if ($index == $i) {
-                $titles[] = $title . '~% ';
+                $titles[] = $title . '~%';
                 $i += 6;
             } else {
-                $titles[] = $title . " ";
+                $titles[] = $title;
             }
         }
         $implode =  implode(" ", $titles);
         
-        return explode("~% ", $implode);
+        return str_replace("~%"," ",explode("~% ", $implode));
     }
 }
