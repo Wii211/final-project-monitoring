@@ -35,7 +35,7 @@ class NewsReportProposalController extends Controller
         
         $thesisDate =  $dateHelper->formatDate(
             Carbon::parse(
-                $finalProject->finalScheduleForReport->scheduled
+                $proposal->finalScheduleForReport->scheduled
             ) 
         );
 
