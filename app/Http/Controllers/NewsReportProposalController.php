@@ -32,6 +32,12 @@ class NewsReportProposalController extends Controller
         $thesisDefenceSchedule = $dateHelper->formatDateWithDayName(
             Carbon::parse($proposal->finalScheduleForReport->scheduled)
         );
+        
+        $thesisDate =  $dateHelper->formatDate(
+            Carbon::parse(
+                $finalProject->finalScheduleForReport->scheduled
+            ) 
+        );
 
         $startTime = $dateHelper
             ->convertTimeHour($proposal->finalScheduleForReport->scheduled);
@@ -46,7 +52,8 @@ class NewsReportProposalController extends Controller
             'todayDate',
             'finalProjectTitle',
             'thesisDefenceSchedule',
-            'thesisDefenceTime'
+            'thesisDefenceTime',
+            'thesisDate'
         ));
     }
 }

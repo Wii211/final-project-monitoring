@@ -45,6 +45,9 @@ let dataTable = $('#final-schedule-table').DataTable({
     "ajax": {
         url: "../final-schedules"
     },
+    "order": [
+        [4, "desc"]
+    ],
     "columns": [{
             "render": function (data, type, full, meta) {
                 let status = full.final_status
@@ -57,6 +60,8 @@ let dataTable = $('#final-schedule-table').DataTable({
                         info = '<span class="badge badge-warning p-2 d-block w-100">Sedang Sidang</span>'
                     } else if (finalScheduleStatus === 2) {
                         info = '<span class="badge badge-danger p-2 d-block w-100">Gagal Sidang</span>'
+                    } else {
+                        info = '<span class="badge badge-success p-2 d-block w-100">Selesai Sidang</span>'
                     }
                     status = '<span class="badge badge-primary p-2 d-block w-100">Sidang Tugas Akhir</span> '
                 } else {
@@ -64,6 +69,8 @@ let dataTable = $('#final-schedule-table').DataTable({
                         info = '<span class="badge badge-warning p-2 d-block w-100">Sedang Seminar</span>'
                     } else if (finalScheduleStatus === 2) {
                         info = '<span class="badge badge-danger p-2 d-block w-100">Gagal Seminar</span>'
+                    } else {
+                        info = '<span class="badge badge-success p-2 d-block w-100">Selesai Seminar</span>'
                     }
 
                     status = '<span class="badge badge-info p-2 d-block w-100">Seminar Proposal</span> '
@@ -110,6 +117,8 @@ let dataTable = $('#final-schedule-table').DataTable({
                     return success + failed
                 } else if (finalScheduleStatus === 2) {
                     return success
+                } else {
+                    return ''
                 }
             }
         },
