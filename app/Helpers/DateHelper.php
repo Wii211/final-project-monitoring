@@ -16,14 +16,14 @@ class DateHelper
     {
         setlocale(LC_TIME, 'id_ID.utf8');
 
-        return $date->formatLocalized('%d %m %Y');
+        return $date->formatLocalized('%d ') . $this->convertMonthName($date->formatLocalized("%m")) . $date->formatLocalized(" %Y");
     }
 
     public function formatDateWithDayName($date)
     {
         setlocale(LC_TIME, 'id_ID.utf8');
         
-        return $date->formatLocalized("%A %d") . " " .  $this->convertMonthName($date->formatLocalized('%m')) . " " .  $date->formatLocalized("%Y");
+        return $date->formatLocalized("%A, %d ") .  $this->convertMonthName($date->formatLocalized('%m'))  .  $date->formatLocalized(" %Y");
     }
 
     public static function convertTimeHour($time)
