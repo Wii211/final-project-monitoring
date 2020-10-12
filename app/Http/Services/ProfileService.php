@@ -21,7 +21,7 @@ class ProfileService
     {
         return $this->user->findOrFail(
             $this->user->getAuthId(),
-            ['user_name', 'phone_number', 'image_profile']
+            ['user_name', 'phone_number', 'image_profile', 'email']
         );
     }
 
