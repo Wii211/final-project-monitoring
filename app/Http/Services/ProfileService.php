@@ -43,6 +43,7 @@ class ProfileService
             $user->image_profile = $imageProfile;
         }
         $user->phone_number = $request->phone_number;
+        $user->email = $request->email;
 
 
         if ($user->save()) {
